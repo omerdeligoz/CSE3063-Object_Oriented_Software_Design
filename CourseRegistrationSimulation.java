@@ -1,7 +1,7 @@
 public class CourseRegistrationSimulation {
     public static void main(String[] args) {
-        Advisor advisor = new Advisor();
-        Student student = new Student();
-        Course course = new Course();
+        Advisor advisorNew = new Advisor();
+        Student studentNew = new Student();
+        System.out.println("test");
     }
 }
