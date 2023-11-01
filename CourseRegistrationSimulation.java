@@ -3,7 +3,5 @@ public class CourseRegistrationSimulation {
         Advisor advisor = new Advisor();
         Student student = new Student();
         Course course = new Course();
-
-        System.out.println("commit at 20.19");
     }
 }
