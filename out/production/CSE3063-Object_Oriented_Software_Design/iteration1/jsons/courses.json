@@ -1,0 +1,74 @@
+{
+  "courses": [
+    {
+      "courseName": "Mathematics 101",
+      "courseId": "MATH101",
+      "credits": 3,
+      "prerequisites": [],
+      "prerequisiteTo": ["MATH201"]
+    },
+    {
+      "courseName": "English Composition",
+      "courseId": "ENG101",
+      "credits": 3,
+      "prerequisites": [],
+      "prerequisiteTo": ["ENG201"]
+    },
+    {
+      "courseName": "Physics Fundamentals",
+      "courseId": "PHYS101",
+      "credits": 4,
+      "prerequisites": [],
+      "prerequisiteTo": ["PHYS201"]
+    },
+    {
+      "courseName": "Computer Science 101",
+      "courseId": "CSCI101",
+      "credits": 3,
+      "prerequisites": [],
+      "prerequisiteTo": ["CSCI201"]
+    },
+    {
+      "courseName": "History of Art",
+      "courseId": "HIST101",
+      "credits": 3,
+      "prerequisites": [],
+      "prerequisiteTo": []
+    },
+    {
+      "courseName": "Chemistry Basics",
+      "courseId": "CHEM101",
+      "credits": 4,
+      "prerequisites": [],
+      "prerequisiteTo": ["CHEM201"]
+    },
+    {
+      "courseName": "Psychology 101",
+      "courseId": "PSYCH101",
+      "credits": 3,
+      "prerequisites": [],
+      "prerequisiteTo": ["PSYCH201"]
+    },
+    {
+      "courseName": "Biology Introduction",
+      "courseId": "BIOL101",
+      "credits": 4,
+      "prerequisites": [],
+      "prerequisiteTo": ["BIOL201"]
+    },
+    {
+      "courseName": "Economics Principles",
+      "courseId": "ECON101",
+      "credits": 3,
+      "prerequisites": [],
+      "prerequisiteTo": ["ECON201"]
+    },
+    {
+      "courseName": "Spanish 101",
+      "courseId": "SPAN101",
+      "credits": 3,
+      "prerequisites": [],
+      "prerequisiteTo": ["SPAN201"]
+    }
+  ]
+}

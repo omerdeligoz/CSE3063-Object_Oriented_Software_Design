@@ -1,0 +1,79 @@
+{
+  "departmentName": "Computer Science",
+  "students": [
+    {
+      "id": 1,
+      "name": "John Smith",
+      "cgpa": 3.75,
+      "gradeLevel": 2,
+      "coursesTaken": [{
+        "courseName": "Mathematics 101",
+        "courseId": "MATH101",
+        "credits": 3,
+        "prerequisites": [],
+        "prerequisiteTo": ["MATH201"]
+      },
+        {
+          "courseName": "English Composition",
+          "courseId": "ENG101",
+          "credits": 3,
+          "prerequisites": [],
+          "prerequisiteTo": ["ENG201"]
+        }]
+    },
+    {
+      "id": 2,
+      "name": "Alice Johnson",
+      "cgpa": 3.95,
+      "gradeLevel": 3
+    },
+    {
+      "id": 3,
+      "name": "Michael Brown",
+      "cgpa": 3.60,
+      "gradeLevel": 1
+    },
+    {
+      "id": 4,
+      "name": "Emily Davis",
+      "cgpa": 4.00,
+      "gradeLevel": 4
+    },
+    {
+      "id": 5,
+      "name": "David Wilson",
+      "cgpa": 3.85,
+      "gradeLevel": 3
+    },
+    {
+      "id": 6,
+      "name": "Sarah Lee",
+      "cgpa": 3.70,
+      "gradeLevel": 2
+    },
+    {
+      "id": 7,
+      "name": "Daniel Miller",
+      "cgpa": 3.90,
+      "gradeLevel": 4
+    },
+    {
+      "id": 8,
+      "name": "Olivia Anderson",
+      "cgpa": 3.55,
+      "gradeLevel": 1
+    },
+    {
+      "id": 9,
+      "name": "Ethan Thomas",
+      "cgpa": 3.80,
+      "gradeLevel": 2
+    },
+    {
+      "id": 10,
+      "name": "Sophia Martinez",
+      "cgpa": 3.65,
+      "gradeLevel": 3
+    }
+  ]
+}
