@@ -38,7 +38,6 @@ public class jsonTest2 {
             double cgpa = student.get("cgpa").asDouble();
             int gradeLevel = student.get("gradeLevel").asInt();
 
-            Student studentObject = new Student(id, name, cgpa, gradeLevel);
         }
     }
 

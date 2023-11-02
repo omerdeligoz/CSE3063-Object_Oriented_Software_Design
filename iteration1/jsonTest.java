@@ -60,7 +60,7 @@ public class jsonTest {
             double cgpa = Double.parseDouble(studentJson.get("cgpa") + "");
             int gradeLevel = Integer.parseInt(studentJson.get("gradeLevel") + "");
             System.out.printf("id: %d, name: %s, cgpa: %f, gradeLevel: %d\n", id, name, cgpa, gradeLevel);
-            Student studentObject = new Student(id, name, cgpa, gradeLevel);
+//            Student studentObject = new Student(id, name, cgpa, gradeLevel);
 //            department.add(studentObject);
         }
 

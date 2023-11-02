@@ -1,16 +1,16 @@
 package iteration1;
 
-public class Student {
+public class Student implements ILogin {
     private int studentID;
-
-    private String firstName;
-    private String lastName;
+    private String name;
     private Advisor advisor;
     private Course[] coursesTaken;
-//    private Transcript transcript;
+    private Transcript transcript;
     private double cgpa;
-    private int gradeLevel;
+    private byte gradeLevel;
 
+    @Override
+    public void login() {
 
-
+    }
 }

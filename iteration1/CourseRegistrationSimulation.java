@@ -32,6 +32,21 @@ public class CourseRegistrationSimulation {
                 System.out.println("2. Student");
                 System.out.print("Enter your choice: ");
                 choice = input.nextInt();
+                switch (choice){
+                    case 1:
+                        System.out.println("Advisor");
+                        advisorMenu();
+                        break;
+                    case 2:
+                        System.out.println("Student");
+                        Student student = new Student();
+                        student.login();
+
+                        break;
+                    default:
+                        System.out.println("Invalid choice");
+                        break;
+                }
                 break;
             case 2:
                 System.out.println("Exit");
@@ -40,5 +55,16 @@ public class CourseRegistrationSimulation {
                 System.out.println("Invalid choice");
                 break;
         }
+    }
+
+    private static void studentMenu() {
+    }
+
+    private static void advisorMenu() {
+        System.out.println("Advisor");
+        System.out.println("Please select from the following options:");
+        System.out.println("1. List requests");
+
+
     }
 }
