@@ -1,5 +1,5 @@
 package iteration1;
 
 public interface ILogin {
-    void login();
+    boolean login(String userName, String password);
 }
