@@ -1,8 +1,51 @@
 package iteration1;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
 public class Course {
-    private int courseName;
-    public int getCourseName() {
+    private String courseName;
+    private String courseCode;
+    private int courseCredit;
+    private byte semester;
+    private List<CourseSession> courseSessions = new ArrayList<>();
+    private List<String> preRequisiteCourseCodes = new ArrayList<>();
+    private List<String> preRequsitieToCourseCodes = new ArrayList<>();
+
+
+    public Course(String courseName, String courseCode, int courseCredit, byte semester) {
+        this.courseName = courseName;
+        this.courseCode = courseCode;
+        this.courseCredit = courseCredit;
+        this.semester = semester;
+    }
+
+    public Course(String courseName, String courseCode, int courseCredit) {
+    }
+
+    public String getCourseName() {
         return courseName;
+    }
+
+    public List getCourseSessions() {
+        return courseSessions;
+    }
+
+    public List<String> getPreRequisiteCourseCodes() {
+        preRequisiteCourseCodes = new ArrayList<>();
+        return this.preRequisiteCourseCodes;
+    }
+
+    public String getCourseCode() {
+        return courseCode;
+    }
+
+    public int getCourseCredit() {
+        return courseCredit;
+    }
+
+    public byte getSemester() {
+        return semester;
     }
 }
