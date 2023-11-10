@@ -34,11 +34,6 @@ public class Student extends Person implements ILogin {
         this.semester = semester;
     }
 
-    @Override
-    public boolean login(String userName, String password) {
-        return this.getUserName().equals(userName) && this.getPassword().equals(password);
-    }
-
     protected ArrayList<Course> selectCourses() {
         System.out.println("Select Courses");
         //TODO
@@ -66,20 +61,33 @@ public class Student extends Person implements ILogin {
         //TODO bazı kontroller yapabilir
     }
 
-    @Override
-    public void loginMenu() {
-
-    }
 
     @Override
-    public void menu() {
-        System.out.println("\nStudent Menu");
-        System.out.println("Please select from the following options:");
-        System.out.println("0. Exit");
-        System.out.println("1. Course Selection Menu");
-        System.out.println("2. View Transcript");
-        System.out.println("3. Log out");
-        System.out.print("Enter your choice: ");
+    public void menu(String menuType) {
+        switch (menuType) {
+            case "studentMenu":
+                System.out.println("\nStudent Menu");
+                System.out.println("Please select from the following options:");
+                System.out.println("0. Exit");
+                System.out.println("1. Course Selection Menu");
+                System.out.println("2. View Transcript");
+                System.out.println("3. Log out");
+                System.out.print("Enter your choice: ");
+                break;
+            case "courseSelectionMenu":
+                System.out.println("\nCourse Selection Menu");
+                System.out.println("Please select from the following options:");
+                System.out.println("0. Exit");
+                System.out.println("1. Course Status Check");
+                System.out.println("2. Add Course");
+                System.out.println("3. Drop Course");
+                System.out.println("4. Send Request");
+                System.out.println("5. Show request status");
+                System.out.println("6. Log out");
+                System.out.print("Enter your choice: ");
+
+        }
+
 
     }
 

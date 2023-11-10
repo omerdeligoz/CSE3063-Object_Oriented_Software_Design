@@ -62,18 +62,12 @@ public class Advisor extends Lecturer implements ILogin {
         }
     }
 
-    @Override
-    public boolean login(String userName, String password) {
-        return this.getUserName().equals(userName) && this.getPassword().equals(password);
-    }
+
+
+
 
     @Override
-    public void loginMenu() {
-
-    }
-
-    @Override
-    public void menu() {
+    public void menu(String menuType) {
         System.out.println("\nAdvisor Menu");
         System.out.println("Please select from the following options:");
         System.out.println("0. Exit");

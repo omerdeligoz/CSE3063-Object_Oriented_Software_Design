@@ -66,4 +66,8 @@ public abstract class Person {
     public String getSurname() {
         return surname;
     }
+    boolean login(String userName, String password){
+        return this.userName.equals(userName) && this.password.equals(password);
+    }
+
 }

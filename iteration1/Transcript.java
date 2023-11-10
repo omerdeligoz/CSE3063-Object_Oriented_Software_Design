@@ -20,4 +20,9 @@ public class Transcript {
         System.out.println("Showing Transcript ...\n\n");
         //TODO a to string method for transcript
     }
+
+    public void courseStatusCheck(Student student) {
+        //TODO
+        System.out.println("Course Status  Check ...");
+    }
 }
