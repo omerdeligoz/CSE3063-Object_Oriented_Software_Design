@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 
 public class CourseRegistrationSystem {
+    Scanner input;
+    private int choice;
 
     public void start() {
         //Create courses
@@ -15,7 +17,7 @@ public class CourseRegistrationSystem {
 
 
         //Create Students
-        Person student1 = new Student(1, "name1", "surname1", "CSE", "username1", "password1", (byte) 3);
+        Person student1 = new Student(1, "name1", "surname1", "CSE", "b", "b", (byte) 3);
         Person student2 = new Student(2, "name2", "surname2", "CSE", "username2", "password2", (byte) 3);
         Person student3 = new Student(3, "name3", "surname3", "CSE", "username3", "password3", (byte) 3);
 
@@ -77,6 +79,7 @@ public class CourseRegistrationSystem {
         Department department = new Department("CSE");
 
         student1.setDepartmentObject(department);
+        advisor1.setDepartmentObject(department);
 
         department.getCourses().add(course1);
         department.getCourses().add(course2);
@@ -103,11 +106,9 @@ public class CourseRegistrationSystem {
 
 
         for (Student student : department.getStudents()) {
-//            department.getStudentPasswordMap().put(student.getUserName(), student);
             department.getUserNamePersonMap().put(student.getUserName(), student);
         }
         for (Advisor advisor : department.getAdvisors()) {
-//            department.getAdvisorPasswordMap().put(advisor.getUserName(), advisor);
             department.getUserNamePersonMap().put(advisor.getUserName(), advisor);
         }
 
@@ -145,23 +146,23 @@ public class CourseRegistrationSystem {
 
         System.out.println("\nWelcome to the Course Registration System");
         System.out.println("Please select from the following options:");
-        System.out.println("1. Login");
-        System.out.println("Enter 0 for exit");
+        System.out.println("0. Exit");
+        System.out.println("1. Login Page");
         System.out.print("Enter your choice: ");
-        int choice;
-        choice = input.nextInt();
-        boolean loggedIn = false;
-        boolean correctChoice = false;
 
-        while (!correctChoice) {
+        choice = getInput();
+        if (choice == -1) {
+            mainMenu(department);
+        } else {
             switch (choice) {
                 case 0:
                     System.out.println("Exiting from system");
-                    correctChoice = true;
                     exitProgram();
                     break;
                 case 1:
+                    //May be more understandable naming
                     userTypeMenu(department);
+                    loginMenu(department);
                     break;
                 default:
                     System.out.println("Invalid choice Please select again");
@@ -171,160 +172,186 @@ public class CourseRegistrationSystem {
         }
     }
 
+
     public void userTypeMenu(Department department) {
-        Scanner input = new Scanner(System.in);
-        int choice;
+        //Maybe we should create just one scanner on top
+        //Scanner input = new Scanner(System.in);
+
         System.out.println("\nPlease select user type:");
+        //May be "0. Save & Exit"
+        System.out.println("0. Exit");
         System.out.println("1. Student");
         System.out.println("2. Advisor");
         System.out.println("3. Back to main menu");
-        System.out.println("Enter 0 for exit");
         System.out.print("Enter your choice: ");
-        choice = input.nextInt();
 
-        switch (choice) {
-            case 0:
-                System.out.println("Exiting from system");
-                exitProgram();
-                break;
-            case 1:
-                loginMenu("Student", department);
-                break;
-            case 2:
-                loginMenu("Advisor", department);
-                break;
-            case 3:
-                mainMenu(department);
-                break;
-            default:
-                System.out.println("Invalid choice Please select again");
-                userTypeMenu(department);
-                break;
+
+        choice = getInput();
+        if (choice == -1) {
+            userTypeMenu(department);
+        } else {
+
+
+            switch (choice) {
+                case 0:
+                    System.out.println("Exiting from system");
+                    exitProgram();
+                    break;
+                case 1:
+                    System.out.println("\nStudent login page");
+                    loginMenu(choice, department);
+                    break;
+                case 2:
+                    System.out.println("\nAdvisor login page");
+                    loginMenu(choice, department);
+                    break;
+                case 3:
+                    mainMenu(department);
+                    break;
+                default:
+                    System.out.println("Invalid choice Please select again");
+                    userTypeMenu(department);
+                    break;
+            }
         }
     }
 
-    private void loginMenu(String userType, Department department) {
-        Scanner input = new Scanner(System.in);
-        Student student = new Student();
-        Advisor advisor;
-        String userName;
-        String password;
+    private void loginMenu(Department department) {
+        Person person;
+        String userName, password;
 
-        System.out.println("\n" + userType + " login page");
         System.out.print("Please enter your username: ");
         userName = input.next();
         System.out.print("Enter your password: ");
         password = input.next();
 
-        if (department.getUserNamePersonMap().get(userName) != null) {
-            if (userType.equals("Student")) {
-                student = (Student) department.getUserNamePersonMap().get(userName);
-                if (student.login(userName, password)) {
-                    studentMenu(student);
-                } else {
-                    System.out.println("Login failed, please try again\n");
-                    loginMenu(userType, department);
-                }
-            } else {
-                if (userType.equals("Advisor")) {
-                    advisor = (Advisor) department.getUserNamePersonMap().get(userName);
-                    if (advisor.login(userName, password)) {
-                        advisorMenu(advisor);
-                    } else {
-                        System.out.println("Login failed, please try again\n");
-                        loginMenu(userType, department);
+
+        person = department.getUserNamePersonMap().get(userName);
+        if (person != null) { //Check if there is such user
+            String userTypeString = person.getClass().getSimpleName();
+            switch (userTypeString) {
+                case "Student":
+                    if (((Student) person).login(userName, password)) {
+                        studentMenu((Student) person);
                     }
-                }
+                    break;
+                case "Advisor":
+                    if (((Advisor) person).login(userName, password)) {
+                        advisorMenu((Advisor) person);
+                    }
+                    break;
             }
         } else {
-            System.out.println("There is no such " + userType);
+            System.out.println("There is no such user, please try again\n");
+            loginMenu(userType, department);
+        }
+
+        if (department.getUserNamePersonMap().get(userName) != null) { //Check if there is such user
+            switch (userType) {
+                case 1: //Student user type
+                    person = department.getUserNamePersonMap().get(userName);
+                    if (((Student) person).login(userName, password)) {
+                        studentMenu((Student) person);
+                    }
+                    break;
+                case 2: //Advisor user type
+                    person = department.getUserNamePersonMap().get(userName);
+                    if (((Advisor) person).login(userName, password)) {
+                        advisorMenu((Advisor) person);
+                    }
+                    break;
+                default:
+                    System.out.println("Login failed, please try again\n");
+                    loginMenu(userType, department);
+            }
+        } else {
+            System.out.println("There is no such user, please try again\n");
             loginMenu(userType, department);
         }
     }
 
 
     private void studentMenu(Student student) {
-        System.out.println("\nStudent Menu");
-        System.out.println("Please select from the following options:");
-        System.out.println("1. Course Selection Menu");
-        System.out.println("2. View Transcript");
-        System.out.println("3. Log out");
-        System.out.println("Enter 0 for exit\n");
-        System.out.print("Enter your choice: ");
-        Scanner input = new Scanner(System.in);
-        int choice = input.nextInt();
-        switch (choice) {
-            case 0:
-                System.out.println("Exiting from system");
-                exitProgram();
-                break;
-            case 1:
-                courseSelectionMenu(student);
-                break;
-            case 2:
-                student.getTranscript().showTranscript();
-                studentMenu(student);
-                break;
-            case 3:
-                mainMenu(student.getDepartmentObject());
-                break;
-            default:
-                System.out.println("Invalid choice Please select again");
-                studentMenu(student);
-                break;
+        student.menu();
+        choice = getInput();
+        if (choice == -1) {
+            studentMenu(student);
+        } else {
+            switch (choice) {
+                case 0:
+                    System.out.println("Exiting from system");
+                    exitProgram();
+                    break;
+                case 1:
+                    courseSelectionMenu(student);
+                    break;
+                case 2:
+                    student.getTranscript().showTranscript();
+                    studentMenu(student);
+                    break;
+                case 3:
+                    userTypeMenu(student.getDepartmentObject());
+                    break;
+                default:
+                    System.out.println("Invalid choice Please select again");
+                    studentMenu(student);
+                    break;
+            }
         }
     }
 
     private void courseSelectionMenu(Student student) {
         List<Course> courses = new ArrayList<>();  //TODO alınabilecek dersler student ta hesaplanıp return edilecek
-        Scanner input = new Scanner(System.in);
+
         System.out.println("\nCourse Selection Menu");
         System.out.println("Please select from the following options:");
+        System.out.println("0. Exit");
         System.out.println("1. Course Status Check");
         System.out.println("2. Add Course");
         System.out.println("3. Drop Course");
         System.out.println("4. Send Request");
         System.out.println("5. Show request status");
         System.out.println("6. Log out");
-        System.out.println("Enter 0 for exit\n");
         System.out.print("Enter your choice: ");
 
-        int choice = input.nextInt();
-        switch (choice) {
-            case 0:
-                System.out.println("Exiting from system");
-                exitProgram();
-                break;
-            case 1:
-                courseStatusCheckMenu(student);
-                courseSelectionMenu(student);
-                break;
-            case 2:
-                addCourseMenu(student);
-                courseSelectionMenu(student);
-                break;
-            case 3:
-                dropCourseMenu(student);
-                courseSelectionMenu(student);
-                break;
-            case 4:
-                student.sendRequest();
-                courseSelectionMenu(student);
-                break;
-            case 5:
-                student.showRequestStatus();
-                courseSelectionMenu(student);
-                break;
-            case 6:
-                userTypeMenu(student.getDepartmentObject());
-                break;
-            default:
-                System.out.println("Invalid choice Please select again");
-                courseSelectionMenu(student);
-                break;
+        choice = getInput();
+        if (choice == -1) {
+            courseSelectionMenu(student);
+        } else {
+            switch (choice) {
+                case 0:
+                    System.out.println("Exiting from system");
+                    exitProgram();
+                    break;
+                case 1:
+                    courseStatusCheckMenu(student);
+                    courseSelectionMenu(student);
+                    break;
+                case 2:
+                    addCourseMenu(student);
+                    courseSelectionMenu(student);
+                    break;
+                case 3:
+                    dropCourseMenu(student);
+                    courseSelectionMenu(student);
+                    break;
+                case 4:
+                    student.sendRequest();
+                    courseSelectionMenu(student);
+                    break;
+                case 5:
+                    student.showRequestStatus();
+                    courseSelectionMenu(student);
+                    break;
+                case 6:
+                    userTypeMenu(student.getDepartmentObject());
+                    break;
+                default:
+                    System.out.println("Invalid choice Please select again");
+                    courseSelectionMenu(student);
+                    break;
+            }
         }
-
-
     }
 
     private void showRequestsStatusMenu(Student student) {
@@ -337,7 +364,6 @@ public class CourseRegistrationSystem {
     }
 
     private void addCourseMenu(Student student) {
-        Scanner input = new Scanner(System.in);
         System.out.println("Add Course Menu");
         System.out.println("Available courses:");
         for (int i = 0; i < student.getAvailableCourses().size(); i++) {
@@ -359,25 +385,39 @@ public class CourseRegistrationSystem {
     }
 
     private void advisorMenu(Advisor advisor) {
-        System.out.println("\nAdvisor Menu");
-        System.out.println("Please select from the following options:");
-        System.out.println("1. List requests");
-        System.out.println("2. Log out");
-        System.out.println("Enter 0 for exit");
-        System.out.print("Enter your choice: ");
-        Scanner input = new Scanner(System.in);
-        int choice = input.nextInt();
-        switch (choice) {
-            case 1:
-                advisor.listRequests();
-                advisorMenu(advisor);
-                break;
-            case 2:
-                userTypeMenu(advisor.getDepartmentObject());
-            default:
-                System.out.println("Invalid choice");
-                break;
+        advisor.menu();
+
+        choice = getInput();
+        if (choice == -1) {
+            advisorMenu(advisor);
+        } else {
+            switch (choice) {
+                case 0:
+                    System.out.println("Exiting from system");
+                    exitProgram();
+                    break;
+                case 1:
+                    advisor.listRequests();
+                    advisorMenu(advisor);
+                    break;
+                case 2:
+                    userTypeMenu(advisor.getDepartmentObject());
+                default:
+                    System.out.println("Invalid choice");
+                    break;
+            }
         }
+    }
+
+    private int getInput() {
+        try {
+            input = new Scanner(System.in);
+            choice = input.nextInt();
+        } catch (Exception e) {
+            System.out.println("Invalid input, please enter a number");
+            return -1;
+        }
+        return choice;
     }
 
     private void exitProgram() {

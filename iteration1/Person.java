@@ -5,15 +5,15 @@ public abstract class Person {
     private String name;
     private String surname;
     private Department departmentObject;
-    private String department;
+    private String departmentName;
     private String userName;
     private String password;
 
-    public Person(int ID, String name, String surname, String department, String userName, String password) {
+    public Person(int ID, String name, String surname, String departmentName, String userName, String password) {
         this.ID = ID;
         this.name = name;
         this.surname = surname;
-        this.department = department;
+        this.departmentName = departmentName;
         this.userName = userName;
         this.password = password;
     }
@@ -25,10 +25,12 @@ public abstract class Person {
         this.userName = userName;
         this.password = password;
     }
+
     //
     //
     //No need
-    public Person() {}
+    public Person() {
+    }
     //
     //
     //
@@ -37,24 +39,24 @@ public abstract class Person {
         return userName;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public void setDepartmentObject(Department departmentObject) {
-        this.departmentObject = departmentObject;
-    }
-
     public Department getDepartmentObject() {
         return departmentObject;
+    }
+
+    public void setDepartmentObject(Department departmentObject) {
+        this.departmentObject = departmentObject;
     }
 
     public String getName() {

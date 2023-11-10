@@ -7,16 +7,12 @@ import java.util.Map;
 
 public class Department {
     String departmentName;
-
-   private List<Course> courses = new ArrayList<>();
-   private List<Student> students = new ArrayList<>();
     List<Advisor> advisors = new ArrayList<>();
     List<Transcript> transcripts = new ArrayList<>();
-    Map<String, Student> studentPasswordMap = new HashMap<>();
     Map<String, Person> userNamePersonMap = new HashMap<>();  //it holds username and password of users
-    Map<String, Advisor> advisorPasswordMap = new HashMap<>();
-
     byte maxCourseNumber = 5;
+    private List<Course> courses = new ArrayList<>();
+    private List<Student> students = new ArrayList<>();
 
     public Department(String departmentName) {
         this.departmentName = departmentName;
@@ -41,14 +37,7 @@ public class Department {
     public List<Transcript> getTranscripts() {
         return transcripts;
     }
-
-    public Map<String, Student> getStudentPasswordMap() {
-        return studentPasswordMap;
-    }
-
-    public Map<String, Advisor> getAdvisorPasswordMap() {
-        return advisorPasswordMap;
-    }
+    
 
     public Map<String, Person> getUserNamePersonMap() {
         return userNamePersonMap;

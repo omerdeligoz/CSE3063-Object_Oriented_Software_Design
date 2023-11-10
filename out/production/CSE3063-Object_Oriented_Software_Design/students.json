@@ -1,245 +1,293 @@
 {
-  "students" : [ {
-    "studentID" : 1,
-    "name" : "Student1",
-    "advisor" : "Advisor2",
-    "coursesTaken" : [ {
-      "courseID" : "Course1",
-      "grade" : {
-        "letter" : "C+",
-        "points" : 3.728186100393656
-      }
-    }, {
-      "courseID" : "Course2",
-      "grade" : {
-        "letter" : "D",
-        "points" : 3.254719842699167
-      }
-    }, {
-      "courseID" : "Course3",
-      "grade" : {
-        "letter" : "B-",
-        "points" : 3.8673859087848665
-      }
-    } ],
-    "transcript" : "Transcript for Student1",
-    "cgpa" : 4.45434421295746,
-    "gradeLevel" : 4
-  }, {
-    "studentID" : 2,
-    "name" : "Student2",
-    "advisor" : "Advisor3",
-    "coursesTaken" : [ {
-      "courseID" : "Course1",
-      "grade" : {
-        "letter" : "B-",
-        "points" : 3.9837840494171086
-      }
-    }, {
-      "courseID" : "Course2",
-      "grade" : {
-        "letter" : "F",
-        "points" : 3.5699664552648254
-      }
-    }, {
-      "courseID" : "Course3",
-      "grade" : {
-        "letter" : "C-",
-        "points" : 3.6218031260723462
-      }
-    }, {
-      "courseID" : "Course4",
-      "grade" : {
-        "letter" : "B",
-        "points" : 3.868714347306204
-      }
-    } ],
-    "transcript" : "Transcript for Student2",
-    "cgpa" : 2.925982813123464,
-    "gradeLevel" : 4
-  }, {
-    "studentID" : 3,
-    "name" : "Student3",
-    "advisor" : "Advisor1",
-    "coursesTaken" : [ {
-      "courseID" : "Course1",
-      "grade" : {
-        "letter" : "C",
-        "points" : 2.581722168344688
-      }
-    }, {
-      "courseID" : "Course2",
-      "grade" : {
-        "letter" : "F",
-        "points" : 3.876573031064175
-      }
-    }, {
-      "courseID" : "Course3",
-      "grade" : {
-        "letter" : "A-",
-        "points" : 2.562681652325244
-      }
-    }, {
-      "courseID" : "Course4",
-      "grade" : {
-        "letter" : "B",
-        "points" : 3.884802234953167
-      }
-    } ],
-    "transcript" : "Transcript for Student3",
-    "cgpa" : 2.8967956129801156,
-    "gradeLevel" : 4
-  }, {
-    "studentID" : 4,
-    "name" : "Student4",
-    "advisor" : "Advisor2",
-    "coursesTaken" : [ {
-      "courseID" : "Course1",
-      "grade" : {
-        "letter" : "B",
-        "points" : 3.3052698769992297
-      }
-    } ],
-    "transcript" : "Transcript for Student4",
-    "cgpa" : 3.7958369027724244,
-    "gradeLevel" : 4
-  }, {
-    "studentID" : 5,
-    "name" : "Student5",
-    "advisor" : "Advisor3",
-    "coursesTaken" : [ {
-      "courseID" : "Course1",
-      "grade" : {
-        "letter" : "B+",
-        "points" : 2.7345797131363185
-      }
-    }, {
-      "courseID" : "Course2",
-      "grade" : {
-        "letter" : "B-",
-        "points" : 3.2047311114057084
-      }
-    }, {
-      "courseID" : "Course3",
-      "grade" : {
-        "letter" : "B",
-        "points" : 3.2163893888101454
-      }
-    }, {
-      "courseID" : "Course4",
-      "grade" : {
-        "letter" : "B",
-        "points" : 2.672899138596796
-      }
-    } ],
-    "transcript" : "Transcript for Student5",
-    "cgpa" : 2.5500658377306893,
-    "gradeLevel" : 4
-  }, {
-    "studentID" : 6,
-    "name" : "Student6",
-    "advisor" : "Advisor1",
-    "coursesTaken" : [ {
-      "courseID" : "Course1",
-      "grade" : {
-        "letter" : "C+",
-        "points" : 2.108543128410842
-      }
-    } ],
-    "transcript" : "Transcript for Student6",
-    "cgpa" : 3.9851806922780284,
-    "gradeLevel" : 2
-  }, {
-    "studentID" : 7,
-    "name" : "Student7",
-    "advisor" : "Advisor2",
-    "coursesTaken" : [ {
-      "courseID" : "Course1",
-      "grade" : {
-        "letter" : "C+",
-        "points" : 2.504008161441587
-      }
-    }, {
-      "courseID" : "Course2",
-      "grade" : {
-        "letter" : "D",
-        "points" : 2.2067890731621516
-      }
-    } ],
-    "transcript" : "Transcript for Student7",
-    "cgpa" : 2.9884092810945004,
-    "gradeLevel" : 4
-  }, {
-    "studentID" : 8,
-    "name" : "Student8",
-    "advisor" : "Advisor3",
-    "coursesTaken" : [ {
-      "courseID" : "Course1",
-      "grade" : {
-        "letter" : "F",
-        "points" : 2.6405560020622563
-      }
-    }, {
-      "courseID" : "Course2",
-      "grade" : {
-        "letter" : "C-",
-        "points" : 3.7833686617652686
-      }
-    }, {
-      "courseID" : "Course3",
-      "grade" : {
-        "letter" : "D",
-        "points" : 2.6263466317458732
-      }
-    } ],
-    "transcript" : "Transcript for Student8",
-    "cgpa" : 3.8911290733547395,
-    "gradeLevel" : 3
-  }, {
-    "studentID" : 9,
-    "name" : "Student9",
-    "advisor" : "Advisor1",
-    "coursesTaken" : [ {
-      "courseID" : "Course1",
-      "grade" : {
-        "letter" : "B",
-        "points" : 2.679757054378621
-      }
-    }, {
-      "courseID" : "Course2",
-      "grade" : {
-        "letter" : "A",
-        "points" : 3.509749454520791
-      }
-    }, {
-      "courseID" : "Course3",
-      "grade" : {
-        "letter" : "B",
-        "points" : 2.2806976009767337
-      }
-    }, {
-      "courseID" : "Course4",
-      "grade" : {
-        "letter" : "C",
-        "points" : 2.2467205847008245
-      }
-    } ],
-    "transcript" : "Transcript for Student9",
-    "cgpa" : 3.32207897923523,
-    "gradeLevel" : 4
-  }, {
-    "studentID" : 10,
-    "name" : "Student10",
-    "advisor" : "Advisor2",
-    "coursesTaken" : [ {
-      "courseID" : "Course1",
-      "grade" : {
-        "letter" : "C-",
-        "points" : 3.1398984024882814
-      }
-    } ],
-    "transcript" : "Transcript for Student10",
-    "cgpa" : 3.858144552194676,
-    "gradeLevel" : 1
-  } ]
+  "students": [
+    {
+      "studentID": 1,
+      "name": "Student1",
+      "advisor": "Advisor2",
+      "coursesTaken": [
+        {
+          "courseID": "Course1",
+          "grade": {
+            "letter": "C+",
+            "points": 3.728186100393656
+          }
+        },
+        {
+          "courseID": "Course2",
+          "grade": {
+            "letter": "D",
+            "points": 3.254719842699167
+          }
+        },
+        {
+          "courseID": "Course3",
+          "grade": {
+            "letter": "B-",
+            "points": 3.8673859087848665
+          }
+        }
+      ],
+      "transcript": "Transcript for Student1",
+      "cgpa": 4.45434421295746,
+      "gradeLevel": 4
+    },
+    {
+      "studentID": 2,
+      "name": "Student2",
+      "advisor": "Advisor3",
+      "coursesTaken": [
+        {
+          "courseID": "Course1",
+          "grade": {
+            "letter": "B-",
+            "points": 3.9837840494171086
+          }
+        },
+        {
+          "courseID": "Course2",
+          "grade": {
+            "letter": "F",
+            "points": 3.5699664552648254
+          }
+        },
+        {
+          "courseID": "Course3",
+          "grade": {
+            "letter": "C-",
+            "points": 3.6218031260723462
+          }
+        },
+        {
+          "courseID": "Course4",
+          "grade": {
+            "letter": "B",
+            "points": 3.868714347306204
+          }
+        }
+      ],
+      "transcript": "Transcript for Student2",
+      "cgpa": 2.925982813123464,
+      "gradeLevel": 4
+    },
+    {
+      "studentID": 3,
+      "name": "Student3",
+      "advisor": "Advisor1",
+      "coursesTaken": [
+        {
+          "courseID": "Course1",
+          "grade": {
+            "letter": "C",
+            "points": 2.581722168344688
+          }
+        },
+        {
+          "courseID": "Course2",
+          "grade": {
+            "letter": "F",
+            "points": 3.876573031064175
+          }
+        },
+        {
+          "courseID": "Course3",
+          "grade": {
+            "letter": "A-",
+            "points": 2.562681652325244
+          }
+        },
+        {
+          "courseID": "Course4",
+          "grade": {
+            "letter": "B",
+            "points": 3.884802234953167
+          }
+        }
+      ],
+      "transcript": "Transcript for Student3",
+      "cgpa": 2.8967956129801156,
+      "gradeLevel": 4
+    },
+    {
+      "studentID": 4,
+      "name": "Student4",
+      "advisor": "Advisor2",
+      "coursesTaken": [
+        {
+          "courseID": "Course1",
+          "grade": {
+            "letter": "B",
+            "points": 3.3052698769992297
+          }
+        }
+      ],
+      "transcript": "Transcript for Student4",
+      "cgpa": 3.7958369027724244,
+      "gradeLevel": 4
+    },
+    {
+      "studentID": 5,
+      "name": "Student5",
+      "advisor": "Advisor3",
+      "coursesTaken": [
+        {
+          "courseID": "Course1",
+          "grade": {
+            "letter": "B+",
+            "points": 2.7345797131363185
+          }
+        },
+        {
+          "courseID": "Course2",
+          "grade": {
+            "letter": "B-",
+            "points": 3.2047311114057084
+          }
+        },
+        {
+          "courseID": "Course3",
+          "grade": {
+            "letter": "B",
+            "points": 3.2163893888101454
+          }
+        },
+        {
+          "courseID": "Course4",
+          "grade": {
+            "letter": "B",
+            "points": 2.672899138596796
+          }
+        }
+      ],
+      "transcript": "Transcript for Student5",
+      "cgpa": 2.5500658377306893,
+      "gradeLevel": 4
+    },
+    {
+      "studentID": 6,
+      "name": "Student6",
+      "advisor": "Advisor1",
+      "coursesTaken": [
+        {
+          "courseID": "Course1",
+          "grade": {
+            "letter": "C+",
+            "points": 2.108543128410842
+          }
+        }
+      ],
+      "transcript": "Transcript for Student6",
+      "cgpa": 3.9851806922780284,
+      "gradeLevel": 2
+    },
+    {
+      "studentID": 7,
+      "name": "Student7",
+      "advisor": "Advisor2",
+      "coursesTaken": [
+        {
+          "courseID": "Course1",
+          "grade": {
+            "letter": "C+",
+            "points": 2.504008161441587
+          }
+        },
+        {
+          "courseID": "Course2",
+          "grade": {
+            "letter": "D",
+            "points": 2.2067890731621516
+          }
+        }
+      ],
+      "transcript": "Transcript for Student7",
+      "cgpa": 2.9884092810945004,
+      "gradeLevel": 4
+    },
+    {
+      "studentID": 8,
+      "name": "Student8",
+      "advisor": "Advisor3",
+      "coursesTaken": [
+        {
+          "courseID": "Course1",
+          "grade": {
+            "letter": "F",
+            "points": 2.6405560020622563
+          }
+        },
+        {
+          "courseID": "Course2",
+          "grade": {
+            "letter": "C-",
+            "points": 3.7833686617652686
+          }
+        },
+        {
+          "courseID": "Course3",
+          "grade": {
+            "letter": "D",
+            "points": 2.6263466317458732
+          }
+        }
+      ],
+      "transcript": "Transcript for Student8",
+      "cgpa": 3.8911290733547395,
+      "gradeLevel": 3
+    },
+    {
+      "studentID": 9,
+      "name": "Student9",
+      "advisor": "Advisor1",
+      "coursesTaken": [
+        {
+          "courseID": "Course1",
+          "grade": {
+            "letter": "B",
+            "points": 2.679757054378621
+          }
+        },
+        {
+          "courseID": "Course2",
+          "grade": {
+            "letter": "A",
+            "points": 3.509749454520791
+          }
+        },
+        {
+          "courseID": "Course3",
+          "grade": {
+            "letter": "B",
+            "points": 2.2806976009767337
+          }
+        },
+        {
+          "courseID": "Course4",
+          "grade": {
+            "letter": "C",
+            "points": 2.2467205847008245
+          }
+        }
+      ],
+      "transcript": "Transcript for Student9",
+      "cgpa": 3.32207897923523,
+      "gradeLevel": 4
+    },
+    {
+      "studentID": 10,
+      "name": "Student10",
+      "advisor": "Advisor2",
+      "coursesTaken": [
+        {
+          "courseID": "Course1",
+          "grade": {
+            "letter": "C-",
+            "points": 3.1398984024882814
+          }
+        }
+      ],
+      "transcript": "Transcript for Student10",
+      "cgpa": 3.858144552194676,
+      "gradeLevel": 1
+    }
+  ]
 }

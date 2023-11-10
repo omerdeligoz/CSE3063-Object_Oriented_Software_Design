@@ -1,6 +1,5 @@
 package iteration1;
 
-import java.util.HashMap;
 import java.util.List;
 
 public class Registration {
@@ -10,7 +9,6 @@ public class Registration {
     public Registration(Student student, List<Course> courses) {
         this.student = student;
         this.courses = courses;
-
     }
 
     public void showRequest() {
@@ -24,12 +22,15 @@ public class Registration {
         return student;
     }
 
-    public void approveRequest() {
+    public void approveRequest(Advisor advisor) {
+        //TODO this.student ve this.courses kullanarak student ve advisor güncellenecek
         System.out.println("Request approved"); //TODO implementation
         student.setHasRequest(false);
+
     }
 
-    public void rejectRequest() { //TODO implementation
+    public void rejectRequest(Advisor advisor) { //TODO implementation
+        //TODO this.student ve this.courses kullanarak student ve advisor güncellenecek
         System.out.println("Request rejected");
     }
 }

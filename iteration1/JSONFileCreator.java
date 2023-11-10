@@ -25,7 +25,7 @@ public class JSONFileCreator {
             JSONObject courseJSON = new JSONObject();
 
             // Generate random data for each course
-            String[] courseNames = {"Introduction to Computer Science", "Data Structures", "Algorithms", "Database Management", "Web Development", "Artificial Intelligence" , "Machine Learning and Deep Learning", "Computer Networks", "Operating Systems", "Computer Architecture", "Software Engineering"};
+            String[] courseNames = {"Introduction to Computer Science", "Data Structures", "Algorithms", "Database Management", "Web Development", "Artificial Intelligence", "Machine Learning and Deep Learning", "Computer Networks", "Operating Systems", "Computer Architecture", "Software Engineering"};
             String courseName = courseNames[i - 1];
             String courseCode = "CSE" + (100 + i);
             int courseCredit = 3 + random.nextInt(3); // Course credits from 3 to 5

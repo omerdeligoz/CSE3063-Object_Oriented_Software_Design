@@ -3,5 +3,6 @@ package iteration1;
 public interface ILogin {
     boolean login(String userName, String password);
 
-    void showMenu();
+    void loginMenu();
+    void menu();
 }

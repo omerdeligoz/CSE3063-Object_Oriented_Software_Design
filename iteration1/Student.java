@@ -3,6 +3,10 @@ package iteration1;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Represents a student who can log in, select courses, and send requests to advisors.
+ * Inherits from the Person class and implements the ILogin interface.
+ */
 public class Student extends Person implements ILogin {
 
     private Advisor advisor;
@@ -10,7 +14,7 @@ public class Student extends Person implements ILogin {
     private byte semester;
     private boolean hasRequest;
     private ArrayList<Course> selectedCourses = new ArrayList<>();
-    private ArrayList<Course> draft= new ArrayList<>();
+    private ArrayList<Course> draft = new ArrayList<>();
     private ArrayList<Course> availableCourses = new ArrayList<>();
     private HashMap<Course, CourseSession> courseSessions = new HashMap<>();
     private HashMap<Course, String> successfulCourseGradeMap = new HashMap<>(); //
@@ -24,9 +28,9 @@ public class Student extends Person implements ILogin {
     //
     //
 
-    public Student(int studentID, String name, String surname, String department,
+    public Student(int studentID, String name, String surname, String departmentName,
                    String userName, String password, byte semester) {
-        super(studentID, name, surname, department, userName, password);
+        super(studentID, name, surname, departmentName, userName, password);
         this.semester = semester;
     }
 
@@ -63,7 +67,19 @@ public class Student extends Person implements ILogin {
     }
 
     @Override
-    public void showMenu() {
+    public void loginMenu() {
+
+    }
+
+    @Override
+    public void menu() {
+        System.out.println("\nStudent Menu");
+        System.out.println("Please select from the following options:");
+        System.out.println("0. Exit");
+        System.out.println("1. Course Selection Menu");
+        System.out.println("2. View Transcript");
+        System.out.println("3. Log out");
+        System.out.print("Enter your choice: ");
 
     }
 
@@ -71,16 +87,12 @@ public class Student extends Person implements ILogin {
         return courseSessions;
     }
 
-    public void setTranscript(Transcript transcript) {
-        this.transcript = transcript;
-    }
-
-    public void setAdvisor(Advisor advisor) {
-        this.advisor = advisor;
-    }
-
     public Transcript getTranscript() {
         return transcript;
+    }
+
+    public void setTranscript(Transcript transcript) {
+        this.transcript = transcript;
     }
 
     public void showRequestStatus() {
@@ -106,12 +118,20 @@ public class Student extends Person implements ILogin {
         return advisor;
     }
 
+    public void setAdvisor(Advisor advisor) {
+        this.advisor = advisor;
+    }
+
     public byte getSemester() {
         return semester;
     }
 
     public boolean isHasRequest() {
         return hasRequest;
+    }
+
+    public void setHasRequest(boolean hasRequest) {
+        this.hasRequest = hasRequest;
     }
 
     public ArrayList<Course> getSelectedCourses() {
@@ -124,9 +144,5 @@ public class Student extends Person implements ILogin {
 
     public HashMap<Course, String> getSuccessfulCourseGradeMap() {
         return successfulCourseGradeMap;
-    }
-
-    public void setHasRequest(boolean hasRequest) {
-        this.hasRequest = hasRequest;
     }
 }

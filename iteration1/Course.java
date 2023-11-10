@@ -1,9 +1,12 @@
 package iteration1;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
+/**
+ * The Course class represents a course offered by an educational institution.
+ * It contains information about the name, code, credit, semester, sessions, and prerequisites of the course.
+ */
 public class Course {
     private String courseName;
     private String courseCode;
