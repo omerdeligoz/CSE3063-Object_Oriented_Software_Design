@@ -66,9 +66,9 @@ public class CourseRegistrationSystem implements ILogin {
 
 
         //Create courseSessions
-        Course courseSession1 = new CourseSession(course1, "CSE100.1", "Monday", 3);
-        Course courseSession2 = new CourseSession(course1, "CSE100.1", "Tuesday", 4);
-        Course courseSession3 = new CourseSession(course2, "CSE101.1", "Wednesday", 5);
+        Course courseSession1 = new CourseSection(course1, "CSE100.1", "Monday", 3);
+        Course courseSession2 = new CourseSection(course1, "CSE100.1", "Tuesday", 4);
+        Course courseSession3 = new CourseSection(course2, "CSE101.1", "Wednesday", 5);
 
 
         //add sessions to courses
@@ -135,7 +135,7 @@ public class CourseRegistrationSystem implements ILogin {
 
     }
 
-    private void readInputParameters() {
+    public void readInputParameters() {
 
         //TODO Read JSON files and create objects
     }
@@ -216,7 +216,7 @@ public class CourseRegistrationSystem implements ILogin {
             }
         }
     */
-    private void loginMenu(Department department) {
+    public void loginMenu(Department department) {
         Person person;
         String userName, password;
 
@@ -243,7 +243,7 @@ public class CourseRegistrationSystem implements ILogin {
     }
 
 
-    private void studentMenu(Student student) {
+    public void studentMenu(Student student) {
         student.menu("studentMenu");
         choice = getInput();
         if (choice == -1) {
@@ -272,7 +272,7 @@ public class CourseRegistrationSystem implements ILogin {
         }
     }
 
-    private void courseSelectionMenu(Student student) {
+    public void courseSelectionMenu(Student student) {
         List<Course> courses = new ArrayList<>();  //TODO alınabilecek dersler student ta hesaplanıp return edilecek
 
        student.menu("courseSelectionMenu");
@@ -291,11 +291,11 @@ public class CourseRegistrationSystem implements ILogin {
                     courseSelectionMenu(student);
                     break;
                 case 2:
-                    addCourseMenu(student);
+                    student.addCourse(student);
                     courseSelectionMenu(student);
                     break;
                 case 3:
-                    dropCourseMenu(student);
+                    student.dropCourse(student);
                     courseSelectionMenu(student);
                     break;
                 case 4:
@@ -317,33 +317,7 @@ public class CourseRegistrationSystem implements ILogin {
         }
     }
 
-    private void dropCourseMenu(Student student) {
-        System.out.println("Drop Course Menu (Studenta taşınabilir)");
-        System.out.println("Çıkarmak istediğiniz dersi ya da dersleri seçiniz");
-        //TODO Dersleri tek tek mi yoksa bütün olarak mı seçilecek?
-        //TODO İşlem bitince courseSelectionMenu'ye dönücek.
-    }
-
-
-    private void addCourseMenu(Student student) {
-        System.out.println("Add Course Menu (Studenta taşınabilir)");
-        System.out.println("Available courses:");
-        for (int i = 0; i < student.getAvailableCourses().size(); i++) {
-            System.out.println((i + 1) + ". " + student.getAvailableCourses().get(i).getCourseCode() + " - " + student.getAvailableCourses().get(i).getCourseName());
-        }
-        System.out.print("Please select courses you want to add:");
-        String choice = input.nextLine();
-        String[] choices = choice.split(" ");
-        ArrayList<Course> selectedCourses = new ArrayList<>();
-        for (String s : choices) {
-            selectedCourses.add(student.getAvailableCourses().get(Integer.parseInt(s) - 1));
-        }
-        student.addCourses(selectedCourses);
-    }
-
-
-
-    private void advisorMenu(Advisor advisor) {
+    public void advisorMenu(Advisor advisor) {
         advisor.menu("advisorMenu");
 
         choice = getInput();
@@ -368,7 +342,7 @@ public class CourseRegistrationSystem implements ILogin {
         }
     }
 
-    private int getInput() {
+    public int getInput() {
         try {
             input = new Scanner(System.in);
             choice = input.nextInt();
@@ -379,13 +353,13 @@ public class CourseRegistrationSystem implements ILogin {
         return choice;
     }
 
-    private void exitProgram() {
+    public void exitProgram() {
         // TODO Save all json files and exit
         System.exit(1);
     }
 
     //how to save a list of students as an array to a json flle
-    private void saveJSON() {
+    public void saveJSON() {
 
     }
 

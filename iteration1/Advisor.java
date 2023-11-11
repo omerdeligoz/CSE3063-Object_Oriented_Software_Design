@@ -83,4 +83,10 @@ public class Advisor extends Lecturer implements ILogin {
     public List<Registration> getRequests() {
         return requests;
     }
+
+    @Override
+    boolean login(String userName, String password) {
+        return this.getUserName().equals(userName) && this.getPassword().equals(password);
+
+    }
 }

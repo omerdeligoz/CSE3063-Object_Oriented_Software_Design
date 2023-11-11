@@ -12,7 +12,7 @@ public class Course {
     private String courseCode;
     private int courseCredit;
     private byte semester;
-    private List<CourseSession> courseSessions = new ArrayList<>();
+    private List<CourseSection> courseSections = new ArrayList<>();
     private List<String> preRequisiteCourseCodes = new ArrayList<>();
     private List<String> preRequsitieToCourseCodes = new ArrayList<>();
 
@@ -32,7 +32,7 @@ public class Course {
     }
 
     public List getCourseSessions() {
-        return courseSessions;
+        return courseSections;
     }
 
     public List<String> getPreRequisiteCourseCodes() {

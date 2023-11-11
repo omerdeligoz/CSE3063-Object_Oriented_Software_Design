@@ -9,4 +9,9 @@ public class Lecturer extends Person {
     public Lecturer() {
 
     }
+
+    @Override
+    boolean login(String userName, String password) {
+        return false;
+    }
 }

@@ -16,7 +16,7 @@ public class Student extends Person implements ILogin {
     private ArrayList<Course> selectedCourses = new ArrayList<>();
     private ArrayList<Course> draft = new ArrayList<>();
     private ArrayList<Course> availableCourses = new ArrayList<>();
-    private HashMap<Course, CourseSession> courseSessions = new HashMap<>();
+    private HashMap<Course, CourseSection> courseSections = new HashMap<>();
     private HashMap<Course, String> successfulCourseGradeMap = new HashMap<>(); //
 
 
@@ -61,7 +61,6 @@ public class Student extends Person implements ILogin {
         //TODO bazı kontroller yapabilir
     }
 
-
     @Override
     public void menu(String menuType) {
         switch (menuType) {
@@ -85,14 +84,25 @@ public class Student extends Person implements ILogin {
                 System.out.println("5. Show request status");
                 System.out.println("6. Log out");
                 System.out.print("Enter your choice: ");
-
         }
-
-
     }
 
-    public HashMap<Course, CourseSession> getCourseSessions() {
-        return courseSessions;
+    public void addCourse(Student student) {
+        System.out.println("Add Course Menu");
+        System.out.println("Listing Available courses... (course sections):");
+        for (int i = 0; i < student.getAvailableCourses().size(); i++) {
+            System.out.println((i + 1) + ". " + student.getAvailableCourses().get(i).getCourseCode() + " - " + student.getAvailableCourses().get(i).getCourseName());
+        }
+    }
+    public void dropCourse(Student student) {
+        System.out.println("Drop Course Menu");
+        System.out.println("Çıkarmak istediğiniz dersi ya da dersleri seçiniz");
+        //TODO Dersleri tek tek mi yoksa bütün olarak mı seçilecek?
+        //TODO İşlem bitince courseSelectionMenu'ye dönücek.
+    }
+
+    public HashMap<Course, CourseSection> getCourseSections() {
+        return courseSections;
     }
 
     public Transcript getTranscript() {
@@ -152,5 +162,10 @@ public class Student extends Person implements ILogin {
 
     public HashMap<Course, String> getSuccessfulCourseGradeMap() {
         return successfulCourseGradeMap;
+    }
+
+    @Override
+    boolean login(String userName, String password) {
+        return this.getUserName().equals(userName) && this.getPassword().equals(password);
     }
 }
