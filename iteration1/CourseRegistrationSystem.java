@@ -142,14 +142,8 @@ public class CourseRegistrationSystem implements ILogin {
 
 
     public void mainMenu(Department department) {
-        Scanner input = new Scanner(System.in);
-
-
-        System.out.println("\nWelcome to the Course Registration System");
-        System.out.println("Please select from the following options:");
-        System.out.println("0. Exit");
-        System.out.println("1. Login Page");
-        System.out.print("Enter your choice: ");
+        //Maybe first sentence should be displayed just once on the first running scene
+        printMenu("mainMenu");
 
         choice = getInput();
         if (choice == -1) {
@@ -355,7 +349,9 @@ public class CourseRegistrationSystem implements ILogin {
 
     public void exitProgram() {
         // TODO Save all json files and exit
-        System.exit(1);
+        input.close();
+        System.exit(0);
+
     }
 
     //how to save a list of students as an array to a json flle
