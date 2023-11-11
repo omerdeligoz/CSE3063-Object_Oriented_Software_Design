@@ -62,7 +62,7 @@ public class Student extends Person implements ILogin {
     }
 
     @Override
-    public void menu(String menuType) {
+    public void printMenu(String menuType) {
         switch (menuType) {
             case "studentMenu":
                 System.out.println("\nStudent Menu");

@@ -244,7 +244,7 @@ public class CourseRegistrationSystem implements ILogin {
 
 
     public void studentMenu(Student student) {
-        student.menu("studentMenu");
+        student.printMenu("studentMenu");
         choice = getInput();
         if (choice == -1) {
             studentMenu(student);
@@ -275,7 +275,7 @@ public class CourseRegistrationSystem implements ILogin {
     public void courseSelectionMenu(Student student) {
         List<Course> courses = new ArrayList<>();  //TODO alınabilecek dersler student ta hesaplanıp return edilecek
 
-       student.menu("courseSelectionMenu");
+       student.printMenu("courseSelectionMenu");
 
         choice = getInput();
         if (choice == -1) {
@@ -318,7 +318,7 @@ public class CourseRegistrationSystem implements ILogin {
     }
 
     public void advisorMenu(Advisor advisor) {
-        advisor.menu("advisorMenu");
+        advisor.printMenu("advisorMenu");
 
         choice = getInput();
         if (choice == -1) {
@@ -365,7 +365,7 @@ public class CourseRegistrationSystem implements ILogin {
 
 
     @Override
-    public void menu(String menuType) {
+    public void printMenu(String menuType) {
         System.out.println("\nWelcome to the Course Registration System");
         System.out.println("Please select from the following options:");
         System.out.println("0. Exit");

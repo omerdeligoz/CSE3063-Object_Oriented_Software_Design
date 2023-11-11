@@ -2,5 +2,5 @@ package iteration1;
 
 public interface ILogin {
 
-    void menu(String menuType);
+    void printMenu(String menuType);
 }

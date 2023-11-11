@@ -67,7 +67,7 @@ public class Advisor extends Lecturer implements ILogin {
 
 
     @Override
-    public void menu(String menuType) {
+    public void printMenu(String menuType) {
         System.out.println("\nAdvisor Menu");
         System.out.println("Please select from the following options:");
         System.out.println("0. Exit");
