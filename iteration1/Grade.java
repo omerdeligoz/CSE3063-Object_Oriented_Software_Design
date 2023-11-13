@@ -80,5 +80,7 @@ public class Grade {
         return letterGrade;
     }
 
-
+    public double getGradeOver4() {
+        return gradeOver4;
+    }
 }

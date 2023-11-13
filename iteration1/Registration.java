@@ -14,10 +14,6 @@ public class Registration {
     public void showRequest() {
     }
 
-    public void sendRequest(Advisor advisor) {
-//        advisor.receiveRequest(this);dD
-    }
-
     public void approveRequest(Advisor advisor) {
         //TODO this.student ve this.courses kullanarak student ve advisor güncellenecek
         System.out.println("Request approved"); //TODO implementation
@@ -28,6 +24,13 @@ public class Registration {
         //TODO this.student ve this.courses kullanarak student ve advisor güncellenecek
         System.out.println("Request rejected");
     }
+    public void addRequest(Advisor advisor) {
+        advisor.getRequests().add(this);
+        student.setHasRequest(true);
+        System.out.println("Request sent to advisor");
+        //TODO bazı kontroller yapabilir
+    }
+
 
     public Student getStudent() {
         return student;

@@ -24,7 +24,6 @@ public class StudentJsonGenerator {
             studentNode.put("advisor", "Advisor" + (i % 3 + 1));
             studentNode.put("coursesTaken", getRandomCourses());
             studentNode.put("transcript", "Transcript for Student" + i);
-            studentNode.put("cgpa", 2.5 + random.nextDouble() * 2.0);
             studentNode.put("gradeLevel", random.nextInt(4) + 1);
 
             studentsArray.add(studentNode);

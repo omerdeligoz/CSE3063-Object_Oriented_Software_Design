@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CourseSection extends Course {
-    private String courseSessionCode;
+    private String courseSectionCode;
     private String day;
     private int hour;
     private List students = new ArrayList();
@@ -12,7 +12,7 @@ public class CourseSection extends Course {
 
     public CourseSection(Course course, String courseSessionCode, String day, int hour) {
         super(course.getCourseName(), course.getCourseCode(), course.getCourseCredit(), course.getSemester());
-        this.courseSessionCode = courseSessionCode;
+        this.courseSectionCode = courseSessionCode;
         this.day = day;
         this.hour = hour;
     }

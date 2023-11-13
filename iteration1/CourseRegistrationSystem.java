@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Scanner;
 
 
-public class CourseRegistrationSystem implements ILogin {
-    Scanner input;
+public class CourseRegistrationSystem implements IDisplayMenu {
+    private Scanner input;
     private int choice;
 
     public void start() {
@@ -17,23 +17,24 @@ public class CourseRegistrationSystem implements ILogin {
 
 
         //Create Students
-        Person student1 = new Student(1, "name1", "surname1", "CSE", "b", "b", (byte) 3);
-        Person student2 = new Student(2, "name2", "surname2", "CSE", "username2", "password2", (byte) 3);
-        Person student3 = new Student(3, "name3", "surname3", "CSE", "username3", "password3", (byte) 3);
+        Person student1 = new Student(1, "name1", "surname1", "b", "b", (byte) 3);
+        Person student2 = new Student(2, "name2", "surname2", "username2", "password2", (byte) 3);
+        Person student3 = new Student(3, "name3", "surname3", "username3", "password3", (byte) 3);
 
         //Create advisors
-        Person advisor1 = new Advisor(100, "advisorName1", "advisorSurname1", "CSE", "a", "a");
-        Person advisor2 = new Advisor(101, "advisorName2", "advisorSurname2", "CSE", "advisorUsername2", "advisorPassword2");
-        Person advisor3 = new Advisor(102, "advisorName3", "advisorSurname3", "CSE", "advisorUsername3", "advisorPassword3");
+        Person advisor1 = new Advisor(100, "advisorName1", "advisorSurname1", "a", "a");
+        Person advisor2 = new Advisor(101, "advisorName2", "advisorSurname2", "advisorUsername2", "advisorPassword2");
+        Person advisor3 = new Advisor(102, "advisorName3", "advisorSurname3", "advisorUsername3", "advisorPassword3");
 
 
         //TODO create lecturers
 //        Person lecturer1= new Lecturer(103,"lecturerName1","lecturerSurname1","CSE",);
 
         //Create Transcripts
-        Transcript transcript1 = new Transcript();
-        Transcript transcript2 = new Transcript();
-        Transcript transcript3 = new Transcript();
+        Transcript transcript1 = new Transcript((Student) student1);
+        Transcript transcript2 = new Transcript((Student) student2);
+        Transcript transcript3 = new Transcript((Student) student3);
+
 
         //Set each student to a transcript
         transcript1.setStudent((Student) student1);
@@ -78,8 +79,12 @@ public class CourseRegistrationSystem implements ILogin {
 
         Department department = new Department("CSE");
 
-        student1.setDepartmentObject(department);
-        advisor1.setDepartmentObject(department);
+        student1.setDepartment(department);
+        student2.setDepartment(department);
+        student3.setDepartment(department);
+        advisor1.setDepartment(department);
+        advisor2.setDepartment(department);
+        advisor3.setDepartment(department);
 
         department.getCourses().add(course1);
         department.getCourses().add(course2);
@@ -256,7 +261,7 @@ public class CourseRegistrationSystem implements ILogin {
                     studentMenu(student);
                     break;
                 case 3:
-                    loginMenu(student.getDepartmentObject());
+                    loginMenu(student.getDepartment());
                     break;
                 default:
                     System.out.println("Invalid choice Please select again");
@@ -269,7 +274,7 @@ public class CourseRegistrationSystem implements ILogin {
     public void courseSelectionMenu(Student student) {
         List<Course> courses = new ArrayList<>();  //TODO alınabilecek dersler student ta hesaplanıp return edilecek
 
-       student.printMenu("courseSelectionMenu");
+        student.printMenu("courseSelectionMenu");
 
         choice = getInput();
         if (choice == -1) {
@@ -301,7 +306,7 @@ public class CourseRegistrationSystem implements ILogin {
                     courseSelectionMenu(student);
                     break;
                 case 6:
-                    loginMenu(student.getDepartmentObject());
+                    loginMenu(student.getDepartment());
                     break;
                 default:
                     System.out.println("Invalid choice Please select again");
@@ -328,7 +333,7 @@ public class CourseRegistrationSystem implements ILogin {
                     advisorMenu(advisor);
                     break;
                 case 2:
-                    loginMenu(advisor.getDepartmentObject());
+                    loginMenu(advisor.getDepartment());
                 default:
                     System.out.println("Invalid choice");
                     break;

@@ -57,22 +57,21 @@ public class jsonTest2 {
         // Get the students array.
         JsonNode studentsArray = jsonNode.get("students");
 
-
         for (JsonNode student : studentsArray) {
 //            JsonNode coursesArray = student.get("coursesTaken");
 //            System.out.println(coursesArray.get(0).get("courseName").asText());
-            int id = 111111111;
+            int id = student.get("id").asInt();
             String name = student.get("name").asText();
             String surname = student.get("surname").asText();
+            String department = student.get("department").asText();
             String userName = student.get("userName").asText();
             String password = student.get("password").asText();
-            String department = student.get("department").asText();
-            double cgpa = student.get("cgpa").asDouble();
-            int gradeLevel = student.get("gradeLevel").asInt();
-            Student student1 = new Student(id, name, surname, department, password, userName, (byte) gradeLevel);
+            int semester = student.get("semester").asInt();
+            Student student1 = new Student(id, name, surname,  password, userName, (byte) semester);
 
             students.add(student1);
-            System.out.printf("id: %d, name: %s, cgpa: %f, gradeLevel: %d\n", id, name, cgpa, gradeLevel);
+            System.out.printf("id: %d, name: %s, surname: %s, department: %s, userName: %s, password: %s, semester: %d\n",
+                    id, name, surname, department, userName, password, semester);
         }
         System.out.println();
     }
