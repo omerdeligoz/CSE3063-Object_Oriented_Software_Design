@@ -1,0 +1,112 @@
+[
+    {
+        "studentID": 1001,
+        "departmentName": "Engineering",
+        "password": "pass1",
+        "advisorID": 3007,
+        "surname": "Smith",
+        "hasRequest": false,
+        "name": "Alice",
+        "semester": 1,
+        "userName": "user1"
+    },
+    {
+        "studentID": 1002,
+        "departmentName": "Mathematics",
+        "password": "pass2",
+        "advisorID": 3002,
+        "surname": "Smith",
+        "hasRequest": false,
+        "name": "Bob",
+        "semester": 2,
+        "userName": "user2"
+    },
+    {
+        "studentID": 1003,
+        "departmentName": "Computer Science",
+        "password": "pass3",
+        "advisorID": 3006,
+        "surname": "Smith",
+        "hasRequest": false,
+        "name": "Charlie",
+        "semester": 3,
+        "userName": "user3"
+    },
+    {
+        "studentID": 1004,
+        "departmentName": "Engineering",
+        "password": "pass4",
+        "advisorID": 3005,
+        "surname": "Smith",
+        "hasRequest": false,
+        "name": "David",
+        "semester": 3,
+        "userName": "user4"
+    },
+    {
+        "studentID": 1005,
+        "departmentName": "Mathematics",
+        "password": "pass5",
+        "advisorID": 3002,
+        "surname": "Smith",
+        "hasRequest": false,
+        "name": "Eve",
+        "semester": 4,
+        "userName": "user5"
+    },
+    {
+        "studentID": 1006,
+        "departmentName": "Computer Science",
+        "password": "pass6",
+        "advisorID": 3002,
+        "surname": "Smith",
+        "hasRequest": false,
+        "name": "Frank",
+        "semester": 3,
+        "userName": "user6"
+    },
+    {
+        "studentID": 1007,
+        "departmentName": "Engineering",
+        "password": "pass7",
+        "advisorID": 3004,
+        "surname": "Smith",
+        "hasRequest": false,
+        "name": "Grace",
+        "semester": 2,
+        "userName": "user7"
+    },
+    {
+        "studentID": 1008,
+        "departmentName": "Mathematics",
+        "password": "pass8",
+        "advisorID": 3006,
+        "surname": "Smith",
+        "hasRequest": false,
+        "name": "Hannah",
+        "semester": 4,
+        "userName": "user8"
+    },
+    {
+        "studentID": 1009,
+        "departmentName": "Computer Science",
+        "password": "pass9",
+        "advisorID": 3000,
+        "surname": "Smith",
+        "hasRequest": false,
+        "name": "Ian",
+        "semester": 1,
+        "userName": "user9"
+    },
+    {
+        "studentID": 1010,
+        "departmentName": "Engineering",
+        "password": "pass10",
+        "advisorID": 3002,
+        "surname": "Smith",
+        "hasRequest": false,
+        "name": "Jessica",
+        "semester": 1,
+        "userName": "user10"
+    }
+]

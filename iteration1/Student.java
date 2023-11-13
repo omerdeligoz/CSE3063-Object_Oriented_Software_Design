@@ -56,7 +56,6 @@ public class Student extends Person implements IDisplayMenu {
     public void sendRequest() {
         Registration registration = new Registration(this, draft);
         registration.addRequest(advisor);
-
     }
 
     @Override
