@@ -1,10 +1,10 @@
 package iteration1;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.simple.*;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -60,7 +60,7 @@ public class jsonTest {
             double cgpa = Double.parseDouble(studentJson.get("cgpa") + "");
             int gradeLevel = Integer.parseInt(studentJson.get("gradeLevel") + "");
             System.out.printf("id: %d, name: %s, cgpa: %f, gradeLevel: %d\n", id, name, cgpa, gradeLevel);
-            Student studentObject = new Student(id, name, cgpa, gradeLevel);
+//            Student studentObject = new Student(id, name, cgpa, gradeLevel);
 //            department.add(studentObject);
         }
 
