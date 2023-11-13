@@ -5,6 +5,29 @@ import java.util.List;
 import java.util.Scanner;
 
 
+/**
+ * CourseRegistrationSystem is a class that implements the IDisplayMenu interface. It represents a course registration system
+ * which allows students and advisors.json to login, view courses, select courses, drop courses, and send course registration requests.
+ * The system also includes functionality for advisors.json to view and approve or reject registration requests.
+ *
+ * The CourseRegistrationSystem class has the following instance variables:
+ * - input: A Scanner object used to read user input
+ * - choice: An integer variable used to store user input choice
+ *
+ * The CourseRegistrationSystem class has the following methods:
+ * - start(): A method that initializes the system by creating courses, students, advisors.json, transcripts, grades, course sessions,
+ *   departments, and other necessary objects. It also calls the readInputParameters() method.
+ * - readInputParameters(): A method that reads input parameters from JSON files and creates corresponding objects.
+ * - mainMenu(Department department): A method that displays the main menu and handles user input.
+ * - loginMenu(Department department): A method that handles the login process for students and advisors.json.
+ * - studentMenu(Student student): A method that displays the student menu and handles student-specific operations.
+ * - courseSelectionMenu(Student student): A method that displays the course selection menu and handles course-related operations for students.
+ * - advisorMenu(Advisor advisor): A method that displays the advisor menu and handles advisor-specific operations.
+ * - getInput(): A method that reads and returns an integer value from user input.
+ * - exitProgram(): A method that saves data and exits the program.
+ * - saveJSON(): A method that saves a list of students as an array to a JSON file.
+ * - printMenu(String menuType): An overridden method from the IDisplayMenu interface that displays a menu based on the specified menuType.
+ */
 public class CourseRegistrationSystem implements IDisplayMenu {
     private Scanner input;
     private int choice;
@@ -21,7 +44,7 @@ public class CourseRegistrationSystem implements IDisplayMenu {
         Person student2 = new Student(2, "name2", "surname2", "username2", "password2", (byte) 3);
         Person student3 = new Student(3, "name3", "surname3", "username3", "password3", (byte) 3);
 
-        //Create advisors
+        //Create advisors.json
         Person advisor1 = new Advisor(100, "advisorName1", "advisorSurname1", "a", "a");
         Person advisor2 = new Advisor(101, "advisorName2", "advisorSurname2", "advisorUsername2", "advisorPassword2");
         Person advisor3 = new Advisor(102, "advisorName3", "advisorSurname3", "advisorUsername3", "advisorPassword3");
@@ -55,15 +78,15 @@ public class CourseRegistrationSystem implements IDisplayMenu {
         ((Student) student1).getTranscript().getCourseGradeMap().put(course2, grade2);
         ((Student) student2).getTranscript().getCourseGradeMap().put(course1, grade3);
 
-        //Assign advisors
+        //Assign advisors.json
         ((Student) student1).setAdvisor((Advisor) advisor1);
         ((Student) student2).setAdvisor((Advisor) advisor2);
         ((Student) student3).setAdvisor((Advisor) advisor3);
 
 
         //Assign prerequisite courses
-        course2.getPreRequisiteCourseCodes().add(course1.getCourseCode());
-        course3.getPreRequisiteCourseCodes().add(course2.getCourseCode());
+        course2.getPreRequisiteCourses().add(course1);
+        course3.getPreRequisiteCourses().add(course2);
 
 
         //Create courseSessions
@@ -286,15 +309,15 @@ public class CourseRegistrationSystem implements IDisplayMenu {
                     exitProgram();
                     break;
                 case 1:
-                    student.getTranscript().courseStatusCheck(student);
+                    student.getTranscript().courseStatusCheck();
                     courseSelectionMenu(student);
                     break;
                 case 2:
-                    student.addCourse(student);
+                    student.addCourse();
                     courseSelectionMenu(student);
                     break;
                 case 3:
-                    student.dropCourse(student);
+                    student.dropCourse();
                     courseSelectionMenu(student);
                     break;
                 case 4:

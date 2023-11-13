@@ -6,17 +6,16 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Advisor extends Lecturer implements IDisplayMenu {
-    private List<Student> studentsAdvised = new ArrayList<>();
+    private List<Student> studentsAdvised ;
 
-    private List<Registration> requests = new ArrayList<>();
+    private List<Registration> requests;
 
-    public Advisor() {
-        super();
 
-    }
 
     public Advisor(int ID, String name, String surname, String userName, String password) {
         super(ID, name, surname, userName, password);
+        studentsAdvised = new ArrayList<>();
+        requests = new ArrayList<>();
     }
 
 

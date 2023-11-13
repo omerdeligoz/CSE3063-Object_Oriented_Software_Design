@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class JSONFileCreator {
 
-    public  void createCourses() {
+    public void createCourses() {
         JSONArray coursesArray = new JSONArray();
         // Create a JSON object containing the "courses" key
         JSONObject coursesJSON = new JSONObject();
@@ -62,36 +62,48 @@ public class JSONFileCreator {
         }
     }
 
-    public  void createStudents() {
+    public void createStudents() {
         JSONArray studentsArray = new JSONArray();
 
         Random random = new Random();
 
         for (int i = 1; i <= 10; i++) {
             JSONObject studentJSON = new JSONObject();
+            Course course1 = new Course("courseName1", "CSE100", 3, (byte) 3);
+            Course course2 = new Course("courseName2", "CSE101", 3, (byte) 5);
+            Course course3 = new Course("courseName3", "CSE102", 3, (byte) 7);
+
+            Course courseSection1 = new CourseSection(course1, "CSE100.1", "Monday", 3);
+            Course courseSection2 = new CourseSection(course1, "CSE100.1", "Tuesday", 4);
+            Course courseSection3 = new CourseSection(course2, "CSE101.1", "Wednesday", 5);
 
             // Generate random data for each student
-            int studentID = 1000 + i;
+            int studentID = 150120000 + i;
             String[] names = {"Alice", "Bob", "Charlie", "David", "Eve", "Frank", "Grace", "Hannah", "Ian", "Jessica"};
+            String[] surnames = { "Yılmaz", "Kaya", "Demir", "Şahin", "Çelik", "Yıldız", "Korkmaz", "Polat", "Öztürk", "Yıldırım" };
             String name = names[i - 1];
             String surname = "Smith";
-            String[] departments = {"Computer Science", "Engineering", "Mathematics"};
-            String departmentName = departments[i % 3];
+            String departmentName = "CSE";
             String userName = "user" + i;
             String password = "pass" + i;
             int advisorID = 3000 + random.nextInt(10);
             boolean hasRequest = false;
-            byte semester = (byte) (1 + random.nextInt(4));
+            byte gradeLevel = (byte) (1 + random.nextInt(4));
+            List<String> draft = new ArrayList<>(); //TODO maybe CourseSections
+            draft.add(((CourseSection) courseSection1).getCourseSectionCode());
+            draft.add(((CourseSection) courseSession2).getCourseSectionCode());
 
             studentJSON.put("studentID", studentID);
             studentJSON.put("name", name);
             studentJSON.put("surname", surname);
             studentJSON.put("userName", userName);
             studentJSON.put("password", password);
-            studentJSON.put("semester", semester);
+            studentJSON.put("gradeLevel", gradeLevel);
             studentJSON.put("advisorID", advisorID);
             studentJSON.put("departmentName", departmentName);
             studentJSON.put("hasRequest", hasRequest);
+            studentJSON.put("draft", draft);
+
 
             studentsArray.put(studentJSON);
         }
@@ -100,7 +112,7 @@ public class JSONFileCreator {
         coursesJSON.put("students", studentsArray);
 
         // Write the JSON array to a file
-        String jsonFileName = "iteration1/jsons/randomstudents.json";
+        String jsonFileName = "iteration1/jsons/students.json";
         try {
             java.nio.file.Files.write(java.nio.file.Paths.get(jsonFileName), studentsArray.toString(4).getBytes());
             System.out.println("JSON file created successfully: " + jsonFileName);
@@ -109,7 +121,7 @@ public class JSONFileCreator {
         }
     }
 
-    public  void createAdvisors(){
+    public void createAdvisors() {
         JSONArray advisorsArray = new JSONArray();
 
         Random random = new Random();
@@ -138,7 +150,7 @@ public class JSONFileCreator {
         }
         // Create a JSON object containing the "courses" key
         JSONObject coursesJSON = new JSONObject();
-        coursesJSON.put("advisors", advisorsArray);
+        coursesJSON.put("advisors.json", advisorsArray);
 
         // Write the JSON array to a file
         String jsonFileName = "iteration1/jsons/randomadvisors.json";
@@ -149,12 +161,13 @@ public class JSONFileCreator {
             e.printStackTrace();
         }
     }
-    public void createTranscripts(){
+
+    public void createTranscripts() {
         //TODO
     }
 
-    public void createCourseSections(){
+    public void createCourseSections() {
         //TODO
     }
-     
+
 }

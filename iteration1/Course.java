@@ -11,21 +11,25 @@ public class Course {
     private String courseName;
     private String courseCode;
     private int courseCredit;
-    private byte semester;
+    private byte gradeLevel;
     private Lecturer lecturer;
-    private List<CourseSection> courseSections = new ArrayList<>();
-    private List<Course> preRequisiteCourses = new ArrayList<>();
-    private List<Course> preRequsitieToCourses = new ArrayList<>();
+    private List<CourseSection> courseSections;
+    private List<Course> preRequisiteCourses;
+    private List<Course> preRequsitieToCourses;
 
 
-    public Course(String courseName, String courseCode, int courseCredit, byte semester) {
+    public Course(String courseName, String courseCode, int courseCredit, byte gradeLevel) {
         this.courseName = courseName;
         this.courseCode = courseCode;
         this.courseCredit = courseCredit;
-        this.semester = semester;
+        this.gradeLevel = gradeLevel;
+        courseSections = new ArrayList<>();
+        preRequisiteCourses = new ArrayList<>();
+        preRequsitieToCourses = new ArrayList<>();
     }
 
-    public Course(String courseName, String courseCode, int courseCredit) {
+    public void addPreRequisiteCourse(Course course) {
+        preRequisiteCourses.add(course);
     }
 
     public String getCourseName() {
@@ -40,9 +44,6 @@ public class Course {
         return preRequisiteCourses;
     }
 
-    public void addPreRequisiteCourse(Course course) {
-        preRequisiteCourses.add(course);
-    }
     public String getCourseCode() {
         return courseCode;
     }
@@ -51,7 +52,7 @@ public class Course {
         return courseCredit;
     }
 
-    public byte getSemester() {
-        return semester;
+    public byte getGradeLevel() {
+        return gradeLevel;
     }
 }

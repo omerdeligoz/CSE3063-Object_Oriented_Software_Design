@@ -2,62 +2,62 @@ package iteration1;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
- * Represents a student who can log in, select courses, and send requests to advisors.
+ * Represents a student who can log in, select courses, and send requests to advisors.json.
  * Inherits from the Person class and implements the ILogin interface.
  */
 public class Student extends Person implements IDisplayMenu {
 
     private Advisor advisor;
     private Transcript transcript;
-    private byte semester;
+    private byte gradeLevel;
     private boolean hasRequest;
-    private ArrayList<Course> selectedCourses;
-    private ArrayList<Course> draft;
-    private ArrayList<Course> availableCourses;
-    private HashMap<Course, CourseSection> courseSections;
-    private HashMap<Course, String> successfulCourseGradeMap; //TODO may be deleted
+    private List<Course> selectedCourses;
+    private List<Course> draft;
+    private List<Course> availableCourses;
+    private Map<Course, CourseSection> courseSections;
 
 
-    public Student() {
-        super();
-    }
-
-    public Student(int studentID, String name, String surname, String userName, String password, byte semester) {
+    /**
+     * Creates a new Student object with the given parameters.
+     *
+     * @param studentID  the student's ID
+     * @param name       the student's name
+     * @param surname    the student's surname
+     * @param userName   the student's username
+     * @param password   the student's password
+     * @param gradeLevel the student's grade level
+     */
+    public Student(int studentID, String name, String surname, String userName, String password, byte gradeLevel) {
         super(studentID, name, surname, userName, password);
         this.selectedCourses = new ArrayList<>();
         this.draft = new ArrayList<>();
         this.availableCourses = new ArrayList<>();
         this.courseSections = new HashMap<>();
-        this.successfulCourseGradeMap = new HashMap<>();
-        this.semester = semester;
+        this.gradeLevel = gradeLevel;
     }
 
-    protected ArrayList<Course> selectCourses() {
-        System.out.println("Select Courses");
-        //TODO
-        //if send selected, create a registration object
-        //        registration.sendRequest(advisor);
-
-        return null;
-    }
-
-    public void setPassword(String password) {
-        super.setPassword(password);
-    }
-
-    @Override
-    public void setUserName(String userName) {
-        super.setUserName(userName);
-    }
-
-
+    /**
+     * Sends a registration request to the advisor.
+     * <p>
+     * This method creates a new Registration object with the student and their draft courses.
+     * It then adds the request to the advisor's queue for approval.
+     *
+     * @throws NullPointerException if the advisor is null
+     */
     public void sendRequest() {
         Registration registration = new Registration(this, draft);
         registration.addRequest(advisor);
     }
 
+    /**
+     * Prints a menu based on the given menu type.
+     *
+     * @param menuType the type of the menu to be printed ("studentMenu" or "courseSelectionMenu")
+     */
     @Override
     public void printMenu(String menuType) {
         switch (menuType) {
@@ -84,22 +84,101 @@ public class Student extends Person implements IDisplayMenu {
         }
     }
 
-    public void addCourse(Student student) {
+    /**
+     * Displays the Add Course Menu and lists the available courses with their course sections.
+     */
+    public void addCourse() {
         System.out.println("Add Course Menu");
         System.out.println("Listing Available courses... (course sections):");
-        for (int i = 0; i < student.getAvailableCourses().size(); i++) {
-            System.out.println((i + 1) + ". " + student.getAvailableCourses().get(i).getCourseCode() + " - " + student.getAvailableCourses().get(i).getCourseName());
+        for (int i = 0; i < this.getAvailableCourses().size(); i++) {
+            System.out.println((i + 1) + ". " + this.getAvailableCourses().get(i).getCourseCode() + " - " + this.getAvailableCourses().get(i).getCourseName());
         }
     }
 
-    public void dropCourse(Student student) {
+    /**
+     * Displays the drop course menu and prompts the user to select the course(s) they want to drop.
+     * <p>
+     * The selected course(s) will be dropped from the user's course list.
+     */
+    public void dropCourse() {
         System.out.println("Drop Course Menu");
         System.out.println("Çıkarmak istediğiniz dersi ya da dersleri seçiniz");
         //TODO Dersleri tek tek mi yoksa bütün olarak mı seçilecek?
         //TODO İşlem bitince courseSelectionMenu'ye dönücek.
     }
 
-    public HashMap<Course, CourseSection> getCourseSections() {
+
+    /**
+     * This method prints the status of the request for advisor approval.
+     * If there is a request waiting for approval, it displays "Your request is waiting for advisor approval".
+     * Otherwise, it displays "There is no waiting request".
+     */
+    public void showRequestStatus() {
+        if (hasRequest) {
+            System.out.println("Your request is waiting for advisor approval");
+        } else System.out.println("There is no waiting request");
+    }
+
+    public List<Course> getAvailableCourses() {
+        return availableCourses;
+    }
+
+    public void viewAvailableCourses(List<Course> availableCourses) {
+        System.out.println("Showing available courses... \n\n");
+    }
+
+    public void addCourses(ArrayList<Course> selectedCourses) {
+        System.out.println("Adding courses to draft...");
+        this.draft.addAll(selectedCourses);
+    }
+
+    @Override
+    boolean login(String userName, String password) {
+        return this.getUserName().equals(userName) && this.getPassword().equals(password);
+    }
+
+    public String getDepartmentName() {
+        return this.getDepartment().getDepartmentName();
+    }
+
+    public void setPassword(String password) {
+        super.setPassword(password);
+    }
+
+    @Override
+    public void setUserName(String userName) {
+        super.setUserName(userName);
+    }
+
+    public Advisor getAdvisor() {
+        return advisor;
+    }
+
+    public void setAdvisor(Advisor advisor) {
+        this.advisor = advisor;
+    }
+
+    public byte getGradeLevel() {
+        return gradeLevel;
+    }
+
+    public boolean isHasRequest() {
+        return hasRequest;
+    }
+
+    public void setHasRequest(boolean hasRequest) {
+        this.hasRequest = hasRequest;
+    }
+
+    public List<Course> getSelectedCourses() {
+        return selectedCourses;
+    }
+
+    public List<Course> getDraft() {
+        return draft;
+    }
+
+    public Map<Course, CourseSection> getCourseSections() {
         return courseSections;
     }
 
@@ -111,63 +190,4 @@ public class Student extends Person implements IDisplayMenu {
         this.transcript = transcript;
     }
 
-    public void showRequestStatus() {
-        if (hasRequest) {
-            System.out.println("Your request is waiting for advisor approval");
-        } else System.out.println("There is no waiting request");
-    }
-
-    public ArrayList<Course> getAvailableCourses() {
-        return availableCourses;
-    }
-
-    public void viewAvailableCourses() {
-        System.out.println("Showing available courses... \n\n");
-    }
-
-    public void addCourses(ArrayList<Course> selectedCourses) {
-        System.out.println("Adding courses to draft...");
-        this.draft.addAll(selectedCourses);
-    }
-
-    public Advisor getAdvisor() {
-        return advisor;
-    }
-
-    public void setAdvisor(Advisor advisor) {
-        this.advisor = advisor;
-    }
-
-    public byte getSemester() {
-        return semester;
-    }
-
-    public boolean isHasRequest() {
-        return hasRequest;
-    }
-
-    public void setHasRequest(boolean hasRequest) {
-        this.hasRequest = hasRequest;
-    }
-
-    public ArrayList<Course> getSelectedCourses() {
-        return selectedCourses;
-    }
-
-    public ArrayList<Course> getDraft() {
-        return draft;
-    }
-
-    public HashMap<Course, String> getSuccessfulCourseGradeMap() {
-        return successfulCourseGradeMap;
-    }
-
-    @Override
-    boolean login(String userName, String password) {
-        return this.getUserName().equals(userName) && this.getPassword().equals(password);
-    }
-
-    public String getDepartmentName() {
-        return this.getDepartment().getDepartmentName();
-    }
 }

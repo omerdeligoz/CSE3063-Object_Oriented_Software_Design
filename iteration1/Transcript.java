@@ -1,57 +1,23 @@
-/*
-
-package iteration1;
-
-import java.util.HashMap;
-import java.util.Map;
-
-public class Transcript {
-    Student student;
-    double cgpa;
-    Map<Course, Grade> courseGradeMap = new HashMap<>();
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
-
-    public Map<Course, Grade> getCourseGradeMap() {
-        return courseGradeMap;
-    }
-
-    //Mehrin
-    public void showTranscript() {
-        System.out.println("Showing Transcript ...\n\n");
-        //TODO a to string method for transcript
-    }
-
-    public void courseStatusCheck(Student student) {
-        //TODO
-        System.out.println("Course Status  Check ...");
-    }
-}
-
-*/
-
-
 package iteration1;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 public class Transcript {
     private List<Course> studentCourses;
     private double cgpa;
-    private byte semester;
+    private byte gradeLevel;
     private int takenCredits;
 
     private int completedCredits;
@@ -59,22 +25,24 @@ public class Transcript {
     private Map<Course, Grade> courseGradeMap;
 
 
-    public Transcript() {
-        this.student = new Student();
-        this.cgpa = 0;
-        semester = 0;
-        takenCredits = 0;
-        studentCourses = new ArrayList<>();
-    }
-
+    /**
+     * Constructs a new Transcript object for the given student.
+     *
+     * @param student the Student object for which the Transcript is being created
+     */
     public Transcript(Student student) {
         this.student = student;
-        this.semester = student.getSemester();
+        this.gradeLevel = student.getGradeLevel();
         this.cgpa = calculateCgpa();
         this.takenCredits = calculateTakenCredits();
         this.courseGradeMap = new HashMap<>();
     }
 
+    /**
+     * Calculates the CGPA (Cumulative Grade Point Average) for the student.
+     *
+     * @return The calculated CGPA.
+     */
     private double calculateCgpa() {
         double totalGrade = 0;
         int totalCredits = 0;
@@ -88,6 +56,11 @@ public class Transcript {
         return cgpa;
     }
 
+    /**
+     * Calculates the total number of credits taken by the student.
+     *
+     * @return The total number of credits taken.
+     */
     public int calculateTakenCredits() {
         for (Course course : studentCourses) {
             takenCredits += course.getCourseCredit();
@@ -95,7 +68,12 @@ public class Transcript {
         return takenCredits;
     }
 
-    public int calculativeCompletedCredits() {
+    /**
+     * Calculates the completed credits of a student based on their course grades and credits.
+     *
+     * @return The total completed credits.
+     */
+    public int calculateCompletedCredits() {
         completedCredits = takenCredits;
         for (Course course : studentCourses) {
             if (courseGradeMap.get(course).getLetterGrade().equals("FF")
@@ -107,6 +85,13 @@ public class Transcript {
         return completedCredits;
     }
 
+    /**
+     * Reads a transcript file and creates a new Student object based on the information in the file.
+     *
+     * @param file the path of the transcript file
+     * @return a Student object with the information from the transcript file
+     * @throws IOException if an I/O error occurs while reading the file
+     */
     public Student readTranscript(String file) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode jsonNode = mapper.readTree(new File(file));
@@ -133,6 +118,12 @@ public class Transcript {
 
     }
 
+    /**
+     * Generates a JSON transcript for the student and saves it to a file.
+     * The transcript includes information such as student name, ID, GPA, completed and taken credits,
+     * current semester, department, and a list of courses taken by the student with their respective
+     * course ID, credits, grade, and name.
+     */
     public void showTranscript() {
         JSONObject transcriptJSON = new JSONObject();
 
@@ -141,8 +132,8 @@ public class Transcript {
         transcriptJSON.put("studentId", student.getID());
         transcriptJSON.put("studentGpa", cgpa);
         transcriptJSON.put("takenCredits", calculateTakenCredits());
-        transcriptJSON.put("completedCredits", calculativeCompletedCredits());
-        transcriptJSON.put("currentSemester", semester);
+        transcriptJSON.put("completedCredits", calculateCompletedCredits());
+        transcriptJSON.put("currentSemester", gradeLevel);
         transcriptJSON.put("studentDepartment", student.getDepartmentName());
 
         JSONArray courses = new JSONArray();
@@ -177,10 +168,12 @@ public class Transcript {
         return courseGradeMap;
     }
 
-    public void courseStatusCheck(Student student) {
+    public void courseStatusCheck() {
         //TODO
         System.out.println("Course Status  Check ...");
     }
+
+    public List<Course> getStudentCourses() {
+        return studentCourses;
+    }
 }
-
-
