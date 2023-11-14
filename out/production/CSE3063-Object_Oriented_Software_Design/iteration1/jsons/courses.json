@@ -1,1 +1,113 @@
-"courses"
+[
+    {
+        "lecturerID": 130108003,
+        "courseName": "Database Systems",
+        "gradeLevel": 3,
+        "courseSectionCodes": ["CSE3055.1"],
+        "courseCode": "CSE3055",
+        "courseCredit": 7,
+        "preRequisiteCourseCodes": [
+
+        ]
+    },
+    {
+        "lecturerID": 130106001,
+        "courseName": "Operating Systems",
+        "gradeLevel": 3,
+        "courseSectionCodes": [
+            "CSE3033.1"
+        ],
+        "courseCode": "CSE3033",
+        "courseCredit": 7,
+        "preRequisiteCourseCodes": [
+            "CSE2225"
+        ]
+    },
+    {
+        "lecturerID": 130113008,
+        "courseName": "Object-Oriented Software Design",
+        "gradeLevel": 3,
+        "courseSectionCodes": [
+            "CSE3063.1"
+        ],
+        "courseCode": "CSE3063",
+        "courseCredit": 5,
+        "preRequisiteCourseCodes": []
+    },
+    {
+        "lecturerID": 130109007,
+        "courseName": "Digital Logic Design",
+        "gradeLevel": 3,
+        "courseSectionCodes": ["CSE3215.1"],
+        "courseCode": "CSE3215",
+        "courseCredit": 6,
+        "preRequisiteCourseCodes": [
+        ]
+    },
+    {
+        "lecturerID": 130117005,
+        "courseName": "Modeling and Discrete Simulation",
+        "gradeLevel": 3,
+        "courseSectionCodes": ["IE.3"],
+        "courseCode": "CSE105",
+        "courseCredit": 4,
+        "preRequisiteCourseCodes": [
+            "CSE109",
+            "CSE102"
+        ]
+    },
+    {
+        "lecturerID": 3003,
+        "courseName": "Artificial Intelligence",
+        "gradeLevel": 2,
+        "courseSectionCodes": ["CSE106.2"],
+        "courseCode": "CSE106",
+        "courseCredit": 5,
+        "preRequisiteCourseCodes": []
+    },
+    {
+        "lecturerID": 3005,
+        "courseName": "Machine Learning and Deep Learning",
+        "gradeLevel": 4,
+        "courseSectionCodes": [
+            "CSE107.1",
+            "CSE107.1"
+        ],
+        "courseCode": "CSE107",
+        "courseCredit": 3,
+        "preRequisiteCourseCodes": ["CSE100"]
+    },
+    {
+        "lecturerID": 3002,
+        "courseName": "Computer Networks",
+        "gradeLevel": 1,
+        "courseSectionCodes": [
+            "CSE108.3",
+            "CSE108.1"
+        ],
+        "courseCode": "CSE108",
+        "courseCredit": 4,
+        "preRequisiteCourseCodes": ["CSE101"]
+    },
+    {
+        "lecturerID": 3003,
+        "courseName": "Operating Systems",
+        "gradeLevel": 2,
+        "courseSectionCodes": [
+            "CSE109.3",
+            "CSE109.2"
+        ],
+        "courseCode": "CSE109",
+        "courseCredit": 4,
+        "preRequisiteCourseCodes": []
+    },
+    {
+        "lecturerID": 3006,
+        "courseName": "Computer Architecture",
+        "gradeLevel": 2,
+        "courseSectionCodes": [],
+        "courseCode": "CSE110",
+        "courseCredit": 3,
+        "preRequisiteCourseCodes": []
+    }
+]

@@ -1,5 +1,6 @@
 package iteration1;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -32,7 +33,11 @@ public class CourseRegistrationSystem implements IDisplayMenu {
     private Scanner input;
     private int choice;
 
-    public void start() {
+    public void start() throws IOException {
+
+
+        Department department = new Department("CSE");
+        /*
         //Create courses
         Course course1 = new Course("courseName1", "CSE100", 3, (byte) 3);
         Course course2 = new Course("courseName2", "CSE101", 3, (byte) 5);
@@ -48,6 +53,7 @@ public class CourseRegistrationSystem implements IDisplayMenu {
         Person advisor1 = new Advisor(100, "advisorName1", "advisorSurname1", "a", "a");
         Person advisor2 = new Advisor(101, "advisorName2", "advisorSurname2", "advisorUsername2", "advisorPassword2");
         Person advisor3 = new Advisor(102, "advisorName3", "advisorSurname3", "advisorUsername3", "advisorPassword3");
+
 
 
         //TODO create lecturers
@@ -96,11 +102,10 @@ public class CourseRegistrationSystem implements IDisplayMenu {
 
 
         //add sessions to courses
-        course1.getCourseSessions().add(courseSession1);
-        course1.getCourseSessions().add(courseSession2);
-        course2.getCourseSessions().add(courseSession3);
+        course1.getCourseSections().add(courseSession1);
+        course1.getCourseSections().add(courseSession2);
+        course2.getCourseSections().add(courseSession3);
 
-        Department department = new Department("CSE");
 
         student1.setDepartment(department);
         student2.setDepartment(department);
@@ -155,19 +160,14 @@ public class CourseRegistrationSystem implements IDisplayMenu {
         ((Advisor) advisor1).getRequests().add(request2);
         ((Advisor) advisor2).getRequests().add(request3);
 
-
-        readInputParameters();
-        mainMenu(department);
+*/
+        JSONReader jsonReader = new JSONReader();
+        jsonReader.start(department);
+//        mainMenu(department);
 
         //Read JSON files and create objects
 
     }
-
-    public void readInputParameters() {
-
-        //TODO Read JSON files and create objects
-    }
-
 
     public void mainMenu(Department department) {
         //Maybe first sentence should be displayed just once on the first running scene
@@ -352,7 +352,7 @@ public class CourseRegistrationSystem implements IDisplayMenu {
                     exitProgram();
                     break;
                 case 1:
-                    advisor.listRequests();
+                    advisor.printRequests();
                     advisorMenu(advisor);
                     break;
                 case 2:

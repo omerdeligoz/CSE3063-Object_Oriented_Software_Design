@@ -15,8 +15,11 @@ public class Department {
     private List<Lecturer> lecturers;
     private Map<String, Person> userNamePersonMap;  //it holds username and password of users
     private Map<String, Course> courseCodeCourseMap; //it holds course code and course
-    private Map<String, Student> studentIDStudentMap; //it holds student id and student
-    private Map<String, Advisor> advisorIDAdvisorMap; //it holds advisor id and advisor
+    private Map<String, Course> sectionCodeCourseMap; //it holds course code and course
+    private Map<CourseSection, Course> sectionCourseMap; //it holds course code and course
+
+    private Map<Integer, Student> studentIDStudentMap; //it holds student id and student
+    private Map<Integer, Advisor> advisorIDAdvisorMap; //it holds advisor id and advisor
     private byte maxCourseNumber = 5;
 
 
@@ -33,6 +36,8 @@ public class Department {
         courseCodeCourseMap = new HashMap<>();
         studentIDStudentMap = new HashMap<>();
         advisorIDAdvisorMap = new HashMap<>();
+        sectionCodeCourseMap = new HashMap<>();
+        sectionCourseMap = new HashMap<>();
     }
 
     public String getDepartmentName() {
@@ -57,6 +62,38 @@ public class Department {
 
     public Map<String, Person> getUserNamePersonMap() {
         return userNamePersonMap;
+    }
+
+    public Map<String, Course> getCourseCodeCourseMap() {
+        return courseCodeCourseMap;
+    }
+
+    public List<CourseSection> getCourseSections() {
+        return courseSections;
+    }
+
+    public List<Lecturer> getLecturers() {
+        return lecturers;
+    }
+
+    public Map<Integer, Student> getStudentIDStudentMap() {
+        return studentIDStudentMap;
+    }
+
+    public Map<Integer, Advisor> getAdvisorIDAdvisorMap() {
+        return advisorIDAdvisorMap;
+    }
+
+    public byte getMaxCourseNumber() {
+        return maxCourseNumber;
+    }
+
+    public Map<String, Course> getSectionCodeCourseMap() {
+        return sectionCodeCourseMap;
+    }
+
+    public Map<CourseSection, Course> getSectionCourseMap() {
+        return sectionCourseMap;
     }
 
 }

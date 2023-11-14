@@ -1,0 +1,30 @@
+  {
+    "studentID": 150120097,
+    "name": "Ali",
+    "surname": "Yeşil",
+    "cgpa": 3.56,
+    "takenCredits": 55,
+    "completedCredits": 42,
+    "courses": [
+      {
+        "courseCode": "course0",
+        "letterGrade": "A"
+      },
+      {
+        "courseCode": "course1",
+        "letterGrade": "B"
+      },
+      {
+        "courseCode": "course2",
+        "letterGrade": "A+"
+      },
+      {
+        "courseCode": "course3",
+        "letterGrade": "B+"
+      },
+      {
+        "courseCode": "course4",
+        "letterGrade": "E+"
+      }
+    ]
+  }
