@@ -25,14 +25,7 @@ public abstract class Person {
         this.password = password;
     }
 
-    //
-    //
-    //No need
-    public Person() {
-    }
-    //
-    //
-    //
+
 
     public String getUserName() {
         return userName;

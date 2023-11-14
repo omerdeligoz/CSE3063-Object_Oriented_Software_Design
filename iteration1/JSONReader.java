@@ -18,6 +18,7 @@ public class JSONReader {
     Map<Course, List<String>> coursePrerequisiteCourseCodesMap = new HashMap<>();
     Map<Course, List<String>> courseSectionCodesMap = new HashMap<>();
     Map<Integer, List<String>> lecturerIDCoursesMap = new HashMap<>();
+    Map<Integer, List<String>> advisorIDCoursesMap = new HashMap<>();
     Map<Integer, Integer> studentIDAdvisorIDMap = new HashMap<>();
     Map<Integer, List<String>> studentIDDraftMap = new HashMap<>();
     Map<Student, Registration> studentRegistrationMap = new HashMap<>();
@@ -114,6 +115,7 @@ public class JSONReader {
             CourseSection courseSection1 = new CourseSection(course, courseSectionCode, day, hour);
             department.getCourseSections().add(courseSection1);
             department.getSectionCodeCourseMap().put(courseSectionCode, course);
+            department.getSectionCourseMap().put(courseSection1, course);
             //////////////////////////////////////////////
             System.out.printf("courseSection: %s, courseCode: %s, day: %s, hour: %d\n", courseSectionCode, courseCode, day, hour);
         }
@@ -132,11 +134,11 @@ public class JSONReader {
 
             Lecturer lecturer1 = new Lecturer(id, name, surname);
             department.getLecturers().add(lecturer1);
+            lecturer1.setDepartment(department);
             //////////////////////////////////////////////
 
             List<String> lessonsTaught = new ArrayList<>();
 
-            //TODO tüm courses
             JsonNode lessonsTaughtArray = lecturer.get("lessonsTaught");
             for (JsonNode lessonTaught : lessonsTaughtArray) {
                 lessonsTaught.add(lessonTaught.asText());
@@ -164,8 +166,11 @@ public class JSONReader {
             String userName = student.get("userName").asText();
             String password = student.get("password").asText();
             int gradeLevel = student.get("gradeLevel").asInt();
-            Student student1 = new Student(id, name, surname, password, userName, (byte) gradeLevel);
+            Student student1 = new Student(id, name, surname, userName, password, (byte) gradeLevel);
+            student1.setDepartment(department);
             department.getStudents().add(student1);
+            department.getUserNamePersonMap().put(userName, student1);
+            department.getStudentIDStudentMap().put(id, student1);
             //////////////////////////////////////////////
 
             //sync part
@@ -217,8 +222,12 @@ public class JSONReader {
                 courseGradeMap.put(course1, new Grade(letterGrade));
             }
         }
-        student.setTranscript(new Transcript(student));
+        Transcript transcript1 = new Transcript(student);
+        department.getTranscripts().add(transcript1);
+        transcript1.setStudentCourses(studentCourses);
+        student.setTranscript(transcript1);
         student.getTranscript().setCourseGradeMap(courseGradeMap);
+        transcript1.calculateValues();
     }
 
 
@@ -261,9 +270,19 @@ public class JSONReader {
             String surname = advisor.get("surname").asText();
             String userName = advisor.get("userName").asText();
             String password = advisor.get("password").asText();
-            Advisor advisor1 = new Advisor(id, name, surname, password, userName);
+            Advisor advisor1 = new Advisor(id, name, surname, userName, password);
             department.getAdvisors().add(advisor1);
+            advisor1.setDepartment(department);
             department.getAdvisorIDAdvisorMap().put(id, advisor1);
+            department.getUserNamePersonMap().put(userName, advisor1);
+
+            List<String> lessonsTaught = new ArrayList<>();
+
+            JsonNode lessonsTaughtArray = advisor.get("lessonsTaught");
+            for (JsonNode lessonTaught : lessonsTaughtArray) {
+                lessonsTaught.add(lessonTaught.asText());
+            }
+            advisorIDCoursesMap.put(id, lessonsTaught);
             //////////////////////////////////////////////
 
             System.out.printf("id: %d, name: %s, surname: %s, userName: %s, password: %s\n", id, name, surname, userName, password);
@@ -286,6 +305,9 @@ public class JSONReader {
             for (String courseCode : lecturerIDCoursesMap.get(lecturer.getID())) {
                 lecturer.getLessonsTaught().add(department.getCourseCodeCourseMap().get(courseCode));
             }
+            for (Course course : lecturer.getLessonsTaught()) {
+                course.setLecturer(lecturer);
+            }
         }
 
         //sync for students
@@ -295,15 +317,23 @@ public class JSONReader {
             if (studentIDDraftMap.get(student.getID()) != null) {
                 for (String courseCode : studentIDDraftMap.get(student.getID())) {
                     student.getDraft().add(department.getCourseCodeCourseMap().get(courseCode));
-                }            }
+                }
+            }
         }
 
         //sync for advisors
         for (Student student : department.getStudents()) {
             Advisor advisor = department.getAdvisorIDAdvisorMap().get(studentIDAdvisorIDMap.get(student.getID()));
             advisor.getStudentsAdvised().add(student);
-            advisor.getRequestList().add(studentRegistrationMap.get(student));
+            if (studentRegistrationMap.get(student) != null)
+                advisor.getRequestList().add(studentRegistrationMap.get(student));
         }
+        for (Advisor advisor : department.getAdvisors()) {
+            for (String courseCode : advisorIDCoursesMap.get(advisor.getID())) {
+                advisor.getLessonsTaught().add(department.getCourseCodeCourseMap().get(courseCode));
+            }
+        }
+
     }
 
 }

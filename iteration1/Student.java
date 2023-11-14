@@ -1,9 +1,7 @@
+
 package iteration1;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Represents a student who can log in, select courses, and send requests to advisors.json.
@@ -15,7 +13,6 @@ public class Student extends Person implements IDisplayMenu {
     private Transcript transcript;
     private byte gradeLevel;
     private boolean hasRequest;
-//    private List<Course> selectedCourses;
     private List<Course> draft;
     private List<Course> availableCourses;
     private Map<Course, CourseSection> courseSectionMap;  // TODO maybe deleted
@@ -33,7 +30,6 @@ public class Student extends Person implements IDisplayMenu {
      */
     public Student(int studentID, String name, String surname, String userName, String password, byte gradeLevel) {
         super(studentID, name, surname, userName, password);
-//        this.selectedCourses = new ArrayList<>();
         this.draft = new ArrayList<>();
         this.availableCourses = new ArrayList<>();
         this.courseSectionMap = new HashMap<>();
@@ -88,10 +84,31 @@ public class Student extends Person implements IDisplayMenu {
      * Displays the Add Course Menu and lists the available courses with their course sections.
      */
     public void addCourse() {
-        System.out.println("Add Course Menu");
-        System.out.println("Listing Available courses... (course sections):");
+        System.out.println("\nAdd Course Menu");
+        viewAvailableCourses();
+        System.out.println("Here is the available courses:");
+        System.out.println("0. Back");
         for (int i = 0; i < this.getAvailableCourses().size(); i++) {
-            System.out.println((i + 1) + ". " + this.getAvailableCourses().get(i).getCourseCode() + " - " + this.getAvailableCourses().get(i).getCourseName());
+            System.out.println((i + 1) + ". " + this.getAvailableCourses().get(i).getCourseCode() +
+                    " - " + this.getAvailableCourses().get(i).getCourseName());
+        }
+        int controlGate = 1;
+        while (controlGate == 1) {
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.print("Choose number between 1 to " + this.getAvailableCourses().size() + " to add course: ");
+            int userNumberInput = scanner.nextInt();
+            //Back to Course Section Menu with return value
+            if (userNumberInput == 0)
+                return;
+            if (1 <= userNumberInput && userNumberInput <= this.getAvailableCourses().size()) {
+                controlGate = 0;
+                this.draft.add(this.getAvailableCourses().get(userNumberInput - 1));
+                this.getAvailableCourses().remove(userNumberInput - 1);
+                addCourse();
+            } else {
+                System.out.println("Invalid input, please enter a valid number");
+            }
         }
     }
 
@@ -101,9 +118,27 @@ public class Student extends Person implements IDisplayMenu {
      * The selected course(s) will be dropped from the user's course list.
      */
     public void dropCourse() {
-        System.out.println("Drop Course Menu");
-        System.out.println("Çıkarmak istediğiniz dersi ya da dersleri seçiniz");
-        //TODO Dersleri tek tek mi yoksa bütün olarak mı seçilecek?
+        System.out.println("\nDrop Course Menu");
+        System.out.println("Select the course you want drop");
+
+        if (draft.isEmpty()) {
+            System.out.println("Your draft is empty!");
+        } else {
+            System.out.println("0. Back");
+            for (int i = 0; i < draft.size(); i++) {
+                System.out.println((i + 1) + ". " + draft.get(i).getCourseCode() +
+                        " - " + draft.get(i).getCourseName());
+            }
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Choose number between 1 to " + this.draft.size() + " to drop course: ");
+            int userNumberInput = scanner.nextInt();
+
+            if (userNumberInput == 0)
+                return;
+            draft.remove(userNumberInput - 1);
+            dropCourse();
+        }
+
         //TODO İşlem bitince courseSelectionMenu'ye dönücek.
     }
 
@@ -115,22 +150,41 @@ public class Student extends Person implements IDisplayMenu {
      */
     public void showRequestStatus() {
         if (hasRequest) {
-            System.out.println("Your request is waiting for advisor approval");
-        } else System.out.println("There is no waiting request");
+            System.out.println("\nYour request is waiting for advisor approval");
+        } else System.out.println("\nThere is no waiting request");
     }
 
     public List<Course> getAvailableCourses() {
         return availableCourses;
     }
 
-    public void viewAvailableCourses(List<Course> availableCourses) {
-        System.out.println("Showing available courses... \n\n");
+    public void viewAvailableCourses() {
+        ArrayList<Course> availableCourses = new ArrayList<>();
+        List<CourseSection> allCourseSections = this.getDepartment().getCourseSections();
+        Map<Course, Grade> mapGrade = this.getTranscript().getCourseGradeMap();
+        Map<CourseSection, Course> courseSectionCourse = this.getDepartment().getSectionCourseMap();
+
+        for (CourseSection courseSection : allCourseSections) {
+            if (this.gradeLevel < courseSection.getGradeLevel() || draft.contains(courseSectionCourse.get(courseSection)))
+                continue;
+            Course course = courseSectionCourse.get(courseSection);
+            if (!mapGrade.containsKey(course)) {
+                boolean status = true;
+                for (Course prerequisite : course.getPreRequisiteCourses()) {
+                    if ((mapGrade.get(prerequisite).getLetterGrade().equals("FF") ||
+                            mapGrade.get(prerequisite).getLetterGrade().equals("FD") ||
+                            mapGrade.get(prerequisite) == null)) {
+                        status = false;
+                    }
+                }
+                if (status)
+                    availableCourses.add(course);
+            }
+        }
+
+        this.availableCourses = availableCourses;
     }
 
-    public void addCourses(ArrayList<Course> selectedCourses) {
-        System.out.println("Adding courses to draft...");
-        this.draft.addAll(selectedCourses);
-    }
 
     @Override
     boolean login(String userName, String password) {

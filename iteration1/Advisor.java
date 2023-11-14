@@ -214,4 +214,8 @@ public class Advisor extends Lecturer implements IDisplayMenu {
     public List<Registration> getRequestList() {
         return requestList;
     }
+
+    public void setRequestNumber(int requestNumber) {
+        this.requestNumber = requestNumber;
+    }
 }

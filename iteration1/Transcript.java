@@ -2,11 +2,8 @@ package iteration1;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,9 +33,15 @@ public class Transcript {
         this.gradeLevel = student.getGradeLevel();
         this.cgpa = calculateCgpa();
         this.takenCredits = calculateTakenCredits();
+        this.completedCredits = calculateCompletedCredits();
         this.courseGradeMap = new HashMap<>();
     }
 
+    public void calculateValues(){
+        this.cgpa = calculateCgpa();
+        this.takenCredits = calculateTakenCredits();
+        this.completedCredits = calculateCompletedCredits();
+    }
     /**
      * Calculates the CGPA (Cumulative Grade Point Average) for the student.
      *
@@ -129,39 +132,20 @@ public class Transcript {
      * course ID, credits, grade, and name.
      */
     public void showTranscript() {
-        JSONObject transcriptJSON = new JSONObject();
-
-        transcriptJSON.put("studentName", student.getName());
-        transcriptJSON.put("studentSurname", student.getSurname());
-        transcriptJSON.put("studentId", student.getID());
-        transcriptJSON.put("studentGpa", cgpa);
-        transcriptJSON.put("takenCredits", calculateTakenCredits());
-        transcriptJSON.put("completedCredits", calculateCompletedCredits());
-        transcriptJSON.put("currentSemester", gradeLevel);
-        transcriptJSON.put("studentDepartment", student.getDepartmentName());
-
-        JSONArray courses = new JSONArray();
-
+        System.out.println("\nTranscript for " + student.getName() + " " + student.getSurname() + ":");
+        System.out.println("Student ID: " + student.getID());
+        System.out.println("CGPA: " + cgpa);
+        System.out.println("Completed Credits: " + calculateCompletedCredits());
+        System.out.println("Taken Credits: " + calculateTakenCredits());
+        System.out.println("Grade Level: " + gradeLevel);
+        System.out.println("Department: " + student.getDepartmentName());
+        System.out.println("Courses:");
         for (Course course : studentCourses) {
-            JSONObject courseData = new JSONObject();
-            courseData.put("Course ID", course.getCourseCode());
-            courseData.put("Credits", course.getCourseCredit());
-            courseData.put("Grade", courseGradeMap.get(course).getLetterGrade());
-            courseData.put("Course Name", course.getCourseName());
-            courses.put(courseData);
+            if (courseGradeMap.get(course) == null) {
+                System.out.println(course.getCourseCode() + " " + course.getCourseCredit() + " " + course.getCourseName());
+            } else
+                System.out.println(course.getCourseCode() + " " + course.getCourseCredit() + " " + courseGradeMap.get(course).getLetterGrade() + " " + course.getCourseName());
         }
-
-        transcriptJSON.put("Courses", courses);
-
-        String filePath = "iteration1\\jsons\\Transcripts" + student.getID() + ".json";
-        try (FileWriter file = new FileWriter(filePath)) {
-            file.write(transcriptJSON.toString(4));
-            file.flush();
-            System.out.println("JSON verisi başarıyla dosyaya yazıldı: " + filePath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
     }
 
     public void setStudent(Student student) {
@@ -173,8 +157,31 @@ public class Transcript {
     }
 
     public void courseStatusCheck() {
-        //TODO
-        System.out.println("Course Status  Check ...");
+        List<Course> successfulCourses = new ArrayList<>();
+        List<Course> failedCourses = new ArrayList<>();
+        List<Course> ongoingCourses = new ArrayList<>();
+        for (Course course : studentCourses) {
+            if (courseGradeMap.get(course).getLetterGrade() == null) {
+                ongoingCourses.add(course);
+            } else if (courseGradeMap.get(course).getLetterGrade().equals("FF")
+                    || courseGradeMap.get(course).getLetterGrade().equals("FD")) {
+                failedCourses.add(course);
+            } else {
+                successfulCourses.add(course);
+            }
+        }
+        System.out.println("\nSuccessful Courses:");
+        for (Course course : successfulCourses) {
+            System.out.println(course.getCourseCode() + " " + course.getCourseName());
+        }
+        System.out.println("Failed Courses:");
+        for (Course course : failedCourses) {
+            System.out.println(course.getCourseCode() + " " + course.getCourseName());
+        }
+        System.out.println("Ongoing Courses:");
+        for (Course course : ongoingCourses) {
+            System.out.println(course.getCourseCode() + " " + course.getCourseName());
+        }
     }
 
     public List<Course> getStudentCourses() {
@@ -188,4 +195,44 @@ public class Transcript {
     public void setCourseGradeMap(Map<Course, Grade> courseGradeMap) {
         this.courseGradeMap = courseGradeMap;
     }
+
+    public void setStudentCourses(List<Course> studentCourses) {
+        this.studentCourses = studentCourses;
+    }
 }
+
+
+/*
+ JSONObject transcriptJSON = new JSONObject();
+
+ transcriptJSON.put("studentName", student.getName());
+ transcriptJSON.put("studentSurname", student.getSurname());
+ transcriptJSON.put("studentId", student.getID());
+ transcriptJSON.put("studentGpa", cgpa);
+ transcriptJSON.put("takenCredits", calculateTakenCredits());
+ transcriptJSON.put("completedCredits", calculateCompletedCredits());
+ transcriptJSON.put("currentSemester", gradeLevel);
+ transcriptJSON.put("studentDepartment", student.getDepartmentName());
+
+ JSONArray courses = new JSONArray();
+
+ for (Course course : studentCourses) {
+ JSONObject courseData = new JSONObject();
+ courseData.put("Course ID", course.getCourseCode());
+ courseData.put("Credits", course.getCourseCredit());
+ courseData.put("Grade", courseGradeMap.get(course).getLetterGrade());
+ courseData.put("Course Name", course.getCourseName());
+ courses.put(courseData);
+ }
+
+ transcriptJSON.put("Courses", courses);
+
+ String filePath = "iteration1/jsons/Transcripts/" + student.getID() + ".json";
+ try (FileWriter file = new FileWriter(filePath)) {
+ file.write(transcriptJSON.toString(4));
+ file.flush();
+ System.out.println("JSON verisi başarıyla dosyaya yazıldı: " + filePath);
+ } catch (IOException e) {
+ e.printStackTrace();
+ }
+ */

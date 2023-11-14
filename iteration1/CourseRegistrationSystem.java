@@ -37,6 +37,7 @@ public class CourseRegistrationSystem implements IDisplayMenu {
 
 
         Department department = new Department("CSE");
+
         /*
         //Create courses
         Course course1 = new Course("courseName1", "CSE100", 3, (byte) 3);
@@ -160,13 +161,11 @@ public class CourseRegistrationSystem implements IDisplayMenu {
         ((Advisor) advisor1).getRequests().add(request2);
         ((Advisor) advisor2).getRequests().add(request3);
 
+        transcript1.showTranscript();
 */
         JSONReader jsonReader = new JSONReader();
         jsonReader.start(department);
-//        mainMenu(department);
-
-        //Read JSON files and create objects
-
+        mainMenu(department);
     }
 
     public void mainMenu(Department department) {
@@ -183,7 +182,6 @@ public class CourseRegistrationSystem implements IDisplayMenu {
                     exitProgram();
                     break;
                 case 1:
-                    //May be more understandable naming
                     loginMenu(department);
                     break;
                 default:
@@ -261,6 +259,9 @@ public class CourseRegistrationSystem implements IDisplayMenu {
                         break;
                 }
             }
+        }else {
+            System.out.println("There is no such user. Please try again!");
+            loginMenu(department);
         }
     }
 

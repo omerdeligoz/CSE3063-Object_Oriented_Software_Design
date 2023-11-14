@@ -49,7 +49,7 @@
         "courseName": "Modeling and Discrete Simulation",
         "gradeLevel": 3,
         "courseSectionCodes": ["IE3081.1"],
-        "courseCode": "CSE3081",
+        "courseCode": "IE3081",
         "courseCredit": 4,
         "preRequisiteCourseCodes": [
         ]
