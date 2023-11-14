@@ -383,12 +383,6 @@ public class CourseRegistrationSystem implements IDisplayMenu {
 
     }
 
-    //how to save a list of students as an array to a json flle
-    public void saveJSON() {
-
-    }
-
-
     @Override
     public void printMenu(String menuType) {
         System.out.println("\nWelcome to the Course Registration System");
