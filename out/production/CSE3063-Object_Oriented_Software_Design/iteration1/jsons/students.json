@@ -4,13 +4,10 @@
         "departmentName": "CSE",
         "password": "pass1",
         "gradeLevel": 1,
-        "advisorID": 3007,
+        "advisorID": 3000,
         "surname": "Smith",
         "hasRequest": false,
-        "draft": [
-            "CSE100.1",
-            "CSE100.1"
-        ],
+        "draft": null,
         "name": "Alice",
         "userName": "user1"
     },
@@ -18,10 +15,10 @@
         "studentID": 150120002,
         "departmentName": "CSE",
         "password": "pass2",
-        "gradeLevel": 1,
-        "advisorID": 3005,
+        "gradeLevel": 3,
+        "advisorID": 3000,
         "surname": "Smith",
-        "hasRequest": false,
+        "hasRequest": true,
         "draft": [
             "CSE100.1",
             "CSE100.1"
@@ -33,120 +30,15 @@
         "studentID": 150120003,
         "departmentName": "CSE",
         "password": "pass3",
-        "gradeLevel": 3,
-        "advisorID": 3009,
+        "gradeLevel": 4,
+        "advisorID": 3003,
         "surname": "Smith",
-        "hasRequest": false,
+        "hasRequest": true,
         "draft": [
             "CSE100.1",
             "CSE100.1"
         ],
         "name": "Charlie",
         "userName": "user3"
-    },
-    {
-        "studentID": 150120004,
-        "departmentName": "CSE",
-        "password": "pass4",
-        "gradeLevel": 4,
-        "advisorID": 3005,
-        "surname": "Smith",
-        "hasRequest": false,
-        "draft": [
-            "CSE100.1",
-            "CSE100.1"
-        ],
-        "name": "David",
-        "userName": "user4"
-    },
-    {
-        "studentID": 150120005,
-        "departmentName": "CSE",
-        "password": "pass5",
-        "gradeLevel": 3,
-        "advisorID": 3006,
-        "surname": "Smith",
-        "hasRequest": false,
-        "draft": [
-            "CSE100.1",
-            "CSE100.1"
-        ],
-        "name": "Eve",
-        "userName": "user5"
-    },
-    {
-        "studentID": 150120006,
-        "departmentName": "CSE",
-        "password": "pass6",
-        "gradeLevel": 3,
-        "advisorID": 3001,
-        "surname": "Smith",
-        "hasRequest": false,
-        "draft": [
-            "CSE100.1",
-            "CSE100.1"
-        ],
-        "name": "Frank",
-        "userName": "user6"
-    },
-    {
-        "studentID": 150120007,
-        "departmentName": "CSE",
-        "password": "pass7",
-        "gradeLevel": 4,
-        "advisorID": 3006,
-        "surname": "Smith",
-        "hasRequest": false,
-        "draft": [
-            "CSE100.1",
-            "CSE100.1"
-        ],
-        "name": "Grace",
-        "userName": "user7"
-    },
-    {
-        "studentID": 150120008,
-        "departmentName": "CSE",
-        "password": "pass8",
-        "gradeLevel": 3,
-        "advisorID": 3007,
-        "surname": "Smith",
-        "hasRequest": false,
-        "draft": [
-            "CSE100.1",
-            "CSE100.1"
-        ],
-        "name": "Hannah",
-        "userName": "user8"
-    },
-    {
-        "studentID": 150120009,
-        "departmentName": "CSE",
-        "password": "pass9",
-        "gradeLevel": 1,
-        "advisorID": 3006,
-        "surname": "Smith",
-        "hasRequest": false,
-        "draft": [
-            "CSE100.1",
-            "CSE100.1"
-        ],
-        "name": "Ian",
-        "userName": "user9"
-    },
-    {
-        "studentID": 150120010,
-        "departmentName": "CSE",
-        "password": "pass10",
-        "gradeLevel": 1,
-        "advisorID": 3001,
-        "surname": "Smith",
-        "hasRequest": false,
-        "draft": [
-            "CSE100.1",
-            "CSE100.1"
-        ],
-        "name": "Jessica",
-        "userName": "user10"
     }
 ]

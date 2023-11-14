@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +31,7 @@ public class Transcript {
      * @param student the Student object for which the Transcript is being created
      */
     public Transcript(Student student) {
+        this.studentCourses = new ArrayList<>();
         this.student = student;
         this.gradeLevel = student.getGradeLevel();
         this.cgpa = calculateCgpa();
@@ -42,7 +44,10 @@ public class Transcript {
      *
      * @return The calculated CGPA.
      */
-    private double calculateCgpa() {
+    public double calculateCgpa() {
+        if (studentCourses.isEmpty()) {
+            return 0;
+        }
         double totalGrade = 0;
         int totalCredits = 0;
         for (Course course : studentCourses) {
@@ -174,5 +179,13 @@ public class Transcript {
 
     public List<Course> getStudentCourses() {
         return studentCourses;
+    }
+
+    public void setTakenCredits(int takenCredits) {
+        this.takenCredits = takenCredits;
+    }
+
+    public void setCourseGradeMap(Map<Course, Grade> courseGradeMap) {
+        this.courseGradeMap = courseGradeMap;
     }
 }

@@ -15,10 +15,10 @@ public class Student extends Person implements IDisplayMenu {
     private Transcript transcript;
     private byte gradeLevel;
     private boolean hasRequest;
-    private List<Course> selectedCourses;
+//    private List<Course> selectedCourses;
     private List<Course> draft;
     private List<Course> availableCourses;
-    private Map<Course, CourseSection> courseSections;
+    private Map<Course, CourseSection> courseSectionMap;  // TODO maybe deleted
 
 
     /**
@@ -33,10 +33,10 @@ public class Student extends Person implements IDisplayMenu {
      */
     public Student(int studentID, String name, String surname, String userName, String password, byte gradeLevel) {
         super(studentID, name, surname, userName, password);
-        this.selectedCourses = new ArrayList<>();
+//        this.selectedCourses = new ArrayList<>();
         this.draft = new ArrayList<>();
         this.availableCourses = new ArrayList<>();
-        this.courseSections = new HashMap<>();
+        this.courseSectionMap = new HashMap<>();
         this.gradeLevel = gradeLevel;
     }
 
@@ -170,16 +170,13 @@ public class Student extends Person implements IDisplayMenu {
         this.hasRequest = hasRequest;
     }
 
-    public List<Course> getSelectedCourses() {
-        return selectedCourses;
-    }
 
     public List<Course> getDraft() {
         return draft;
     }
 
-    public Map<Course, CourseSection> getCourseSections() {
-        return courseSections;
+    public Map<Course, CourseSection> getCourseSectionMap() {
+        return courseSectionMap;
     }
 
     public Transcript getTranscript() {
@@ -190,4 +187,7 @@ public class Student extends Person implements IDisplayMenu {
         this.transcript = transcript;
     }
 
+    public void setDraft(List<Course> draft) {
+        this.draft = draft;
+    }
 }

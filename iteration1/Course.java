@@ -15,7 +15,7 @@ public class Course {
     private Lecturer lecturer;
     private List<CourseSection> courseSections;
     private List<Course> preRequisiteCourses;
-    private List<Course> preRequsitieToCourses;
+//    private List<Course> preRequsitieToCourses;
 
 
     public Course(String courseName, String courseCode, int courseCredit, byte gradeLevel) {
@@ -25,7 +25,7 @@ public class Course {
         this.gradeLevel = gradeLevel;
         courseSections = new ArrayList<>();
         preRequisiteCourses = new ArrayList<>();
-        preRequsitieToCourses = new ArrayList<>();
+//        preRequsitieToCourses = new ArrayList<>();
     }
 
     public void addPreRequisiteCourse(Course course) {
@@ -36,7 +36,7 @@ public class Course {
         return courseName;
     }
 
-    public List getCourseSessions() {
+    public List getCourseSections() {
         return courseSections;
     }
 
@@ -55,4 +55,17 @@ public class Course {
     public byte getGradeLevel() {
         return gradeLevel;
     }
+
+    public void setLecturer(Lecturer lecturer) {
+        this.lecturer = lecturer;
+    }
+
+    public void setPreRequisiteCourses(List<Course> preRequisiteCourses) {
+        this.preRequisiteCourses = preRequisiteCourses;
+    }
+
+    public void setCourseSections(List<CourseSection> courseSections) {
+        this.courseSections = courseSections;
+    }
+
 }

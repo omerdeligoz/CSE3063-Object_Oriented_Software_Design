@@ -1,114 +1,91 @@
 [
-  {
-    "courseName": "Introduction to Computer Science",
-    "courseCode": "CSE101",
-    "courseCredit": 4,
-    "preRequisiteCourseCodes": [
-      "CSE102",
-      "CSE109"
-    ],
-    "preRequisiteToCourseCodes": [
-      "CSE108",
-      "CSE108"
-    ]
-  },
-  {
-    "courseName": "Data Structures",
-    "courseCode": "CSE102",
-    "courseCredit": 4,
-    "preRequisiteCourseCodes": [
-      "CSE108",
-      "CSE100"
-    ],
-    "preRequisiteToCourseCodes": [
-      "CSE108"
-    ]
-  },
-  {
-    "courseName": "Algorithms",
-    "courseCode": "CSE103",
-    "courseCredit": 5,
-    "preRequisiteCourseCodes": [
-      "CSE109",
-      "CSE106"
-    ],
-    "preRequisiteToCourseCodes": []
-  },
-  {
-    "courseName": "Database Management",
-    "courseCode": "CSE104",
-    "courseCredit": 4,
-    "preRequisiteCourseCodes": [
-      "CSE100",
-      "CSE100"
-    ],
-    "preRequisiteToCourseCodes": [
-      "CSE102",
-      "CSE107"
-    ]
-  },
-  {
-    "courseName": "Web Development",
-    "courseCode": "CSE105",
-    "courseCredit": 5,
-    "preRequisiteCourseCodes": [
-      "CSE106",
-      "CSE102"
-    ],
-    "preRequisiteToCourseCodes": [
-      "CSE103",
-      "CSE107"
-    ]
-  },
-  {
-    "courseName": "Artificial Intelligence",
-    "courseCode": "CSE106",
-    "courseCredit": 3,
-    "preRequisiteCourseCodes": [
-      "CSE103",
-      "CSE109"
-    ],
-    "preRequisiteToCourseCodes": []
-  },
-  {
-    "courseName": "Machine Learning and Deep Learning",
-    "courseCode": "CSE107",
-    "courseCredit": 4,
-    "preRequisiteCourseCodes": [],
-    "preRequisiteToCourseCodes": [
-      "CSE102",
-      "CSE102"
-    ]
-  },
-  {
-    "courseName": "Computer Networks",
-    "courseCode": "CSE108",
-    "courseCredit": 5,
-    "preRequisiteCourseCodes": [
-      "CSE100"
-    ],
-    "preRequisiteToCourseCodes": []
-  },
-  {
-    "courseName": "Operating Systems",
-    "courseCode": "CSE109",
-    "courseCredit": 4,
-    "preRequisiteCourseCodes": [
-      "CSE102",
-      "CSE104"
-    ],
-    "preRequisiteToCourseCodes": [
-      "CSE107",
-      "CSE101"
-    ]
-  },
-  {
-    "courseName": "Computer Architecture",
-    "courseCode": "CSE110",
-    "courseCredit": 4,
-    "preRequisiteCourseCodes": [],
-    "preRequisiteToCourseCodes": [
-      "CSE105"
-    ]
-  }
+    {
+        "courseName": "Introduction to Computer Science",
+        "courseCode": "CSE101",
+        "courseCredit": 3,
+        "semester": 2,
+        "preRequisiteCourseCodes": [],
+        "preRequisiteToCourseCodes": []
+    },
+    {
+        "courseName": "Data Structures",
+        "courseCode": "CSE102",
+        "courseCredit": 3,
+        "semester": 4,
+        "preRequisiteCourseCodes": [
+            "CSE107",
+            "CSE101"
+        ],
+        "preRequisiteToCourseCodes": []
+    },
+    {
+        "courseName": "Algorithms",
+        "courseCode": "CSE103",
+        "courseCredit": 4,
+        "semester": 2,
+        "preRequisiteCourseCodes": ["CSE102"],
+        "preRequisiteToCourseCodes": ["CSE103"]
+    },
+    {
+        "courseName": "Database Management",
+        "courseCode": "CSE104",
+        "courseCredit": 3,
+        "semester": 4,
+        "preRequisiteCourseCodes": ["CSE108"],
+        "preRequisiteToCourseCodes": ["CSE103"]
+    },
+    {
+        "courseName": "Web Development",
+        "courseCode": "CSE105",
+        "courseCredit": 5,
+        "semester": 3,
+        "preRequisiteCourseCodes": ["CSE107"],
+        "preRequisiteToCourseCodes": []
+    },
+    {
+        "courseName": "Artificial Intelligence",
+        "courseCode": "CSE106",
+        "courseCredit": 4,
+        "semester": 2,
+        "preRequisiteCourseCodes": ["CSE107"],
+        "preRequisiteToCourseCodes": []
+    },
+    {
+        "courseName": "Machine Learning and Deep Learning",
+        "courseCode": "CSE107",
+        "courseCredit": 5,
+        "semester": 3,
+        "preRequisiteCourseCodes": [
+            "CSE108",
+            "CSE108"
+        ],
+        "preRequisiteToCourseCodes": ["CSE105"]
+    },
+    {
+        "courseName": "Computer Networks",
+        "courseCode": "CSE108",
+        "courseCredit": 5,
+        "semester": 3,
+        "preRequisiteCourseCodes": ["CSE102"],
+        "preRequisiteToCourseCodes": []
+    },
+    {
+        "courseName": "Operating Systems",
+        "courseCode": "CSE109",
+        "courseCredit": 3,
+        "semester": 2,
+        "preRequisiteCourseCodes": ["CSE109"],
+        "preRequisiteToCourseCodes": ["CSE100"]
+    },
+    {
+        "courseName": "Computer Architecture",
+        "courseCode": "CSE110",
+        "courseCredit": 3,
+        "semester": 2,
+        "preRequisiteCourseCodes": [],
+        "preRequisiteToCourseCodes": [
+            "CSE105",
+            "CSE105"
+        ]
+    }
 ]
