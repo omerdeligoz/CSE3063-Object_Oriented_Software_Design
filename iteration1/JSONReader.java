@@ -2,10 +2,8 @@ package iteration1;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,6 +13,7 @@ import java.util.Map;
 public class JSONReader {
     ObjectMapper mapper;
     JsonNode jsonNode;
+    Department department;
     Map<Course, List<String>> coursePrerequisiteCourseCodesMap = new HashMap<>();
     Map<Course, List<String>> courseSectionCodesMap = new HashMap<>();
     Map<Integer, List<String>> lecturerIDCoursesMap = new HashMap<>();
@@ -24,50 +23,35 @@ public class JSONReader {
     Map<Student, Registration> studentRegistrationMap = new HashMap<>();
 
 
-    public void start(Department department) throws IOException {
-        readJson(department);
-        syncObjects(department);
-//        writeJson();
-
+    public void start(Department department) {
+        this.department = department;
+        readJson();
+        syncObjects();
     }
 
-    public void writeJson() {
-        writeJson("students");
-        writeJson("courses");
+
+    public void readJson() {
+        readCourses();
+        readCourseSections();
+        readLecturers();
+        readStudents();
+        readRequests();
+        readAdvisors();
     }
 
-    public void writeJson(String jsonType) {
-        Gson gson = new Gson();
-        String json = gson.toJson(jsonType);
-        String fileName = "iteration1/jsons/" + jsonType + ".json";
-        try {
-            // Write the JSON string to a file
-            FileWriter writer = new FileWriter(fileName);
-            writer.write(json);
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void readJson(Department department) throws IOException {
-        readCourses(department);
-        readCourseSections(department); //No need to sync
-        readLecturers(department);
-        readStudents(department);
-        readRequests(department);
-        readAdvisors(department);
-    }
-
-    public void readCourses(Department department) throws IOException {
+    public void readCourses() {
         mapper = new ObjectMapper();
-        // Parse the JSON file into a Java object.
-        jsonNode = mapper.readTree(new File("iteration1/jsons/courses.json"));
+        try {
+            // Parse the JSON file into a Java object.
+            jsonNode = mapper.readTree(new File("iteration1/jsons/courses.json"));
+        } catch (IOException e) {
+            System.out.println("File not found");
+            System.exit(0);
+        }
         // Get the students array.
         JsonNode coursesArray = jsonNode;
 
         for (JsonNode course : coursesArray) {
-            //Construction part
             String courseName = course.get("courseName").asText();
             String courseCode = course.get("courseCode").asText();
             int courseCredit = course.get("courseCredit").asInt();
@@ -76,15 +60,10 @@ public class JSONReader {
             Course course1 = new Course(courseName, courseCode, courseCredit, gradeLevel);
             department.getCourses().add(course1);
             department.getCourseCodeCourseMap().put(courseCode, course1);
-            //////////////////////////////////////////////
 
-            //sync part
             List<String> preRequisiteCourseCodes = new ArrayList<>();
             List<String> courseSectionCodes = new ArrayList<>();
 
-//            readCourseSections(department);
-
-            //TODO tüm courses
             JsonNode preRequisiteCourseCodesArray = course.get("preRequisiteCourseCodes");
             for (JsonNode preRequisiteCourseCode : preRequisiteCourseCodesArray) {
                 preRequisiteCourseCodes.add(preRequisiteCourseCode.asText());
@@ -95,14 +74,19 @@ public class JSONReader {
                 courseSectionCodes.add(courseSectionCode.asText());
             }
             courseSectionCodesMap.put(course1, courseSectionCodes);
-            //////////////////////////////////////////////
-            System.out.printf("courseName: %s, courseCode: %s, courseCredit: %d\n", courseName, courseCode, courseCredit);
         }
     }
 
-    public void readCourseSections(Department department) throws IOException {
+    public void readCourseSections() {
         mapper = new ObjectMapper();
-        jsonNode = mapper.readTree(new File("iteration1/jsons/courseSections.json"));
+
+        try {
+            // Parse the JSON file into a Java object.
+            jsonNode = mapper.readTree(new File("iteration1/jsons/courseSections.json"));
+        } catch (IOException e) {
+            System.out.println("File not found");
+            System.exit(0);
+        }
         JsonNode courseSectionsArray = jsonNode;
 
         for (JsonNode courseSection : courseSectionsArray) {
@@ -121,9 +105,16 @@ public class JSONReader {
         }
     }
 
-    public void readLecturers(Department department) throws IOException {
+    public void readLecturers() {
         mapper = new ObjectMapper();
-        jsonNode = mapper.readTree(new File("iteration1/jsons/lecturers.json"));
+
+        try {
+            // Parse the JSON file into a Java object.
+            jsonNode = mapper.readTree(new File("iteration1/jsons/lecturers.json"));
+        } catch (IOException e) {
+            System.out.println("File not found");
+            System.exit(0);
+        }
         JsonNode lecturersArray = jsonNode;
 
         for (JsonNode lecturer : lecturersArray) {
@@ -149,12 +140,15 @@ public class JSONReader {
         }
     }
 
-    public void readStudents(Department department) throws IOException {
+    public void readStudents() {
         mapper = new ObjectMapper();
-
-        // Parse the JSON file into a Java object.
-        jsonNode = mapper.readTree(new File("iteration1/jsons/students.json"));
-
+        try {
+            // Parse the JSON file into a Java object.
+            jsonNode = mapper.readTree(new File("iteration1/jsons/students.json"));
+        } catch (IOException e) {
+            System.out.println("File not found");
+            System.exit(0);
+        }
         // Get the students array.
         JsonNode studentsArray = jsonNode;
 
@@ -191,7 +185,7 @@ public class JSONReader {
 
             //////////////////////////////////////////////
 
-            readTranscript(department, student1);
+            readTranscript(student1);
 
             System.out.printf("id: %d, name: %s, surname: %s, userName: %s, password: %s, gradeLevel: %d\n",
                     id, name, surname, userName, password, gradeLevel);
@@ -199,17 +193,22 @@ public class JSONReader {
         System.out.println();
     }
 
-    public void readTranscript(Department department, Student student) throws IOException {
+    public void readTranscript(Student student) {
         mapper = new ObjectMapper();
 
-        // Parse the JSON file into a Java object.
-        jsonNode = mapper.readTree(new File("iteration1/jsons/Transcripts/" + student.getID() + ".json"));
+        try {
+            // Parse the JSON file into a Java object.
+            jsonNode = mapper.readTree(new File("iteration1/jsons/Transcripts/" + student.getID() + ".json"));
+        } catch (IOException e) {
+            System.out.println("File not found");
+            System.exit(0);
+        }
+
         Map<Course, Grade> courseGradeMap = new HashMap<>();
         List<Course> studentCourses = new ArrayList<>();
 
         // Get the students array.
         JsonNode transcript = jsonNode;
-        int studentID = transcript.get("studentID").asInt();
         JsonNode courses = transcript.get("courses");
         for (JsonNode course : courses) {
             String letterGrade = course.get("letterGrade").asText();
@@ -231,12 +230,16 @@ public class JSONReader {
     }
 
 
-    public void readRequests(Department department) throws IOException {
+    public void readRequests() {
         mapper = new ObjectMapper();
 
-        // Parse the JSON file into a Java object.
-        jsonNode = mapper.readTree(new File("iteration1/jsons/requests.json"));
-
+        try {
+            // Parse the JSON file into a Java object.
+            jsonNode = mapper.readTree(new File("iteration1/jsons/requests.json"));
+        } catch (IOException e) {
+            System.out.println("File not found");
+            System.exit(0);
+        }
         // Get the students array.
         JsonNode requestsArray = jsonNode;
         List<Course> draftCourses = new ArrayList<>();
@@ -254,11 +257,17 @@ public class JSONReader {
     }
 
 
-    public void readAdvisors(Department department) throws IOException {
+    public void readAdvisors() {
         mapper = new ObjectMapper();
 
-        // Parse the JSON file into a Java object.
-        jsonNode = mapper.readTree(new File("iteration1/jsons/advisors.json"));
+
+        try {
+            // Parse the JSON file into a Java object.
+            jsonNode = mapper.readTree(new File("iteration1/jsons/advisors.json"));
+        } catch (IOException e) {
+            System.out.println("File not found");
+            System.exit(0);
+        }
 
         // Get the students array.
         JsonNode advisorsArray = jsonNode;
@@ -289,7 +298,7 @@ public class JSONReader {
         }
     }
 
-    public void syncObjects(Department department) throws IOException {
+    public void syncObjects() {
         //sync for courses
         for (Course course : department.getCourses()) {
             for (String courseCode : coursePrerequisiteCourseCodesMap.get(course)) {

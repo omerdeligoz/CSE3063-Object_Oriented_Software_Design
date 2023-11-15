@@ -37,24 +37,17 @@ public class Student extends Person implements IDisplayMenu {
         this.gradeLevel = gradeLevel;
     }
 
-    /**
-     * Sends a registration request to the advisor.
-     * <p>
-     * This method creates a new Registration object with the student and their draft courses.
-     * It then adds the request to the advisor's queue for approval.
-     *
-     * @throws NullPointerException if the advisor is null
-     */
+
     public void sendRequest() {
-        Registration registration = new Registration(this, draft);
-        registration.addRequest(advisor);
+        if (hasRequest) {
+            System.out.println("\nYou already have a request waiting for approval");
+        } else {
+            Registration registration = new Registration(this, draft);
+            registration.addRequest(advisor);
+        }
     }
 
-    /**
-     * Prints a menu based on the given menu type.
-     *
-     * @param menuType the type of the menu to be printed ("studentMenu" or "courseSelectionMenu")
-     */
+
     @Override
     public void printMenu(String menuType) {
         switch (menuType) {
@@ -81,9 +74,7 @@ public class Student extends Person implements IDisplayMenu {
         }
     }
 
-    /**
-     * Displays the Add Course Menu and lists the available courses with their course sections.
-     */
+
     public void addCourse() {
         System.out.println("\nAdd Course Menu");
         viewAvailableCourses();

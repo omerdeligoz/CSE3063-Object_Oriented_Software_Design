@@ -135,7 +135,7 @@ public class Transcript {
     public void showTranscript() {
         System.out.println("\nTranscript for " + student.getName() + " " + student.getSurname() + ":");
         System.out.println("Student ID: " + student.getID());
-        System.out.println("CGPA: " + cgpa);
+        System.out.printf("CGPA: %.2f\n" ,cgpa);
         System.out.println("Completed Credits: " + calculateCompletedCredits());
         System.out.println("Taken Credits: " + calculateTakenCredits());
         System.out.println("Grade Level: " + gradeLevel);
@@ -169,7 +169,7 @@ public class Transcript {
         List<Course> failedCourses = new ArrayList<>();
         List<Course> ongoingCourses = new ArrayList<>();
         for (Course course : studentCourses) {
-            if (courseGradeMap.get(course).getLetterGrade() == null) {
+            if (courseGradeMap.get(course) == null) {
                 ongoingCourses.add(course);
             } else if (courseGradeMap.get(course).getLetterGrade().equals("FF")
                     || courseGradeMap.get(course).getLetterGrade().equals("FD")) {
@@ -206,6 +206,18 @@ public class Transcript {
 
     public void setStudentCourses(List<Course> studentCourses) {
         this.studentCourses = studentCourses;
+    }
+
+    public int getTakenCredits() {
+        return takenCredits;
+    }
+
+    public int getCompletedCredits() {
+        return completedCredits;
+    }
+
+    public double getCgpa() {
+        return cgpa;
     }
 }
 
