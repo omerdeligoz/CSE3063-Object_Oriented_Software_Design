@@ -10,11 +10,11 @@ public class CourseRegistrationSystem implements IDisplayMenu {
 
     public void start() throws IOException {
         Department department = new Department("CSE");
-//        JSONReader jsonReader = new JSONReader();
-//        jsonReader.start(department);
+        JSONReader jsonReader = new JSONReader();
+        jsonReader.start(department);
         JSONWriter jsonWriter = new JSONWriter();
         jsonWriter.start(department);
-        mainMenu(department);
+//        mainMenu(department);
     }
 
     public void mainMenu(Department department) {

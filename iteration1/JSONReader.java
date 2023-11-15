@@ -90,7 +90,6 @@ public class JSONReader {
         JsonNode courseSectionsArray = jsonNode;
 
         for (JsonNode courseSection : courseSectionsArray) {
-            //Construction part
             String courseSectionCode = courseSection.get("courseSectionCode").asText();
             String courseCode = courseSection.get("courseCode").asText();
             String day = courseSection.get("day").asText();
@@ -100,8 +99,6 @@ public class JSONReader {
             department.getCourseSections().add(courseSection1);
             department.getSectionCodeCourseMap().put(courseSectionCode, course);
             department.getSectionCourseMap().put(courseSection1, course);
-            //////////////////////////////////////////////
-            System.out.printf("courseSection: %s, courseCode: %s, day: %s, hour: %d\n", courseSectionCode, courseCode, day, hour);
         }
     }
 
@@ -118,7 +115,6 @@ public class JSONReader {
         JsonNode lecturersArray = jsonNode;
 
         for (JsonNode lecturer : lecturersArray) {
-            //Construction part
             int id = lecturer.get("lecturerID").asInt();
             String name = lecturer.get("name").asText();
             String surname = lecturer.get("surname").asText();
@@ -126,7 +122,6 @@ public class JSONReader {
             Lecturer lecturer1 = new Lecturer(id, name, surname);
             department.getLecturers().add(lecturer1);
             lecturer1.setDepartment(department);
-            //////////////////////////////////////////////
 
             List<String> lessonsTaught = new ArrayList<>();
 
@@ -135,8 +130,6 @@ public class JSONReader {
                 lessonsTaught.add(lessonTaught.asText());
             }
             lecturerIDCoursesMap.put(id, lessonsTaught);
-
-            System.out.printf("lecturerID: %d, name: %s, surname: %s\n", id, name, surname);
         }
     }
 
@@ -153,7 +146,6 @@ public class JSONReader {
         JsonNode studentsArray = jsonNode;
 
         for (JsonNode student : studentsArray) {
-            //Construction part
             int id = student.get("studentID").asInt();
             String name = student.get("name").asText();
             String surname = student.get("surname").asText();
@@ -165,9 +157,7 @@ public class JSONReader {
             department.getStudents().add(student1);
             department.getUserNamePersonMap().put(userName, student1);
             department.getStudentIDStudentMap().put(id, student1);
-            //////////////////////////////////////////////
 
-            //sync part
             int advisorID = student.get("advisorID").asInt();
             studentIDAdvisorIDMap.put(id, advisorID);
 
@@ -182,15 +172,8 @@ public class JSONReader {
                 student1.setHasRequest(true);
                 studentIDDraftMap.put(id, draft);
             }
-
-            //////////////////////////////////////////////
-
             readTranscript(student1);
-
-            System.out.printf("id: %d, name: %s, surname: %s, userName: %s, password: %s, gradeLevel: %d\n",
-                    id, name, surname, userName, password, gradeLevel);
         }
-        System.out.println();
     }
 
     public void readTranscript(Student student) {
@@ -260,7 +243,6 @@ public class JSONReader {
     public void readAdvisors() {
         mapper = new ObjectMapper();
 
-
         try {
             // Parse the JSON file into a Java object.
             jsonNode = mapper.readTree(new File("iteration1/jsons/advisors.json"));
@@ -273,7 +255,6 @@ public class JSONReader {
         JsonNode advisorsArray = jsonNode;
 
         for (JsonNode advisor : advisorsArray) {
-            //Construction part
             int id = advisor.get("advisorID").asInt();
             String name = advisor.get("name").asText();
             String surname = advisor.get("surname").asText();
@@ -292,9 +273,6 @@ public class JSONReader {
                 lessonsTaught.add(lessonTaught.asText());
             }
             advisorIDCoursesMap.put(id, lessonsTaught);
-            //////////////////////////////////////////////
-
-            System.out.printf("id: %d, name: %s, surname: %s, userName: %s, password: %s\n", id, name, surname, userName, password);
         }
     }
 
@@ -342,7 +320,6 @@ public class JSONReader {
                 advisor.getLessonsTaught().add(department.getCourseCodeCourseMap().get(courseCode));
             }
         }
-
     }
 
 }
