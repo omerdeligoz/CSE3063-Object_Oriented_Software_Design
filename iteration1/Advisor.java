@@ -149,12 +149,12 @@ public class Advisor extends Lecturer implements IDisplayMenu {
 
         switch (choice) {
             case 1:
-                requestList.get(requestNumber -1).approveRequest(this);
+                requestList.get(requestNumber -1).approveRequest();
                 requestList.remove(requestNumber - 1);
                 printRequests();
                 break;
             case 2:
-                requestList.get(requestNumber -1).rejectRequest(this);
+                requestList.get(requestNumber -1).rejectRequest();
                 requestList.remove(requestNumber - 1);
                 printRequests();
                 break;

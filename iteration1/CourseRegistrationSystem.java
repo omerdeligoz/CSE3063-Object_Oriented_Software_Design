@@ -306,8 +306,7 @@ public class CourseRegistrationSystem implements IDisplayMenu {
         } else {
             switch (choice) {
                 case 0:
-                    System.out.println("Exiting from system");
-                    exitProgram();
+                    studentMenu(student);
                     break;
                 case 1:
                     student.getTranscript().courseStatusCheck();

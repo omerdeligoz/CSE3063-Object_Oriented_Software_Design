@@ -1,7 +1,10 @@
 
 package iteration1;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 
 /**
  * Represents a student who can log in, select courses, and send requests to advisors.json.
@@ -15,7 +18,6 @@ public class Student extends Person implements IDisplayMenu {
     private boolean hasRequest;
     private List<Course> draft;
     private List<Course> availableCourses;
-    private Map<Course, CourseSection> courseSectionMap;  // TODO maybe deleted
 
 
     /**
@@ -32,7 +34,6 @@ public class Student extends Person implements IDisplayMenu {
         super(studentID, name, surname, userName, password);
         this.draft = new ArrayList<>();
         this.availableCourses = new ArrayList<>();
-        this.courseSectionMap = new HashMap<>();
         this.gradeLevel = gradeLevel;
     }
 
@@ -69,7 +70,7 @@ public class Student extends Person implements IDisplayMenu {
             case "courseSelectionMenu":
                 System.out.println("\nCourse Selection Menu");
                 System.out.println("Please select from the following options:");
-                System.out.println("0. Exit");
+                System.out.println("0. Back");
                 System.out.println("1. Course Status Check");
                 System.out.println("2. Add Course");
                 System.out.println("3. Drop Course");
@@ -86,6 +87,13 @@ public class Student extends Person implements IDisplayMenu {
     public void addCourse() {
         System.out.println("\nAdd Course Menu");
         viewAvailableCourses();
+        int numberOfCourses = calculateNumberOfCourses();
+
+        if (numberOfCourses >= this.getDepartment().getMaxCourseNumber()) {
+            System.out.println("You can not add more lectures.");
+            return;
+        }
+
         System.out.println("Here is the available courses:");
         System.out.println("0. Back");
         for (int i = 0; i < this.getAvailableCourses().size(); i++) {
@@ -110,6 +118,16 @@ public class Student extends Person implements IDisplayMenu {
                 System.out.println("Invalid input, please enter a valid number");
             }
         }
+    }
+
+    private int calculateNumberOfCourses() {
+        int numberOfCourses = draft.size();
+        for (Course course : this.getDepartment().getCourses()) {
+            if (this.getTranscript().getCourseGradeMap().containsKey(course) && this.getTranscript().getCourseGradeMap().get(course) == null) {
+                numberOfCourses++;
+            }
+        }
+        return numberOfCourses;
     }
 
     /**
@@ -138,8 +156,6 @@ public class Student extends Person implements IDisplayMenu {
             draft.remove(userNumberInput - 1);
             dropCourse();
         }
-
-        //TODO İşlem bitince courseSelectionMenu'ye dönücek.
     }
 
 
@@ -229,9 +245,6 @@ public class Student extends Person implements IDisplayMenu {
         return draft;
     }
 
-    public Map<Course, CourseSection> getCourseSectionMap() {
-        return courseSectionMap;
-    }
 
     public Transcript getTranscript() {
         return transcript;

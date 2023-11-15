@@ -11,26 +11,28 @@ public class Registration {
         this.courses = courses;
     }
 
-    public void showRequest() {
-    }
-
-    public void approveRequest(Advisor advisor) {
+    public void approveRequest() {
         //TODO this.student ve this.courses kullanarak student ve advisor güncellenecek
-        System.out.println("Request approved"); //TODO implementation
+        System.out.println("Request approved");
+        student.getTranscript().getStudentCourses().addAll(courses);
+        for (Course course : courses) {
+            student.getTranscript().getCourseGradeMap().put(course, null);
+        }
         student.setHasRequest(false);
+        student.getDraft().clear();
     }
 
-    public void rejectRequest(Advisor advisor) { //TODO implementation
+    public void rejectRequest() { //TODO implementation
         //TODO this.student ve this.courses kullanarak student ve advisor güncellenecek
         System.out.println("Request rejected");
+        student.setHasRequest(false);
+        student.getDraft().clear();
     }
     public void addRequest(Advisor advisor) {
         advisor.getRequests().add(this);
         student.setHasRequest(true);
         System.out.println("Request sent to advisor");
-        //TODO bazı kontroller yapabilir
     }
-
 
     public Student getStudent() {
         return student;

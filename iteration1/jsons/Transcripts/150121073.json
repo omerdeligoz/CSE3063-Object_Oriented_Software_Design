@@ -1,19 +1,27 @@
-  {
-    "studentID": 150120097,
-    "name": "Ali",
-    "surname": "Yeşil",
-    "cgpa": 3.56,
-    "takenCredits": 55,
-    "completedCredits": 42,
+{
+    "studentID": 150121073,
+    "name": "Tuğba",
+    "surname": "Yaşar",
+    "cgpa": 0,
+    "takenCredits": 0,
+    "completedCredits": 0,
     "gradeLevel": 3,
     "courses": [
-      {
-        "courseCode": "CSE3055",
-        "letterGrade": "AA"
-      },
-      {
-        "courseCode": "CSE2225",
-        "letterGrade": "BB"
-      }
+        {
+            "courseCode": "CSE2023",
+            "letterGrade": "BA"
+        },
+        {
+            "courseCode": "CSE2225",
+            "letterGrade": "AA"
+        },
+        {
+            "courseCode": "EE2031",
+            "letterGrade": "AA"
+        },
+        {
+            "courseCode": "IE3081",
+            "letterGrade": "BA"
+        }
     ]
-  }
+}

@@ -37,11 +37,12 @@ public class Transcript {
         this.courseGradeMap = new HashMap<>();
     }
 
-    public void calculateValues(){
+    public void calculateValues() {
         this.cgpa = calculateCgpa();
         this.takenCredits = calculateTakenCredits();
         this.completedCredits = calculateCompletedCredits();
     }
+
     /**
      * Calculates the CGPA (Cumulative Grade Point Average) for the student.
      *
@@ -83,9 +84,9 @@ public class Transcript {
     public int calculateCompletedCredits() {
         completedCredits = takenCredits;
         for (Course course : studentCourses) {
-            if (courseGradeMap.get(course).getLetterGrade().equals("FF")
-                    || courseGradeMap.get(course).getLetterGrade().equals("FD")
-                    || courseGradeMap.get(course) == null) {
+            if (courseGradeMap.get(course) == null
+                    || courseGradeMap.get(course).getLetterGrade().equals("FF")
+                    || courseGradeMap.get(course).getLetterGrade().equals("FD")) {
                 completedCredits = takenCredits - course.getCourseCredit();
             }
         }
@@ -140,11 +141,18 @@ public class Transcript {
         System.out.println("Grade Level: " + gradeLevel);
         System.out.println("Department: " + student.getDepartmentName());
         System.out.println("Courses:");
+
+        //TODO fix printing
+        System.out.format("%-15s%-38s%-20s%-15s\n", "Course Code", "Course Name", "Course Credit", "Grade");
+        System.out.println("-------------------------------------------------------------------------------");
         for (Course course : studentCourses) {
             if (courseGradeMap.get(course) == null) {
-                System.out.println(course.getCourseCode() + " " + course.getCourseCredit() + " " + course.getCourseName());
-            } else
-                System.out.println(course.getCourseCode() + " " + course.getCourseCredit() + " " + courseGradeMap.get(course).getLetterGrade() + " " + course.getCourseName());
+                System.out.format("%-15s%-45s%-15s%-15s\n", course.getCourseCode(), course.getCourseName(), course.getCourseCredit(), "--");
+//                System.out.format(course.getCourseCode() + "\t\t" + course.getCourseName() + "\t\t\t\t\t\t\t" + course.getCourseCredit());
+            } else {
+                System.out.format("%-15s%-45s%-15s%-15s\n", course.getCourseCode(), course.getCourseName(), course.getCourseCredit(), courseGradeMap.get(course).getLetterGrade());
+//                System.out.println(course.getCourseCode() + "\t\t" + course.getCourseName() + "\t\t\t\t\t\t\t" + course.getCourseCredit() + "\t\t" + courseGradeMap.get(course).getLetterGrade());
+            }
         }
     }
 
