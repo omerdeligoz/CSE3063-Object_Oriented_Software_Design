@@ -41,6 +41,8 @@ public class Student extends Person implements IDisplayMenu {
     public void sendRequest() {
         if (hasRequest) {
             System.out.println("\nYou already have a request waiting for approval");
+        } else if (draft.isEmpty()) {
+            System.out.println("\nYour draft is empty!");
         } else {
             Registration registration = new Registration(this, draft);
             registration.addRequest(advisor);
@@ -211,20 +213,12 @@ public class Student extends Person implements IDisplayMenu {
         super.setUserName(userName);
     }
 
-    public Advisor getAdvisor() {
-        return advisor;
-    }
-
     public void setAdvisor(Advisor advisor) {
         this.advisor = advisor;
     }
 
     public byte getGradeLevel() {
         return gradeLevel;
-    }
-
-    public boolean isHasRequest() {
-        return hasRequest;
     }
 
     public void setHasRequest(boolean hasRequest) {
@@ -235,7 +229,6 @@ public class Student extends Person implements IDisplayMenu {
     public List<Course> getDraft() {
         return draft;
     }
-
 
     public Transcript getTranscript() {
         return transcript;

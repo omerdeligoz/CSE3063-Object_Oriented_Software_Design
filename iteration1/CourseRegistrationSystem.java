@@ -1,20 +1,18 @@
 package iteration1;
 
-import java.io.IOException;
 import java.util.Scanner;
-
 
 public class CourseRegistrationSystem implements IDisplayMenu {
     private Scanner input;
     private int choice;
 
-    public void start() throws IOException {
+    public void start()  {
         Department department = new Department("CSE");
         JSONReader jsonReader = new JSONReader();
         jsonReader.start(department);
         JSONWriter jsonWriter = new JSONWriter();
         jsonWriter.start(department);
-//        mainMenu(department);
+        mainMenu(department);
     }
 
     public void mainMenu(Department department) {

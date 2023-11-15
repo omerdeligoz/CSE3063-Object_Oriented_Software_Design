@@ -3,7 +3,6 @@ package iteration1;
 public class Grade {
     private String letterGrade;
     private double gradeOver4;
-
     private int gradeOver100;
 
     public Grade(String letterGrade) {

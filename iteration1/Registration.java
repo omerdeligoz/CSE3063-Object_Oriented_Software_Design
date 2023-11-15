@@ -44,7 +44,7 @@ public class Registration {
      * Rejects a request by a student.
      * Clears the draft and marks the request as rejected.
      */
-    public void rejectRequest() { //TODO implementation
+    public void rejectRequest() {
         System.out.println("\nRequest rejected");
         student.setHasRequest(false);
         student.getDraft().clear();

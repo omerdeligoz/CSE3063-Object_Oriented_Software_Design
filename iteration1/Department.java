@@ -16,8 +16,7 @@ public class Department {
     private Map<String, Person> userNamePersonMap;  //it holds username and password of users
     private Map<String, Course> courseCodeCourseMap; //it holds course code and course
     private Map<String, Course> sectionCodeCourseMap; //it holds course code and course
-    private Map<CourseSection, Course> sectionCourseMap; //it holds course code and course
-
+    private Map<CourseSection, Course> sectionCourseMap; //it holds course section and course
     private Map<Integer, Student> studentIDStudentMap; //it holds student id and student
     private Map<Integer, Advisor> advisorIDAdvisorMap; //it holds advisor id and advisor
     private byte maxCourseNumber = 5;
