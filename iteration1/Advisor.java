@@ -96,6 +96,7 @@ public class Advisor extends Lecturer implements IDisplayMenu {
     @Override
     public void printMenu(String menuType) {
         System.out.println("\nAdvisor Menu");
+        System.out.println("Welcome " + this.getName() + " " + this.getSurname() + "!");
         System.out.println("Please select from the following options:");
         System.out.println("0. Exit");
         System.out.println("1. List requests");

@@ -55,6 +55,7 @@ public class Student extends Person implements IDisplayMenu {
         switch (menuType) {
             case "studentMenu":
                 System.out.println("\nStudent Menu");
+                System.out.println("Welcome " + this.getName() + " " + this.getSurname() + "!");
                 System.out.println("Please select from the following options:");
                 System.out.println("0. Exit");
                 System.out.println("1. Course Selection Menu");
