@@ -51,11 +51,18 @@ public class Advisor extends Lecturer implements IDisplayMenu {
 
         System.out.print("Enter the request number you want to evaluate: ");
         Scanner scanner = new Scanner(System.in);
-        requestNumber = scanner.nextInt();
+
+        try {
+            requestNumber = scanner.nextInt();
+        } catch (Exception e) {
+            System.out.println("Invalid input, please enter a number");
+            printRequests();
+        }
+
 
         if (requestNumber == 0) {
             return;
-        } else if (requestNumber > requestList.size()) {
+        } else if (requestNumber > requestList.size() || requestNumber < 0) {
             System.out.println("Invalid choice Please select again");
             printRequests();
         } else {
@@ -77,7 +84,14 @@ public class Advisor extends Lecturer implements IDisplayMenu {
         System.out.println("3. Back");
         System.out.println("Please select an option: ");
         Scanner scanner = new Scanner(System.in);
-        int choice = scanner.nextInt();
+
+        int choice = 0;
+        try {
+            choice = scanner.nextInt();
+        } catch (Exception e) {
+            System.out.println("Invalid input, please enter a number");
+            replyRequests();
+        }
 
         switch (choice) {
             case 1:

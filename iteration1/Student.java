@@ -171,7 +171,12 @@ public class Student extends Person implements IDisplayMenu {
     public void showRequestStatus() {
         if (hasRequest) {
             System.out.println("\nYour request is waiting for advisor approval");
+
         } else System.out.println("\nThere is no waiting request");
+        System.out.println("Your draft: ");
+        for (Course course : draft) {
+            System.out.println(course.getCourseCode() + " - " + course.getCourseName());
+        }
     }
 
     public List<Course> getAvailableCourses() {
