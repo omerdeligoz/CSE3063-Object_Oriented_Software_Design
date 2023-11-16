@@ -64,4 +64,8 @@ public class Registration {
     public Student getStudent() {
         return student;
     }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
 }

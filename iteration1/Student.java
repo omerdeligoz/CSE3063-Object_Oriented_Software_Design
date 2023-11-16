@@ -190,14 +190,17 @@ public class Student extends Person implements IDisplayMenu {
             if (!mapGrade.containsKey(course)) {
                 boolean status = true;
                 for (Course prerequisite : course.getPreRequisiteCourses()) {
-                    if ((mapGrade.get(prerequisite).getLetterGrade().equals("FF") ||
-                            mapGrade.get(prerequisite).getLetterGrade().equals("FD") ||
-                            mapGrade.get(prerequisite) == null)) {
+                    if ((mapGrade.get(prerequisite) == null || mapGrade.get(prerequisite).getLetterGrade().equals("FF") ||
+                            mapGrade.get(prerequisite).getLetterGrade().equals("FD"))) {
                         status = false;
                     }
                 }
                 if (status)
                     availableCourses.add(course);
+            } else {
+                if (mapGrade.get(course) != null && mapGrade.get(course).getLetterGrade().compareTo("CC") > 0) {
+                    availableCourses.add(course);
+                }
             }
         }
 

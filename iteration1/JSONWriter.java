@@ -1,15 +1,15 @@
 package iteration1;
 
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class JSONWriter {
     Department department;
@@ -23,12 +23,8 @@ public class JSONWriter {
 
     public void writeJson() {
         writeStudents();
-        writeLecturers();
-        writeAdvisors();
-        writeCourses();
-        writeCourseSections();
         writeRequests();
-//        writeTranscripts();
+        writeTranscripts();
     }
 
     public void writeTranscripts() {
@@ -36,8 +32,7 @@ public class JSONWriter {
         String filePath;
 
         for (Student student : department.getStudents()) {
-//            filePath = "src/iteration1/JSONFiles/Transcripts/" + student.getID() + ".json";
-            filePath = "iteration1/jsons/Transcripts/test.json";
+            filePath = "iteration1/jsons/Transcripts/" + student.getID() + ".json";
             try {
                 // Create ObjectMapper
                 objectMapper = new ObjectMapper();
@@ -49,10 +44,7 @@ public class JSONWriter {
                 int newTakenCredits = student.getTranscript().getTakenCredits();
                 int newCompletedCredits = student.getTranscript().getCompletedCredits();
                 double newCgpa = student.getTranscript().getCgpa();
-//                TODO for testing
-//                int newTakenCredits = 123; // Replace with the desired value
-//                int newCompletedCredits = 456;
-//                double newCgpa = 789;
+                newCgpa = Math.round(newCgpa * 100.0) / 100.0;
 
                 ((ObjectNode) jsonNode).put("takenCredits", newTakenCredits);
                 ((ObjectNode) jsonNode).put("completedCredits", newCompletedCredits);
@@ -64,8 +56,8 @@ public class JSONWriter {
                 for (Course course : student.getTranscript().getStudentCourses()) {
                     ObjectNode courseNode = JsonNodeFactory.instance.objectNode();
                     courseNode.put("courseCode", course.getCourseCode());
-                    if (student.getTranscript().getCourseGradeMap().get(course) != null) {
-                        courseNode.put("grade", (JsonNode) null);
+                    if (student.getTranscript().getCourseGradeMap().get(course) == null) {
+                        courseNode.put("letterGrade", (JsonNode) null);
                     } else {
                         courseNode.put("letterGrade", student.getTranscript().getCourseGradeMap().get(course).getLetterGrade());
                     }
@@ -78,7 +70,6 @@ public class JSONWriter {
                 // Write the updated JsonNode back to the file
                 objectMapper.writeValue(new File(filePath), jsonNode);
 
-                System.out.println("JSON file updated successfully.");
             } catch (IOException e) {
                 System.out.println("File not found");
                 System.exit(0);
@@ -92,57 +83,52 @@ public class JSONWriter {
 
         try {
             objectMapper = new ObjectMapper();
-            ArrayNode jsonArray = (ArrayNode) objectMapper.readTree(new File(filePath));
 
-            for(Student student : department.getStudents()){
-                List<String> courseCodes = new ArrayList<>();
+            // Initialize a new ArrayNode, replacing the existing file's ArrayNode
+            ArrayNode jsonArray = objectMapper.createArrayNode();
 
-                for(Course course : student.getDraft()){
-                    ObjectNode requestNode = JsonNodeFactory.instance.objectNode();
-                    requestNode.put("studentID", student.getID());
-                    courseCodes.add(course.getCourseCode());
-                    jsonArray.add(requestNode);
-                }
-                JsonNode jsonNode1 = jsonArray.get(jsonArray.size()-1);
-            }
+            for (Student student : department.getStudents()) {
+                if (!student.getDraft().isEmpty()) {
+                    ObjectNode newNode = objectMapper.createObjectNode();
+                    newNode.put("studentID", student.getID());
 
-
-
-
-            List<String> courseCodes = new ArrayList<>();
-            for (JsonNode jsonNode : jsonArray) {
-                int studentID = jsonNode.get("studentID").asInt();
-                ArrayNode courseCodesArray = (ArrayNode) jsonNode.get("courses");
-                for (JsonNode courseCode : courseCodesArray) {
-                    courseCodes.add(courseCode.asText());
+                    ArrayNode coursesArray = objectMapper.createArrayNode();
+                    for (Course course : student.getDraft()) {
+                        coursesArray.add(course.getCourseCode());
+                    }
+                    newNode.set("courses", coursesArray);
+                    jsonArray.add(newNode);
                 }
             }
-
-            // Write the updated ArrayNode back to the file
+            // Write the entirely new ArrayNode back to the file
             objectMapper.writeValue(new File(filePath), jsonArray);
 
-            System.out.println("JSON file updated successfully.");
         } catch (IOException e) {
             System.out.println("File not found");
             System.exit(0);
         }
     }
 
-    public void writeCourseSections() {
-    }
-
-    public void writeCourses() {
-    }
-
-    public void writeAdvisors() {
-    }
-
-    public void writeLecturers() {
-    }
-
     public void writeStudents() {
+        // Specify the path to your JSON file
+        String filePath;
+
+        filePath = "iteration1/jsons/students.json";
+        try {
+            objectMapper = new ObjectMapper();
+            JsonNode jsonArray = objectMapper.readTree(new File(filePath));
+
+            // Iterate over each element in the array
+            for (JsonNode jsonNode : jsonArray) {
+                int studentID = jsonNode.get("studentID").asInt();
+                Student student = department.getStudentIDStudentMap().get(studentID);
+                boolean hasRequest = jsonNode.get("hasRequest").asBoolean();
+                student.setHasRequest(hasRequest);
+            }
+        } catch (IOException e) {
+            System.out.println("File not found");
+            System.exit(0);
+        }
     }
-
 }
-
 
