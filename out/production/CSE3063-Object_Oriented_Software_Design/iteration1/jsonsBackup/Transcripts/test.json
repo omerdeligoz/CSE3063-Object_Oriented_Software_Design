@@ -1,0 +1,23 @@
+{
+  "studentID": 150120045,
+  "name": "Enes",
+  "surname": "Demir",
+  "cgpa": 789.0,
+  "takenCredits": 123,
+  "completedCredits": 456,
+  "gradeLevel": 3,
+  "courses": [
+    {
+      "courseCode": "CSE2023",
+      "grade": null
+    },
+    {
+      "courseCode": "CSE2225",
+      "grade": null
+    },
+    {
+      "courseCode": "EE2031",
+      "grade": null
+    }
+  ]
+}
