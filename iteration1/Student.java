@@ -104,7 +104,15 @@ public class Student extends Person implements IDisplayMenu {
             Scanner scanner = new Scanner(System.in);
 
             System.out.print("Choose number between 1 to " + this.getAvailableCourses().size() + " to add course: ");
-            int userNumberInput = scanner.nextInt();
+
+            int userNumberInput = 0;
+            try {
+                userNumberInput = scanner.nextInt();
+            } catch (Exception e) {
+                System.out.println("Invalid input, please enter a number");
+                addCourse();
+            }
+
             //Back to Course Section Menu with return value
             if (userNumberInput == 0)
                 return;
@@ -153,7 +161,14 @@ public class Student extends Person implements IDisplayMenu {
             }
             Scanner scanner = new Scanner(System.in);
             System.out.print("Choose number between 1 to " + this.draft.size() + " to drop course: ");
-            int userNumberInput = scanner.nextInt();
+
+            int userNumberInput = 0;
+            try {
+                userNumberInput = scanner.nextInt();
+            } catch (Exception e) {
+                System.out.println("Invalid input, please enter a number");
+                dropCourse();
+            }
 
             if (userNumberInput == 0)
                 return;
