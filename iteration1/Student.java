@@ -1,4 +1,3 @@
-
 package iteration1;
 
 import java.util.ArrayList;
@@ -6,12 +5,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-/**
- * Represents a student who can log in, select courses, and send requests to advisors.json.
- * Inherits from the Person class and implements the ILogin interface.
- */
+//Inherits from the Person class and implements the ILogin interface
 public class Student extends Person implements IDisplayMenu {
 
+    //All attributes
     private Advisor advisor;
     private Transcript transcript;
     private byte gradeLevel;
@@ -19,17 +16,7 @@ public class Student extends Person implements IDisplayMenu {
     private List<Course> draft;
     private List<Course> availableCourses;
 
-
-    /**
-     * Creates a new Student object with the given parameters.
-     *
-     * @param studentID  the student's ID
-     * @param name       the student's name
-     * @param surname    the student's surname
-     * @param userName   the student's username
-     * @param password   the student's password
-     * @param gradeLevel the student's grade level
-     */
+    //Implement Constructor
     public Student(int studentID, String name, String surname, String userName, String password, byte gradeLevel) {
         super(studentID, name, surname, userName, password);
         this.draft = new ArrayList<>();
@@ -37,7 +24,10 @@ public class Student extends Person implements IDisplayMenu {
         this.gradeLevel = gradeLevel;
     }
 
-
+    //Check if there is already a request awaiting approval
+    //Check if the draft is empty
+    /* Create a new Registration object and initialize it with the current
+    student object (this) and draft information */
     public void sendRequest() {
         if (hasRequest) {
             System.out.println("\nYou already have a request waiting for approval");
@@ -49,7 +39,10 @@ public class Student extends Person implements IDisplayMenu {
         }
     }
 
-
+    //Implements the printMenu method from the IDisplayMenu interface.
+    //Prints a menu based on the specified menu type.
+    /* After determining whether the user is a student or an advisor
+    based on the String value, print the relevant menu. */
     @Override
     public void printMenu(String menuType) {
         switch (menuType) {
@@ -77,45 +70,50 @@ public class Student extends Person implements IDisplayMenu {
         }
     }
 
-
+    // The 'addCourse' function displays all accessible courses and adds these courses to
+    // the student's draft, which is a private attribute.
     public void addCourse() {
+        //If a request has been sent, terminate the function.
         if (hasRequest) {
             System.out.println("\nYou can not add lecture because you have a request waiting for approval.");
             return;
         }
-
+        //Call the calculateNumberOfCourses() function to limit with the maximum number of courses.
         int numberOfCourses = calculateNumberOfCourses();
         if (numberOfCourses >= this.getDepartment().getMaxCourseNumber()) {
             System.out.println("You can not add more lectures.");
             return;
         }
 
+        //Call the viewAvailableCourses() function to see all available courses.
         System.out.println("\nAdd Course Menu");
         viewAvailableCourses();
 
         System.out.println("Here is the available courses:");
         System.out.println("0. Back");
+        //Yazdırma işlemi için belli bir for döngüsü kullan
         for (int i = 0; i < this.getAvailableCourses().size(); i++) {
             System.out.println((i + 1) + ". " + this.getAvailableCourses().get(i).getCourseCode() +
                     " - " + this.getAvailableCourses().get(i).getCourseName());
         }
+        //Check the controlGate variable for while loop manipulation.
         int controlGate = 1;
         while (controlGate == 1) {
+            //Take input from the user and make assignments to the courses.
             Scanner scanner = new Scanner(System.in);
-
             System.out.print("Choose number between 1 to " + this.getAvailableCourses().size() + " to add course: ");
-
             int userNumberInput = 0;
-            try {
+            try{
                 userNumberInput = scanner.nextInt();
-            } catch (Exception e) {
+            }
+            catch (Exception e){
                 System.out.println("Invalid input, please enter a number");
                 addCourse();
             }
-
             //Back to Course Section Menu with return value
             if (userNumberInput == 0)
                 return;
+            //If incorrect input is entered, ask for input again.
             if (1 <= userNumberInput && userNumberInput <= this.getAvailableCourses().size()) {
                 controlGate = 0;
                 this.draft.add(this.getAvailableCourses().get(userNumberInput - 1));
@@ -127,6 +125,8 @@ public class Student extends Person implements IDisplayMenu {
         }
     }
 
+    // This method calculates the total number of courses, considering both the drafted courses
+    // and the courses in the transcript for which the student has not received a grade yet.
     private int calculateNumberOfCourses() {
         int numberOfCourses = draft.size();
         for (Course course : this.getTranscript().getCourseGradeMap().keySet()) {
@@ -137,12 +137,8 @@ public class Student extends Person implements IDisplayMenu {
         return numberOfCourses;
     }
 
-    /**
-     * Displays the drop course menu and prompts the user to select the course(s) they want to drop.
-     * <p>
-     * The selected course(s) will be dropped from the user's course list.
-     */
     public void dropCourse() {
+        // Check if the student has already sent a request
         if (hasRequest) {
             System.out.println("\nYou can not drop lecture because you have a request waiting for approval.");
             return;
@@ -151,21 +147,24 @@ public class Student extends Person implements IDisplayMenu {
         System.out.println("\nDrop Course Menu");
         System.out.println("Select the course you want drop");
 
+        // Check if the draft is empty.
         if (draft.isEmpty()) {
             System.out.println("Your draft is empty!");
         } else {
             System.out.println("0. Back");
+            // Manipulation for displaying and dropping courses in the menu.
             for (int i = 0; i < draft.size(); i++) {
                 System.out.println((i + 1) + ". " + draft.get(i).getCourseCode() +
                         " - " + draft.get(i).getCourseName());
             }
+            // Remove input index element -1 from the draft list if the input is valid and in the appropriate range.
             Scanner scanner = new Scanner(System.in);
             System.out.print("Choose number between 1 to " + this.draft.size() + " to drop course: ");
-
             int userNumberInput = 0;
-            try {
+            try{
                 userNumberInput = scanner.nextInt();
-            } catch (Exception e) {
+            }
+            catch (Exception e){
                 System.out.println("Invalid input, please enter a number");
                 dropCourse();
             }
@@ -177,21 +176,17 @@ public class Student extends Person implements IDisplayMenu {
         }
     }
 
-
-    /**
-     * This method prints the status of the request for advisor approval.
-     * If there is a request waiting for approval, it displays "Your request is waiting for advisor approval".
-     * Otherwise, it displays "There is no waiting request".
-     */
+    //Checks if the student has a registration request waiting for advisor approval
+    //and prints an appropriate message to the console.
     public void showRequestStatus() {
         if (hasRequest) {
             System.out.println("\nYour request is waiting for advisor approval");
-
         } else System.out.println("\nThere is no waiting request");
         System.out.println("Your draft: ");
-        for (Course course : draft) {
-            System.out.println(course.getCourseCode() + " - " + course.getCourseName());
+        for (Course course : draft){
+            System.out.println(course.getCourseCode() + "-" + course.getCourseName());
         }
+
     }
 
     public List<Course> getAvailableCourses() {
@@ -199,14 +194,29 @@ public class Student extends Person implements IDisplayMenu {
     }
 
     public void viewAvailableCourses() {
+        /*
+        Collect all course sections from the department, and for each course, store them in
+        a map<course,grade> along with the grade value. Also, keep track of course sections
+        with their respective courses.
+        */
         ArrayList<Course> availableCourses = new ArrayList<>();
         List<CourseSection> allCourseSections = this.getDepartment().getCourseSections();
         Map<Course, Grade> mapGrade = this.getTranscript().getCourseGradeMap();
         Map<CourseSection, Course> courseSectionCourse = this.getDepartment().getSectionCourseMap();
 
+        /*
+        "While iterating through all course sections, check if the grade level is sufficient
+         and if the course is already in the draft. If it is, continue the loop to change the course section.
+         */
         for (CourseSection courseSection : allCourseSections) {
             if (this.gradeLevel < courseSection.getGradeLevel() || draft.contains(courseSectionCourse.get(courseSection)))
                 continue;
+        /*
+        If the conditions are not problematic and there is no course in the transcript,
+        enter the 'if' statement. If status is true, then the student can add.
+        If status is false, the student is ineligible unless they have taken the course before
+        and received a low success grade; in this case, they can retake the course.
+        */
             Course course = courseSectionCourse.get(courseSection);
             if (!mapGrade.containsKey(course)) {
                 boolean status = true;
@@ -219,6 +229,7 @@ public class Student extends Person implements IDisplayMenu {
                 if (status)
                     availableCourses.add(course);
             } else {
+                // If the student has previously taken the course and has a grade lower than 'CC', include it
                 if (mapGrade.get(course) != null && mapGrade.get(course).getLetterGrade().compareTo("CC") > 0) {
                     availableCourses.add(course);
                 }
@@ -228,7 +239,8 @@ public class Student extends Person implements IDisplayMenu {
         this.availableCourses = availableCourses;
     }
 
-
+    //Checks if the provided username and password match the student's credentials.
+    //Overrides the abstract login method in the Person class.
     @Override
     public boolean login(String userName, String password) {
         return this.getUserName().equals(userName) && this.getPassword().equals(password);
@@ -242,9 +254,15 @@ public class Student extends Person implements IDisplayMenu {
         super.setPassword(password);
     }
 
+    // Override the setUserName method to set the username by
+    // calling the setUserName method from the inherited Person class.
     @Override
     public void setUserName(String userName) {
         super.setUserName(userName);
+    }
+
+    public Advisor getAdvisor() {
+        return advisor;
     }
 
     public void setAdvisor(Advisor advisor) {
@@ -258,7 +276,6 @@ public class Student extends Person implements IDisplayMenu {
     public void setHasRequest(boolean hasRequest) {
         this.hasRequest = hasRequest;
     }
-
 
     public List<Course> getDraft() {
         return draft;
@@ -274,9 +291,5 @@ public class Student extends Person implements IDisplayMenu {
 
     public void setDraft(List<Course> draft) {
         this.draft = draft;
-    }
-
-    public Advisor getAdvisor() {
-        return advisor;
     }
 }
