@@ -230,7 +230,7 @@ public class Student extends Person implements IDisplayMenu {
 
 
     @Override
-    boolean login(String userName, String password) {
+    public boolean login(String userName, String password) {
         return this.getUserName().equals(userName) && this.getPassword().equals(password);
     }
 

@@ -15,7 +15,7 @@ public abstract class Person {
         this.userName = userName;
         this.password = password;
     }
-    abstract boolean login(String userName, String password);
+    public abstract boolean login(String userName, String password);
     public String getUserName() {
         return userName;
     }

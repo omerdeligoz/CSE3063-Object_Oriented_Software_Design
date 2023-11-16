@@ -24,7 +24,7 @@ public class Lecturer extends Person {
     }
 
     @Override
-    boolean login(String userName, String password) {
+    public boolean login(String userName, String password) {
         return false;
     }
 }
