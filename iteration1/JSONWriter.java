@@ -8,6 +8,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class JSONWriter {
     Department department;
@@ -26,7 +28,7 @@ public class JSONWriter {
         writeCourses();
         writeCourseSections();
         writeRequests();
-        writeTranscripts();
+//        writeTranscripts();
     }
 
     public void writeTranscripts() {
@@ -85,6 +87,45 @@ public class JSONWriter {
     }
 
     public void writeRequests() {
+        // Specify the path to your JSON file
+        String filePath = "iteration1/jsons/requests.json";
+
+        try {
+            objectMapper = new ObjectMapper();
+            ArrayNode jsonArray = (ArrayNode) objectMapper.readTree(new File(filePath));
+
+            for(Student student : department.getStudents()){
+                List<String> courseCodes = new ArrayList<>();
+
+                for(Course course : student.getDraft()){
+                    ObjectNode requestNode = JsonNodeFactory.instance.objectNode();
+                    requestNode.put("studentID", student.getID());
+                    courseCodes.add(course.getCourseCode());
+                    jsonArray.add(requestNode);
+                }
+                JsonNode jsonNode1 = jsonArray.get(jsonArray.size()-1);
+            }
+
+
+
+
+            List<String> courseCodes = new ArrayList<>();
+            for (JsonNode jsonNode : jsonArray) {
+                int studentID = jsonNode.get("studentID").asInt();
+                ArrayNode courseCodesArray = (ArrayNode) jsonNode.get("courses");
+                for (JsonNode courseCode : courseCodesArray) {
+                    courseCodes.add(courseCode.asText());
+                }
+            }
+
+            // Write the updated ArrayNode back to the file
+            objectMapper.writeValue(new File(filePath), jsonArray);
+
+            System.out.println("JSON file updated successfully.");
+        } catch (IOException e) {
+            System.out.println("File not found");
+            System.exit(0);
+        }
     }
 
     public void writeCourseSections() {

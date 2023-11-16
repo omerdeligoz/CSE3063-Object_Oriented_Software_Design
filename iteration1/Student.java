@@ -78,14 +78,19 @@ public class Student extends Person implements IDisplayMenu {
 
 
     public void addCourse() {
-        System.out.println("\nAdd Course Menu");
-        viewAvailableCourses();
-        int numberOfCourses = calculateNumberOfCourses();
+        if (hasRequest) {
+            System.out.println("\nYou can not add lecture because you have a request waiting for approval.");
+            return;
+        }
 
+        int numberOfCourses = calculateNumberOfCourses();
         if (numberOfCourses >= this.getDepartment().getMaxCourseNumber()) {
             System.out.println("You can not add more lectures.");
             return;
         }
+
+        System.out.println("\nAdd Course Menu");
+        viewAvailableCourses();
 
         System.out.println("Here is the available courses:");
         System.out.println("0. Back");
@@ -115,8 +120,8 @@ public class Student extends Person implements IDisplayMenu {
 
     private int calculateNumberOfCourses() {
         int numberOfCourses = draft.size();
-        for (Course course : this.getDepartment().getCourses()) {
-            if (this.getTranscript().getCourseGradeMap().containsKey(course) && this.getTranscript().getCourseGradeMap().get(course) == null) {
+        for (Course course : this.getTranscript().getCourseGradeMap().keySet()) {
+            if (this.getTranscript().getCourseGradeMap().get(course) == null) {
                 numberOfCourses++;
             }
         }
@@ -129,6 +134,11 @@ public class Student extends Person implements IDisplayMenu {
      * The selected course(s) will be dropped from the user's course list.
      */
     public void dropCourse() {
+        if (hasRequest) {
+            System.out.println("\nYou can not drop lecture because you have a request waiting for approval.");
+            return;
+        }
+
         System.out.println("\nDrop Course Menu");
         System.out.println("Select the course you want drop");
 
@@ -240,5 +250,9 @@ public class Student extends Person implements IDisplayMenu {
 
     public void setDraft(List<Course> draft) {
         this.draft = draft;
+    }
+
+    public Advisor getAdvisor() {
+        return advisor;
     }
 }

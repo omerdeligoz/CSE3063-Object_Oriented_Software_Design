@@ -35,6 +35,10 @@ public class Advisor extends Lecturer implements IDisplayMenu {
 
         if (requestNumber == 0) {
             return;
+
+        } else if (requestNumber > requestList.size()) {
+            System.out.println("Invalid choice Please select again");
+            printRequests();
         } else {
             //seçilen öğrencinin requestini göster
             System.out.println(requestList.get(requestNumber - 1).getStudent().getName() + " " + requestList.get(requestNumber - 1).getStudent().getSurname() + " wants to take these courses:");
@@ -69,6 +73,7 @@ public class Advisor extends Lecturer implements IDisplayMenu {
                 break;
             default:
                 System.out.println("Invalid choice Please select again");
+                replyRequests();
                 break;
         }
     }
