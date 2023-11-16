@@ -1,5 +1,7 @@
-package iteration1;
+package unnecessary;
 
+import iteration1.Course;
+import iteration1.CourseSection;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
