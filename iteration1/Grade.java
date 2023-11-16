@@ -74,7 +74,6 @@ public class Grade {
                 break;
         }
     }
-
     public String getLetterGrade() {
         return letterGrade;
     }

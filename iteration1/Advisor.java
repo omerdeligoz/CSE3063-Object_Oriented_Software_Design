@@ -77,21 +77,6 @@ public class Advisor extends Lecturer implements IDisplayMenu {
                 break;
         }
     }
-/* şu an için advisor değerlendirme yapmıyor sonrasında işe yarayabilir
-    public void assistWithRegistration(Student student, Course course) {
-        boolean result = true;
-        if (student.getSelectedCourses.size() > maxNumOfCourses) {// max REGİSTRATİON classta tanımlanabilir
-            System.out.println("The number of selected courses is above the limit.");
-            result = false;
-        }
-        if (!(course.hasCapacity)) {
-            System.out.println("Course capacity is full");
-            result = false;
-        }
-        if (result)
-            System.out.println("There is no problem with requests.");
-    }
-*/
 
     @Override
     public void printMenu(String menuType) {
@@ -104,17 +89,17 @@ public class Advisor extends Lecturer implements IDisplayMenu {
         System.out.print("Enter your choice: ");
     }
 
+    @Override
+    boolean login(String userName, String password) {
+        return this.getUserName().equals(userName) && this.getPassword().equals(password);
+    }
+
     public List<Student> getStudentsAdvised() {
         return studentsAdvised;
     }
 
     public List<Registration> getRequests() {
         return requestList;
-    }
-
-    @Override
-    boolean login(String userName, String password) {
-        return this.getUserName().equals(userName) && this.getPassword().equals(password);
     }
 
     public List<Registration> getRequestList() {

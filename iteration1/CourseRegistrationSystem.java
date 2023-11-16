@@ -6,9 +6,9 @@ import java.util.Scanner;
 public class CourseRegistrationSystem implements IDisplayMenu {
     private Scanner input;
     private int choice;
-    Department department;
+    private Department department;
 
-    public void start()  {
+    public void start() {
         department = new Department("CSE");
         JSONReader jsonReader = new JSONReader();
         jsonReader.start(department);

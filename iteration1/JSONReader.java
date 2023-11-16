@@ -14,16 +14,16 @@ import java.util.Map;
  * A class that reads JSON files and populates the necessary data structures for a department.
  */
 public class JSONReader {
-    ObjectMapper mapper;
-    JsonNode jsonNode;
-    Department department;
-    Map<Course, List<String>> coursePrerequisiteCourseCodesMap = new HashMap<>();
-    Map<Course, List<String>> courseSectionCodesMap = new HashMap<>();
-    Map<Integer, List<String>> lecturerIDCoursesMap = new HashMap<>();
-    Map<Integer, List<String>> advisorIDCoursesMap = new HashMap<>();
-    Map<Integer, Integer> studentIDAdvisorIDMap = new HashMap<>();
-    Map<Integer, List<String>> studentIDDraftMap = new HashMap<>();
-    Map<Student, Registration> studentRegistrationMap = new HashMap<>();
+    private ObjectMapper mapper;
+    private JsonNode jsonNode;
+    private Department department;
+    private Map<Course, List<String>> coursePrerequisiteCourseCodesMap = new HashMap<>();
+    private Map<Course, List<String>> courseSectionCodesMap = new HashMap<>();
+    private Map<Integer, List<String>> lecturerIDCoursesMap = new HashMap<>();
+    private Map<Integer, List<String>> advisorIDCoursesMap = new HashMap<>();
+    private Map<Integer, Integer> studentIDAdvisorIDMap = new HashMap<>();
+    private Map<Integer, List<String>> studentIDDraftMap = new HashMap<>();
+    private Map<Student, Registration> studentRegistrationMap = new HashMap<>();
 
 
     /**
@@ -68,9 +68,7 @@ public class JSONReader {
             System.out.println("File not found");
             System.exit(0);
         }
-        // Get the students array.
         JsonNode coursesArray = jsonNode;
-
         for (JsonNode course : coursesArray) {
             String courseName = course.get("courseName").asText();
             String courseCode = course.get("courseCode").asText();
@@ -105,14 +103,13 @@ public class JSONReader {
      * - "courseCode" (String): the code of the course that the section belongs to.
      * - "day" (String): the day of the week that the section meets.
      * - "hour" (int): the hour of the day that the section starts.
-     *
+     * <p>
      * After reading and parsing the JSON file, the course sections will be added to the department's
      * collection of course sections. The course section code will be mapped to the course object, and
      * the course section will also be added to the course's section list.
      */
     public void readCourseSections() {
         mapper = new ObjectMapper();
-
         try {
             // Parse the JSON file into a Java object.
             jsonNode = mapper.readTree(new File("iteration1/jsons/courseSections.json"));
@@ -144,14 +141,13 @@ public class JSONReader {
      * - "name" (String): the name of the lecturer.
      * - "surname" (String): the surname of the lecturer.
      * - "lessonsTaught" (Array of Strings): the list of lessons taught by the lecturer.
-     *
+     * <p>
      * After reading and parsing the JSON file, the lecturers will be added to the department's
      * collection of lecturers. The lecturer ID will be mapped to the list of lessons taught by that
      * lecturer.
      */
     public void readLecturers() {
         mapper = new ObjectMapper();
-
         try {
             // Parse the JSON file into a Java object.
             jsonNode = mapper.readTree(new File("iteration1/jsons/lecturers.json"));
@@ -165,13 +161,10 @@ public class JSONReader {
             int id = lecturer.get("lecturerID").asInt();
             String name = lecturer.get("name").asText();
             String surname = lecturer.get("surname").asText();
-
             Lecturer lecturer1 = new Lecturer(id, name, surname);
             department.getLecturers().add(lecturer1);
             lecturer1.setDepartment(department);
-
             List<String> lessonsTaught = new ArrayList<>();
-
             JsonNode lessonsTaughtArray = lecturer.get("lessonsTaught");
             for (JsonNode lessonTaught : lessonsTaughtArray) {
                 lessonsTaught.add(lessonTaught.asText());
@@ -193,7 +186,7 @@ public class JSONReader {
      * - "gradeLevel" (int): the grade level of the student.
      * - "advisorID" (int): the ID of the advisor for the student.
      * - "draft" (Array of Strings): the list of draft courses for the student.
-     *
+     * <p>
      * After reading and parsing the JSON file, the students will be added to the department's
      * collection of students. The student's username will be mapped to the student object,
      * and the student's ID will be mapped to the advisorID.
@@ -210,7 +203,6 @@ public class JSONReader {
             System.out.println("File not found");
             System.exit(0);
         }
-        // Get the students array.
         JsonNode studentsArray = jsonNode;
 
         for (JsonNode student : studentsArray) {
@@ -225,25 +217,8 @@ public class JSONReader {
             department.getStudents().add(student1);
             department.getUserNamePersonMap().put(userName, student1);
             department.getStudentIDStudentMap().put(id, student1);
-
             int advisorID = student.get("advisorID").asInt();
             studentIDAdvisorIDMap.put(id, advisorID);
-
-
-            /*
-            List<String> draft = new ArrayList<>();
-            JsonNode draftArray = student.get("draft");
-            for (JsonNode draftCourse : draftArray) {
-                draft.add(draftCourse.asText());
-            }
-            if (draft.isEmpty()) {
-                student1.setHasRequest(false);
-            } else {
-                student1.setHasRequest(true);
-                studentIDDraftMap.put(id, draft);
-            }
-
-            */
             readTranscript(student1);
         }
     }
@@ -257,7 +232,6 @@ public class JSONReader {
      */
     public void readTranscript(Student student) {
         mapper = new ObjectMapper();
-
         try {
             // Parse the JSON file into a Java object.
             jsonNode = mapper.readTree(new File("iteration1/jsons/Transcripts/" + student.getID() + ".json"));
@@ -269,7 +243,6 @@ public class JSONReader {
         Map<Course, Grade> courseGradeMap = new HashMap<>();
         List<Course> studentCourses = new ArrayList<>();
 
-        // Get the students array.
         JsonNode transcript = jsonNode;
         JsonNode courses = transcript.get("courses");
         for (JsonNode course : courses) {
@@ -305,7 +278,6 @@ public class JSONReader {
             System.out.println("File not found");
             System.exit(0);
         }
-        // Get the students array.
         JsonNode requestsArray = jsonNode;
         for (JsonNode request : requestsArray) {
             List<Course> draftCourses = new ArrayList<>();
@@ -331,7 +303,6 @@ public class JSONReader {
      */
     public void readAdvisors() {
         mapper = new ObjectMapper();
-
         try {
             // Parse the JSON file into a Java object.
             jsonNode = mapper.readTree(new File("iteration1/jsons/advisors.json"));
@@ -340,9 +311,7 @@ public class JSONReader {
             System.exit(0);
         }
 
-        // Get the students array.
         JsonNode advisorsArray = jsonNode;
-
         for (JsonNode advisor : advisorsArray) {
             int id = advisor.get("advisorID").asInt();
             String name = advisor.get("name").asText();
@@ -394,7 +363,6 @@ public class JSONReader {
         //sync for students
         for (Student student : department.getStudents()) {
             student.setAdvisor(department.getAdvisorIDAdvisorMap().get(studentIDAdvisorIDMap.get(student.getID())));
-
             if (studentIDDraftMap.get(student.getID()) != null) {
                 for (String courseCode : studentIDDraftMap.get(student.getID())) {
                     student.getDraft().add(department.getCourseCodeCourseMap().get(courseCode));

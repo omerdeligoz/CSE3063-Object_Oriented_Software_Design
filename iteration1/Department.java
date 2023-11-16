@@ -21,8 +21,6 @@ public class Department {
     private Map<Integer, Advisor> advisorIDAdvisorMap; //it holds advisor id and advisor
     private byte maxCourseNumber = 5;
 
-
-
     public Department(String departmentName) {
         this.departmentName = departmentName;
         advisors = new ArrayList<>();

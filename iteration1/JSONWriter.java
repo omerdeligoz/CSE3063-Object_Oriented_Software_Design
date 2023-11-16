@@ -11,11 +11,11 @@ import java.io.IOException;
 
 public class JSONWriter {
 
-    Department department;
+    private Department department;
 
-    ObjectMapper objectMapper;
+    private ObjectMapper objectMapper;
 
-    JsonNode jsonNode;
+    private JsonNode jsonNode;
 
     /**
      * Starts the process with the given department and writes the result to a JSON file.
@@ -47,7 +47,6 @@ public class JSONWriter {
      */
     public void writeTranscripts() {
         String filePath;
-
         for (Student student : department.getStudents()) {
             filePath = "iteration1/jsons/Transcripts/" + student.getID() + ".json";
             try {
@@ -81,7 +80,6 @@ public class JSONWriter {
 
                 // Write the updated JsonNode back to the file
                 objectMapper.writeValue(new File(filePath), jsonNode);
-
             } catch (IOException e) {
                 System.out.println("File not found");
                 System.exit(0);
