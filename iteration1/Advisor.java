@@ -4,18 +4,38 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Represents an adviser who can log in, reach request of the student, approve and reject request of the student
+ * Inherits from the Person class and implements the IDisplayMenu interface.
+ */
 public class Advisor extends Lecturer implements IDisplayMenu {
 
     private List<Student> studentsAdvised;
     private List<Registration> requestList;
     private int requestNumber;
 
+
+    /**
+     * Creates a new advisor object with the given parameters
+     *
+     * @param ID       the advisor's ID
+     * @param name     the advisor's name
+     * @param surname  the advisor's surname
+     * @param userName the advisor's userName
+     * @param password the advisor's password
+     */
     public Advisor(int ID, String name, String surname, String userName, String password) {
         super(ID, name, surname, userName, password);
         studentsAdvised = new ArrayList<>();
         requestList = new ArrayList<>();
     }
 
+    /**
+     * The method prints the first five request of students
+     * Then prompts to advisor choose one of them to evaluate
+     * Then prints the detailed request of selected student
+     * And calls replyRequest method
+     */
     public void printRequests() {
         System.out.println("List of Requests:");
         System.out.println("0. Back");
@@ -28,27 +48,29 @@ public class Advisor extends Lecturer implements IDisplayMenu {
                 System.out.println((i + 1) + ". " + requestList.get(i).getStudent().getName() + " " + requestList.get(i).getStudent().getSurname());
             }
         }
-        //Advisor makes selection
+
         System.out.print("Enter the request number you want to evaluate: ");
         Scanner scanner = new Scanner(System.in);
         requestNumber = scanner.nextInt();
 
         if (requestNumber == 0) {
             return;
-
         } else if (requestNumber > requestList.size()) {
             System.out.println("Invalid choice Please select again");
             printRequests();
         } else {
-            //seçilen öğrencinin requestini göster
             System.out.println(requestList.get(requestNumber - 1).getStudent().getName() + " " + requestList.get(requestNumber - 1).getStudent().getSurname() + " wants to take these courses:");
-            for (Course course : requestList.get(requestNumber - 1).getStudent().getDraft()) {
+            for (Course course : requestList.get(requestNumber - 1).getCourses()) {
                 System.out.println(course.getCourseCode() + " " + course.getCourseName());
             }
             replyRequests();
         }
     }
 
+    /**
+     * The method prompts to adviser select an option for request
+     * Calls the appropriate methods from registration class
+     */
     public void replyRequests() {
         System.out.println("1. Approve Request");
         System.out.println("2. Reject Request");
@@ -73,11 +95,14 @@ public class Advisor extends Lecturer implements IDisplayMenu {
                 break;
             default:
                 System.out.println("Invalid choice Please select again");
-                replyRequests();
                 break;
         }
     }
 
+    /**
+     * Prints the advisor menu
+     * Prompts to advisor select an action
+     */
     @Override
     public void printMenu(String menuType) {
         System.out.println("\nAdvisor Menu");
@@ -89,6 +114,9 @@ public class Advisor extends Lecturer implements IDisplayMenu {
         System.out.print("Enter your choice: ");
     }
 
+    /**
+     * The method to check whether the userName and password match
+     */
     @Override
     boolean login(String userName, String password) {
         return this.getUserName().equals(userName) && this.getPassword().equals(password);
