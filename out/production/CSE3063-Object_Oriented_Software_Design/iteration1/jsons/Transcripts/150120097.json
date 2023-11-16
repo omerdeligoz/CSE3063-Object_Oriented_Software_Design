@@ -3,8 +3,8 @@
   "name": "Ali",
   "surname": "Yeşil",
   "cgpa": 1.39,
-  "takenCredits": 72,
-  "completedCredits": 47,
+  "takenCredits": 18,
+  "completedCredits": 11,
   "gradeLevel": 3,
   "courses": [
     {
