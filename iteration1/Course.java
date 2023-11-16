@@ -16,6 +16,15 @@ public class Course {
     private List<CourseSection> courseSections;
     private List<Course> preRequisiteCourses;
 
+    /**
+     * Creates a new course object with the given parameters
+     *
+     * @param courseName   the course's name
+     * @param courseCode   the course's code
+     * @param courseCredit the course's credit
+     * @param gradeLevel   the course's level
+     */
+
 
     public Course(String courseName, String courseCode, int courseCredit, byte gradeLevel) {
         this.courseName = courseName;
@@ -25,7 +34,6 @@ public class Course {
         courseSections = new ArrayList<>();
         preRequisiteCourses = new ArrayList<>();
     }
-
 
     public String getCourseName() {
         return courseName;
@@ -54,4 +62,5 @@ public class Course {
     public void setLecturer(Lecturer lecturer) {
         this.lecturer = lecturer;
     }
+
 }
