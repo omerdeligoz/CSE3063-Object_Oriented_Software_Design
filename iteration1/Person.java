@@ -1,5 +1,10 @@
 package iteration1;
 
+/**
+ * Represents a person who can be lecturer, advisor or student
+ * It has common features of these classes:
+ * ID, name, surname, department, userName, password
+ */
 public abstract class Person {
     private int ID;
     private String name;
@@ -8,6 +13,15 @@ public abstract class Person {
     private String userName;
     private String password;
 
+    /**
+     * Creates a person object with given parameters
+     *
+     * @param ID       the person's ID
+     * @param name     the person's name
+     * @param surname  the person's surname
+     * @param userName the person's userName
+     * @param password the person's password
+     */
     public Person(int ID, String name, String surname, String userName, String password) {
         this.ID = ID;
         this.name = name;
@@ -15,7 +29,10 @@ public abstract class Person {
         this.userName = userName;
         this.password = password;
     }
+
+
     public abstract boolean login(String userName, String password);
+
     public String getUserName() {
         return userName;
     }
