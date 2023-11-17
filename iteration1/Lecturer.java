@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Lecturer extends Person {
 
-    private List<Course> lessonsTaught;
+    List<Course> lessonsTaught;
 
     //For creating lecturer with person abstract class.
     public Lecturer(int ID, String name, String surname) {

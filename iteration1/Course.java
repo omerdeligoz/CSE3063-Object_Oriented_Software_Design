@@ -35,6 +35,10 @@ public class Course {
         preRequisiteCourses = new ArrayList<>();
     }
 
+    public void addPreRequisiteCourse(Course course) {
+        preRequisiteCourses.add(course);
+    }
+
     public String getCourseName() {
         return courseName;
     }
@@ -61,6 +65,14 @@ public class Course {
 
     public void setLecturer(Lecturer lecturer) {
         this.lecturer = lecturer;
+    }
+
+    public void setPreRequisiteCourses(List<Course> preRequisiteCourses) {
+        this.preRequisiteCourses = preRequisiteCourses;
+    }
+
+    public void setCourseSections(List<CourseSection> courseSections) {
+        this.courseSections = courseSections;
     }
 
 }
