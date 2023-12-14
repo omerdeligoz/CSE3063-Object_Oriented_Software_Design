@@ -1,0 +1,26 @@
+[
+  {
+    "assistantId": 130210011,
+    "labSectionCode": "CSE1241.1",
+    "courseCode": "CSE1241",
+    "capacity": 60,
+    "day": "Monday",
+    "hour": 9
+  },
+  {
+    "assistantId": 130210011,
+    "labSectionCode": "CSE1241.2",
+    "courseCode": "CSE1241",
+    "capacity": 60,
+    "day": "Tuesday",
+    "hour": 9
+  },
+  {
+    "assistantId": 130210026,
+    "labSectionCode": "PHYS1103.1",
+    "courseCode": "PHYS1103",
+    "capacity": 40,
+    "day": "Wednesday",
+    "hour": 9
+  }
+]
