@@ -17,6 +17,12 @@ import java.util.Map;
  * The class also contains a method for synchronizing the objects in the department, ensuring that all necessary information is properly linked and associated.
  */
 public class JSONReader {
+    private final Map<Course, List<String>> coursePrerequisiteCourseCodesMap = new HashMap<>();
+    private final Map<Integer, List<String>> lecturerIDCoursesMap = new HashMap<>();
+    private final Map<Integer, Assistant> assistantIDAssistantMap = new HashMap<>();
+    private final Map<Integer, List<String>> advisorIDCoursesMap = new HashMap<>();
+    private final Map<Integer, Integer> studentIDAdvisorIDMap = new HashMap<>();
+    private final Map<Student, Registration> studentRegistrationMap = new HashMap<>();
     /**
      * The JSONReader class contains several private fields used throughout the class.
      * <p>
@@ -35,16 +41,6 @@ public class JSONReader {
     private JsonNode jsonNode;
     private University university;
     private Department department;
-
-    private Map<Course, List<String>> coursePrerequisiteCourseCodesMap = new HashMap<>();
-    private Map<String, LaboratorySection> labSectionCodesMap = new HashMap<>();
-    private Map<Integer, List<String>> lecturerIDCoursesMap = new HashMap<>();
-    private Map<Integer, Assistant> assistantIDAssistantMap = new HashMap<>();
-    private Map<Integer, List<String>> advisorIDCoursesMap = new HashMap<>();
-    private Map<Integer, Integer> studentIDAdvisorIDMap = new HashMap<>();
-    private Map<Integer, List<String>> studentIDDraftMap = new HashMap<>();
-    private Map<Student, Registration> studentRegistrationMap = new HashMap<>();
-
 
     public void readDepartments(University university) {
         this.university = university;
@@ -189,7 +185,6 @@ public class JSONReader {
 
             // Create a list to store the prerequisite course codes and course section codes.
             List<String> preRequisiteCourseCodes = new ArrayList<>();
-            List<String> labSections = new ArrayList<>(); //TODO: sync lab sections
 
             // Get the array of prerequisite course codes and course section codes from the course.
             JsonNode preRequisiteCourseCodesArray = course.get("preRequisiteCourseCodes");
@@ -238,7 +233,6 @@ public class JSONReader {
             LaboratorySection labSection1 = new LaboratorySection(labSectionCode, capacity, hour, day);
 
             labSection1.setAssistant(assistantIDAssistantMap.get(assistantID));
-            labSectionCodesMap.put(labSectionCode, labSection1);
             department.getLaboratorySections().add(labSection1);
             department.getSectionCodeCourseMap().put(labSectionCode, course);
             department.getLabSectionCourseMap().put(labSection1, course);
@@ -589,6 +583,7 @@ public class JSONReader {
             }
         }
 
+        // Sync for lab sections
         for (LaboratorySection labSection : department.getLaboratorySections()) {
             Course course = department.getLabSectionCourseMap().get(labSection);
             course.getLaboratorySections().add(labSection);
@@ -605,22 +600,12 @@ public class JSONReader {
             }
         }
 
-        // Sync for students
-        // For each student in the department, set their advisor and add their draft courses
-        for (Student student : department.getStudents()) {
-            student.setAdvisor(department.getAdvisorIDAdvisorMap().get(studentIDAdvisorIDMap.get(student.getID())));
-            if (studentIDDraftMap.get(student.getID()) != null) {
-                for (String courseCode : studentIDDraftMap.get(student.getID())) {
-                    student.getDraft().add(department.getCourseCodeCourseMap().get(courseCode));
-                }
-            }
-        }
-
         // Sync for advisors
         // For each student in the department, add them to their advisor's list of advised students and add their registration to the advisor's request list
         // For each advisor in the department, add the courses they teach
         for (Student student : department.getStudents()) {
             Advisor advisor = department.getAdvisorIDAdvisorMap().get(studentIDAdvisorIDMap.get(student.getID()));
+            student.setAdvisor(advisor);
             advisor.getStudentsAdvised().add(student);
             if (studentRegistrationMap.get(student) != null)
                 advisor.getRequestList().add(studentRegistrationMap.get(student));
@@ -631,6 +616,4 @@ public class JSONReader {
             }
         }
     }
-
-
 }
