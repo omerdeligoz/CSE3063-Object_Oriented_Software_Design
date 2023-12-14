@@ -168,6 +168,7 @@ public class JSONReader {
             // Retrieve the course name, course code, course credit, and grade level from the JSON.
             String courseName = course.get("courseName").asText();
             String courseCode = course.get("courseCode").asText();
+            String courseType = course.get("courseType").asText();
             int courseCredit = course.get("courseCredit").asInt();
             byte semester = (byte) course.get("semester").asInt();
             int capacity = course.get("capacity").asInt();
@@ -175,7 +176,7 @@ public class JSONReader {
             String day = course.get("day").asText();
 
             // Create a new Course object with the retrieved details.
-            Course course1 = new Course(courseName, courseCode, courseCredit, semester, capacity, hour, day);
+            Course course1 = new Course(courseName, courseCode, courseType, courseCredit, semester, capacity, hour, day);
 
             // Add the new Course object to the department's list of courses.
             department.getCourses().add(course1);

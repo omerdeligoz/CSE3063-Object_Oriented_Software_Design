@@ -11,6 +11,7 @@ import java.util.List;
 public class Course {
     private String courseName;
     private String courseCode;
+    private String courseType;
     private int courseCredit;
     private byte semester;
     private Lecturer lecturer;
@@ -32,9 +33,10 @@ public class Course {
      */
 
 
-    public Course(String courseName, String courseCode, int courseCredit, byte semester, int capacity, int hour, String day) {
+    public Course(String courseName, String courseCode, String courseType, int courseCredit, byte semester, int capacity, int hour, String day) {
         this.courseName = courseName;
         this.courseCode = courseCode;
+        this.courseType = courseType;
         this.capacity = capacity;
         this.courseCredit = courseCredit;
         this.semester = semester;
