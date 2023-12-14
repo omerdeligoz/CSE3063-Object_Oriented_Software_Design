@@ -37,37 +37,37 @@ public class Registration {
         System.out.println();
 
         for (Course course : courses) {
-            // İlk defa daha önce hiç almadığı ders eklemesi yapıcak.
+            //Student will add a course that he has never taken before for the first time
             if (!student.getTranscript().getStudentCourses().contains(course)) {
                 ArrayList<Grade> tempGrade = new ArrayList<Grade>();
                 tempGrade.add(null);
                 student.getTranscript().getCourseGradeMap().put(course, tempGrade);
                 student.getTranscript().getStudentCourses().add(course);
-                //TODO add to schedule
                 course.setNumberOfStudents(course.getNumberOfStudents() + 1);
             } else {
 
                 List<Grade> myTempList = student.getTranscript().getCourseGradeMap().get(course);
 
-                //Tek bir grade varsa null ise az önce add ile transcripte ekledi şimdi vazgeçti silecek.
+                //If there is only one grade and it is null, student added it to the transcript with
+                // 'add' a moment ago, now he will cancel and delete it
                 if (myTempList.size() == 1 && myTempList.getFirst() == null) {
                     student.getTranscript().getCourseGradeMap().remove(course);
                     student.getTranscript().getStudentCourses().remove(course);
                     course.setNumberOfStudents(course.getNumberOfStudents() - 1);
                 }
 
-                //Daha önce bir notu var ve dersi az önce almış şimdi vazgeçti bu ders ağır gelir dedi sildi
+                //Student had a grade before, and he had just taken the course. Now, he changed his mind,
+                // saying it would be too challenging, and deleted it
                 else if (myTempList.size() > 1 && myTempList.getLast() == null) {
                     myTempList.remove(myTempList.getLast());
                     course.setNumberOfStudents(course.getNumberOfStudents() - 1);
                 }
 
-                //Daha önce bir notu var son not -- değil demek ki bir daha dersi alma kararı verecek.
+                //He has a previous grade, and the final grade is not --, which means
+                // he will decide not to take the course again
                 else if (myTempList.size() >= 1 && myTempList.getLast() != null) {
                     myTempList.add(null);
                     course.setNumberOfStudents(course.getNumberOfStudents() + 1);
-                    //TODO add to schedule
-
                 }
 //!!
             }
