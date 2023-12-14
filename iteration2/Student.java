@@ -16,7 +16,8 @@ public class Student extends Person implements IDisplayMenu {
     private List<Course> draft;
     private List<Course> availableCoursesToAdd;
     private List<Course> availableCoursesToDrop;
-    private Course[][] schedule = new Course[5][8];
+
+    private Course[][] schedule;
 
     //Implement Constructor
     public Student(int studentID, String name, String surname, String userName, String password, byte semester) {
@@ -25,6 +26,7 @@ public class Student extends Person implements IDisplayMenu {
         this.availableCoursesToAdd = new ArrayList<>();
         this.availableCoursesToDrop = new ArrayList<>();
         this.semester = semester;
+        this.schedule = new Course[5][8];
     }
 
     //Check if there is already a request awaiting approval
@@ -100,14 +102,34 @@ public class Student extends Person implements IDisplayMenu {
                 System.out.println("Please select from the following options:");
                 System.out.println("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
                 System.out.println("       Back to Course Selection Menu -> 0");
-                System.out.println("              Add Technical Elective -> 1");
-                System.out.println("          Add Non-Technical Elective -> 2");
-                System.out.println("      Add Faculty Technical Elective -> 3");
-                System.out.println("             Add University Elective -> 4");
+                System.out.println("                       Add Mandatory -> 1");
+                System.out.println("              Add Technical Elective -> 2");
+                System.out.println("          Add Non-Technical Elective -> 3");
+                System.out.println("      Add Faculty Technical Elective -> 4");
                 System.out.println("                         Drop Course -> 5");
                 System.out.println("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
                 ConsoleColours.paintGreenMenu();
                 System.out.println("Enter your choice: ");
+                break;
+            case "addCourse":
+                ConsoleColours.paintBlueMenu();
+                System.out.println("Add Course Menu");
+                System.out.println("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨\n");
+                System.out.println("      Back -> 0");
+                System.out.println("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
+                System.out.println("Here is the available courses to drop:");
+                System.out.println("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
+                ConsoleColours.paintPurpleMenu();
+                break;
+            case "dropCourse":
+                ConsoleColours.paintBlueMenu();
+                System.out.println("Drop Course Menu");
+                System.out.println("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨\n");
+                System.out.println("       Back -> 0");
+                System.out.println("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
+                System.out.println("Here is the available courses to add:");
+                System.out.println("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
+                ConsoleColours.paintPurpleMenu();
                 break;
         }
     }
@@ -128,16 +150,16 @@ public class Student extends Person implements IDisplayMenu {
             case 0:
                 return;
             case 1:
-                addTechnicalElective();
+                addMandatoryCourse();
                 break;
             case 2:
-                addNonTechnicalElective();
+                addTechnicalElective();
                 break;
             case 3:
-                addFacultyTechnicalElective();
+                addNonTechnicalElective();
                 break;
             case 4:
-                addUniversityElective();
+                addFacultyTechnicalElective();
                 break;
             case 5:
                 addCourseToDrop();
@@ -160,26 +182,19 @@ public class Student extends Person implements IDisplayMenu {
 
         if (availableCoursesToDrop.isEmpty()) {
             ConsoleColours.paintRedMenu();
-            System.out.println("You can not drop course.");
-            return;
+            System.out.println("You do not have any droppable course!");
         } else {
-            ConsoleColours.paintBlueMenu();
-            System.out.println("Here is the available courses to drop:");
-            System.out.println("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
-            ConsoleColours.paintPurpleMenu();
-
+            this.printMenu("dropCourse");
 
             for (int i = 0; i < availableCoursesToDrop.size(); i++) {
                 Course course = availableCoursesToDrop.get(i);
                 System.out.println((i + 1) + ". " + course.getCourseCode() + " - " + course.getCourseName());
                 System.out.println("´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´");
             }
-            //TODO add back selection
 
             //Take input from the user and make assignments to the courses.
             ConsoleColours.paintGreenMenu();
             System.out.print("Choose number between 1 to " + availableCoursesToDrop.size() + " to add course: \n");
-
             int userNumberInput = (new CourseRegistrationSystem()).getInput();
 
             if (userNumberInput <= availableCoursesToDrop.size() && userNumberInput >= 1) {
@@ -196,42 +211,123 @@ public class Student extends Person implements IDisplayMenu {
         }
     }
 
-    private void addUniversityElective() {
-        if (maxCoursesReached()) {
-            return;
-        }
-        System.out.println("Here is the available courses to add:");
-        System.out.println("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
-        ConsoleColours.paintPurpleMenu();
-    }
-
     private boolean maxCoursesReached() {
         //Call the calculateNumberOfCourses() function to limit with the maximum number of courses.
         int numberOfCourses = calculateNumberOfCourses();
         if (numberOfCourses >= getDepartment().getMaxCourseNumber()) {
             ConsoleColours.paintRedMenu();
-            System.out.println("You can not add more lectures.");
+            System.out.println("Limit Reached! You can take at most "
+                    + this.getDepartment().getMaxCourseNumber() + " courses.");
             return true;
         }
         return false;
     }
 
+    private void addMandatoryCourse() {
+//        computeAvailableCoursesToAdd();
+        if (maxCoursesReached())
+            return;
+
+        this.printMenu("addCourse");
+
+        for (int i = 0; i < availableCoursesToAdd.size(); i++) {
+            Course course = availableCoursesToAdd.get(i);
+            System.out.println((i + 1) + ". " + course.getCourseCode() + " - " + course.getCourseName());
+            System.out.println("´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´");
+        }
+
+        ConsoleColours.paintGreenMenu();
+        System.out.print("Choose number between 1 to " + "availableCoursesToAdd.size()" + " to add course: \n");
+        int userNumberInput = (new CourseRegistrationSystem()).getInput();
+
+        //TODO Complete Add Operation
+
+        if (availableCoursesToAdd.isEmpty()) {
+            ConsoleColours.paintRedMenu();
+            System.out.println("You do not have any addable course!");
+        } else {
+            this.printMenu("addCourse");
+
+            for (int i = 0; i < availableCoursesToAdd.size(); i++) {
+                Course course = availableCoursesToAdd.get(i);
+                System.out.println((i + 1) + ". " + course.getCourseCode() + " - " + course.getCourseName());
+                System.out.println("´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´");
+            }
+
+            //Take input from the user and make assignments to the courses.
+            ConsoleColours.paintGreenMenu();
+            System.out.print("Choose number between 1 to " + availableCoursesToAdd.size() + " to add course: \n");
+            int userNumberInput1 = (new CourseRegistrationSystem()).getInput();
+
+            if (userNumberInput1 <= availableCoursesToAdd.size() && userNumberInput1 >= 1) {
+                draft.add(availableCoursesToAdd.get(userNumberInput1 - 1));
+                availableCoursesToAdd.remove(userNumberInput1 - 1);
+                if (!availableCoursesToAdd.isEmpty())
+                    addMandatoryCourse();
+            } else if (userNumberInput1 > availableCoursesToAdd.size() || userNumberInput1 < 0) {
+                ConsoleColours.paintRedMenu();
+                System.out.println("Invalid input, please enter a valid number");
+                addMandatoryCourse();
+            } else if (userNumberInput1 == 0)
+                addCourseToDraft();
+
+
+        }
+
+    }
+
     private void addFacultyTechnicalElective() {
-        System.out.println("Here is the available courses to add:");
-        System.out.println("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
-        ConsoleColours.paintPurpleMenu();
+        if (maxCoursesReached())
+            return;
+
+        this.printMenu("addCourse");
+        //TODO IMPLEMENT A PRINTER LIKE A FOR LOOP
+        /*
+        Here is the simple example for you
+
+            for (int i = 0; i < availableCoursesToDrop.size(); i++) {
+                Course course = availableCoursesToDrop.get(i);
+                System.out.println((i + 1) + ". " + course.getCourseCode() + " - " + course.getCourseName());
+                System.out.println("´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´");
+            }
+
+         */
     }
 
     private void addNonTechnicalElective() {
-        System.out.println("Here is the available courses to add:");
-        System.out.println("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
-        ConsoleColours.paintPurpleMenu();
+        if (maxCoursesReached())
+            return;
+
+        this.printMenu("addCourse");
+        //TODO IMPLEMENT A PRINTER LIKE A FOR LOOP
+        /*
+        Here is the simple example for you
+
+            for (int i = 0; i < availableCoursesToDrop.size(); i++) {
+                Course course = availableCoursesToDrop.get(i);
+                System.out.println((i + 1) + ". " + course.getCourseCode() + " - " + course.getCourseName());
+                System.out.println("´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´");
+            }
+
+         */
     }
 
     private void addTechnicalElective() {
-        System.out.println("Here is the available courses to add:");
-        System.out.println("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
-        ConsoleColours.paintPurpleMenu();
+        if (maxCoursesReached())
+            return;
+
+        this.printMenu("addCourse");
+        //TODO IMPLEMENT A PRINTER LIKE A FOR LOOP
+        /*
+        Here is the simple example for you
+
+            for (int i = 0; i < availableCoursesToDrop.size(); i++) {
+                Course course = availableCoursesToDrop.get(i);
+                System.out.println((i + 1) + ". " + course.getCourseCode() + " - " + course.getCourseName());
+                System.out.println("´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´");
+            }
+
+         */
     }
 
     // This method calculates the total number of courses, considering both the drafted courses
@@ -334,8 +430,46 @@ public class Student extends Person implements IDisplayMenu {
         }
     }
 
-    public void viewAvailableCoursestoAdd() {
+    /*
+    public void computeAvailableCoursesToAdd() {
+
+        ArrayList<Course> availableCoursestoAdd = new ArrayList<>();
+
+        List<CourseSection> allCourseSections = getDepartment().getCourseSections();
+        Map<Course, List<Grade>> mapGrade = transcript.getCourseGradeMap();
+        Map<CourseSection, Course> courseSectionCourse = getDepartment().getSectionCourseMap();
+
+
+        for (CourseSection courseSection : allCourseSections) {
+
+            if (semester < courseSection.semester()
+                    || draft.contains(courseSectionCourse.get(courseSection)))
+                continue;
+
+
+            Course course = courseSectionCourse.get(courseSection);
+
+            if (!mapGrade.containsKey(course)) {
+                boolean status = true;
+                for (Course prerequisite : course.getPreRequisiteCourses()) {
+                    if ((mapGrade.get(prerequisite) == null
+                            || mapGrade.get(prerequisite).getLast().getLetterGrade().equals("FF")
+                            || mapGrade.get(prerequisite).getLast().getLetterGrade().equals("FD"))) {
+                        status = false;
+                    }
+                }
+                if (status)
+                    availableCoursestoAdd.add(course);
+            } else {
+                // If the student has previously taken the course and has a grade lower than 'CC', include it
+                if (mapGrade.get(course) != null &&  mapGrade.get(course).getLast() !=null && mapGrade.get(course).getLast().getLetterGrade().compareTo("CC") > 0) {
+                    availableCoursestoAdd.add(course);
+                }
+            }
+        }
+        availableCoursesToAdd = availableCoursestoAdd;
     }
+*/
 
     //Checks if the provided username and password match the student's credentials.
     //Overrides the abstract login method in the Person class.
@@ -372,8 +506,16 @@ public class Student extends Person implements IDisplayMenu {
         return semester;
     }
 
+    public void setHasRequest(boolean hasRequest) {
+        this.hasRequest = hasRequest;
+    }
+
     public List<Course> getDraft() {
         return draft;
+    }
+
+    public void setTranscript(Transcript transcript) {
+        this.transcript = transcript;
     }
 
     public void setDraft(List<Course> draft) {
@@ -384,10 +526,6 @@ public class Student extends Person implements IDisplayMenu {
         return hasRequest;
     }
 
-    public void setHasRequest(boolean hasRequest) {
-        this.hasRequest = hasRequest;
-    }
-
     public void setNotification(Notification notification) {
         this.notification = notification;
     }
@@ -396,15 +534,7 @@ public class Student extends Person implements IDisplayMenu {
         return transcript;
     }
 
-    public void setTranscript(Transcript transcript) {
-        this.transcript = transcript;
-    }
-
     public Course[][] getSchedule() {
         return schedule;
-    }
-
-    public void setSchedule(Course[][] schedule) {
-        this.schedule = schedule;
     }
 }
