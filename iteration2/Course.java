@@ -97,4 +97,12 @@ public class Course {
     public int getHour() {
         return hour;
     }
+
+    public boolean hasCapacity() {
+        return numberOfStudents < capacity;
+    }
+
+    public String getCourseType() {
+        return courseType;
+    }
 }
