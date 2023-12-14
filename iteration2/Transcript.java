@@ -124,7 +124,7 @@ public class Transcript {
                 if (grade == null) {
                     System.out.format("%-15s%-45s%-15s%-15s\n", course.getCourseCode(),
                             course.getCourseName(), course.getCourseCredit(), "--");
-                } else {//TODO We bozduk how to show transkript
+                } else {
                     System.out.format("%-15s%-45s%-15s%-15s\n", course.getCourseCode(),
                             course.getCourseName(), course.getCourseCredit(),
                             grade.getLetterGrade());
