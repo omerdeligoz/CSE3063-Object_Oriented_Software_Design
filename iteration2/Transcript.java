@@ -9,7 +9,7 @@ import java.util.Map;
 public class Transcript {
     private List<Course> studentCourses;
     private double cgpa;
-    private byte gradeLevel;
+    private byte semester;
     private int takenCredits;
     private int completedCredits;
     private Student student;
@@ -24,7 +24,7 @@ public class Transcript {
     public Transcript(Student student) {
         this.studentCourses = new ArrayList<>();
         this.student = student;
-        this.gradeLevel = student.getSemester();
+        this.semester = student.getSemester();
         this.cgpa = calculateCgpa();
         this.takenCredits = calculateTakenCredits();
         this.completedCredits = calculateCompletedCredits();
@@ -112,7 +112,7 @@ public class Transcript {
         System.out.printf("CGPA             : %.2f\n", cgpa);
         System.out.println("Completed Credits: " + calculateCompletedCredits());
         System.out.println("Taken Credits    : " + calculateTakenCredits());
-        System.out.println("Grade Level      : " + gradeLevel);
+        System.out.println("Semester         : " + semester);
         System.out.println("Department       : " + student.getDepartmentName());
         System.out.println("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
 

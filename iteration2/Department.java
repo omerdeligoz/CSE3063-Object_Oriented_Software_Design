@@ -14,13 +14,12 @@ public class Department {
     private List<LaboratorySection> laboratorySections; //it holds courseSection list.
     private List<Lecturer> lecturers; //it holds lecturer list.
     private List<Assistant> assistants; //it holds lecturer list.
-    private Map<String, Person> userNamePersonMap;  //it holds username and password of users.
     private Map<String, Course> courseCodeCourseMap; //it holds course code and course.
     private Map<String, Course> sectionCodeCourseMap; //it holds course code and course.
     private Map<LaboratorySection, Course> labSectionCourseMap; //it holds course section and course.
     private Map<Integer, Student> studentIDStudentMap; //it holds student id and student.
     private Map<Integer, Advisor> advisorIDAdvisorMap; //it holds advisor id and advisor.
-    private byte maxCourseNumber = 5;
+    private byte maxCourseNumber = 10;
 
 
     //Creating department objects.
@@ -32,7 +31,6 @@ public class Department {
         students = new ArrayList<>();
         laboratorySections = new ArrayList<>();
         lecturers = new ArrayList<>();
-        userNamePersonMap = new HashMap<>();
         courseCodeCourseMap = new HashMap<>();
         studentIDStudentMap = new HashMap<>();
         advisorIDAdvisorMap = new HashMap<>();
@@ -67,9 +65,6 @@ public class Department {
     }
 
     //Return the username map.
-    public Map<String, Person> getUserNamePersonMap() {
-        return userNamePersonMap;
-    }
 
     //Return the course code map.
     public Map<String, Course> getCourseCodeCourseMap() {

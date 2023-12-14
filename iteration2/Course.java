@@ -87,4 +87,12 @@ public class Course {
     public void setNumberOfStudents(int numberOfStudents) {
         this.numberOfStudents = numberOfStudents;
     }
+
+    public String getDay() {
+        return day;
+    }
+
+    public int getHour() {
+        return hour;
+    }
 }

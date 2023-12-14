@@ -37,9 +37,9 @@ public class JSONReader {
     private Department department;
 
     private Map<Course, List<String>> coursePrerequisiteCourseCodesMap = new HashMap<>();
-    private Map<Course, List<String>> labSectionCodesMap = new HashMap<>();
+    private Map<String, LaboratorySection> labSectionCodesMap = new HashMap<>();
     private Map<Integer, List<String>> lecturerIDCoursesMap = new HashMap<>();
-    private Map<Integer, List<String>> assistantIDCoursesMap = new HashMap<>();
+    private Map<Integer, Assistant> assistantIDAssistantMap = new HashMap<>();
     private Map<Integer, List<String>> advisorIDCoursesMap = new HashMap<>();
     private Map<Integer, Integer> studentIDAdvisorIDMap = new HashMap<>();
     private Map<Integer, List<String>> studentIDDraftMap = new HashMap<>();
@@ -98,8 +98,8 @@ public class JSONReader {
      */
     public void readJson() {
         readCourses();
-        readLabSections();
         readAssistants();
+        readLabSections();
         readLecturers();
         readStudents();
         readRequests();
@@ -132,7 +132,7 @@ public class JSONReader {
 
             // Add the new Lecturer object to the department's list of lecturers.
             department.getAssistants().add((Assistant) assistant1);
-
+            assistantIDAssistantMap.put(id, (Assistant) assistant1);
             // Set the department for the lecturer.
             assistant1.setDepartment(department);
         }
@@ -232,11 +232,13 @@ public class JSONReader {
             String day = labSection.get("day").asText();
             int hour = labSection.get("hour").asInt();
             int capacity = labSection.get("capacity").asInt();
-
+            int assistantID = labSection.get("assistantID").asInt();
             Course course = department.getCourseCodeCourseMap().get(courseCode);
 
             LaboratorySection labSection1 = new LaboratorySection(labSectionCode, capacity, hour, day);
 
+            labSection1.setAssistant(assistantIDAssistantMap.get(assistantID));
+            labSectionCodesMap.put(labSectionCode, labSection1);
             department.getLaboratorySections().add(labSection1);
             department.getSectionCodeCourseMap().put(labSectionCode, course);
             department.getLabSectionCourseMap().put(labSection1, course);
@@ -387,6 +389,7 @@ public class JSONReader {
     public void readTranscript(Student student) {
         // Create an ObjectMapper instance for converting between Java objects and JSON.
         mapper = new ObjectMapper();
+        CourseRegistrationSystem system = new CourseRegistrationSystem();
         try {
             // Parse the JSON file into a Java object.
             jsonNode = mapper.readTree(new File("iteration2/jsons/Transcripts/" + student.getID() + ".json"));
@@ -419,8 +422,7 @@ public class JSONReader {
                 List<Grade> grades = new ArrayList<>();
 
                 if (letterGrade.equals("null")) {
-
-//                    addToSchedule(course1, student); TODO : add to schedule
+                    system.addToSchedule(course1, student);
                     course1.setNumberOfStudents(course1.getNumberOfStudents() + 1);
                     grades.add(null);
                     courseGradeMap.put(course1, grades);
@@ -430,6 +432,7 @@ public class JSONReader {
                 }
             } else {
                 if (letterGrade.equals("null")) {
+                    system.addToSchedule(course1, student);
                     course1.setNumberOfStudents(course1.getNumberOfStudents() + 1);
                     courseGradeMap.get(course1).add(null);
                 } else {
@@ -584,11 +587,11 @@ public class JSONReader {
             for (String courseCode : coursePrerequisiteCourseCodesMap.get(course)) {
                 course.getPreRequisiteCourses().add(department.getCourseCodeCourseMap().get(courseCode));
             }
+        }
 
-            //TODO: sync lab sections
-//            for (String labSectionCode : labSectionCodesMap.get(course)) {
-//                course.getLaboratorySections().add(department.getLabSectionCourseMap().get(labSectionCode));
-//            }
+        for (LaboratorySection labSection : department.getLaboratorySections()) {
+            Course course = department.getLabSectionCourseMap().get(labSection);
+            course.getLaboratorySections().add(labSection);
         }
 
         // Sync for lecturers

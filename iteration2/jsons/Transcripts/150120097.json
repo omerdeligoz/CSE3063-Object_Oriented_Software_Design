@@ -154,6 +154,10 @@
     {
       "courseCode": "IE3235",
       "letterGrade": "AA"
+    },{
+      "courseCode": "IE3235",
+      "letterGrade": null
     }
+
   ]
 }
