@@ -176,6 +176,152 @@ public class Student extends Person implements IDisplayMenu {
         addCourseToDraft();
     }
 
+    private void addMandatoryCourse() {
+        computeAvailableMandatoryCourses();
+        //TODO Complete Add Operation
+
+        if (availableCoursesToAdd.isEmpty()) {
+            ConsoleColours.paintRedMenu();
+            System.out.println("You do not have any addable course!");
+        } else {
+            this.printMenu("addCourse");
+
+            for (int i = 0; i < availableCoursesToAdd.size(); i++) {
+                Course course = availableCoursesToAdd.get(i);
+                System.out.println((i + 1) + ". " + course.getCourseCode() + " - " + course.getCourseName());
+                System.out.println("´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´");
+            }
+
+            //Take input from the user and make assignments to the courses.
+            ConsoleColours.paintGreenMenu();
+            System.out.print("Choose number between 1 to " + availableCoursesToAdd.size() + " to add course: \n");
+            int userNumberInput1 = (new CourseRegistrationSystem()).getInput();
+
+            if (userNumberInput1 <= availableCoursesToAdd.size() && userNumberInput1 >= 1) {
+                chooseLabSection(availableCoursesToAdd.get(userNumberInput1 - 1));
+                draft.add(availableCoursesToAdd.get(userNumberInput1 - 1));
+                availableCoursesToAdd.remove(userNumberInput1 - 1);
+                if (!availableCoursesToAdd.isEmpty())
+                    addMandatoryCourse();
+            } else if (userNumberInput1 > availableCoursesToAdd.size() || userNumberInput1 < 0) {
+                ConsoleColours.paintRedMenu();
+                System.out.println("Invalid input, please enter a valid number");
+                addMandatoryCourse();
+            } else
+                return;
+        }
+    }
+
+    private void chooseLabSection(Course course) {
+        if (course.getLaboratorySections().isEmpty())
+            return;
+        //TODO add menu
+        List<LaboratorySection> labSections = course.getLaboratorySections();
+        for (int i = 0; i < course.getLaboratorySections().size(); i++) {
+            LaboratorySection labSection = labSections.get(i);
+            System.out.println((i + 1) + ". " + labSection.getLaboratorySectionCode());
+            System.out.println("´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´");
+        }
+        System.out.print("Choose number between 1 to " + labSections.size() + " to add course: \n");
+        int userNumberInput = (new CourseRegistrationSystem()).getInput();
+
+        if (userNumberInput <= labSections.size() && userNumberInput >= 1) {
+            if (!availableCoursesToAdd.isEmpty())
+                addMandatoryCourse();
+        } else if (userNumberInput > availableCoursesToAdd.size() || userNumberInput < 0) {
+            ConsoleColours.paintRedMenu();
+            System.out.println("Invalid input, please enter a valid number");
+            addMandatoryCourse();
+        } else
+            return;
+
+    }
+
+    private void addTechnicalElective() {
+        if (maxCoursesReached())
+            return;
+
+        this.printMenu("addCourse");
+        //TODO IMPLEMENT A PRINTER LIKE A FOR LOOP
+        /*
+        Here is the simple example for you
+
+            for (int i = 0; i < availableCoursesToDrop.size(); i++) {
+                Course course = availableCoursesToDrop.get(i);
+                System.out.println((i + 1) + ". " + course.getCourseCode() + " - " + course.getCourseName());
+                System.out.println("´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´");
+            }
+
+         */
+    }
+
+
+    private void addNonTechnicalElective() {
+        if (maxCoursesReached())
+            return;
+
+        this.printMenu("addCourse");
+        //TODO IMPLEMENT A PRINTER LIKE A FOR LOOP
+        /*
+        Here is the simple example for you
+
+            for (int i = 0; i < availableCoursesToDrop.size(); i++) {
+                Course course = availableCoursesToDrop.get(i);
+                System.out.println((i + 1) + ". " + course.getCourseCode() + " - " + course.getCourseName());
+                System.out.println("´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´");
+            }
+
+         */
+    }
+
+    private void addFacultyTechnicalElective() {
+        if (maxCoursesReached())
+            return;
+
+        this.printMenu("addCourse");
+        //TODO IMPLEMENT A PRINTER LIKE A FOR LOOP
+        /*
+        Here is the simple example for you
+
+            for (int i = 0; i < availableCoursesToDrop.size(); i++) {
+                Course course = availableCoursesToDrop.get(i);
+                System.out.println((i + 1) + ". " + course.getCourseCode() + " - " + course.getCourseName());
+                System.out.println("´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´");
+            }
+
+         */
+    }
+
+
+    private void computeAvailableMandatoryCourses() {
+        availableCoursesToAdd.clear();
+        if (maxCoursesReached()) {
+            return;
+        }
+        //Kapasite
+        //If no capacity, has overlap, (student's semester is less than course's semester and student has CGPA that is
+        //less than 3) or course is in draft; continue.
+        for (Course course : this.getDepartment().getCourses()) {
+            if (!course.getCourseType().equals("Mandatory")
+                    || !course.hasCapacity()
+                    || hasCourseOverlap(course)
+                    || (semester < course.semester() && transcript.getCgpa() < 3)
+                    || draft.contains(course)
+                    || !checkThePrerequisiteAndCourseThatWasTaken(course)
+                    || maxCoursesReached()) {
+                continue;
+            } else {
+                availableCoursesToAdd.add(course);
+            }
+
+
+        }
+        //alttan ff fd dc dd durumu  -
+        //Üstten ortalamanın 3.00 dan büyük olması -
+        //TODO eğer labı varsa lablarından birini seçmek zorunda(mandatory)
+        //öğrencinin semesterı büyük eşit olmalı
+    }
+
     private void addCourseToDrop() {
         computeAvailableCoursesToDrop();
 
@@ -210,30 +356,6 @@ public class Student extends Person implements IDisplayMenu {
         }
     }
 
-    private void computeTheAvailableMandatoryCourses() {
-        availableCoursesToAdd.clear();
-        //Kapasite
-        //If no capacity, has overlap, (student's semester is less than course's semester and student has CGPA that is
-        //less than 3) or course is in draft; continue.
-        for (Course course : this.getDepartment().getCourses()) {
-            if (!course.getCourseType().equals("Mandatory")
-                    || !course.hasCapacity()
-                    || hasCourseOverlap(course)
-                    || (semester < course.semester() && transcript.getCgpa() < 3)
-                    || draft.contains(course)
-                    || !checkThePrerequisiteAndCourseThatWasTaken(course)) {
-                continue;
-            } else {
-                availableCoursesToAdd.add(course);
-            }
-
-
-        }
-        //alttan ff fd dc dd durumu  -
-        //Üstten ortalamanın 3.00 dan büyük olması -
-        //TODO eğer labı varsa lablarından birini seçmek zorunda(mandatory)
-        //öğrencinin semesterı büyük eşit olmalı
-    }
 
     //TODO İsim bulunacak :D
     private boolean checkThePrerequisiteAndCourseThatWasTaken(Course course) {
@@ -253,7 +375,6 @@ public class Student extends Person implements IDisplayMenu {
         } else if (!(mapGrade.get(course).getLast() != null && mapGrade.get(course).getLast().getLetterGrade().compareTo("CC") > 0)) {
             return false;
         }
-
         return true;
     }
 
@@ -307,97 +428,6 @@ public class Student extends Person implements IDisplayMenu {
         return false;
     }
 
-    private void addMandatoryCourse() {
-        computeTheAvailableMandatoryCourses();
-        if (maxCoursesReached()) {
-            return;
-        }
-        //TODO Complete Add Operation
-
-        if (availableCoursesToAdd.isEmpty()) {
-            ConsoleColours.paintRedMenu();
-            System.out.println("You do not have any addable course!");
-        } else {
-            this.printMenu("addCourse");
-
-            for (int i = 0; i < availableCoursesToAdd.size(); i++) {
-                Course course = availableCoursesToAdd.get(i);
-                System.out.println((i + 1) + ". " + course.getCourseCode() + " - " + course.getCourseName());
-                System.out.println("´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´");
-            }
-
-            //Take input from the user and make assignments to the courses.
-            ConsoleColours.paintGreenMenu();
-            System.out.print("Choose number between 1 to " + availableCoursesToAdd.size() + " to add course: \n");
-            int userNumberInput1 = (new CourseRegistrationSystem()).getInput();
-
-            if (userNumberInput1 <= availableCoursesToAdd.size() && userNumberInput1 >= 1) {
-                draft.add(availableCoursesToAdd.get(userNumberInput1 - 1));
-                availableCoursesToAdd.remove(userNumberInput1 - 1);
-                if (!availableCoursesToAdd.isEmpty())
-                    addMandatoryCourse();
-            } else if (userNumberInput1 > availableCoursesToAdd.size() || userNumberInput1 < 0) {
-                ConsoleColours.paintRedMenu();
-                System.out.println("Invalid input, please enter a valid number");
-                addMandatoryCourse();
-            } else
-                return;
-        }
-    }
-
-    private void addFacultyTechnicalElective() {
-        if (maxCoursesReached())
-            return;
-
-        this.printMenu("addCourse");
-        //TODO IMPLEMENT A PRINTER LIKE A FOR LOOP
-        /*
-        Here is the simple example for you
-
-            for (int i = 0; i < availableCoursesToDrop.size(); i++) {
-                Course course = availableCoursesToDrop.get(i);
-                System.out.println((i + 1) + ". " + course.getCourseCode() + " - " + course.getCourseName());
-                System.out.println("´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´");
-            }
-
-         */
-    }
-
-    private void addNonTechnicalElective() {
-        if (maxCoursesReached())
-            return;
-
-        this.printMenu("addCourse");
-        //TODO IMPLEMENT A PRINTER LIKE A FOR LOOP
-        /*
-        Here is the simple example for you
-
-            for (int i = 0; i < availableCoursesToDrop.size(); i++) {
-                Course course = availableCoursesToDrop.get(i);
-                System.out.println((i + 1) + ". " + course.getCourseCode() + " - " + course.getCourseName());
-                System.out.println("´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´");
-            }
-
-         */
-    }
-
-    private void addTechnicalElective() {
-        if (maxCoursesReached())
-            return;
-
-        this.printMenu("addCourse");
-        //TODO IMPLEMENT A PRINTER LIKE A FOR LOOP
-        /*
-        Here is the simple example for you
-
-            for (int i = 0; i < availableCoursesToDrop.size(); i++) {
-                Course course = availableCoursesToDrop.get(i);
-                System.out.println((i + 1) + ". " + course.getCourseCode() + " - " + course.getCourseName());
-                System.out.println("´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´");
-            }
-
-         */
-    }
 
     // This method calculates the total number of courses, considering both the drafted courses
     // and the courses in the transcript for which the student has not received a grade yet.
