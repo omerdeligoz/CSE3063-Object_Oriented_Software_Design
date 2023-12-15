@@ -6,5 +6,18 @@
   "takenCredits": 0,
   "completedCredits": 0,
   "semester": 1,
-  "courses": []
+  "courses": [
+    {
+      "courseCode": "CSE1200",
+      "letterGrade": "DZ"
+    },
+    {
+      "courseCode": "MATH1001",
+      "letterGrade": "DD"
+    },
+    {
+      "courseCode": "MATH1001",
+      "letterGrade": null
+    }
+  ]
 }

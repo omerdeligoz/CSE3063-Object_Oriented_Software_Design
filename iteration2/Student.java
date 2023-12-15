@@ -196,7 +196,7 @@ public class Student extends Person implements IDisplayMenu {
             int userNumberInput1 = (new CourseRegistrationSystem()).getInput();
 
             if (userNumberInput1 <= availableCoursesToAdd.size() && userNumberInput1 >= 1) {
-//                chooseLabSection(availableCoursesToAdd.get(userNumberInput1 - 1)); TODO add
+                chooseLabSection(availableCoursesToAdd.get(userNumberInput1 - 1)); // TODO add
                 draft.add(availableCoursesToAdd.get(userNumberInput1 - 1));
                 availableCoursesToAdd.remove(userNumberInput1 - 1);
                 if (!availableCoursesToAdd.isEmpty()) addMandatoryCourse();
@@ -211,26 +211,28 @@ public class Student extends Person implements IDisplayMenu {
     private void chooseLabSection(Course course) {
         if (course.getLaboratorySections().isEmpty()) return;
         //TODO add menu
-        List<LaboratorySection> labSections = course.getLaboratorySections();
-        for (int i = 0; i < course.getLaboratorySections().size(); i++) {
-            LaboratorySection labSection = labSections.get(i);
-            System.out.println((i + 1) + ". " + labSection.getLaboratorySectionCode());
-            System.out.println("´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´");
-        }
-        System.out.print("Choose number between 1 to " + labSections.size() + " to add course: \n");
-        int userNumberInput = (new CourseRegistrationSystem()).getInput();
 
-        if (userNumberInput <= labSections.size() && userNumberInput >= 1) {
-            LaboratorySection labSection = labSections.get(userNumberInput - 1);
+        List<LaboratorySection> availableLabSections = new ArrayList<>();
+
+        for (LaboratorySection labSection : course.getLaboratorySections()) {
             Course labCourse = new Course(null, labSection.getLaboratorySectionCode(), null, 0, (byte) 0, 0, labSection.getHour(), labSection.getDay());
             if (hasCourseOverlap(labCourse, true)
                     || labSection.getCapacity() <= labSection.getNumberOfStudents()) {
-                ConsoleColours.paintRedMenu();
-                System.out.println("You can not add this lab section!");
-                chooseLabSection(course);
+                continue;
             } else {
-
+                availableLabSections.add(labSection);
             }
+        }
+        for (int i = 0; i < availableLabSections.size(); i++) {
+            LaboratorySection labSection = availableLabSections.get(i);
+            System.out.println((i + 1) + ". " + labSection.getLaboratorySectionCode());
+            System.out.println("´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´");
+        }
+        System.out.print("Choose number between 1 to " + availableLabSections.size() + " to add course: \n");
+        int userNumberInput = (new CourseRegistrationSystem()).getInput();
+
+        if (userNumberInput <= availableLabSections.size() && userNumberInput >= 1) {
+            //TODO ne yapacaz bunu  ??
         } else if (userNumberInput > availableCoursesToAdd.size() || userNumberInput < 0) {
             ConsoleColours.paintRedMenu();
             System.out.println("Invalid input, please enter a valid number");
@@ -393,34 +395,54 @@ public class Student extends Person implements IDisplayMenu {
             case 15 -> j = 6;
             case 16 -> j = 7;
         }
-
         Course courseInSchedule = schedule[i][j];
-        //If there is no course in the schedule, no overlap.
-        List<Grade> scheduleCourseGrades = transcript.getCourseGradeMap().get(courseInSchedule);
 
         if (isLab) {
-            if (courseInSchedule != null
-                    && scheduleCourseGrades != null
-                    && scheduleCourseGrades.size() >= 2
-                    && !scheduleCourseGrades.get(scheduleCourseGrades.size() - 2).getLetterGrade().equals("DZ"))
-                return false;
+            if (courseInSchedule != null) {
+                List<Grade> scheduleCourseGrades = transcript.getCourseGradeMap().get(courseInSchedule);
+                if (scheduleCourseGrades.size() == 1 && scheduleCourseGrades.getLast() == null) {
+                    return true;
+                }
+                if (scheduleCourseGrades.size() >= 2 && scheduleCourseGrades.get(scheduleCourseGrades.size() - 2).getLetterGrade().equals("DZ")) {
+                    return true;
+                }
+            }
+            for (Course course : draft) {
+                if (course.getDay().equals(courseToAdd.getDay()) && course.getHour() == courseToAdd.getHour()) {
+                    if (transcript.getCourseGradeMap().get(course) != null
+                            && transcript.getCourseGradeMap().get(course).getLast().getLetterGrade().equals("DZ")) {
+                        return true;
+                    }
+                }
+            }
         } else {
-            if (courseInSchedule == null) {
-                return false;
-            } else {
-                List<Grade> newCourseGrades = transcript.getCourseGradeMap().get(courseToAdd);
+            if (courseInSchedule != null) {
+                List<Grade> scheduleCourseGrades = transcript.getCourseGradeMap().get(courseInSchedule);
                 if (scheduleCourseGrades != null
                         && scheduleCourseGrades.size() >= 2
-                        && !scheduleCourseGrades.get(scheduleCourseGrades.size() - 2).getLetterGrade().equals("DZ"))
-                    return false;
-                if (newCourseGrades != null
-                        && newCourseGrades.getLast() != null
-                        && !newCourseGrades.getLast().getLetterGrade().equals("DZ"))
-                    return false;
+                        && scheduleCourseGrades.get(scheduleCourseGrades.size() - 2).getLetterGrade().equals("DZ")) {
+                    if (!transcript.getStudentCourses().contains(courseToAdd)
+                            || (transcript.getCourseGradeMap().get(courseToAdd).getLast() != null && transcript.getCourseGradeMap().get(courseToAdd).getLast().getLetterGrade().equals("DZ"))) {
+                        return true;
+
+                    }
+                }
+            }
+
+            for (Course course : draft) {
+                if (course.getDay().equals(courseToAdd.getDay()) && course.getHour() == courseToAdd.getHour()) {
+                    if (transcript.getCourseGradeMap().get(course) != null
+                            && transcript.getCourseGradeMap().get(course).getLast().getLetterGrade().equals("DZ")) {
+                        return true;
+                    }
+                    if (transcript.getCourseGradeMap().get(course) == null
+                            && (transcript.getCourseGradeMap().get(courseToAdd) == null || transcript.getCourseGradeMap().get(courseToAdd).getLast().getLetterGrade().equals("DZ"))) {
+                        return true;
+                    }
+                }
             }
         }
-
-        return true;
+        return false;
     }
 
     private boolean maxCoursesReached() {
