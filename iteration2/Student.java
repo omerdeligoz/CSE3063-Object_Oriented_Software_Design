@@ -276,25 +276,24 @@ public class Student extends Person implements IDisplayMenu {
             case 15 -> j = 6;
             case 16 -> j = 7;
         }
-
-
-        //TODO check the overlap
-        Course course1 = schedule[i][j];
-        int sizeOfGradesList = transcript.getCourseGradeMap().get(course1).size();
-        if (course1 == null) {
+        Course courseInSchedule = schedule[i][j];
+        //If there is no course in the schedule, no overlap.
+        if (courseInSchedule == null) {
             return false;
-        } else if (transcript.getCourseGradeMap().get(course1).getLast() == null) {
-            if (sizeOfGradesList >= 2 &&
-                    transcript.getCourseGradeMap().get(course1).get(sizeOfGradesList - 2).getLetterGrade().equals("DZ")) {
-                return false;
-            } else {
-                return true;
-            }
         } else {
-            return false;
+            List<Grade> scheduleCourseGrades = transcript.getCourseGradeMap().get(courseInSchedule);
+            List<Grade> newCourseGrades = transcript.getCourseGradeMap().get(courseToAdd);
+            if (scheduleCourseGrades != null
+                    && scheduleCourseGrades.size() >= 2
+                    && !scheduleCourseGrades.get(scheduleCourseGrades.size() - 2).getLetterGrade().equals("DZ"))
+                return false;
+            if (newCourseGrades != null
+                    && newCourseGrades.getLast() != null
+                    && !newCourseGrades.getLast().getLetterGrade().equals("DZ"))
+                return false;
         }
+        return true;
     }
-
 
     private boolean maxCoursesReached() {
         //Call the calculateNumberOfCourses() function to limit with the maximum number of courses.
@@ -577,16 +576,8 @@ public class Student extends Person implements IDisplayMenu {
         return semester;
     }
 
-    public void setHasRequest(boolean hasRequest) {
-        this.hasRequest = hasRequest;
-    }
-
     public List<Course> getDraft() {
         return draft;
-    }
-
-    public void setTranscript(Transcript transcript) {
-        this.transcript = transcript;
     }
 
     public void setDraft(List<Course> draft) {
@@ -597,12 +588,20 @@ public class Student extends Person implements IDisplayMenu {
         return hasRequest;
     }
 
+    public void setHasRequest(boolean hasRequest) {
+        this.hasRequest = hasRequest;
+    }
+
     public void setNotification(Notification notification) {
         this.notification = notification;
     }
 
     public Transcript getTranscript() {
         return transcript;
+    }
+
+    public void setTranscript(Transcript transcript) {
+        this.transcript = transcript;
     }
 
     public Course[][] getSchedule() {
