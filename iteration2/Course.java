@@ -54,9 +54,6 @@ public class Course {
         return courseName;
     }
 
-    public List getCourseSections() {
-        return laboratorySections;
-    }
 
     public List<Course> getPreRequisiteCourses() {
         return preRequisiteCourses;

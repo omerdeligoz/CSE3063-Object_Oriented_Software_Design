@@ -38,4 +38,20 @@ public class LaboratorySection {
     public void setAssistant(Assistant assistant) {
         this.assistant = assistant;
     }
+
+    public String getDay() {
+        return day;
+    }
+
+    public int getHour() {
+        return hour;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public int getNumberOfStudents() {
+        return numberOfStudents;
+    }
 }

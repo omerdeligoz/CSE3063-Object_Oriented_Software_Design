@@ -16,7 +16,6 @@ public class Student extends Person implements IDisplayMenu {
     private List<Course> draft;
     private List<Course> availableCoursesToAdd;
     private List<Course> availableCoursesToDrop;
-
     private Course[][] schedule;
 
     //Implement Constructor
@@ -178,7 +177,6 @@ public class Student extends Person implements IDisplayMenu {
 
     private void addMandatoryCourse() {
         computeAvailableMandatoryCourses();
-        //TODO Complete Add Operation
 
         if (availableCoursesToAdd.isEmpty()) {
             ConsoleColours.paintRedMenu();
@@ -198,23 +196,20 @@ public class Student extends Person implements IDisplayMenu {
             int userNumberInput1 = (new CourseRegistrationSystem()).getInput();
 
             if (userNumberInput1 <= availableCoursesToAdd.size() && userNumberInput1 >= 1) {
-                chooseLabSection(availableCoursesToAdd.get(userNumberInput1 - 1));
+//                chooseLabSection(availableCoursesToAdd.get(userNumberInput1 - 1)); TODO add
                 draft.add(availableCoursesToAdd.get(userNumberInput1 - 1));
                 availableCoursesToAdd.remove(userNumberInput1 - 1);
-                if (!availableCoursesToAdd.isEmpty())
-                    addMandatoryCourse();
+                if (!availableCoursesToAdd.isEmpty()) addMandatoryCourse();
             } else if (userNumberInput1 > availableCoursesToAdd.size() || userNumberInput1 < 0) {
                 ConsoleColours.paintRedMenu();
                 System.out.println("Invalid input, please enter a valid number");
                 addMandatoryCourse();
-            } else
-                return;
+            } else return;
         }
     }
 
     private void chooseLabSection(Course course) {
-        if (course.getLaboratorySections().isEmpty())
-            return;
+        if (course.getLaboratorySections().isEmpty()) return;
         //TODO add menu
         List<LaboratorySection> labSections = course.getLaboratorySections();
         for (int i = 0; i < course.getLaboratorySections().size(); i++) {
@@ -226,20 +221,26 @@ public class Student extends Person implements IDisplayMenu {
         int userNumberInput = (new CourseRegistrationSystem()).getInput();
 
         if (userNumberInput <= labSections.size() && userNumberInput >= 1) {
-            if (!availableCoursesToAdd.isEmpty())
-                addMandatoryCourse();
+            LaboratorySection labSection = labSections.get(userNumberInput - 1);
+            Course labCourse = new Course(null, labSection.getLaboratorySectionCode(), null, 0, (byte) 0, 0, labSection.getHour(), labSection.getDay());
+            if (hasCourseOverlap(labCourse, true)
+                    || labSection.getCapacity() <= labSection.getNumberOfStudents()) {
+                ConsoleColours.paintRedMenu();
+                System.out.println("You can not add this lab section!");
+                chooseLabSection(course);
+            } else {
+
+            }
         } else if (userNumberInput > availableCoursesToAdd.size() || userNumberInput < 0) {
             ConsoleColours.paintRedMenu();
             System.out.println("Invalid input, please enter a valid number");
             addMandatoryCourse();
-        } else
-            return;
+        } else return;
 
     }
 
     private void addTechnicalElective() {
-        if (maxCoursesReached())
-            return;
+        if (maxCoursesReached()) return;
 
         this.printMenu("addCourse");
         //TODO IMPLEMENT A PRINTER LIKE A FOR LOOP
@@ -257,8 +258,7 @@ public class Student extends Person implements IDisplayMenu {
 
 
     private void addNonTechnicalElective() {
-        if (maxCoursesReached())
-            return;
+        if (maxCoursesReached()) return;
 
         this.printMenu("addCourse");
         //TODO IMPLEMENT A PRINTER LIKE A FOR LOOP
@@ -275,8 +275,7 @@ public class Student extends Person implements IDisplayMenu {
     }
 
     private void addFacultyTechnicalElective() {
-        if (maxCoursesReached())
-            return;
+        if (maxCoursesReached()) return;
 
         this.printMenu("addCourse");
         //TODO IMPLEMENT A PRINTER LIKE A FOR LOOP
@@ -304,7 +303,7 @@ public class Student extends Person implements IDisplayMenu {
         for (Course course : this.getDepartment().getCourses()) {
             if (!course.getCourseType().equals("Mandatory")
                     || !course.hasCapacity()
-                    || hasCourseOverlap(course)
+                    || hasCourseOverlap(course, false)
                     || (semester < course.semester() && transcript.getCgpa() < 3)
                     || draft.contains(course)
                     || !checkThePrerequisiteAndCourseThatWasTaken(course)
@@ -345,8 +344,7 @@ public class Student extends Person implements IDisplayMenu {
             if (userNumberInput <= availableCoursesToDrop.size() && userNumberInput >= 1) {
                 draft.add(availableCoursesToDrop.get(userNumberInput - 1));
                 availableCoursesToDrop.remove(userNumberInput - 1);
-                if (!availableCoursesToDrop.isEmpty())
-                    addCourseToDrop();
+                if (!availableCoursesToDrop.isEmpty()) addCourseToDrop();
             } else if (userNumberInput > availableCoursesToDrop.size() || userNumberInput < 0) {
                 ConsoleColours.paintRedMenu();
                 System.out.println("Invalid input, please enter a valid number");
@@ -365,9 +363,7 @@ public class Student extends Person implements IDisplayMenu {
             boolean status = true;
 
             for (Course prerequisite : course.getPreRequisiteCourses()) {
-                if ((mapGrade.get(prerequisite).getLast() == null
-                        || mapGrade.get(prerequisite).getLast().getLetterGrade().equals("FF")
-                        || mapGrade.get(prerequisite).getLast().getLetterGrade().equals("FD"))) {
+                if ((mapGrade.get(prerequisite).getLast() == null || mapGrade.get(prerequisite).getLast().getLetterGrade().equals("FF") || mapGrade.get(prerequisite).getLast().getLetterGrade().equals("FD"))) {
                     return false;
                 }
             }
@@ -378,7 +374,7 @@ public class Student extends Person implements IDisplayMenu {
         return true;
     }
 
-    public boolean hasCourseOverlap(Course courseToAdd) {
+    public boolean hasCourseOverlap(Course courseToAdd, boolean isLab) {
         int i = 0, j = 0;
         switch (courseToAdd.getDay()) {
             case "Monday" -> i = 0;
@@ -397,22 +393,33 @@ public class Student extends Person implements IDisplayMenu {
             case 15 -> j = 6;
             case 16 -> j = 7;
         }
+
         Course courseInSchedule = schedule[i][j];
         //If there is no course in the schedule, no overlap.
-        if (courseInSchedule == null) {
-            return false;
-        } else {
-            List<Grade> scheduleCourseGrades = transcript.getCourseGradeMap().get(courseInSchedule);
-            List<Grade> newCourseGrades = transcript.getCourseGradeMap().get(courseToAdd);
-            if (scheduleCourseGrades != null
+        List<Grade> scheduleCourseGrades = transcript.getCourseGradeMap().get(courseInSchedule);
+
+        if (isLab) {
+            if (courseInSchedule != null
+                    && scheduleCourseGrades != null
                     && scheduleCourseGrades.size() >= 2
                     && !scheduleCourseGrades.get(scheduleCourseGrades.size() - 2).getLetterGrade().equals("DZ"))
                 return false;
-            if (newCourseGrades != null
-                    && newCourseGrades.getLast() != null
-                    && !newCourseGrades.getLast().getLetterGrade().equals("DZ"))
+        } else {
+            if (courseInSchedule == null) {
                 return false;
+            } else {
+                List<Grade> newCourseGrades = transcript.getCourseGradeMap().get(courseToAdd);
+                if (scheduleCourseGrades != null
+                        && scheduleCourseGrades.size() >= 2
+                        && !scheduleCourseGrades.get(scheduleCourseGrades.size() - 2).getLetterGrade().equals("DZ"))
+                    return false;
+                if (newCourseGrades != null
+                        && newCourseGrades.getLast() != null
+                        && !newCourseGrades.getLast().getLetterGrade().equals("DZ"))
+                    return false;
+            }
         }
+
         return true;
     }
 
@@ -421,8 +428,7 @@ public class Student extends Person implements IDisplayMenu {
         int numberOfCourses = calculateNumberOfCourses();
         if (numberOfCourses >= getDepartment().getMaxCourseNumber()) {
             ConsoleColours.paintRedMenu();
-            System.out.println("Limit Reached! You can take at most "
-                    + this.getDepartment().getMaxCourseNumber() + " courses.");
+            System.out.println("Limit Reached! You can take at most " + this.getDepartment().getMaxCourseNumber() + " courses.");
             return true;
         }
         return false;
@@ -434,8 +440,7 @@ public class Student extends Person implements IDisplayMenu {
     public int calculateNumberOfCourses() {
         int numberOfCourses = 0;
         for (Course course : draft) {
-            if (transcript.getCourseGradeMap().get(course) != null
-                    && transcript.getCourseGradeMap().get(course).getLast() == null) {
+            if (transcript.getCourseGradeMap().get(course) != null && transcript.getCourseGradeMap().get(course).getLast() == null) {
                 numberOfCourses++;
             }
         }
@@ -473,8 +478,7 @@ public class Student extends Person implements IDisplayMenu {
 
             // Manipulation for displaying and removing courses in the menu.
             for (int i = 0; i < draft.size(); i++) {
-                System.out.println((i + 1) + ". " + draft.get(i).getCourseCode() +
-                        " - " + draft.get(i).getCourseName());
+                System.out.println((i + 1) + ". " + draft.get(i).getCourseCode() + " - " + draft.get(i).getCourseName());
                 System.out.println("´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´");
             }
             // Remove input index element -1 from the draft list if the input is valid and in the appropriate range.
@@ -517,59 +521,16 @@ public class Student extends Person implements IDisplayMenu {
         System.out.println();
     }
 
-    //TODO Edit for loop
     private void computeAvailableCoursesToDrop() {
         availableCoursesToDrop.clear();
         Map<Course, List<Grade>> mapGrade = transcript.getCourseGradeMap();
         for (Course course : transcript.getStudentCourses()) {
-            if (draft.contains(course))
-                continue;
+            if (draft.contains(course)) continue;
             if (mapGrade.get(course).getLast() == null) {
                 availableCoursesToDrop.add(course);
             }
         }
     }
-
-    /*
-    public void computeAvailableCoursesToAdd() {
-
-        ArrayList<Course> availableCoursestoAdd = new ArrayList<>();
-
-        List<CourseSection> allCourseSections = getDepartment().getCourseSections();
-        Map<Course, List<Grade>> mapGrade = transcript.getCourseGradeMap();
-        Map<CourseSection, Course> courseSectionCourse = getDepartment().getSectionCourseMap();
-
-
-        for (CourseSection courseSection : allCourseSections) {
-
-            if (semester < courseSection.semester()
-                    || draft.contains(courseSectionCourse.get(courseSection)))
-                continue;
-
-
-            Course course = courseSectionCourse.get(courseSection);
-
-            if (!mapGrade.containsKey(course)) {
-                boolean status = true;
-                for (Course prerequisite : course.getPreRequisiteCourses()) {
-                    if ((mapGrade.get(prerequisite) == null
-                            || mapGrade.get(prerequisite).getLast().getLetterGrade().equals("FF")
-                            || mapGrade.get(prerequisite).getLast().getLetterGrade().equals("FD"))) {
-                        status = false;
-                    }
-                }
-                if (status)
-                    availableCoursestoAdd.add(course);
-            } else {
-                // If the student has previously taken the course and has a grade lower than 'CC', include it
-                if (mapGrade.get(course) != null &&  mapGrade.get(course).getLast() !=null && mapGrade.get(course).getLast().getLetterGrade().compareTo("CC") > 0) {
-                    availableCoursestoAdd.add(course);
-                }
-            }
-        }
-        availableCoursesToAdd = availableCoursestoAdd;
-    }
-*/
 
     //Checks if the provided username and password match the student's credentials.
     //Overrides the abstract login method in the Person class.
