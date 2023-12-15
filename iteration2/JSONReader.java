@@ -23,6 +23,7 @@ public class JSONReader {
     private final Map<Integer, List<String>> advisorIDCoursesMap = new HashMap<>();
     private final Map<Integer, Integer> studentIDAdvisorIDMap = new HashMap<>();
     private final Map<Student, Registration> studentRegistrationMap = new HashMap<>();
+
     /**
      * The JSONReader class contains several private fields used throughout the class.
      * <p>

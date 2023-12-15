@@ -5,7 +5,7 @@
     "surname": "Yeşil",
     "userName": "a",
     "password": "a",
-    "semester": 3,
+    "semester": 7,
     "departmentName": "CSE",
     "advisorID": 130113008,
     "hasRequest": false
@@ -27,7 +27,7 @@
     "surname": "Uzun",
     "userName": "o150121091",
     "password": "150121091",
-    "semester": 4,
+    "semester": 7,
     "departmentName": "CSE",
     "advisorID": 130113008,
     "hasRequest": false
@@ -38,7 +38,7 @@
     "surname": "Demir",
     "userName": "o150120045",
     "password": "150120045",
-    "semester": 3,
+    "semester": 5,
     "departmentName": "CSE",
     "advisorID": 130113008,
     "hasRequest": false
@@ -49,7 +49,7 @@
     "surname": "Subaşı",
     "userName": "o150120090",
     "password": "150120090",
-    "semester": 4,
+    "semester": 1,
     "departmentName": "CSE",
     "advisorID": 130116002,
     "hasRequest": false
@@ -60,7 +60,7 @@
     "surname": "Çakır",
     "userName": "o150121075",
     "password": "150121075",
-    "semester": 4,
+    "semester": 3,
     "departmentName": "CSE",
     "advisorID": 130113008,
     "hasRequest": false
@@ -71,7 +71,7 @@
     "surname": "Alemdar",
     "userName": "o150120047",
     "password": "150120047",
-    "semester": 3,
+    "semester": 5,
     "departmentName": "CSE",
     "advisorID": 130116002,
     "hasRequest": false
@@ -82,7 +82,7 @@
     "surname": "Tekin",
     "userName": "o150120083",
     "password": "150120083",
-    "semester": 4,
+    "semester": 1,
     "departmentName": "CSE",
     "advisorID": 130113008,
     "hasRequest": false
@@ -93,7 +93,7 @@
     "surname": "Öztürk",
     "userName": "o150121067",
     "password": "150121067",
-    "semester": 4,
+    "semester": 7,
     "departmentName": "CSE",
     "advisorID": 130116002,
     "hasRequest": false
@@ -104,7 +104,7 @@
     "surname": "Kurşun",
     "userName": "o150121059",
     "password": "150121059",
-    "semester": 3,
+    "semester": 7,
     "departmentName": "CSE",
     "advisorID": 130116002,
     "hasRequest": false
