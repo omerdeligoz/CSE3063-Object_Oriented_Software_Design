@@ -374,6 +374,28 @@ public class CourseRegistrationSystem implements IDisplayMenu {
         student.getSchedule()[i][j] = course;
     }
 
+    public void removeFromSchedule(Course course, Student student) {
+        int i = 0, j = 0;
+        switch (course.getDay()) {
+            case "Monday" -> i = 0;
+            case "Tuesday" -> i = 1;
+            case "Wednesday" -> i = 2;
+            case "Thursday" -> i = 3;
+            case "Friday" -> i = 4;
+        }
+        switch (course.getHour()) {
+            case 8 -> j = 0;
+            case 9 -> j = 1;
+            case 10 -> j = 2;
+            case 11 -> j = 3;
+            case 13 -> j = 4;
+            case 14 -> j = 5;
+            case 15 -> j = 6;
+            case 16 -> j = 7;
+        }
+        student.getSchedule()[i][j] = null;
+    }
+
     /*
         Menu patterns
         System.out.println("||||||||||||||||||||||||||||||||||||||||||");

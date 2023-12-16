@@ -65,10 +65,10 @@ public class JSONWriter {
 
                 ArrayNode newCoursesArray = JsonNodeFactory.instance.arrayNode();
 
-                for (Course course : student.getTranscript().getStudentCourses()) {
+                for (Course course : student.getTranscript().getCourseGradeMap().keySet()) {
+                    for (Grade grade : student.getTranscript().getCourseGradeMap().get(course)) {
                     ObjectNode courseNode = JsonNodeFactory.instance.objectNode();
                     courseNode.put("courseCode", course.getCourseCode());
-                    for (Grade grade : student.getTranscript().getCourseGradeMap().get(course)) {
                         if (grade == null) {
                             courseNode.put("letterGrade", (JsonNode) null);
                         } else {

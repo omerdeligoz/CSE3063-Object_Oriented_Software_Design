@@ -16,6 +16,7 @@ public class Student extends Person implements IDisplayMenu {
     private List<Course> draft;
     private List<Course> availableCoursesToAdd;
     private List<Course> availableCoursesToDrop;
+    private List<LaboratorySection> labSections;
     private Course[][] schedule;
 
     //Implement Constructor
@@ -24,6 +25,7 @@ public class Student extends Person implements IDisplayMenu {
         this.draft = new ArrayList<>();
         this.availableCoursesToAdd = new ArrayList<>();
         this.availableCoursesToDrop = new ArrayList<>();
+        this.labSections = new ArrayList<>();
         this.semester = semester;
         this.schedule = new Course[5][8];
     }
@@ -232,11 +234,12 @@ public class Student extends Person implements IDisplayMenu {
         int userNumberInput = (new CourseRegistrationSystem()).getInput();
 
         if (userNumberInput <= availableLabSections.size() && userNumberInput >= 1) {
-            //TODO ne yapacaz bunu  ??
-        } else if (userNumberInput > availableCoursesToAdd.size() || userNumberInput < 0) {
+            this.labSections.add(availableLabSections.get(userNumberInput - 1));
+            availableLabSections.get(userNumberInput - 1).setNumberOfStudents(availableLabSections.get(userNumberInput - 1).getNumberOfStudents() + 1);
+        } else if (userNumberInput > availableCoursesToAdd.size() || userNumberInput <= 0) {
             ConsoleColours.paintRedMenu();
             System.out.println("Invalid input, please enter a valid number");
-            addMandatoryCourse();
+            chooseLabSection(course);
         } else return;
 
     }
@@ -244,55 +247,152 @@ public class Student extends Person implements IDisplayMenu {
     private void addTechnicalElective() {
         if (maxCoursesReached()) return;
 
-        this.printMenu("addCourse");
-        //TODO IMPLEMENT A PRINTER LIKE A FOR LOOP
-        /*
-        Here is the simple example for you
+        computeTheAvailableTEAndFTECourses("TE");
 
-            for (int i = 0; i < availableCoursesToDrop.size(); i++) {
-                Course course = availableCoursesToDrop.get(i);
+        if (availableCoursesToAdd.isEmpty()) {
+            ConsoleColours.paintRedMenu();
+            System.out.println("You do not have any addable course!");
+        } else {
+            this.printMenu("addCourse");
+
+            for (int i = 0; i < availableCoursesToAdd.size(); i++) {
+                Course course = availableCoursesToAdd.get(i);
                 System.out.println((i + 1) + ". " + course.getCourseCode() + " - " + course.getCourseName());
                 System.out.println("´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´");
             }
 
-         */
+            //Take input from the user and make assignments to the courses.
+            ConsoleColours.paintGreenMenu();
+            System.out.print("Choose number between 1 to " + availableCoursesToAdd.size() + " to add course: \n");
+            int userNumberInput1 = (new CourseRegistrationSystem()).getInput();
+
+            if (userNumberInput1 <= availableCoursesToAdd.size() && userNumberInput1 >= 1) {
+                draft.add(availableCoursesToAdd.get(userNumberInput1 - 1));
+                availableCoursesToAdd.remove(userNumberInput1 - 1);
+                if (!availableCoursesToAdd.isEmpty()) addTechnicalElective();
+            } else if (userNumberInput1 > availableCoursesToAdd.size() || userNumberInput1 < 0) {
+                ConsoleColours.paintRedMenu();
+                System.out.println("Invalid input, please enter a valid number");
+                addTechnicalElective();
+            } else return;
+        }
     }
 
 
-    private void addNonTechnicalElective() {
-        if (maxCoursesReached()) return;
+    private void computeTheAvailableTEAndFTECourses(String courseType) {
+        availableCoursesToAdd.clear();
+        int sum = 0;
+        Map<Course, List<Grade>> mapGrade = transcript.getCourseGradeMap();
 
-        this.printMenu("addCourse");
-        //TODO IMPLEMENT A PRINTER LIKE A FOR LOOP
-        /*
-        Here is the simple example for you
+        for (Course course : transcript.getStudentCourses()) {
 
-            for (int i = 0; i < availableCoursesToDrop.size(); i++) {
-                Course course = availableCoursesToDrop.get(i);
-                System.out.println((i + 1) + ". " + course.getCourseCode() + " - " + course.getCourseName());
-                System.out.println("´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´");
+            if (course.semester() > 6
+                    || course.getCourseType().equals("NTE")
+                    || mapGrade.get(course).getLast() == null
+                    || mapGrade.get(course).getLast().getLetterGrade().compareTo("DD") > 0) {
+                continue;
+            }
+            sum += course.getCourseCredit();
+
+        }
+
+        if (sum >= 155) {
+            for (Course course : this.getDepartment().getCourses()) {
+                if (course.getCourseType().equals((courseType))) {
+                    availableCoursesToAdd.add(course);
+                }
             }
 
-         */
+        }
     }
 
     private void addFacultyTechnicalElective() {
         if (maxCoursesReached()) return;
+        computeTheAvailableTEAndFTECourses("FTE");
 
-        this.printMenu("addCourse");
-        //TODO IMPLEMENT A PRINTER LIKE A FOR LOOP
-        /*
-        Here is the simple example for you
+        if (availableCoursesToAdd.isEmpty()) {
+            ConsoleColours.paintRedMenu();
+            System.out.println("You do not have any addable course!");
+        } else {
+            this.printMenu("addCourse");
 
-            for (int i = 0; i < availableCoursesToDrop.size(); i++) {
-                Course course = availableCoursesToDrop.get(i);
+            for (int i = 0; i < availableCoursesToAdd.size(); i++) {
+                Course course = availableCoursesToAdd.get(i);
                 System.out.println((i + 1) + ". " + course.getCourseCode() + " - " + course.getCourseName());
                 System.out.println("´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´");
             }
 
-         */
+            //Take input from the user and make assignments to the courses.
+            ConsoleColours.paintGreenMenu();
+            System.out.print("Choose number between 1 to " + availableCoursesToAdd.size() + " to add course: \n");
+            int userNumberInput1 = (new CourseRegistrationSystem()).getInput();
+
+            if (userNumberInput1 <= availableCoursesToAdd.size() && userNumberInput1 >= 1) {
+                draft.add(availableCoursesToAdd.get(userNumberInput1 - 1));
+                availableCoursesToAdd.remove(userNumberInput1 - 1);
+                if (!availableCoursesToAdd.isEmpty()) addFacultyTechnicalElective();
+            } else if (userNumberInput1 > availableCoursesToAdd.size() || userNumberInput1 < 0) {
+                ConsoleColours.paintRedMenu();
+                System.out.println("Invalid input, please enter a valid number");
+                addFacultyTechnicalElective();
+            } else return;
+        }
+
     }
 
+    private void addNonTechnicalElective() {
+        if (maxCoursesReached()) return;
+        computeTheNTECourses();
+
+        if (availableCoursesToAdd.isEmpty()) {
+            ConsoleColours.paintRedMenu();
+            System.out.println("You do not have any addable course!");
+        } else {
+            this.printMenu("addCourse");
+
+            for (int i = 0; i < availableCoursesToAdd.size(); i++) {
+                Course course = availableCoursesToAdd.get(i);
+                System.out.println((i + 1) + ". " + course.getCourseCode() + " - " + course.getCourseName());
+                System.out.println("´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´");
+            }
+
+            //Take input from the user and make assignments to the courses.
+            ConsoleColours.paintGreenMenu();
+            System.out.print("Choose number between 1 to " + availableCoursesToAdd.size() + " to add course: \n");
+            int userNumberInput1 = (new CourseRegistrationSystem()).getInput();
+
+            if (userNumberInput1 <= availableCoursesToAdd.size() && userNumberInput1 >= 1) {
+                draft.add(availableCoursesToAdd.get(userNumberInput1 - 1));
+                availableCoursesToAdd.remove(userNumberInput1 - 1);
+                if (!availableCoursesToAdd.isEmpty()) addNonTechnicalElective();
+            } else if (userNumberInput1 > availableCoursesToAdd.size() || userNumberInput1 < 0) {
+                ConsoleColours.paintRedMenu();
+                System.out.println("Invalid input, please enter a valid number");
+                addNonTechnicalElective();
+            } else return;
+        }
+
+
+    }
+
+    private void computeTheNTECourses() {
+        availableCoursesToAdd.clear();
+
+        for (Course course : this.getDepartment().getCourses()) {
+            if (!course.getCourseType().equals("NTE")
+                    || !course.hasCapacity()
+                    || hasCourseOverlap(course, false)
+                    || (semester < course.semester() && transcript.getCgpa() < 3)
+                    || draft.contains(course)
+                    || !checkThePrerequisiteAndCourseThatWasTaken(course)
+                    || maxCoursesReached()) {
+                continue;
+            } else {
+                availableCoursesToAdd.add(course);
+            }
+
+        }
+    }
 
     private void computeAvailableMandatoryCourses() {
         availableCoursesToAdd.clear();
@@ -356,7 +456,6 @@ public class Student extends Person implements IDisplayMenu {
         }
     }
 
-
     //TODO İsim bulunacak :D
     private boolean checkThePrerequisiteAndCourseThatWasTaken(Course course) {
         Map<Course, List<Grade>> mapGrade = transcript.getCourseGradeMap();
@@ -365,7 +464,9 @@ public class Student extends Person implements IDisplayMenu {
             boolean status = true;
 
             for (Course prerequisite : course.getPreRequisiteCourses()) {
-                if ((mapGrade.get(prerequisite).getLast() == null || mapGrade.get(prerequisite).getLast().getLetterGrade().equals("FF") || mapGrade.get(prerequisite).getLast().getLetterGrade().equals("FD"))) {
+                if ((mapGrade.get(prerequisite).getLast() == null
+                        || mapGrade.get(prerequisite).getLast().getLetterGrade().equals("FF")
+                        || mapGrade.get(prerequisite).getLast().getLetterGrade().equals("FD"))) {
                     return false;
                 }
             }
@@ -408,6 +509,8 @@ public class Student extends Person implements IDisplayMenu {
                 }
             }
             for (Course course : draft) {
+                if (transcript.getCourseGradeMap().get(course) != null && transcript.getCourseGradeMap().get(course).getLast() == null)
+                    continue;
                 if (course.getDay().equals(courseToAdd.getDay()) && course.getHour() == courseToAdd.getHour()) {
                     if (transcript.getCourseGradeMap().get(course) != null
                             && transcript.getCourseGradeMap().get(course).getLast().getLetterGrade().equals("DZ")) {
@@ -415,6 +518,14 @@ public class Student extends Person implements IDisplayMenu {
                     }
                 }
             }
+
+            for (LaboratorySection labSection : labSections) {
+                if (labSection.getDay().equals(courseToAdd.getDay()) && labSection.getHour() == courseToAdd.getHour()) {
+                    return true;
+                }
+            }
+
+
         } else {
             if (courseInSchedule != null) {
                 List<Grade> scheduleCourseGrades = transcript.getCourseGradeMap().get(courseInSchedule);
@@ -430,6 +541,8 @@ public class Student extends Person implements IDisplayMenu {
             }
 
             for (Course course : draft) {
+                if (transcript.getCourseGradeMap().get(course) != null && transcript.getCourseGradeMap().get(course).getLast() == null)
+                    continue;
                 if (course.getDay().equals(courseToAdd.getDay()) && course.getHour() == courseToAdd.getHour()) {
                     if (transcript.getCourseGradeMap().get(course) != null
                             && transcript.getCourseGradeMap().get(course).getLast().getLetterGrade().equals("DZ")) {
@@ -439,6 +552,12 @@ public class Student extends Person implements IDisplayMenu {
                             && (transcript.getCourseGradeMap().get(courseToAdd) == null || transcript.getCourseGradeMap().get(courseToAdd).getLast().getLetterGrade().equals("DZ"))) {
                         return true;
                     }
+                }
+            }
+
+            for (LaboratorySection labSection : labSections) {
+                if (labSection.getDay().equals(courseToAdd.getDay()) && labSection.getHour() == courseToAdd.getHour()) {
+                    return true;
                 }
             }
         }
@@ -461,11 +580,7 @@ public class Student extends Person implements IDisplayMenu {
     // and the courses in the transcript for which the student has not received a grade yet.
     public int calculateNumberOfCourses() {
         int numberOfCourses = 0;
-        for (Course course : draft) {
-            if (transcript.getCourseGradeMap().get(course) != null && transcript.getCourseGradeMap().get(course).getLast() == null) {
-                numberOfCourses++;
-            }
-        }
+        numberOfCourses += draft.size();
 
         for (Course course : transcript.getCourseGradeMap().keySet()) {
             if (transcript.getCourseGradeMap().get(course).getLast() == null) {
@@ -510,6 +625,13 @@ public class Student extends Person implements IDisplayMenu {
             int userNumberInput = (new CourseRegistrationSystem()).getInput();
 
             if (userNumberInput <= draft.size() && userNumberInput >= 1) {
+                for (LaboratorySection labSection : draft.get(userNumberInput - 1).getLaboratorySections()) {
+                    if (this.labSections.contains(labSection)) {
+                        this.labSections.remove(labSection);
+                        labSection.setNumberOfStudents(labSection.getNumberOfStudents() - 1);
+                        break;
+                    }
+                }
                 draft.remove(userNumberInput - 1);
                 removeCourseFromDraft();
             } else if (userNumberInput > draft.size() || userNumberInput < 0) {
