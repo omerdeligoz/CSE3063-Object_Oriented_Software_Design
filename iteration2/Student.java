@@ -464,7 +464,8 @@ public class Student extends Person implements IDisplayMenu {
             boolean status = true;
 
             for (Course prerequisite : course.getPreRequisiteCourses()) {
-                if ((mapGrade.get(prerequisite).getLast() == null
+                if ((!transcript.getStudentCourses().contains(prerequisite)
+                        || mapGrade.get(prerequisite).getLast() == null
                         || mapGrade.get(prerequisite).getLast().getLetterGrade().equals("FF")
                         || mapGrade.get(prerequisite).getLast().getLetterGrade().equals("FD"))) {
                     return false;
