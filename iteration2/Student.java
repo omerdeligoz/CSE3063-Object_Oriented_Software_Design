@@ -41,9 +41,9 @@ public class Student extends Person implements IDisplayMenu {
     public void sendRequest() {
         ConsoleColours.paintYellowMenu();
         if (hasRequest) {
-            logger.warn("Student " + this.getID() + " already has a request waiting for " + advisor.getID() + "'s approval.");
             System.out.println("You already have a request waiting for approval.");
             ConsoleColours.resetColour();
+            logger.warn("Student " + this.getID() + " already has a request waiting for " + advisor.getID() + "'s approval.");
             System.out.println();
         } else if (draft.isEmpty()) {
             System.out.println("Your draft is empty!");
