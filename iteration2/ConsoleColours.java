@@ -201,23 +201,18 @@ public class ConsoleColours {
     public static void resetColour() {
         System.out.print(ANSI_RESET);
     }
-
     public static void paintBlueMenu() {
         System.out.print(ANSI_BLUE_BACKGROUND + ANSI_WHITE_BRIGHT);
     }
-
     public static void paintRedMenu() {
         System.out.print(ANSI_RED_BACKGROUND + ANSI_WHITE_BRIGHT);
     }
-
     public static void paintYellowMenu() {
         System.out.print(ANSI_YELLOW_BACKGROUND + ANSI_WHITE_BRIGHT);
     }
-
     public static void paintGreenMenu() {
         System.out.print(ANSI_GREEN_BACKGROUND + ANSI_WHITE_BRIGHT);
     }
-
     public static void paintPurpleMenu() {
         System.out.print(ANSI_PURPLE_BACKGROUND + ANSI_WHITE_BRIGHT);
     }
