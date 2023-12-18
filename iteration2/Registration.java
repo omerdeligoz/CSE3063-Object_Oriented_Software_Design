@@ -1,5 +1,6 @@
 package iteration2;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -98,7 +99,6 @@ public class Registration {
         student.setHasRequest(false);
         student.getDraft().clear();
 
-        //!!
         (new Notification(student, "Your request has been rejected.")).sendNotification();
     }
 

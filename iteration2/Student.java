@@ -53,6 +53,7 @@ public class Student extends Person implements IDisplayMenu {
         } else {
             Registration registration = new Registration(this, draft);
             registration.addRequest(advisor);
+            logger.info("Student " + this.getID() + " sent a request to advisor " + advisor.getID() + ".");
         }
     }
 

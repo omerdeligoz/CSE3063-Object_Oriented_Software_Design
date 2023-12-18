@@ -3,7 +3,7 @@
     <Appenders>
         <RollingFile name="File" filePattern="iteration2/logs/%d{yyyy-MM-dd_HH-mm-ss}.log">
             <PatternLayout>
-                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level - %m%n</Pattern>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %C{1}.%M - %m%n</Pattern>
             </PatternLayout>
             <Policies>
                 <OnStartupTriggeringPolicy/>
