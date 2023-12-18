@@ -1,15 +1,15 @@
 {
-  "studentID": 150120047,
-  "name": "Süleyman",
-  "surname": "Alemdar",
-  "cgpa": 2.64,
+  "studentID": 150120003,
+  "name": "Duru",
+  "surname": "Yavuz",
+  "cgpa": 2.61,
   "takenCredits": 18,
   "completedCredits": 18,
   "semester": 5,
   "courses": [
     {
       "courseCode": "MATH1001",
-      "letterGrade": "BA"
+      "letterGrade": "AA"
     },
     {
       "courseCode": "CSE1200",
@@ -17,7 +17,7 @@
     },
     {
       "courseCode": "CSE1241",
-      "letterGrade": "BB"
+      "letterGrade": "AA"
     },
     {
       "courseCode": "PHYS1101",
@@ -53,7 +53,7 @@
     },
     {
       "courseCode": "PHYS1102",
-      "letterGrade": "FF"
+      "letterGrade": "CB"
     },
     {
       "courseCode": "ATA122",
@@ -61,7 +61,7 @@
     },
     {
       "courseCode": "MATH2256",
-      "letterGrade": "FF"
+      "letterGrade": "BB"
     },
     {
       "courseCode": "TRD122",
@@ -73,11 +73,11 @@
     },
     {
       "courseCode": "CSE2225",
-      "letterGrade": "DC"
+      "letterGrade": "AA"
     },
     {
       "courseCode": "CSE2023",
-      "letterGrade": "CC"
+      "letterGrade": "AA"
     },
     {
       "courseCode": "EE2031",
@@ -85,23 +85,19 @@
     },
     {
       "courseCode": "ECON2004",
-      "letterGrade": "DD"
+      "letterGrade": "CC"
     },
     {
       "courseCode": "MATH2055",
       "letterGrade": "AA"
     },
     {
-      "courseCode": "CSE2246",
-      "letterGrade": "BA"
-    },
-    {
       "courseCode": "CSE2260",
-      "letterGrade": "FF"
+      "letterGrade": "BB"
     },
     {
       "courseCode": "EE2032",
-      "letterGrade": "AA"
+      "letterGrade": "CC"
     },
     {
       "courseCode": "CSE2138",
@@ -109,7 +105,7 @@
     },
     {
       "courseCode": "STAT2253",
-      "letterGrade": "BA"
+      "letterGrade": "AA"
     }
   ]
 }

@@ -2,9 +2,9 @@
   "studentID": 150120097,
   "name": "Ali",
   "surname": "Yeşil",
-  "cgpa": 2.53,
-  "takenCredits": 176,
-  "completedCredits": 145,
+  "cgpa": 1.39,
+  "takenCredits": 28,
+  "completedCredits": 11,
   "semester": 7,
   "courses": [
     {
@@ -144,16 +144,8 @@
       "letterGrade": "CC"
     },
     {
-      "courseCode": "CSE3038",
-      "letterGrade": "BA"
-    },
-    {
       "courseCode": "CSE3048",
       "letterGrade": "CB"
-    },
-    {
-      "courseCode": "IE3235",
-      "letterGrade": null
     }
   ]
 }

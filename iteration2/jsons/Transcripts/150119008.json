@@ -1,11 +1,11 @@
 {
-  "studentID": 150120047,
-  "name": "Süleyman",
-  "surname": "Alemdar",
-  "cgpa": 2.64,
-  "takenCredits": 18,
-  "completedCredits": 18,
-  "semester": 5,
+  "studentID": 150119008,
+  "name": "Naz",
+  "surname": "Okçuoğlu",
+  "cgpa": 1.39,
+  "takenCredits": 28,
+  "completedCredits": 11,
+  "semester": 7,
   "courses": [
     {
       "courseCode": "MATH1001",
@@ -21,11 +21,11 @@
     },
     {
       "courseCode": "PHYS1101",
-      "letterGrade": "BA"
+      "letterGrade": "BB"
     },
     {
       "courseCode": "MBG1201",
-      "letterGrade": "DC"
+      "letterGrade": "AA"
     },
     {
       "courseCode": "ATA121",
@@ -53,7 +53,7 @@
     },
     {
       "courseCode": "PHYS1102",
-      "letterGrade": "FF"
+      "letterGrade": "DC"
     },
     {
       "courseCode": "ATA122",
@@ -61,7 +61,7 @@
     },
     {
       "courseCode": "MATH2256",
-      "letterGrade": "FF"
+      "letterGrade": "AA"
     },
     {
       "courseCode": "TRD122",
@@ -89,7 +89,7 @@
     },
     {
       "courseCode": "MATH2055",
-      "letterGrade": "AA"
+      "letterGrade": "DC"
     },
     {
       "courseCode": "CSE2246",
@@ -105,11 +105,55 @@
     },
     {
       "courseCode": "CSE2138",
-      "letterGrade": "FF"
+      "letterGrade": "DC"
     },
     {
       "courseCode": "STAT2253",
       "letterGrade": "BA"
+    },
+    {
+      "courseCode": "CSE3055",
+      "letterGrade": "BB"
+    },
+    {
+      "courseCode": "CSE3033",
+      "letterGrade": "BA"
+    },
+    {
+      "courseCode": "CSE3063",
+      "letterGrade": "AA"
+    },
+    {
+      "courseCode": "CSE3215",
+      "letterGrade": "AA"
+    },
+    {
+      "courseCode": "IE3081",
+      "letterGrade": "BA"
+    },
+    {
+      "courseCode": "COM2202",
+      "letterGrade": "CB"
+    },
+    {
+      "courseCode": "CSE3044",
+      "letterGrade": "BA"
+    },
+    {
+      "courseCode": "CSE3264",
+      "letterGrade": "CC"
+    },
+    {
+      "courseCode": "CSE3038",
+      "letterGrade": "FF"
+    },
+    {
+      "courseCode": "CSE3048",
+      "letterGrade": "FF"
+    },
+    {
+      "courseCode": "IE3235",
+      "letterGrade": "AA"
     }
   ]
 }

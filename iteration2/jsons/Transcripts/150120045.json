@@ -2,9 +2,9 @@
   "studentID": 150120045,
   "name": "Enes",
   "surname": "Demir",
-  "cgpa": 2.62,
-  "takenCredits": 111,
-  "completedCredits": 104,
+  "cgpa": 2.61,
+  "takenCredits": 18,
+  "completedCredits": 18,
   "semester": 5,
   "courses": [
     {

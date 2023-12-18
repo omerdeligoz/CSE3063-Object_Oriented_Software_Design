@@ -1,31 +1,31 @@
 {
-  "studentID": 150120047,
-  "name": "Süleyman",
-  "surname": "Alemdar",
-  "cgpa": 2.64,
+  "studentID": 150120004,
+  "name": "Melda",
+  "surname": "Yanar",
+  "cgpa": 2.61,
   "takenCredits": 18,
   "completedCredits": 18,
   "semester": 5,
   "courses": [
     {
       "courseCode": "MATH1001",
-      "letterGrade": "BA"
+      "letterGrade": "AA"
     },
     {
       "courseCode": "CSE1200",
-      "letterGrade": "CC"
+      "letterGrade": "AA"
     },
     {
       "courseCode": "CSE1241",
-      "letterGrade": "BB"
+      "letterGrade": "AA"
     },
     {
       "courseCode": "PHYS1101",
-      "letterGrade": "BA"
+      "letterGrade": "AA"
     },
     {
       "courseCode": "MBG1201",
-      "letterGrade": "DC"
+      "letterGrade": "AA"
     },
     {
       "courseCode": "ATA121",
@@ -37,11 +37,11 @@
     },
     {
       "courseCode": "PHYS1103",
-      "letterGrade": "BA"
+      "letterGrade": "AA"
     },
     {
       "courseCode": "MATH1002",
-      "letterGrade": "DD"
+      "letterGrade": "AA"
     },
     {
       "courseCode": "PHYS1104",
@@ -49,11 +49,11 @@
     },
     {
       "courseCode": "CSE1242",
-      "letterGrade": "BA"
+      "letterGrade": "AA"
     },
     {
       "courseCode": "PHYS1102",
-      "letterGrade": "FF"
+      "letterGrade": "AA"
     },
     {
       "courseCode": "ATA122",
@@ -61,43 +61,39 @@
     },
     {
       "courseCode": "MATH2256",
-      "letterGrade": "FF"
+      "letterGrade": "AA"
     },
     {
       "courseCode": "TRD122",
-      "letterGrade": "BA"
+      "letterGrade": "AA"
     },
     {
       "courseCode": "MATH2059",
-      "letterGrade": "BA"
+      "letterGrade": "AA"
     },
     {
       "courseCode": "CSE2225",
-      "letterGrade": "DC"
+      "letterGrade": "AA"
     },
     {
       "courseCode": "CSE2023",
-      "letterGrade": "CC"
+      "letterGrade": "AA"
     },
     {
       "courseCode": "EE2031",
-      "letterGrade": "BA"
+      "letterGrade": "AA"
     },
     {
       "courseCode": "ECON2004",
-      "letterGrade": "DD"
+      "letterGrade": "AA"
     },
     {
       "courseCode": "MATH2055",
       "letterGrade": "AA"
     },
     {
-      "courseCode": "CSE2246",
-      "letterGrade": "BA"
-    },
-    {
       "courseCode": "CSE2260",
-      "letterGrade": "FF"
+      "letterGrade": "AA"
     },
     {
       "courseCode": "EE2032",
@@ -105,11 +101,11 @@
     },
     {
       "courseCode": "CSE2138",
-      "letterGrade": "FF"
+      "letterGrade": "AA"
     },
     {
       "courseCode": "STAT2253",
-      "letterGrade": "BA"
+      "letterGrade": "AA"
     }
   ]
 }
