@@ -1,5 +1,8 @@
 package iteration2;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +22,8 @@ public class Student extends Person implements IDisplayMenu {
     private List<LaboratorySection> labSections;
     private Course[][] schedule;
 
+    private static final Logger logger = LogManager.getLogger(Student.class);
+
     //Implement Constructor
     public Student(int studentID, String name, String surname, String userName, String password, byte semester) {
         super(studentID, name, surname, userName, password);
@@ -37,6 +42,7 @@ public class Student extends Person implements IDisplayMenu {
     public void sendRequest() {
         ConsoleColours.paintYellowMenu();
         if (hasRequest) {
+            logger.warn("Student " + this.getID() + " already has a request waiting for " + advisor.getID() + "'s approval.");
             System.out.println("You already have a request waiting for approval.");
             ConsoleColours.resetColour();
             System.out.println();
@@ -118,7 +124,7 @@ public class Student extends Person implements IDisplayMenu {
                 System.out.println("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨\n");
                 System.out.println("      Back -> 0");
                 System.out.println("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
-                System.out.println("Here is the available courses to drop:");
+                System.out.println("Here is the available courses to add:");
                 System.out.println("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
                 ConsoleColours.paintPurpleMenu();
                 break;
@@ -128,7 +134,7 @@ public class Student extends Person implements IDisplayMenu {
                 System.out.println("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨\n");
                 System.out.println("       Back -> 0");
                 System.out.println("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
-                System.out.println("Here is the available courses to add:");
+                System.out.println("Here is the available courses to drop:");
                 System.out.println("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨");
                 ConsoleColours.paintPurpleMenu();
                 break;
@@ -141,6 +147,7 @@ public class Student extends Person implements IDisplayMenu {
         //If a request has been sent, terminate the function.
         if (hasRequest) {
             ConsoleColours.paintRedMenu();
+            logger.warn("Student " + this.getID() + " can not add lecture because he/she has a request waiting for " + advisor.getID() + "'s approval.");
             System.out.println("You can not add lecture because you have a request waiting for approval.");
             return;
         }
@@ -199,11 +206,13 @@ public class Student extends Person implements IDisplayMenu {
 
             if (userNumberInput1 <= availableCoursesToAdd.size() && userNumberInput1 >= 1) {
                 chooseLabSection(availableCoursesToAdd.get(userNumberInput1 - 1)); // TODO add
+                logger.info("Student " + this.getID() + " added " + availableCoursesToAdd.get(userNumberInput1 - 1).getCourseCode() + " to draft.");
                 draft.add(availableCoursesToAdd.get(userNumberInput1 - 1));
                 availableCoursesToAdd.remove(userNumberInput1 - 1);
                 if (!availableCoursesToAdd.isEmpty()) addMandatoryCourse();
             } else if (userNumberInput1 > availableCoursesToAdd.size() || userNumberInput1 < 0) {
                 ConsoleColours.paintRedMenu();
+                logger.warn("Student " + this.getID() + " entered invalid input.");
                 System.out.println("Invalid input, please enter a valid number");
                 addMandatoryCourse();
             } else return;
@@ -268,6 +277,7 @@ public class Student extends Person implements IDisplayMenu {
 
             if (userNumberInput1 <= availableCoursesToAdd.size() && userNumberInput1 >= 1) {
                 draft.add(availableCoursesToAdd.get(userNumberInput1 - 1));
+                logger.info("Student " + this.getID() + " added " + availableCoursesToAdd.get(userNumberInput1 - 1).getCourseCode() + " to draft.");
                 availableCoursesToAdd.remove(userNumberInput1 - 1);
                 if (!availableCoursesToAdd.isEmpty()) addTechnicalElective();
             } else if (userNumberInput1 > availableCoursesToAdd.size() || userNumberInput1 < 0) {
@@ -329,6 +339,7 @@ public class Student extends Person implements IDisplayMenu {
 
             if (userNumberInput1 <= availableCoursesToAdd.size() && userNumberInput1 >= 1) {
                 draft.add(availableCoursesToAdd.get(userNumberInput1 - 1));
+                logger.info("Student " + this.getID() + " added " + availableCoursesToAdd.get(userNumberInput1 - 1).getCourseCode() + " to draft.");
                 availableCoursesToAdd.remove(userNumberInput1 - 1);
                 if (!availableCoursesToAdd.isEmpty()) addFacultyTechnicalElective();
             } else if (userNumberInput1 > availableCoursesToAdd.size() || userNumberInput1 < 0) {
@@ -363,6 +374,7 @@ public class Student extends Person implements IDisplayMenu {
 
             if (userNumberInput1 <= availableCoursesToAdd.size() && userNumberInput1 >= 1) {
                 draft.add(availableCoursesToAdd.get(userNumberInput1 - 1));
+                logger.info("Student " + this.getID() + " added " + availableCoursesToAdd.get(userNumberInput1 - 1).getCourseCode() + " to draft.");
                 availableCoursesToAdd.remove(userNumberInput1 - 1);
                 if (!availableCoursesToAdd.isEmpty()) addNonTechnicalElective();
             } else if (userNumberInput1 > availableCoursesToAdd.size() || userNumberInput1 < 0) {
@@ -445,6 +457,7 @@ public class Student extends Person implements IDisplayMenu {
 
             if (userNumberInput <= availableCoursesToDrop.size() && userNumberInput >= 1) {
                 draft.add(availableCoursesToDrop.get(userNumberInput - 1));
+                logger.info("Student " + this.getID() + " added " + availableCoursesToDrop.get(userNumberInput - 1).getCourseCode() + " to draft.");
                 availableCoursesToDrop.remove(userNumberInput - 1);
                 if (!availableCoursesToDrop.isEmpty()) addCourseToDrop();
             } else if (userNumberInput > availableCoursesToDrop.size() || userNumberInput < 0) {
@@ -536,7 +549,6 @@ public class Student extends Person implements IDisplayMenu {
                     if (!transcript.getStudentCourses().contains(courseToAdd)
                             || (transcript.getCourseGradeMap().get(courseToAdd).getLast() != null && transcript.getCourseGradeMap().get(courseToAdd).getLast().getLetterGrade().equals("DZ"))) {
                         return true;
-
                     }
                 }
             }
@@ -570,6 +582,7 @@ public class Student extends Person implements IDisplayMenu {
         int numberOfCourses = calculateNumberOfCourses();
         if (numberOfCourses >= getDepartment().getMaxCourseNumber()) {
             ConsoleColours.paintRedMenu();
+            logger.warn("Student " + this.getID() + " reached the maximum number of courses.");
             System.out.println("Limit Reached! You can take at most " + this.getDepartment().getMaxCourseNumber() + " courses.");
             return true;
         }
@@ -595,6 +608,7 @@ public class Student extends Person implements IDisplayMenu {
         // Check if the student has already sent a request
         if (hasRequest) {
             ConsoleColours.paintRedMenu();
+            logger.warn("Student " + this.getID() + " can not remove lecture because he/she has a request waiting for " + advisor.getID() + "'s approval.");
             System.out.println("You can not remove lecture because you have a request waiting for approval.");
             return;
         }
@@ -634,9 +648,11 @@ public class Student extends Person implements IDisplayMenu {
                     }
                 }
                 draft.remove(userNumberInput - 1);
+                logger.info("Student " + this.getID() + " removed " + draft.get(userNumberInput - 1).getCourseCode() + " from draft.");
                 removeCourseFromDraft();
             } else if (userNumberInput > draft.size() || userNumberInput < 0) {
                 ConsoleColours.paintRedMenu();
+                logger.warn("Student " + this.getID() + " entered invalid input.");
                 System.out.println("Invalid input, please enter a number");
                 removeCourseFromDraft();
             }
@@ -648,6 +664,7 @@ public class Student extends Person implements IDisplayMenu {
     public void showRequestStatus() {
         ConsoleColours.paintYellowMenu();
         if (hasRequest) {
+            logger.info("Student " + this.getID() + " has a request waiting for " + advisor.getID() + "'s approval.");
             System.out.println("Your request is waiting for advisor approval.");
         } else {
             System.out.println("There is no waiting request!");
