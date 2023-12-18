@@ -1,8 +1,5 @@
 package iteration2;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -15,7 +12,6 @@ public class Advisor extends Lecturer implements IDisplayMenu {
     private List<Registration> requestList;
     private int requestNumber;
     private Notification notification;
-    private static final Logger LOGGER = LogManager.getLogger(Advisor.class);
 
 
     /**
@@ -31,8 +27,6 @@ public class Advisor extends Lecturer implements IDisplayMenu {
         super(ID, name, surname, userName, password);
         studentsAdvised = new ArrayList<>();
         requestList = new ArrayList<>();
-        LOGGER.info("Advisor created with ID: {}", ID);
-
     }
 
     /**
