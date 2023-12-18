@@ -2,18 +2,34 @@
   "studentID": 150121073,
   "name": "Tuğba",
   "surname": "Yaşar",
-  "cgpa": 3.77,
-  "takenCredits": 22,
-  "completedCredits": 22,
+  "cgpa": 2.36,
+  "takenCredits": 58,
+  "completedCredits": 48,
   "semester": 3,
   "courses": [
+    {
+      "courseCode": "MATH2256",
+      "letterGrade": "BA"
+    },
+    {
+      "courseCode": "MBG1201",
+      "letterGrade": "CB"
+    },
     {
       "courseCode": "MATH1001",
       "letterGrade": "DC"
     },
     {
+      "courseCode": "ATA121",
+      "letterGrade": "BB"
+    },
+    {
       "courseCode": "CSE1200",
       "letterGrade": "FF"
+    },
+    {
+      "courseCode": "MATH1002",
+      "letterGrade": "DD"
     },
     {
       "courseCode": "CSE1241",
@@ -24,35 +40,7 @@
       "letterGrade": "AA"
     },
     {
-      "courseCode": "MBG1201",
-      "letterGrade": "CB"
-    },
-    {
-      "courseCode": "ATA121",
-      "letterGrade": "BB"
-    },
-    {
-      "courseCode": "TRD121",
-      "letterGrade": "AA"
-    },
-    {
       "courseCode": "PHYS1103",
-      "letterGrade": "BA"
-    },
-    {
-      "courseCode": "MATH1002",
-      "letterGrade": "DD"
-    },
-    {
-      "courseCode": "PHYS1104",
-      "letterGrade": "AA"
-    },
-    {
-      "courseCode": "CSE1242",
-      "letterGrade": "FD"
-    },
-    {
-      "courseCode": "PHYS1102",
       "letterGrade": "BA"
     },
     {
@@ -60,12 +48,24 @@
       "letterGrade": "AA"
     },
     {
-      "courseCode": "MATH2256",
+      "courseCode": "TRD121",
+      "letterGrade": "AA"
+    },
+    {
+      "courseCode": "PHYS1102",
       "letterGrade": "BA"
+    },
+    {
+      "courseCode": "CSE1242",
+      "letterGrade": "FD"
     },
     {
       "courseCode": "TRD122",
       "letterGrade": "BA"
+    },
+    {
+      "courseCode": "PHYS1104",
+      "letterGrade": "AA"
     }
   ]
 }

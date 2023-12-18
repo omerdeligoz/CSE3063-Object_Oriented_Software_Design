@@ -2,17 +2,33 @@
   "studentID": 150120004,
   "name": "Melda",
   "surname": "Yanar",
-  "cgpa": 2.61,
-  "takenCredits": 18,
-  "completedCredits": 18,
+  "cgpa": 4.0,
+  "takenCredits": 111,
+  "completedCredits": 111,
   "semester": 5,
   "courses": [
+    {
+      "courseCode": "MATH2256",
+      "letterGrade": "AA"
+    },
+    {
+      "courseCode": "CSE2138",
+      "letterGrade": "AA"
+    },
+    {
+      "courseCode": "ECON2004",
+      "letterGrade": "AA"
+    },
     {
       "courseCode": "MATH1001",
       "letterGrade": "AA"
     },
     {
-      "courseCode": "CSE1200",
+      "courseCode": "EE2032",
+      "letterGrade": "AA"
+    },
+    {
+      "courseCode": "MATH2059",
       "letterGrade": "AA"
     },
     {
@@ -24,6 +40,26 @@
       "letterGrade": "AA"
     },
     {
+      "courseCode": "PHYS1103",
+      "letterGrade": "AA"
+    },
+    {
+      "courseCode": "EE2031",
+      "letterGrade": "AA"
+    },
+    {
+      "courseCode": "STAT2253",
+      "letterGrade": "AA"
+    },
+    {
+      "courseCode": "PHYS1102",
+      "letterGrade": "AA"
+    },
+    {
+      "courseCode": "CSE2225",
+      "letterGrade": "AA"
+    },
+    {
       "courseCode": "MBG1201",
       "letterGrade": "AA"
     },
@@ -32,11 +68,11 @@
       "letterGrade": "AA"
     },
     {
-      "courseCode": "TRD121",
+      "courseCode": "CSE2260",
       "letterGrade": "AA"
     },
     {
-      "courseCode": "PHYS1103",
+      "courseCode": "CSE1200",
       "letterGrade": "AA"
     },
     {
@@ -44,47 +80,7 @@
       "letterGrade": "AA"
     },
     {
-      "courseCode": "PHYS1104",
-      "letterGrade": "AA"
-    },
-    {
-      "courseCode": "CSE1242",
-      "letterGrade": "AA"
-    },
-    {
-      "courseCode": "PHYS1102",
-      "letterGrade": "AA"
-    },
-    {
-      "courseCode": "ATA122",
-      "letterGrade": "AA"
-    },
-    {
-      "courseCode": "MATH2256",
-      "letterGrade": "AA"
-    },
-    {
-      "courseCode": "TRD122",
-      "letterGrade": "AA"
-    },
-    {
-      "courseCode": "MATH2059",
-      "letterGrade": "AA"
-    },
-    {
-      "courseCode": "CSE2225",
-      "letterGrade": "AA"
-    },
-    {
       "courseCode": "CSE2023",
-      "letterGrade": "AA"
-    },
-    {
-      "courseCode": "EE2031",
-      "letterGrade": "AA"
-    },
-    {
-      "courseCode": "ECON2004",
       "letterGrade": "AA"
     },
     {
@@ -92,19 +88,23 @@
       "letterGrade": "AA"
     },
     {
-      "courseCode": "CSE2260",
+      "courseCode": "ATA122",
       "letterGrade": "AA"
     },
     {
-      "courseCode": "EE2032",
+      "courseCode": "TRD121",
       "letterGrade": "AA"
     },
     {
-      "courseCode": "CSE2138",
+      "courseCode": "CSE1242",
       "letterGrade": "AA"
     },
     {
-      "courseCode": "STAT2253",
+      "courseCode": "TRD122",
+      "letterGrade": "AA"
+    },
+    {
+      "courseCode": "PHYS1104",
       "letterGrade": "AA"
     }
   ]

@@ -2,18 +2,34 @@
   "studentID": 150121002,
   "name": "Kaan",
   "surname": "Deveci",
-  "cgpa": 2.36,
-  "takenCredits": 18,
-  "completedCredits": 13,
+  "cgpa": 2.64,
+  "takenCredits": 58,
+  "completedCredits": 53,
   "semester": 3,
   "courses": [
+    {
+      "courseCode": "MATH2256",
+      "letterGrade": "FF"
+    },
+    {
+      "courseCode": "MBG1201",
+      "letterGrade": "AA"
+    },
     {
       "courseCode": "MATH1001",
       "letterGrade": "BA"
     },
     {
+      "courseCode": "ATA121",
+      "letterGrade": "AA"
+    },
+    {
       "courseCode": "CSE1200",
       "letterGrade": "CC"
+    },
+    {
+      "courseCode": "MATH1002",
+      "letterGrade": "DD"
     },
     {
       "courseCode": "CSE1241",
@@ -24,48 +40,32 @@
       "letterGrade": "BB"
     },
     {
-      "courseCode": "MBG1201",
-      "letterGrade": "AA"
-    },
-    {
-      "courseCode": "ATA121",
-      "letterGrade": "AA"
-    },
-    {
-      "courseCode": "TRD121",
-      "letterGrade": "BB"
-    },
-    {
       "courseCode": "PHYS1103",
       "letterGrade": "BA"
-    },
-    {
-      "courseCode": "MATH1002",
-      "letterGrade": "DD"
-    },
-    {
-      "courseCode": "PHYS1104",
-      "letterGrade": "AA"
-    },
-    {
-      "courseCode": "CSE1242",
-      "letterGrade": "BA"
-    },
-    {
-      "courseCode": "PHYS1102",
-      "letterGrade": "DC"
     },
     {
       "courseCode": "ATA122",
       "letterGrade": "CB"
     },
     {
-      "courseCode": "MATH2256",
-      "letterGrade": "FF"
+      "courseCode": "TRD121",
+      "letterGrade": "BB"
+    },
+    {
+      "courseCode": "PHYS1102",
+      "letterGrade": "DC"
+    },
+    {
+      "courseCode": "CSE1242",
+      "letterGrade": "BA"
     },
     {
       "courseCode": "TRD122",
       "letterGrade": "BA"
+    },
+    {
+      "courseCode": "PHYS1104",
+      "letterGrade": "AA"
     }
   ]
 }

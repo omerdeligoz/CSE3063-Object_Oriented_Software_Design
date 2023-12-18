@@ -2,18 +2,34 @@
   "studentID": 150121075,
   "name": "Polat",
   "surname": "Çakır",
-  "cgpa": 2.92,
-  "takenCredits": 33,
-  "completedCredits": 33,
+  "cgpa": 3.09,
+  "takenCredits": 58,
+  "completedCredits": 58,
   "semester": 3,
   "courses": [
+    {
+      "courseCode": "MATH2256",
+      "letterGrade": "BA"
+    },
+    {
+      "courseCode": "MBG1201",
+      "letterGrade": "DC"
+    },
     {
       "courseCode": "MATH1001",
       "letterGrade": "BA"
     },
     {
+      "courseCode": "ATA121",
+      "letterGrade": "AA"
+    },
+    {
       "courseCode": "CSE1200",
       "letterGrade": "CC"
+    },
+    {
+      "courseCode": "MATH1002",
+      "letterGrade": "BB"
     },
     {
       "courseCode": "CSE1241",
@@ -24,35 +40,7 @@
       "letterGrade": "BA"
     },
     {
-      "courseCode": "MBG1201",
-      "letterGrade": "DC"
-    },
-    {
-      "courseCode": "ATA121",
-      "letterGrade": "AA"
-    },
-    {
-      "courseCode": "TRD121",
-      "letterGrade": "AA"
-    },
-    {
       "courseCode": "PHYS1103",
-      "letterGrade": "BA"
-    },
-    {
-      "courseCode": "MATH1002",
-      "letterGrade": "BB"
-    },
-    {
-      "courseCode": "PHYS1104",
-      "letterGrade": "AA"
-    },
-    {
-      "courseCode": "CSE1242",
-      "letterGrade": "CB"
-    },
-    {
-      "courseCode": "PHYS1102",
       "letterGrade": "BA"
     },
     {
@@ -60,12 +48,24 @@
       "letterGrade": "AA"
     },
     {
-      "courseCode": "MATH2256",
+      "courseCode": "TRD121",
+      "letterGrade": "AA"
+    },
+    {
+      "courseCode": "PHYS1102",
       "letterGrade": "BA"
+    },
+    {
+      "courseCode": "CSE1242",
+      "letterGrade": "CB"
     },
     {
       "courseCode": "TRD122",
       "letterGrade": "BA"
+    },
+    {
+      "courseCode": "PHYS1104",
+      "letterGrade": "AA"
     }
   ]
 }

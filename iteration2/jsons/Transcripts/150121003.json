@@ -2,18 +2,50 @@
   "studentID": 150121003,
   "name": "Yağmur",
   "surname": "Sever",
-  "cgpa": 2.36,
-  "takenCredits": 18,
-  "completedCredits": 13,
+  "cgpa": 2.43,
+  "takenCredits": 45,
+  "completedCredits": 39,
   "semester": 3,
   "courses": [
+    {
+      "courseCode": "MBG1201",
+      "letterGrade": "DC"
+    },
+    {
+      "courseCode": "PHYS1103",
+      "letterGrade": "BA"
+    },
     {
       "courseCode": "MATH1001",
       "letterGrade": "BA"
     },
     {
+      "courseCode": "ATA121",
+      "letterGrade": "BB"
+    },
+    {
+      "courseCode": "ATA122",
+      "letterGrade": "AA"
+    },
+    {
+      "courseCode": "TRD121",
+      "letterGrade": "AA"
+    },
+    {
       "courseCode": "CSE1200",
       "letterGrade": "CC"
+    },
+    {
+      "courseCode": "PHYS1102",
+      "letterGrade": "DC"
+    },
+    {
+      "courseCode": "CSE1242",
+      "letterGrade": "FF"
+    },
+    {
+      "courseCode": "PHYS1104",
+      "letterGrade": "AA"
     },
     {
       "courseCode": "CSE1241",
@@ -22,38 +54,6 @@
     {
       "courseCode": "PHYS1101",
       "letterGrade": "BB"
-    },
-    {
-      "courseCode": "MBG1201",
-      "letterGrade": "DC"
-    },
-    {
-      "courseCode": "ATA121",
-      "letterGrade": "BB"
-    },
-    {
-      "courseCode": "TRD121",
-      "letterGrade": "AA"
-    },
-    {
-      "courseCode": "PHYS1103",
-      "letterGrade": "BA"
-    },
-    {
-      "courseCode": "PHYS1104",
-      "letterGrade": "AA"
-    },
-    {
-      "courseCode": "CSE1242",
-      "letterGrade": "FF"
-    },
-    {
-      "courseCode": "PHYS1102",
-      "letterGrade": "DC"
-    },
-    {
-      "courseCode": "ATA122",
-      "letterGrade": "AA"
     }
   ]
 }
