@@ -157,7 +157,7 @@ public class JSONReader {
 
             // Create a new Course object with the retrieved details.
             Course course1 = new Course(courseName, courseCode, courseType, courseCredit, semester, capacity, hour, day);
-            logger.info("Course " + courseName + " created.");
+            logger.info("Course " + courseCode + " created.");
 
             // Add the new Course object to the department's list of courses.
             department.getCourses().add(course1);

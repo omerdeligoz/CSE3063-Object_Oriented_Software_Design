@@ -10,6 +10,7 @@ import java.util.Map;
 //Inherits from the Person class and implements the ILogin interface
 public class Student extends Person implements IDisplayMenu {
 
+    private static final Logger logger = LogManager.getLogger(Student.class);
     //All attributes
     private Advisor advisor;
     private Transcript transcript;
@@ -21,8 +22,6 @@ public class Student extends Person implements IDisplayMenu {
     private List<Course> availableCoursesToDrop;
     private List<LaboratorySection> labSections;
     private Course[][] schedule;
-
-    private static final Logger logger = LogManager.getLogger(Student.class);
 
     //Implement Constructor
     public Student(int studentID, String name, String surname, String userName, String password, byte semester) {
@@ -186,6 +185,7 @@ public class Student extends Person implements IDisplayMenu {
     }
 
     private void addMandatoryCourse() {
+        if (maxCoursesReached()) return;
         computeAvailableMandatoryCourses();
 
         if (availableCoursesToAdd.isEmpty()) {
@@ -206,7 +206,7 @@ public class Student extends Person implements IDisplayMenu {
             int userNumberInput1 = (new CourseRegistrationSystem()).getInput();
 
             if (userNumberInput1 <= availableCoursesToAdd.size() && userNumberInput1 >= 1) {
-                chooseLabSection(availableCoursesToAdd.get(userNumberInput1 - 1)); // TODO add
+                chooseLabSection(availableCoursesToAdd.get(userNumberInput1 - 1));
                 logger.info("Student " + this.getID() + " added " + availableCoursesToAdd.get(userNumberInput1 - 1).getCourseCode() + " to draft.");
                 draft.add(availableCoursesToAdd.get(userNumberInput1 - 1));
                 availableCoursesToAdd.remove(userNumberInput1 - 1);
@@ -222,10 +222,10 @@ public class Student extends Person implements IDisplayMenu {
 
     private void chooseLabSection(Course course) {
         if (course.getLaboratorySections().isEmpty()) return;
-        //TODO add menu
-
         List<LaboratorySection> availableLabSections = new ArrayList<>();
-
+        ConsoleColours.paintBlueMenu();
+        System.out.println("Here is the available laboratory sections to add:");
+        ConsoleColours.paintPurpleMenu();
         for (LaboratorySection labSection : course.getLaboratorySections()) {
             Course labCourse = new Course(null, labSection.getLaboratorySectionCode(), null, 0, (byte) 0, 0, labSection.getHour(), labSection.getDay());
             if (hasCourseOverlap(labCourse, true)
@@ -240,7 +240,7 @@ public class Student extends Person implements IDisplayMenu {
             System.out.println((i + 1) + ". " + labSection.getLaboratorySectionCode());
             System.out.println("´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´");
         }
-        System.out.print("Choose number between 1 to " + availableLabSections.size() + " to add course: \n");
+        System.out.print("Choose number between 1 to " + availableLabSections.size() + " to add laboratory section: \n");
         int userNumberInput = (new CourseRegistrationSystem()).getInput();
 
         if (userNumberInput <= availableLabSections.size() && userNumberInput >= 1) {
@@ -249,6 +249,7 @@ public class Student extends Person implements IDisplayMenu {
         } else if (userNumberInput > availableCoursesToAdd.size() || userNumberInput <= 0) {
             ConsoleColours.paintRedMenu();
             System.out.println("Invalid input, please enter a valid number");
+            ConsoleColours.resetColour();
             chooseLabSection(course);
         } else return;
 
@@ -257,7 +258,7 @@ public class Student extends Person implements IDisplayMenu {
     private void addTechnicalElective() {
         if (maxCoursesReached()) return;
 
-        computeTheAvailableTEAndFTECourses("TE");
+        computeAvailableTEAndFTECourses("TE");
 
         if (availableCoursesToAdd.isEmpty()) {
             ConsoleColours.paintRedMenu();
@@ -290,13 +291,12 @@ public class Student extends Person implements IDisplayMenu {
     }
 
 
-    private void computeTheAvailableTEAndFTECourses(String courseType) {
+    private void computeAvailableTEAndFTECourses(String courseType) {
         availableCoursesToAdd.clear();
         int sum = 0;
         Map<Course, List<Grade>> mapGrade = transcript.getCourseGradeMap();
 
         for (Course course : transcript.getStudentCourses()) {
-
             if (course.semester() > 6
                     || course.getCourseType().equals("NTE")
                     || mapGrade.get(course).getLast() == null
@@ -304,22 +304,28 @@ public class Student extends Person implements IDisplayMenu {
                 continue;
             }
             sum += course.getCourseCredit();
-
         }
 
         if (sum >= 155) {
             for (Course course : this.getDepartment().getCourses()) {
-                if (course.getCourseType().equals((courseType))) {
+                if (!course.getCourseType().equals(courseType)
+                        || !course.hasCapacity()
+                        || hasCourseOverlap(course, false)
+                        || (semester < course.semester() && transcript.getCgpa() < 3)
+                        || draft.contains(course)
+                        || !checkThePrerequisiteAndCourseThatWasTaken(course)
+                        || (course.semester() % 2 != this.semester % 2)) {
+                    continue;
+                } else {
                     availableCoursesToAdd.add(course);
                 }
             }
-
         }
     }
 
     private void addFacultyTechnicalElective() {
         if (maxCoursesReached()) return;
-        computeTheAvailableTEAndFTECourses("FTE");
+        computeAvailableTEAndFTECourses("FTE");
 
         if (availableCoursesToAdd.isEmpty()) {
             ConsoleColours.paintRedMenu();
@@ -354,7 +360,7 @@ public class Student extends Person implements IDisplayMenu {
 
     private void addNonTechnicalElective() {
         if (maxCoursesReached()) return;
-        computeTheNTECourses();
+        computeAvailableNTECourses();
 
         if (availableCoursesToAdd.isEmpty()) {
             ConsoleColours.paintRedMenu();
@@ -388,7 +394,7 @@ public class Student extends Person implements IDisplayMenu {
 
     }
 
-    private void computeTheNTECourses() {
+    private void computeAvailableNTECourses() {
         availableCoursesToAdd.clear();
 
         for (Course course : this.getDepartment().getCourses()) {
@@ -398,21 +404,17 @@ public class Student extends Person implements IDisplayMenu {
                     || (semester < course.semester() && transcript.getCgpa() < 3)
                     || draft.contains(course)
                     || !checkThePrerequisiteAndCourseThatWasTaken(course)
-                    || maxCoursesReached()) {
+                    || (course.semester() % 2 != this.semester % 2)) {
                 continue;
             } else {
                 availableCoursesToAdd.add(course);
             }
-
         }
     }
 
     private void computeAvailableMandatoryCourses() {
         availableCoursesToAdd.clear();
-        if (maxCoursesReached()) {
-            return;
-        }
-        //Kapasite
+
         //If no capacity, has overlap, (student's semester is less than course's semester and student has CGPA that is
         //less than 3) or course is in draft; continue.
         for (Course course : this.getDepartment().getCourses()) {
@@ -422,18 +424,12 @@ public class Student extends Person implements IDisplayMenu {
                     || (semester < course.semester() && transcript.getCgpa() < 3)
                     || draft.contains(course)
                     || !checkThePrerequisiteAndCourseThatWasTaken(course)
-                    || maxCoursesReached()) {
+                    || (course.semester() % 2 != this.semester % 2)) {
                 continue;
             } else {
                 availableCoursesToAdd.add(course);
             }
-
-
         }
-        //alttan ff fd dc dd durumu  -
-        //Üstten ortalamanın 3.00 dan büyük olması -
-        //TODO eğer labı varsa lablarından birini seçmek zorunda(mandatory)
-        //öğrencinin semesterı büyük eşit olmalı
     }
 
     private void addCourseToDrop() {
@@ -648,8 +644,8 @@ public class Student extends Person implements IDisplayMenu {
                         break;
                     }
                 }
-                draft.remove(userNumberInput - 1);
                 logger.info("Student " + this.getID() + " removed " + draft.get(userNumberInput - 1).getCourseCode() + " from draft.");
+                draft.remove(userNumberInput - 1);
                 removeCourseFromDraft();
             } else if (userNumberInput > draft.size() || userNumberInput < 0) {
                 ConsoleColours.paintRedMenu();
