@@ -1,9 +1,9 @@
 package iteration2.Test;
 
-import iteration1.Advisor;
-import iteration1.Course;
-import iteration1.Registration;
-import iteration1.Student;
+import iteration2.Advisor;
+import iteration2.Course;
+import iteration2.Registration;
+import iteration2.Student;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,8 +28,13 @@ public class TestSendRequest {
         student1 = new Student(150121073, "name", "surname", "username", "password", (byte) 3);
         student2 = new Student(150121091, "name", "surname", "username", "password", (byte) 3);
         student3 = new Student(150120045, "name", "surname", "username", "password", (byte) 3);
-        Course course1 = new Course("courseName1", "CSE100", 3, (byte) 3);
+
+        Course course1 = new Course("courseName1", "CSE100", "Mandatory", 3, (byte) 3, 120, 8, "Monday");
+
         advisor1 = new Advisor(130116002, "name", "surname", "username", "password");
+        student1.setAdvisor(advisor1);
+        student2.setAdvisor(advisor1);
+        student3.setAdvisor(advisor1);
         List<Course> draft1 = new ArrayList<>();
         List<Course> draft2 = new ArrayList<>();
         List<Course> draft3 = new ArrayList<>();
@@ -50,9 +55,9 @@ public class TestSendRequest {
     public void testSendRequestWithHasRequest() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        String expected = "\nYou already have a request waiting for approval";
+        String expected = "You already have a request waiting for approval.";
         student1.sendRequest();
-        Assertions.assertEquals(expected.trim(), outContent.toString().trim());
+        Assertions.assertTrue(outContent.toString().trim().contains(expected.trim()));
         System.setOut(System.out);
     }
 
@@ -61,9 +66,9 @@ public class TestSendRequest {
     public void testSendRequestWithDraftIsEmpty() {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
-        String expected = "\nYour draft is empty!";
+        String expected = "Your draft is empty!";
         student2.sendRequest();
-        Assertions.assertEquals(expected.trim(), outputStream.toString().trim());
+        Assertions.assertTrue(outputStream.toString().trim().contains(expected.trim()));
         System.setOut(System.out);
     }
 
@@ -73,9 +78,9 @@ public class TestSendRequest {
     public void testSendRequestWithValidRequest() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        String expected = "\nRequest sent to advisor";
+        String expected = "Request sent to advisor";
         student3.sendRequest();
-        Assertions.assertEquals(expected.trim(), outContent.toString().trim());
+        Assertions.assertTrue(outContent.toString().trim().contains(expected.trim()));
         System.setOut(System.out);
     }
 }

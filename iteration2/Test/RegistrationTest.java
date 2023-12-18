@@ -1,6 +1,6 @@
 package iteration2.Test;
 
-import iteration1.*;
+import iteration2.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,8 +20,8 @@ public class RegistrationTest {
     @BeforeEach
     void setUp() {
         student = new Student(150120000, "name", "surname", "username", "password", (byte) 3);
-        course1 = new Course("courseName1", "CSE100", 3, (byte) 3);
-        course2 = new Course("courseName2", "CSE101", 4, (byte) 3);
+        course1 = new Course("courseName1", "CSE100", "Mandatory", 3, (byte) 3, 120, 8, "Monday");
+        course2 = new Course("courseName2", "CSE101", "Mandatory", 4, (byte) 3, 120, 9, "Monday");
         courses = List.of(course1, course2);
         registration = new Registration(student, courses);
     }
