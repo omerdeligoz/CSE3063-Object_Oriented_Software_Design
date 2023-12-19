@@ -1,5 +1,4 @@
 package iteration2;
-
 /**
  * This interface is used to display menus.
  */

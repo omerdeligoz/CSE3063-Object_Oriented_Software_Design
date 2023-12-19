@@ -10,7 +10,7 @@ import java.util.Map;
 //Inherits from the Person class and implements the ILogin interface
 public class Student extends Person implements IDisplayMenu {
 
-    private static final Logger logger = LogManager.getLogger(Student.class);
+    private final Logger logger = LogManager.getLogger(Student.class);
     //All attributes
     private Advisor advisor;
     private Transcript transcript;
@@ -313,7 +313,7 @@ public class Student extends Person implements IDisplayMenu {
                         || hasCourseOverlap(course, false)
                         || (semester < course.semester() && transcript.getCgpa() < 3)
                         || draft.contains(course)
-                        || !checkThePrerequisiteAndCourseThatWasTaken(course)
+                        || !checkPrerequisiteAndCourseThatWasTaken(course)
                         || (course.semester() % 2 != this.semester % 2)) {
                     continue;
                 } else {
@@ -403,7 +403,7 @@ public class Student extends Person implements IDisplayMenu {
                     || hasCourseOverlap(course, false)
                     || (semester < course.semester() && transcript.getCgpa() < 3)
                     || draft.contains(course)
-                    || !checkThePrerequisiteAndCourseThatWasTaken(course)
+                    || !checkPrerequisiteAndCourseThatWasTaken(course)
                     || (course.semester() % 2 != this.semester % 2)) {
                 continue;
             } else {
@@ -423,7 +423,7 @@ public class Student extends Person implements IDisplayMenu {
                     || hasCourseOverlap(course, false)
                     || (semester < course.semester() && transcript.getCgpa() < 3)
                     || draft.contains(course)
-                    || !checkThePrerequisiteAndCourseThatWasTaken(course)
+                    || !checkPrerequisiteAndCourseThatWasTaken(course)
                     || (course.semester() % 2 != this.semester % 2)) {
                 continue;
             } else {
@@ -466,13 +466,10 @@ public class Student extends Person implements IDisplayMenu {
         }
     }
 
-    //TODO İsim bulunacak :D
-    private boolean checkThePrerequisiteAndCourseThatWasTaken(Course course) {
+    private boolean checkPrerequisiteAndCourseThatWasTaken(Course course) {
         Map<Course, List<Grade>> mapGrade = transcript.getCourseGradeMap();
-        //If student take the course for the first time, prerequisities is checked.
+        //If student take the course for the first time, prerequisites is checked.
         if (!mapGrade.containsKey(course)) {
-            boolean status = true;
-
             for (Course prerequisite : course.getPreRequisiteCourses()) {
                 if ((!transcript.getStudentCourses().contains(prerequisite)
                         || mapGrade.get(prerequisite).getLast() == null

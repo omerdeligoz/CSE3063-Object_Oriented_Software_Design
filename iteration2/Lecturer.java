@@ -9,7 +9,7 @@ public class Lecturer extends Person {
 
     //For creating lecturer with person abstract class.
     public Lecturer(int ID, String name, String surname) {
-        super(ID, name, surname, null, null);
+        super(ID, name, surname, null,null);
         lessonsTaught = new ArrayList<>();
     }
 

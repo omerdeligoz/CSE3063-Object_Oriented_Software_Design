@@ -216,9 +216,6 @@ public class ConsoleColours {
     public static void paintPurpleMenu() {
         System.out.print(ANSI_PURPLE_BACKGROUND + ANSI_WHITE_BRIGHT);
     }
-
-    public static void paintWhiteMenu() {
-        System.out.print(ANSI_BLACK + ANSI_WHITE_BRIGHT_BACKGROUND);
-    }
+    public static void paintWhiteMenu() { System.out.print(ANSI_BLACK + ANSI_WHITE_BRIGHT_BACKGROUND); }
 }
     

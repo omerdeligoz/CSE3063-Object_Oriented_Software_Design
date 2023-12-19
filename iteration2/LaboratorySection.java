@@ -12,16 +12,16 @@ public class LaboratorySection {
     private int hour;
     private String day;
 
+
     /**
      * Creates a new LaboratorySection object with the given parameters
-     *
-     * @param laboratorySectionCode the section's code
-     * @param capacity              the section's capacity
-     * @param hour                  the section's hour
-     * @param day                   the section's day
+     * @param laboratorySectionCode      the section's code
+     * @param capacity                   the section's capacity
+     * @param hour                       the section's hour
+     * @param day                        the section's day
      */
 
-    public LaboratorySection(String laboratorySectionCode, int capacity, int hour, String day) {
+   public LaboratorySection(String laboratorySectionCode, int capacity, int hour, String day) {
         this.laboratorySectionCode = laboratorySectionCode;
         this.capacity = capacity;
         this.hour = hour;
@@ -55,4 +55,6 @@ public class LaboratorySection {
     public void setNumberOfStudents(int numberOfStudents) {
         this.numberOfStudents = numberOfStudents;
     }
+
+  
 }

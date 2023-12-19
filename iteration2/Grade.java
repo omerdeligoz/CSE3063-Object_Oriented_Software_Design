@@ -1,18 +1,15 @@
 package iteration2;
-
 //All attributes
 public class Grade {
     private String letterGrade;
     private double gradeOver4;
     private int gradeOver100;
-
     //Implement Constructor
     public Grade(String letterGrade) {
         this.letterGrade = letterGrade;
         setGradeOver4();
         setGradeOver100();
     }
-
     //This method is used for set the letter grade as a number 100, 90, 80 etc.
     private void setGradeOver100() {
         switch (letterGrade) {
@@ -45,7 +42,6 @@ public class Grade {
                 break;
         }
     }
-
     //This method is used for set the letter grade as a number 4.0, 3.5, 3.0 etc.
     private void setGradeOver4() {
         switch (letterGrade) {
@@ -78,7 +74,6 @@ public class Grade {
                 break;
         }
     }
-
     public String getLetterGrade() {
         return letterGrade;
     }

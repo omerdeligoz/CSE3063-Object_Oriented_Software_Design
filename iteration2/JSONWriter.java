@@ -17,7 +17,7 @@ public class JSONWriter {
     private ObjectMapper objectMapper;
 
     private JsonNode jsonNode;
-    private static final Logger logger = LogManager.getLogger(JSONWriter.class);
+    private final Logger logger = LogManager.getLogger(JSONWriter.class);
 
     /**
      * Starts the process with the given department and writes the result to a JSON file.
