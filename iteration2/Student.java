@@ -246,7 +246,7 @@ public class Student extends Person implements IDisplayMenu {
         if (userNumberInput <= availableLabSections.size() && userNumberInput >= 1) {
             this.labSections.add(availableLabSections.get(userNumberInput - 1));
             availableLabSections.get(userNumberInput - 1).setNumberOfStudents(availableLabSections.get(userNumberInput - 1).getNumberOfStudents() + 1);
-        } else if (userNumberInput > availableCoursesToAdd.size() || userNumberInput <= 0) {
+        } else if (userNumberInput > availableLabSections.size() || userNumberInput <= 0) {
             ConsoleColours.paintRedMenu();
             System.out.println("Invalid input, please enter a valid number");
             ConsoleColours.resetColour();
@@ -756,5 +756,9 @@ public class Student extends Person implements IDisplayMenu {
 
     public Course[][] getSchedule() {
         return schedule;
+    }
+
+    public List<LaboratorySection> getLabSections() {
+        return labSections;
     }
 }

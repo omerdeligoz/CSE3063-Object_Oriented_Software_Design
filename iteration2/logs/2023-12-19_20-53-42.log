@@ -1,0 +1,191 @@
+2023-12-19 20:53:42 INFO  JSONReader.readDepartments - Department CSE created.
+2023-12-19 20:53:42 INFO  JSONReader.start - Reading JSON data and synchronizing objects for department: CSE
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course MATH1001 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course CSE1200 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course CSE1241 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course PHYS1101 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course MBG1201 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course ATA121 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course TRD121 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course PHYS1103 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course MATH1002 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course PHYS1104 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course CSE1242 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course PHYS1102 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course ATA122 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course MATH2256 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course TRD122 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course MATH2059 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course CSE2225 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course CSE2023 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course EE2031 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course ECON2004 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course MATH2055 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course CSE2246 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course CSE2260 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course EE2032 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course CSE2138 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course STAT2253 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course CSE3055 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course CSE3033 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course CSE3063 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course CSE3215 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course IE3081 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course COM2202 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course CSE3044 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course CSE3264 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course CSE3038 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course CSE3048 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course IE3235 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course CSE4074 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course CSE4219 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course CSE4288 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course ISG121 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course ISG122 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course CSE4075 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course CSE4034 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course CSE4061 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course CSE4217 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course CSE4044 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course BUS1003 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course BUS1004 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course BUS2005 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course ME3022 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course ME4022 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course CAS3044 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course FNCE3003 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course CSE4297 created.
+2023-12-19 20:53:42 INFO  JSONReader.readCourses - Course CSE4298 created.
+2023-12-19 20:53:42 INFO  JSONReader.readAssistants - Assistant created with ID: 130210011
+2023-12-19 20:53:42 INFO  JSONReader.readAssistants - Assistant created with ID: 130210026
+2023-12-19 20:53:42 INFO  JSONReader.readAssistants - Assistant created with ID: 130212039
+2023-12-19 20:53:42 INFO  JSONReader.readAssistants - Assistant created with ID: 130211013
+2023-12-19 20:53:42 INFO  JSONReader.readLabSections - Lab section created with code: CSE1241.1
+2023-12-19 20:53:42 INFO  JSONReader.readLabSections - Lab section created with code: CSE1241.2
+2023-12-19 20:53:42 INFO  JSONReader.readLabSections - Lab section created with code: PHYS1103.1
+2023-12-19 20:53:42 INFO  JSONReader.readLabSections - Lab section created with code: PHYS1103.2
+2023-12-19 20:53:42 INFO  JSONReader.readLabSections - Lab section created with code: PHYS1103.3
+2023-12-19 20:53:42 INFO  JSONReader.readLabSections - Lab section created with code: CSE1242.1
+2023-12-19 20:53:42 INFO  JSONReader.readLabSections - Lab section created with code: CSE1242.2
+2023-12-19 20:53:42 INFO  JSONReader.readLabSections - Lab section created with code: PHYS1104.1
+2023-12-19 20:53:42 INFO  JSONReader.readLabSections - Lab section created with code: PHYS1104.2
+2023-12-19 20:53:42 INFO  JSONReader.readLabSections - Lab section created with code: PHYS1104.3
+2023-12-19 20:53:42 INFO  JSONReader.readLabSections - Lab section created with code: CSE2138.1
+2023-12-19 20:53:42 INFO  JSONReader.readLabSections - Lab section created with code: CSE2138.2
+2023-12-19 20:53:42 INFO  JSONReader.readLabSections - Lab section created with code: EE2032.1
+2023-12-19 20:53:42 INFO  JSONReader.readLabSections - Lab section created with code: EE2032.2
+2023-12-19 20:53:42 INFO  JSONReader.readLabSections - Lab section created with code: EE2032.3
+2023-12-19 20:53:42 INFO  JSONReader.readLabSections - Lab section created with code: CSE3033.1
+2023-12-19 20:53:42 INFO  JSONReader.readLabSections - Lab section created with code: CSE3033.2
+2023-12-19 20:53:42 INFO  JSONReader.readLabSections - Lab section created with code: CSE3055.1
+2023-12-19 20:53:42 INFO  JSONReader.readLabSections - Lab section created with code: CSE3055.2
+2023-12-19 20:53:42 INFO  JSONReader.readLabSections - Lab section created with code: CSE4219.1
+2023-12-19 20:53:42 INFO  JSONReader.readLabSections - Lab section created with code: CSE4219.2
+2023-12-19 20:53:42 INFO  JSONReader.readLecturers - Lecturer created with ID: 130106001
+2023-12-19 20:53:42 INFO  JSONReader.readLecturers - Lecturer created with ID: 130108003
+2023-12-19 20:53:42 INFO  JSONReader.readLecturers - Lecturer created with ID: 130109007
+2023-12-19 20:53:42 INFO  JSONReader.readLecturers - Lecturer created with ID: 130117006
+2023-12-19 20:53:42 INFO  JSONReader.readLecturers - Lecturer created with ID: 130118011
+2023-12-19 20:53:42 INFO  JSONReader.readLecturers - Lecturer created with ID: 130109002
+2023-12-19 20:53:42 INFO  JSONReader.readLecturers - Lecturer created with ID: 130111003
+2023-12-19 20:53:42 INFO  JSONReader.readLecturers - Lecturer created with ID: 130113003
+2023-12-19 20:53:42 INFO  JSONReader.readLecturers - Lecturer created with ID: 130112003
+2023-12-19 20:53:42 INFO  JSONReader.readLecturers - Lecturer created with ID: 130114005
+2023-12-19 20:53:42 INFO  JSONReader.readLecturers - Lecturer created with ID: 130112006
+2023-12-19 20:53:42 INFO  JSONReader.readLecturers - Lecturer created with ID: 130114011
+2023-12-19 20:53:42 INFO  JSONReader.readLecturers - Lecturer created with ID: 130112017
+2023-12-19 20:53:42 INFO  JSONReader.readLecturers - Lecturer created with ID: 130114009
+2023-12-19 20:53:42 INFO  JSONReader.readLecturers - Lecturer created with ID: 130114002
+2023-12-19 20:53:42 INFO  JSONReader.readLecturers - Lecturer created with ID: 130115001
+2023-12-19 20:53:42 INFO  JSONReader.readLecturers - Lecturer created with ID: 130117005
+2023-12-19 20:53:42 INFO  JSONReader.readLecturers - Lecturer created with ID: 130111006
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150120097
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150120097
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150121073
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150121073
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150121091
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150121091
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150120045
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150120045
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150120090
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150120090
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150121075
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150121075
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150120047
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150120047
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150120083
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150120083
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150121067
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150121067
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150121059
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150121059
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150122001
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150122001
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150122002
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150122002
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150122003
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150122003
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150122004
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150122004
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150122005
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150122005
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150122006
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150122006
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150122007
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150122007
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150122008
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150122008
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150123009
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150123009
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150123010
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150123010
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150121001
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150121001
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150121002
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150121002
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150121003
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150121003
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150122014
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150122014
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150122015
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150122015
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150120001
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150120001
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150120002
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150120002
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150120003
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150120003
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150120004
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150120004
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150120005
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150120005
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150121017
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150121017
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150121018
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150121018
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150119001
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150119001
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150119002
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150119002
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150119003
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150119003
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150119004
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150119004
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150119005
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150119005
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150119006
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150119006
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150119007
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150119007
+2023-12-19 20:53:42 INFO  JSONReader.readStudents - Student created with ID: 150119008
+2023-12-19 20:53:42 INFO  JSONReader.readTranscript - Transcript created for student with ID: 150119008
+2023-12-19 20:53:42 INFO  JSONReader.readAdvisors - Advisor created with ID: 130116002
+2023-12-19 20:53:42 INFO  JSONReader.readAdvisors - Advisor created with ID: 130113008
+2023-12-19 20:53:42 INFO  JSONReader.readAdvisors - Advisor created with ID: 130110002
+2023-12-19 20:53:42 INFO  JSONReader.readAdvisors - Advisor created with ID: 130110005
+2023-12-19 20:53:42 INFO  JSONReader.readAdvisors - Advisor created with ID: 130110009
+2023-12-19 20:53:42 INFO  JSONReader.start - JSON data read and objects synchronized for department: CSE
+2023-12-19 20:53:43 INFO  CourseRegistrationSystem.mainMenu - User navigated to the login page.
+2023-12-19 20:53:44 INFO  CourseRegistrationSystem.loginMenu - 150123010 Neslihan Sayan logged in.
+2023-12-19 20:57:13 ERROR CourseRegistrationSystem.getInput - User entered a invalid input. -> Input: �1
+2023-12-19 20:57:29 INFO  Student.addMandatoryCourse - Student 150123010 added PHYS1101 to draft.

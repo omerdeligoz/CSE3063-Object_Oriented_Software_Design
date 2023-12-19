@@ -8,15 +8,7 @@
   "semester": 3,
   "courses": [
     {
-      "courseCode": "MATH2256",
-      "letterGrade": "BA"
-    },
-    {
-      "courseCode": "MBG1201",
-      "letterGrade": "DC"
-    },
-    {
-      "courseCode": "MATH1001",
+      "courseCode": "TRD122",
       "letterGrade": "BA"
     },
     {
@@ -28,15 +20,35 @@
       "letterGrade": "CC"
     },
     {
-      "courseCode": "MATH1002",
-      "letterGrade": "BB"
+      "courseCode": "TRD121",
+      "letterGrade": "AA"
     },
     {
       "courseCode": "CSE1241",
       "letterGrade": "BB"
     },
     {
+      "courseCode": "MATH1001",
+      "letterGrade": "BA"
+    },
+    {
+      "courseCode": "PHYS1104",
+      "letterGrade": "AA"
+    },
+    {
       "courseCode": "PHYS1101",
+      "letterGrade": "BA"
+    },
+    {
+      "courseCode": "MBG1201",
+      "letterGrade": "DC"
+    },
+    {
+      "courseCode": "MATH1002",
+      "letterGrade": "BB"
+    },
+    {
+      "courseCode": "MATH2256",
       "letterGrade": "BA"
     },
     {
@@ -48,24 +60,12 @@
       "letterGrade": "AA"
     },
     {
-      "courseCode": "TRD121",
-      "letterGrade": "AA"
-    },
-    {
       "courseCode": "PHYS1102",
       "letterGrade": "BA"
     },
     {
       "courseCode": "CSE1242",
       "letterGrade": "CB"
-    },
-    {
-      "courseCode": "TRD122",
-      "letterGrade": "BA"
-    },
-    {
-      "courseCode": "PHYS1104",
-      "letterGrade": "AA"
     }
   ]
 }
