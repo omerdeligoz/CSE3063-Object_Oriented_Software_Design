@@ -55,5 +55,4 @@ public class LaboratorySection {
     public void setNumberOfStudents(int numberOfStudents) {
         this.numberOfStudents = numberOfStudents;
     }
-
 }

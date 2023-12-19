@@ -155,12 +155,6 @@ public class JSONWriter {
                 ((ObjectNode) jsonNode).put("userName", userName);
                 ((ObjectNode) jsonNode).put("password", password);
                 ((ObjectNode) jsonNode).put("departmentName", departmentName);
-
-                ArrayNode newLabSectionsArray = JsonNodeFactory.instance.arrayNode();
-                for (LaboratorySection labSection : student.getLabSections()) {
-                    newLabSectionsArray.add(labSection.getLaboratorySectionCode());
-                }
-                ((ObjectNode) jsonNode).set("labSections", newLabSectionsArray);
             }
             // Write the updated JsonNode back to the file
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), jsonArray);

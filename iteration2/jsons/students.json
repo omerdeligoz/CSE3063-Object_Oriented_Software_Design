@@ -8,9 +8,7 @@
     "semester": 7,
     "departmentName": "CSE",
     "advisorID": 130113008,
-    "hasRequest": false,
-    "labSections": [
-    ]
+    "hasRequest": false
   },
   {
     "studentID": 150121073,
@@ -21,8 +19,7 @@
     "semester": 3,
     "departmentName": "CSE",
     "advisorID": 130116002,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150121091,
@@ -33,8 +30,7 @@
     "semester": 3,
     "departmentName": "CSE",
     "advisorID": 130113008,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150120045,
@@ -45,8 +41,7 @@
     "semester": 5,
     "departmentName": "CSE",
     "advisorID": 130113008,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150120090,
@@ -57,8 +52,7 @@
     "semester": 7,
     "departmentName": "CSE",
     "advisorID": 130116002,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150121075,
@@ -69,8 +63,7 @@
     "semester": 3,
     "departmentName": "CSE",
     "advisorID": 130113008,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150120047,
@@ -81,8 +74,7 @@
     "semester": 5,
     "departmentName": "CSE",
     "advisorID": 130116002,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150120083,
@@ -93,8 +85,7 @@
     "semester": 5,
     "departmentName": "CSE",
     "advisorID": 130113008,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150121067,
@@ -105,8 +96,7 @@
     "semester": 3,
     "departmentName": "CSE",
     "advisorID": 130116002,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150121059,
@@ -117,8 +107,7 @@
     "semester": 3,
     "departmentName": "CSE",
     "advisorID": 130116002,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150122001,
@@ -129,8 +118,7 @@
     "semester": 1,
     "departmentName": "CSE",
     "advisorID": 130110002,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150122002,
@@ -141,8 +129,7 @@
     "semester": 1,
     "departmentName": "CSE",
     "advisorID": 130110002,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150122003,
@@ -153,8 +140,7 @@
     "semester": 1,
     "departmentName": "CSE",
     "advisorID": 130110002,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150122004,
@@ -165,8 +151,7 @@
     "semester": 1,
     "departmentName": "CSE",
     "advisorID": 130110002,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150122005,
@@ -177,8 +162,7 @@
     "semester": 1,
     "departmentName": "CSE",
     "advisorID": 130110002,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150122006,
@@ -189,8 +173,7 @@
     "semester": 1,
     "departmentName": "CSE",
     "advisorID": 130110002,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150122007,
@@ -201,8 +184,7 @@
     "semester": 1,
     "departmentName": "CSE",
     "advisorID": 130110002,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150122008,
@@ -213,8 +195,7 @@
     "semester": 1,
     "departmentName": "CSE",
     "advisorID": 130110002,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150123009,
@@ -225,8 +206,7 @@
     "semester": 1,
     "departmentName": "CSE",
     "advisorID": 130110002,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150123010,
@@ -237,9 +217,7 @@
     "semester": 1,
     "departmentName": "CSE",
     "advisorID": 130110002,
-    "hasRequest": false,
-    "labSections": [
-    ]
+    "hasRequest": false
   },
   {
     "studentID": 150121001,
@@ -250,8 +228,7 @@
     "semester": 3,
     "departmentName": "CSE",
     "advisorID": 130110005,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150121002,
@@ -262,8 +239,7 @@
     "semester": 3,
     "departmentName": "CSE",
     "advisorID": 130110005,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150121003,
@@ -274,8 +250,7 @@
     "semester": 3,
     "departmentName": "CSE",
     "advisorID": 130110005,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150122014,
@@ -286,8 +261,7 @@
     "semester": 3,
     "departmentName": "CSE",
     "advisorID": 130110005,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150122015,
@@ -298,8 +272,7 @@
     "semester": 3,
     "departmentName": "CSE",
     "advisorID": 130110005,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150120001,
@@ -310,8 +283,7 @@
     "semester": 5,
     "departmentName": "CSE",
     "advisorID": 130110005,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150120002,
@@ -322,8 +294,7 @@
     "semester": 5,
     "departmentName": "CSE",
     "advisorID": 130110005,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150120003,
@@ -334,8 +305,7 @@
     "semester": 5,
     "departmentName": "CSE",
     "advisorID": 130110005,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150120004,
@@ -346,8 +316,7 @@
     "semester": 5,
     "departmentName": "CSE",
     "advisorID": 130110005,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150120005,
@@ -358,8 +327,7 @@
     "semester": 5,
     "departmentName": "CSE",
     "advisorID": 130110005,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150121017,
@@ -370,8 +338,7 @@
     "semester": 5,
     "departmentName": "CSE",
     "advisorID": 130110009,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150121018,
@@ -382,8 +349,7 @@
     "semester": 5,
     "departmentName": "CSE",
     "advisorID": 130110009,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150119001,
@@ -394,8 +360,7 @@
     "semester": 7,
     "departmentName": "CSE",
     "advisorID": 130110009,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150119002,
@@ -406,8 +371,7 @@
     "semester": 7,
     "departmentName": "CSE",
     "advisorID": 130110009,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150119003,
@@ -418,8 +382,7 @@
     "semester": 7,
     "departmentName": "CSE",
     "advisorID": 130110009,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150119004,
@@ -430,8 +393,7 @@
     "semester": 7,
     "departmentName": "CSE",
     "advisorID": 130110009,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150119005,
@@ -442,8 +404,7 @@
     "semester": 7,
     "departmentName": "CSE",
     "advisorID": 130110009,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150119006,
@@ -454,8 +415,7 @@
     "semester": 7,
     "departmentName": "CSE",
     "advisorID": 130110009,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150119007,
@@ -466,8 +426,7 @@
     "semester": 7,
     "departmentName": "CSE",
     "advisorID": 130110009,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   },
   {
     "studentID": 150119008,
@@ -478,7 +437,6 @@
     "semester": 7,
     "departmentName": "CSE",
     "advisorID": 130110009,
-    "hasRequest": false,
-    "labSections": []
+    "hasRequest": false
   }
 ]

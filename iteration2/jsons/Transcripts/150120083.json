@@ -8,7 +8,47 @@
   "semester": 5,
   "courses": [
     {
-      "courseCode": "TRD122",
+      "courseCode": "MATH2256",
+      "letterGrade": "DC"
+    },
+    {
+      "courseCode": "CSE2138",
+      "letterGrade": "CC"
+    },
+    {
+      "courseCode": "ECON2004",
+      "letterGrade": "AA"
+    },
+    {
+      "courseCode": "MATH1001",
+      "letterGrade": "BA"
+    },
+    {
+      "courseCode": "EE2032",
+      "letterGrade": "BB"
+    },
+    {
+      "courseCode": "MATH2059",
+      "letterGrade": "BA"
+    },
+    {
+      "courseCode": "CSE1241",
+      "letterGrade": "BB"
+    },
+    {
+      "courseCode": "PHYS1101",
+      "letterGrade": "BB"
+    },
+    {
+      "courseCode": "CSE2246",
+      "letterGrade": "BA"
+    },
+    {
+      "courseCode": "PHYS1103",
+      "letterGrade": "BA"
+    },
+    {
+      "courseCode": "EE2031",
       "letterGrade": "BA"
     },
     {
@@ -16,19 +56,7 @@
       "letterGrade": "FF"
     },
     {
-      "courseCode": "MATH2055",
-      "letterGrade": "AA"
-    },
-    {
-      "courseCode": "CSE1200",
-      "letterGrade": "CC"
-    },
-    {
-      "courseCode": "CSE2138",
-      "letterGrade": "CC"
-    },
-    {
-      "courseCode": "MATH1001",
+      "courseCode": "PHYS1102",
       "letterGrade": "BA"
     },
     {
@@ -36,23 +64,31 @@
       "letterGrade": "DC"
     },
     {
+      "courseCode": "MBG1201",
+      "letterGrade": "AA"
+    },
+    {
+      "courseCode": "ATA121",
+      "letterGrade": "AA"
+    },
+    {
       "courseCode": "CSE2260",
       "letterGrade": "CB"
     },
     {
-      "courseCode": "PHYS1101",
-      "letterGrade": "BB"
-    },
-    {
-      "courseCode": "MBG1201",
-      "letterGrade": "AA"
+      "courseCode": "CSE1200",
+      "letterGrade": "CC"
     },
     {
       "courseCode": "MATH1002",
       "letterGrade": "DD"
     },
     {
-      "courseCode": "ECON2004",
+      "courseCode": "CSE2023",
+      "letterGrade": "CC"
+    },
+    {
+      "courseCode": "MATH2055",
       "letterGrade": "AA"
     },
     {
@@ -60,56 +96,20 @@
       "letterGrade": "BB"
     },
     {
-      "courseCode": "CSE2023",
-      "letterGrade": "CC"
-    },
-    {
-      "courseCode": "ATA121",
-      "letterGrade": "AA"
-    },
-    {
-      "courseCode": "EE2032",
-      "letterGrade": "BB"
-    },
-    {
       "courseCode": "TRD121",
       "letterGrade": "AA"
     },
     {
-      "courseCode": "CSE1241",
-      "letterGrade": "BB"
+      "courseCode": "CSE1242",
+      "letterGrade": "BA"
+    },
+    {
+      "courseCode": "TRD122",
+      "letterGrade": "BA"
     },
     {
       "courseCode": "PHYS1104",
       "letterGrade": "AA"
-    },
-    {
-      "courseCode": "EE2031",
-      "letterGrade": "BA"
-    },
-    {
-      "courseCode": "CSE2246",
-      "letterGrade": "BA"
-    },
-    {
-      "courseCode": "MATH2256",
-      "letterGrade": "DC"
-    },
-    {
-      "courseCode": "PHYS1103",
-      "letterGrade": "BA"
-    },
-    {
-      "courseCode": "MATH2059",
-      "letterGrade": "BA"
-    },
-    {
-      "courseCode": "PHYS1102",
-      "letterGrade": "BA"
-    },
-    {
-      "courseCode": "CSE1242",
-      "letterGrade": "BA"
     }
   ]
 }
