@@ -20,7 +20,7 @@ class Transcript:
         totalCredits = 0
         for course in self.studentCourses:
             if len(self.courseGradeMap.get(course)) > 0:
-                totalGrade += self.courseGradeMap.get(course)[-1].gradeOver4 * course.courseCredit
+                totalGrade += self.courseGradeMap.get(course)[-1].__gradeOver4 * course.courseCredit
                 totalCredits += course.courseCredit
 
         if totalCredits == 0:
@@ -43,13 +43,13 @@ class Transcript:
         return self.completedCredits
 
     def showTranscript(self):
-        print(f'Transcript for {self.student.name} {self.student.surname}:')
-        print(f'Student ID       : {self.student.ID}')
+        print(f'Transcript for {self.student.__name} {self.student.__surname}:')
+        print(f'Student ID       : {self.student.__ID}')
         print(f'CGPA             : {self.cgpa:.2f}')
         print(f'Completed Credits: {self.calculateCompletedCredits()}')
         print(f'Taken Credits    : {self.calculateTakenCredits()}')
         print(f'Semester         : {self.semester}')
-        print(f'Department       : {self.student.department.departmentName}')
+        print(f'Department       : {self.student.__department.departmentName}')
 
         for course in self.studentCourses:
             for grade in self.courseGradeMap.get(course, []):
@@ -57,7 +57,7 @@ class Transcript:
                     print("%-15s%-45s%-15s%-15s" % (course.courseCode, course.courseName, course.courseCredit, "--"))
                 else:
                     print("%-15s%-45s%-15s%-15s" % (
-                        course.courseCode, course.courseName, course.courseCredit, grade.letterGrade))
+                        course.courseCode, course.courseName, course.courseCredit, grade.__letterGrade))
         print()
 
     def courseStatusCheck(self):
@@ -70,7 +70,7 @@ class Transcript:
             for grade in grades:
                 if grade is None:
                     ongoingCourses.append(course)
-                elif grade.letterGrade in ["FF", "FD"]:
+                elif grade.__letterGrade in ["FF", "FD"]:
                     failedCourses.append(course)
                 else:
                     successfulCourses.append(course)

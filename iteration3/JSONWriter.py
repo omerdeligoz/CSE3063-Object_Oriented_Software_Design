@@ -4,11 +4,11 @@ import logging
 
 class JSONWriter:
     def __init__(self):
-        self.department = None
+        self.__department = None
 
     def start(self, university):
         for department in university.departments:
-            self.department = department
+            self.__department = department
             self.writeJson()
 
     def writeJson(self):
@@ -19,8 +19,8 @@ class JSONWriter:
         logging.info("JSON data for the department has been written")
 
     def writeTranscripts(self):
-        for student in self.department.students:
-            filepath = f"jsons/Transcripts/{student.ID}.json"
+        for student in self.__department.students:
+            filepath = f"jsons/Transcripts/{student.__ID}.json"
             try:
                 with open(filepath, 'r+', encoding='utf-8') as f:
                     data = json.load(f)
@@ -30,7 +30,7 @@ class JSONWriter:
                     data['courses'] = [
                         {
                             "courseCode": course.courseCode,
-                            "letterGrade": grade.letterGrade if grade else None
+                            "letterGrade": grade.__letterGrade if grade else None
                         }
                         for course, grades in student.transcript.courseGradeMap.items()
                         for grade in grades
@@ -39,17 +39,17 @@ class JSONWriter:
                 with open(filepath, "w") as f:
                     json.dump(data, f, indent=4)
             except Exception as e:
-                print(f"There is a problem with the {student.ID}.json file")
-                logging.error(f"There is a problem with the {student.ID}.json file")
+                print(f"There is a problem with the {student.__ID}.json file")
+                logging.error(f"There is a problem with the {student.__ID}.json file")
                 exit(0)
 
     def writeRequests(self):
         try:
             requests_data = []
-            for student in self.department.students:
+            for student in self.__department.students:
                 if student.hasRequest:
                     request = {
-                        "studentID": student.ID,
+                        "studentID": student.__ID,
                         "courses": [course.courseCode for course in student.draft]
                     }
                     requests_data.append(request)
@@ -69,7 +69,7 @@ class JSONWriter:
                 existingData = json.load(f)
 
             for data in existingData:
-                student = self.department.studentIDStudentMap.get(data["studentID"])
+                student = self.__department.studentIDStudentMap.get(data["studentID"])
                 if student:
                     data["hasRequest"] = student.hasRequest
                     data["labSections"] = [labSection.laboratorySectionCode for labSection in student.labSections]

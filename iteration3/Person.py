@@ -1,41 +1,42 @@
 from abc import ABC, abstractmethod
 
+
 class Person(ABC):
     def __init__(self, ID, name, surname, userName, password, department=None):
-        self.ID = ID
-        self.name = name
-        self.surname = surname
-        self.userName = userName
-        self.password = password
-        self.department = department
+        self.__ID = ID
+        self.__name = name
+        self.__surname = surname
+        self.__userName = userName
+        self.__password = password
+        self.__department = department
 
     @abstractmethod
     def login(self, userName, password):
         pass
 
     def getUserName(self):
-        return self.userName
+        return self.__userName
 
     def setUserName(self, userName):
-        self.userName = userName
+        self.__userName = userName
 
     def getPassword(self):
-        return self.password
+        return self.__password
 
     def setPassword(self, password):
-        self.password = password
+        self.__password = password
 
     def getDepartment(self):
-        return self.department
+        return self.__department
 
     def setDepartment(self, department):
-        self.department = department
+        self.__department = department
 
     def getName(self):
-        return self.name
+        return self.__name
 
     def getSurname(self):
-        return self.surname
+        return self.__surname
 
     def getID(self):
-        return self.ID
+        return self.__ID

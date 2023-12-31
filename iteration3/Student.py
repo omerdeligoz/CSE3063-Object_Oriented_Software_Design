@@ -27,7 +27,7 @@ class Student(Person, IDisplayMenu):
         if self.hasRequest:
             print("You already have a request waiting for approval.")
             logging.warning(
-                "Student " + self.ID + " already has a request waiting for " + self.advisor.ID + "'s approval.")
+                "Student " + self.__ID + " already has a request waiting for " + self.advisor.__ID + "'s approval.")
             ConsoleColours.resetColour()
         elif not self.draft:
             print("Your draft is empty!")
@@ -35,14 +35,14 @@ class Student(Person, IDisplayMenu):
         else:
             registration = Registration(self, self.draft)
             registration.addRequest(self.advisor)
-            logging.info("Student " + self.ID + " sent a request to advisor " + self.advisor.ID + ".")
+            logging.info("Student " + self.__ID + " sent a request to advisor " + self.advisor.__ID + ".")
 
     def printMenu(self, menuType):
         match menuType:
             case "studentMenu":
                 ConsoleColours.paintBlueMenu()
                 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-                print(f"Welcome {self.name} {self.surname}!")
+                print(f"Welcome {self.__name} {self.__surname}!")
                 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 
                 if self.notification != None:
@@ -118,8 +118,8 @@ class Student(Person, IDisplayMenu):
             ConsoleColours.paintRedMenu()
             print("You can not add lecture because you have a request waiting for approval.")
             logging.warning(
-                "Student " + self.ID + " can not add lecture because "
-                                       "he/she has a request waiting for " + self.advisor.ID + "'s approval.")
+                "Student " + self.__ID + " can not add lecture because "
+                                       "he/she has a request waiting for " + self.advisor.__ID + "'s approval.")
             return
         ConsoleColours.paintBlueMenu()
         self.printMenu("courseSelectionMenu")
@@ -167,14 +167,14 @@ class Student(Person, IDisplayMenu):
             if 1 <= userNumberInput1 <= len(self.availableCoursesToAdd):
                 self.chooseLabSection(self.availableCoursesToAdd[userNumberInput1 - 1])
                 logging.info(
-                    f"Student {self.ID} added {self.availableCoursesToAdd[userNumberInput1 - 1].courseCode} to draft.")
+                    f"Student {self.__ID} added {self.availableCoursesToAdd[userNumberInput1 - 1].courseCode} to draft.")
                 self.draft.append(self.availableCoursesToAdd[userNumberInput1 - 1])
                 del self.availableCoursesToAdd[userNumberInput1 - 1]
                 if self.availableCoursesToAdd:
                     self.addMandatoryCourse()
             elif userNumberInput1 > len(self.availableCoursesToAdd) or userNumberInput1 < 0:
                 ConsoleColours.paintRedMenu()
-                logging.warning(f"Student {self.ID} entered invalid input.")
+                logging.warning(f"Student {self.__ID} entered invalid input.")
                 print("Invalid input, please enter a valid number")
                 self.addMandatoryCourse()
             else:
@@ -236,7 +236,7 @@ class Student(Person, IDisplayMenu):
             if 1 <= userNumberInput1 <= len(self.availableCoursesToAdd):
                 self.draft.append(self.availableCoursesToAdd[userNumberInput1 - 1])
                 logging.info(
-                    f"Student {self.ID} added {self.availableCoursesToAdd[userNumberInput1 - 1].courseCode} to draft.")
+                    f"Student {self.__ID} added {self.availableCoursesToAdd[userNumberInput1 - 1].courseCode} to draft.")
                 del self.availableCoursesToAdd[userNumberInput1 - 1]
                 if self.availableCoursesToAdd:
                     self.addTechnicalElective()
@@ -256,12 +256,12 @@ class Student(Person, IDisplayMenu):
             if (course.semester() > 6
                     or course.courseType == "NTE"
                     or mapGrade[course][-1] is None
-                    or mapGrade[course][-1].letterGrade > "DD"):
+                    or mapGrade[course][-1].__letterGrade > "DD"):
                 continue
             sum += course.courseCredit
 
         if sum >= 155:
-            for course in self.department.courses:
+            for course in self.__department.courses:
                 if (course.courseType != courseType
                         or not course.hasCapacity()
                         or self.hasCourseOverlap(course, False)
@@ -295,7 +295,7 @@ class Student(Person, IDisplayMenu):
             if 1 <= userNumberInput1 <= len(self.availableCoursesToAdd):
                 self.draft.append(self.availableCoursesToAdd[userNumberInput1 - 1])
                 logging.info(
-                    f"Student {self.ID} added {self.availableCoursesToAdd[userNumberInput1 - 1].courseCode} to draft.")
+                    f"Student {self.__ID} added {self.availableCoursesToAdd[userNumberInput1 - 1].courseCode} to draft.")
                 del self.availableCoursesToAdd[userNumberInput1 - 1]
                 if self.availableCoursesToAdd:
                     self.addFacultyTechnicalElective()
@@ -328,7 +328,7 @@ class Student(Person, IDisplayMenu):
             if 1 <= userNumberInput1 <= len(self.availableCoursesToAdd):
                 self.draft.append(self.availableCoursesToAdd[userNumberInput1 - 1])
                 logging.info(
-                    f"Student {self.ID} added {self.availableCoursesToAdd[userNumberInput1 - 1].courseCode} to draft.")
+                    f"Student {self.__ID} added {self.availableCoursesToAdd[userNumberInput1 - 1].courseCode} to draft.")
                 del self.availableCoursesToAdd[userNumberInput1 - 1]
                 if self.availableCoursesToAdd:
                     self.addNonTechnicalElective()
@@ -342,7 +342,7 @@ class Student(Person, IDisplayMenu):
     def computeAvailableNTECourses(self):
         self.availableCoursesToAdd.clear()
 
-        for course in self.department.courses:
+        for course in self.__department.courses:
             if (course.courseType != "NTE"
                     or not course.hasCapacity()
                     or self.hasCourseOverlap(course, False)
@@ -357,7 +357,7 @@ class Student(Person, IDisplayMenu):
     def computeAvailableMandatoryCourses(self):
         self.availableCoursesToAdd.clear()
 
-        for course in self.department.courses:
+        for course in self.__department.courses:
             if course.courseCode == "CSE4297":
                 sum = 0
                 for studentCourse in self.transcript.studentCourses:
@@ -365,7 +365,7 @@ class Student(Person, IDisplayMenu):
                             (course.courseType in ["NTE", "TE", "FTE"])
                             or studentCourse.courseCode in ["ISG121", "ISG122"]
                             or self.transcript.courseGradeMap[studentCourse][-1] is None
-                            or self.transcript.courseGradeMap[studentCourse][-1].letterGrade > "DD"):
+                            or self.transcript.courseGradeMap[studentCourse][-1].__letterGrade > "DD"):
                         continue
                     sum += course.courseCredit
 
@@ -412,7 +412,7 @@ class Student(Person, IDisplayMenu):
             if 1 <= userNumberInput <= len(self.availableCoursesToDrop):
                 self.draft.append(self.availableCoursesToDrop[userNumberInput - 1])
                 logging.info(
-                    f"Student {self.ID} added {self.availableCoursesToDrop[userNumberInput - 1].courseCode} to draft.")
+                    f"Student {self.__ID} added {self.availableCoursesToDrop[userNumberInput - 1].courseCode} to draft.")
                 del self.availableCoursesToDrop[userNumberInput - 1]
                 if self.availableCoursesToDrop:
                     self.addCourseToDrop()
@@ -429,9 +429,9 @@ class Student(Person, IDisplayMenu):
             for prerequisite in course.preRequisiteCourses:
                 if (prerequisite not in self.transcript.studentCourses
                         or mapGrade[prerequisite][-1] is None
-                        or mapGrade[prerequisite][-1].letterGrade in ["FF", "FD"]):
+                        or mapGrade[prerequisite][-1].__letterGrade in ["FF", "FD"]):
                     return False
-        elif not (mapGrade[course][-1] is not None and mapGrade[course][-1].letterGrade > "CC"):
+        elif not (mapGrade[course][-1] is not None and mapGrade[course][-1].__letterGrade > "CC"):
             return False
 
         return True
@@ -451,14 +451,14 @@ class Student(Person, IDisplayMenu):
                 scheduleCourseGrades = self.transcript.courseGradeMap[courseInSchedule]
                 if scheduleCourseGrades and not scheduleCourseGrades[-1]:
                     return True
-                elif len(scheduleCourseGrades) >= 2 and scheduleCourseGrades[-2].letterGrade == "DZ":
+                elif len(scheduleCourseGrades) >= 2 and scheduleCourseGrades[-2].__letterGrade == "DZ":
                     return True
             for course in self.draft:
                 if self.transcript.courseGradeMap[course] and not self.transcript.courseGradeMap[course][-1]:
                     continue
                 if course.day == courseToAdd.day and course.hour == courseToAdd.hour:
                     if self.transcript.courseGradeMap[course] and self.transcript.courseGradeMap[course][
-                        -1].letterGrade == "DZ":
+                        -1].__letterGrade == "DZ":
                         return True
             for labSection in self.labSections:
                 if labSection.day == courseToAdd.day and labSection.hour == courseToAdd.hour:
@@ -469,21 +469,21 @@ class Student(Person, IDisplayMenu):
                 if scheduleCourseGrades and not scheduleCourseGrades[-1]:
                     return True
                 if scheduleCourseGrades and len(scheduleCourseGrades) >= 2 and scheduleCourseGrades[
-                    -2].letterGrade == "DZ":
+                    -2].__letterGrade == "DZ":
                     if not courseToAdd in self.transcript.studentCourses or (
                             self.transcript.courseGradeMap[courseToAdd][-1] and
-                            self.transcript.courseGradeMap[courseToAdd][-1].letterGrade == "DZ"):
+                            self.transcript.courseGradeMap[courseToAdd][-1].__letterGrade == "DZ"):
                         return True
             for course in self.draft:
                 if self.transcript.courseGradeMap[course] and not self.transcript.courseGradeMap[course][-1]:
                     continue
                 if course.day == courseToAdd.day and course.hour == courseToAdd.hour:
                     if self.transcript.courseGradeMap[course] and self.transcript.courseGradeMap[course][
-                        -1].letterGrade == "DZ":
+                        -1].__letterGrade == "DZ":
                         return True
                     if not self.transcript.courseGradeMap[course] and (
                             not self.transcript.courseGradeMap[courseToAdd] or
-                            self.transcript.courseGradeMap[courseToAdd][-1].letterGrade == "DZ"):
+                            self.transcript.courseGradeMap[courseToAdd][-1].__letterGrade == "DZ"):
                         return True
             for labSection in self.labSections:
                 if labSection.day == courseToAdd.day and labSection.hour == courseToAdd.hour:
@@ -492,10 +492,10 @@ class Student(Person, IDisplayMenu):
 
     def maxCoursesReached(self):
         numberOfCourses = self.calculateNumberOfCourses()
-        if numberOfCourses >= self.department.maxCourseNumber:
+        if numberOfCourses >= self.__department.maxCourseNumber:
             ConsoleColours.paintRedMenu()
-            logging.warning(f"Student {self.ID} reached the maximum number of courses.")
-            print(f"Limit Reached! You can take at most {self.department.maxCourseNumber} courses.")
+            logging.warning(f"Student {self.__ID} reached the maximum number of courses.")
+            print(f"Limit Reached! You can take at most {self.__department.maxCourseNumber} courses.")
             return True
         return False
 
@@ -512,7 +512,7 @@ class Student(Person, IDisplayMenu):
         if self.hasRequest:
             ConsoleColours.paintRedMenu()
             logging.warning(
-                f"Student {self.ID} can not remove lecture because he/she has a request waiting for {self.advisor.ID}'s approval.")
+                f"Student {self.__ID} can not remove lecture because he/she has a request waiting for {self.advisor.__ID}'s approval.")
             print("You can not remove lecture because you have a request waiting for approval.")
             return;
         if not self.draft:
@@ -537,19 +537,19 @@ class Student(Person, IDisplayMenu):
                         labSection.setNumberOfStudents(labSection.numberOfStudents - 1)
                         break
                 logging.info(
-                    f"Student {self.ID} removed {self.draft[userNumberInput - 1].courseCode} from draft.")
+                    f"Student {self.__ID} removed {self.draft[userNumberInput - 1].courseCode} from draft.")
                 del self.draft[userNumberInput - 1]
                 self.removeCourseFromDraft()
             elif userNumberInput > len(self.draft) or userNumberInput < 0:
                 ConsoleColours.paintRedMenu()
-                logging.warning(f"Student {self.ID} entered invalid input.")
+                logging.warning(f"Student {self.__ID} entered invalid input.")
                 print("Invalid input, please enter a number")
                 self.removeCourseFromDraft()
 
     def showRequestStatus(self):
         ConsoleColours.paintYellowMenu()
         if self.hasRequest:
-            logging.info(f"Student {self.ID} has a request waiting for {self.advisor.ID}'s approval.")
+            logging.info(f"Student {self.__ID} has a request waiting for {self.advisor.__ID}'s approval.")
             print("Your request is waiting for advisor approval.")
         else:
             print("There is no waiting request.")
@@ -587,4 +587,4 @@ class Student(Person, IDisplayMenu):
                 self.availableCoursesToDrop.append(course)
 
     def login(self, userName, password):
-        return self.userName == userName and self.password == password
+        return self.__userName == userName and self.__password == password

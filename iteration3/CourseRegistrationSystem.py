@@ -12,14 +12,14 @@ from University import University
 class CourseRegistrationSystem(IDisplayMenu):
 
     def __init__(self):
-        self.university = University("Marmara University")
-        self.input = ""
-        self.choice = 0
+        self.__university = University("Marmara University")
+        self.__input = ""
+        self.__choice = 0
 
     def start(self):
         jsonReader = JSONReader()
-        jsonReader.readDepartments(self.university)
-        for department in self.university.departments:
+        jsonReader.readDepartments(self.__university)
+        for department in self.__university.departments:
             jsonReader.start(department)
         self.mainMenu()
 
@@ -28,9 +28,9 @@ class CourseRegistrationSystem(IDisplayMenu):
         self.printMenu("mainMenu")
 
         # Get the user's choice.
-        self.choice = self.getInput()
+        self.__choice = self.getInput()
 
-        match self.choice:
+        match self.__choice:
             case 0:
                 logging.info("User exited the system.")
                 # If the user chooses to exit, print a message and terminate the program.
@@ -67,10 +67,10 @@ class CourseRegistrationSystem(IDisplayMenu):
         print("Enter your password: ")
         password = input()
 
-        person = self.university.userNamePersonMap.get(userName)
+        person = self.__university.userNamePersonMap.get(userName)
         if person is not None:  # Check if there is such user
             if person.login(userName, password):
-                logging.info(f"{person.ID} {person.name} {person.surname} logged in.")
+                logging.info(f"{person.__ID} {person.__name} {person.__surname} logged in.")
                 if isinstance(person, Student):
                     self.studentMenu(person)
                 elif isinstance(person, Advisor):
@@ -88,21 +88,21 @@ class CourseRegistrationSystem(IDisplayMenu):
 
     def studentMenu(self, student):
         student.printMenu("studentMenu")
-        self.choice = self.getInput()
+        self.__choice = self.getInput()
 
-        if self.choice == 0:
-            logging.info(f"Student {student.name} {student.surname} exited the system.")
+        if self.__choice == 0:
+            logging.info(f"Student {student.__name} {student.__surname} exited the system.")
             self.exitProgram()
             return
-        elif self.choice == 1:
+        elif self.__choice == 1:
             self.courseRegistrationMenu(student)
-        elif self.choice == 2:
+        elif self.__choice == 2:
             student.transcript.showTranscript()
-        elif self.choice == 3:
-            logging.info(f"Student {student.name} {student.surname} logged out.")
+        elif self.__choice == 3:
+            logging.info(f"Student {student.__name} {student.__surname} logged out.")
             self.loginMenu()
             return
-        elif self.choice == -1:
+        elif self.__choice == -1:
             print("Please enter valid number!")
         else:
             print("Invalid choice! Please select again!")
@@ -111,9 +111,9 @@ class CourseRegistrationSystem(IDisplayMenu):
 
     def courseRegistrationMenu(self, student):
         student.printMenu("courseRegistrationMenu")
-        self.choice = self.getInput()
+        self.__choice = self.getInput()
 
-        match self.choice:
+        match self.__choice:
             case 0:
                 return
             case 1:
@@ -127,7 +127,7 @@ class CourseRegistrationSystem(IDisplayMenu):
             case 5:
                 student.sendRequest()
             case 6:
-                logging.info(f"Student {student.name} {student.surname} logged out.")
+                logging.info(f"Student {student.__name} {student.__surname} logged out.")
                 self.loginMenu()
                 return
             case -1:
@@ -139,17 +139,17 @@ class CourseRegistrationSystem(IDisplayMenu):
 
     def advisorMenu(self, advisor):
         advisor.printMenu("advisorMenu")
-        self.choice = self.getInput()
+        self.__choice = self.getInput()
 
-        match self.choice:
+        match self.__choice:
             case 0:
-                logging.info(f"Advisor {advisor.name} {advisor.surname} exited the system.")
+                logging.info(f"Advisor {advisor.__name} {advisor.__surname} exited the system.")
                 self.exitProgram()
                 return
             case 1:
                 advisor.printRequests()
             case 2:
-                logging.info(f"Advisor {advisor.name} {advisor.surname} logged out.")
+                logging.info(f"Advisor {advisor.__name} {advisor.__surname} logged out.")
                 self.loginMenu()
                 return
             case -1:
@@ -163,14 +163,14 @@ class CourseRegistrationSystem(IDisplayMenu):
         user_input = None
         try:
             user_input = input()
-            self.choice = int(user_input)
-            if user_input != str(self.choice):
+            self.__choice = int(user_input)
+            if user_input != str(self.__choice):
                 raise ValueError
         except Exception as e:
             print("Invalid input, please do not enter a nonnumeric input!")
             logging.error(f"User entered an invalid input. -> Input: {user_input}")
             return -1
-        return self.choice
+        return self.__choice
 
     def exitProgram(self):
         print("Exiting from system...")
@@ -181,7 +181,7 @@ class CourseRegistrationSystem(IDisplayMenu):
         jsonWriter = JSONWriter()
 
         # Write the current state of the university to JSON files.
-        jsonWriter.start(self.university)
+        jsonWriter.start(self.__university)
 
         logging.info("User exited the system.")
 

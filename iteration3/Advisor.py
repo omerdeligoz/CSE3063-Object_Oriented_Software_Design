@@ -9,35 +9,35 @@ class Advisor(Lecturer, IDisplayMenu):
 
     def __init__(self, ID, name, surname, userName, password):
         super().__init__(ID, name, surname, userName, password)
-        self.studentsAdvised = []
-        self.requestList = []
-        self.requestNumber = None
-        self.notification = None
+        self.__studentsAdvised = []
+        self.__requestList = []
+        self.__requestNumber = None
+        self.__notification = None
 
     def printRequests(self):
         controller = CourseRegistrationSystem
         print("Request Approval Menu:")
         print("\nBack -> 0\n")
-        if len(self.requestList) != 0:
+        if len(self.__requestList) != 0:
             print("Request(s) Listed Below:")
-            for i in range(len(self.requestList)):
-                print(f"{i + 1}. {self.requestList[i].student.name} {self.requestList[i].student.surname}")
+            for i in range(len(self.__requestList)):
+                print(f"{i + 1}. {self.__requestList[i].student.__name} {self.__requestList[i].student.__surname}")
                 print("``````````````````````````````````````````````")
             requestNumber = controller.getInput()
-            if 1 <= requestNumber <= len(self.requestList):
-                request = self.requestList[requestNumber - 1]
-                print(f"{request.student.name} {request.student.surname} wants to take these courses:")
+            if 1 <= requestNumber <= len(self.__requestList):
+                request = self.__requestList[requestNumber - 1]
+                print(f"{request.student.__name} {request.student.__surname} wants to take these courses:")
                 for course in request.courses:
                     if not (request.student.transcript.courseGradeMap.get(course) is not None
                             and request.student.transcript.courseGradeMap.get(course).last is None):
                         print(f"{course.courseCode} {course.courseName}")
-                print(f"{request.student.name} {request.student.surname} wants to drop these courses:")
+                print(f"{request.student.__name} {request.student.__surname} wants to drop these courses:")
                 for course in request.courses:
                     if request.student.transcript.courseGradeMap.get(course) is not None \
                             and request.student.transcript.courseGradeMap.get(course).last is None:
                         print(f"{course.courseCode} {course.courseName}")
                 self.replyRequests()
-            elif requestNumber > len(self.requestList) or requestNumber < 0:
+            elif requestNumber > len(self.__requestList) or requestNumber < 0:
                 print("Invalid choice! Please select again.")
                 self.printRequests()
         else:
@@ -53,29 +53,29 @@ class Advisor(Lecturer, IDisplayMenu):
 
         choice = controller.getInput()
         if choice == 1:
-            self.requestList[self.requestNumber - 1].approveRequest()
+            self.__requestList[self.__requestNumber - 1].approveRequest()
             logging.info(
-                f"Advisor {self.ID} approved request of student {self.requestList[self.requestNumber - 1].student.ID}")
-            self.requestList.pop(self.requestNumber - 1)
+                f"Advisor {self.getID()} approved request of student {self.__requestList[self.__requestNumber - 1].student.getID()}")
+            self.__requestList.pop(self.__requestNumber - 1)
             self.printRequests()
         elif choice == 2:
-            self.requestList[self.requestNumber - 1].rejectRequest()
+            self.__requestList[self.__requestNumber - 1].rejectRequest()
             logging.info(
-                f"Advisor {self.ID} rejected request of student {self.requestList[self.requestNumber - 1].student.ID}")
-            self.requestList.pop(self.requestNumber - 1)
+                f"Advisor {self.getID()} rejected request of student {self.__requestList[self.__requestNumber - 1].student.getID()}")
+            self.__requestList.pop(self.__requestNumber - 1)
             self.printRequests()
         elif choice == 0:
             self.printRequests()
         else:
-            logging.warning(f"Advisor {self.ID} entered invalid input.")
+            logging.warning(f"Advisor {self.getID()} entered invalid input.")
             print("Invalid choice. Please select again!")
             self.replyRequests()
 
     def printMenu(self, menuType):
-        print(f"Welcome {self.name} {self.surname}!")
+        print(f"Welcome {self.__name} {self.__surname}!")
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
-        message = f"You have {len(self.requestList)} request(s)."
+        message = f"You have {len(self.__requestList)} request(s)."
         print(message)
         print()
 
@@ -89,4 +89,13 @@ class Advisor(Lecturer, IDisplayMenu):
         print("Enter your choice: ")
 
     def login(self, userName, password):
-        return self.userName == userName and self.password == password
+        return self.__userName == userName and self.__password == password
+
+    def getStudentsAdvised(self):
+        return self.__studentsAdvised
+
+    def getRequestList(self):
+        return self.__requestList
+
+    def setNotification(self, notification):
+        self.__notification = notification
