@@ -35,9 +35,8 @@ class JSONWriter:
                         for course, grades in student.getTranscript().getCourseGradeMap().items()
                         for grade in grades
                     ]
-
                 with open(filepath, "w", encoding='utf-8') as f:
-                    json.dump(data, f, indent=4)
+                    json.dump(data, f, ensure_ascii=False, indent=2)
             except Exception as e:
                 print(f"There is a problem with the {student.getID()}.json file")
                 logging.error(f"There is a problem with the {student.getID()}.json file")
@@ -55,7 +54,7 @@ class JSONWriter:
                     requests_data.append(request)
 
             with open("jsons/requests.json", "w", encoding='utf-8') as f:
-                json.dump(requests_data, f, indent=4)
+                json.dump(requests_data, f, ensure_ascii=False, indent=2)
         except Exception as e:
             print("There is a problem with the requests.json file")
             logging.error("There is a problem with the requests.json file")
@@ -72,11 +71,12 @@ class JSONWriter:
                 student = self.__department.studentIDStudentMap.get(data["studentID"])
                 if student:
                     data["hasRequest"] = student.isHasRequest()
-                    data["labSections"] = [labSection.getLaboratorySectionCode() for labSection in student.getLabSections()]
+                    data["labSections"] = [labSection.getLaboratorySectionCode() for labSection in
+                                           student.getLabSections()]
 
             # write back updated data
             with open(filepath, "w", encoding='utf-8') as f:
-                json.dump(existingData, f, indent=4, ensure_ascii=False)
+                json.dump(existingData, f, indent=2, ensure_ascii=False)
         except Exception as e:
             print("There is a problem with the students.json file")
             logging.error("There is a problem with the students.json file")

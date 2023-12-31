@@ -476,9 +476,10 @@ class Student(Person, IDisplayMenu):
                 if (scheduleCourseGrades and
                         len(scheduleCourseGrades) >= 2
                         and scheduleCourseGrades[-2].getLetterGrade() == "DZ"):
-                    if not courseToAdd in courseGradeMap or (
-                            courseGradeMap[courseToAdd][-1] and
-                            courseGradeMap[courseToAdd][-1].getLetterGrade() == "DZ"):
+                    courseToAddGrades = courseGradeMap.get(courseToAdd, [])
+                    if (not courseToAddGrades or
+                            courseToAddGrades[-1] and
+                            courseToAddGrades[-1].getLetterGrade() == "DZ"):
                         return True
             for course in self.__draft:
                 grades = courseGradeMap.get(course, [])
@@ -487,9 +488,10 @@ class Student(Person, IDisplayMenu):
                 if course.getDay() == courseToAdd.getDay() and course.getHour() == courseToAdd.getHour():
                     if grades and grades[-1].getLetterGrade() == "DZ":
                         return True
+                    courseToAddGrades = courseGradeMap.get(courseToAdd, [])
                     if not grades and (
-                            not courseGradeMap[courseToAdd] or
-                            courseGradeMap[courseToAdd][-1].getLetterGrade() == "DZ"):
+                            not courseToAddGrades or
+                            courseToAddGrades[-1].getLetterGrade() == "DZ"):
                         return True
             for labSection in self.__labSections:
                 if labSection.getDay() == courseToAdd.getDay() and labSection.getHour() == courseToAdd.getHour():
@@ -545,7 +547,7 @@ class Student(Person, IDisplayMenu):
             print(f"Choose number between 1 to {len(self.__draft)} to remove course: \n")
             userNumberInput = CourseRegistrationSystem.CourseRegistrationSystem().getInput()
             if 1 <= userNumberInput <= len(self.__draft):
-                for labSection in self.__draft[userNumberInput - 1].laboratorySections:
+                for labSection in self.__draft[userNumberInput - 1].getLaboratorySections():
                     if labSection in self.__labSections:
                         self.__labSections.remove(labSection)
                         labSection.setNumberOfStudents(labSection.getNumberOfStudents() - 1)

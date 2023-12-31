@@ -14,7 +14,7 @@ class Notification:
         if isinstance(self.recipient, Advisor):
             self.recipient.setNotification(self)
         elif isinstance(self.recipient, Student):
-            self.logger.info(f"Notification sent to student {self.recipient.id} that their request has been rejected.")
+            self.logger.info(f"Notification sent to student {self.recipient.getID()} that their request has been rejected.")
             self.recipient.setNotification(self)
 
     def getMessage(self):

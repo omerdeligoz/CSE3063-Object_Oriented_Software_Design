@@ -26,19 +26,20 @@ class Advisor(Lecturer, IDisplayMenu):
                 print("``````````````````````````````````````````````")
             requestNumber = controller.getInput()
             if 1 <= requestNumber <= len(self.__requestList):
+                self.__requestNumber = requestNumber
                 request = self.__requestList[requestNumber - 1]
                 print(
                     f"{request.getStudent().getName()} {request.getStudent().getSurname()} wants to take these courses:")
                 for course in request.getCourses():
                     if not (request.getStudent().getTranscript().getCourseGradeMap().get(course) is not None
                             and request.getStudent().getTranscript().getCourseGradeMap().get(course).last is None):
-                        print(f"{course.courseCode} {course.courseName}")
+                        print(f"{course.getCourseCode()} {course.getCourseName()}")
                 print(
                     f"{request.getStudent().getName()} {request.getStudent().getSurname()} wants to drop these courses:")
                 for course in request.getCourses():
                     if request.getStudent().getTranscript().getCourseGradeMap().get(course) is not None \
                             and request.getStudent().getTranscript().getCourseGradeMap().get(course).last is None:
-                        print(f"{course.courseCode} {course.courseName}")
+                        print(f"{course.getCourseCode()} {course.getCourseName()}")
                 self.replyRequests()
             elif requestNumber > len(self.__requestList) or requestNumber < 0:
                 print("Invalid choice! Please select again.")
@@ -75,7 +76,7 @@ class Advisor(Lecturer, IDisplayMenu):
             self.replyRequests()
 
     def printMenu(self, menuType):
-        print(f"Welcome {self.__name} {self.__surname}!")
+        print(f"Welcome {self.getName()} {self.getSurname()}!")
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
         message = f"You have {len(self.__requestList)} request(s)."
@@ -92,7 +93,7 @@ class Advisor(Lecturer, IDisplayMenu):
         print("Enter your choice: ")
 
     def login(self, userName, password):
-        return self.__userName == userName and self.__password == password
+        return self.getUserName() == userName and self.getPassword() == password
 
     def getStudentsAdvised(self):
         return self.__studentsAdvised

@@ -12,47 +12,47 @@ class Registration:
         print("Request approved.")
         system = CourseRegistrationSystem.CourseRegistrationSystem()
         for course in self.__courses:
-            if course not in self.__student.getTranscript().getStudentCourses():
-                system.addToSchedule(course, self.__student)
-                self.__student.getTranscript().getCourseGradeMap()[course] = [None]
-                self.__student.getTranscript().getStudentCourses().append(course)
+            if course not in self.getStudent().getTranscript().getStudentCourses():
+                system.addToSchedule(course, self.getStudent())
+                self.getStudent().getTranscript().getCourseGradeMap()[course] = [None]
+                self.getStudent().getTranscript().getStudentCourses().append(course)
                 course.setNumberOfStudents(course.getNumberOfStudents() + 1)
             else:
-                tempList = self.__student.getTranscript().getCourseGradeMap()[course]
+                tempList = self.getStudent().getTranscript().getCourseGradeMap()[course]
 
                 if len(tempList) == 1 and tempList[0] is None:
-                    system.removeFromSchedule(course, self.__student)
-                    self.__student.getTranscript().getCourseGradeMap().pop(course, None)
-                    self.__student.getTranscript().getStudentCourses().remove(course)
+                    system.removeFromSchedule(course, self.getStudent())
+                    self.getStudent().getTranscript().getCourseGradeMap().pop(course, None)
+                    self.getStudent().getTranscript().getStudentCourses().remove(course)
                     course.setNumberOfStudents(course.getNumberOfStudents() - 1)
                 elif len(tempList) == 1 and tempList[0] is not None:
-                    system.addToSchedule(course, self.__student)
+                    system.addToSchedule(course, self.getStudent())
                     tempList.append(None)
                     course.setNumberOfStudents(course.getNumberOfStudents() + 1)
                 elif len(tempList) > 1 and tempList[-1] is None:
-                    system.removeFromSchedule(course, self.__student)
+                    system.removeFromSchedule(course, self.getStudent())
                     tempList.remove(tempList[-1])
                     course.setNumberOfStudents(course.getNumberOfStudents() - 1)
                 elif tempList and tempList[-1] is not None:
-                    system.addToSchedule(course, self.__student)
+                    system.addToSchedule(course, self.getStudent())
                     tempList.append(None)
                     course.setNumberOfStudents(course.getNumberOfStudents() + 1)
 
-        self.__student.setHasRequest(False)
-        self.__student.getDraft().clear()
-        Notification(self.__student, "Your request has been approved.").sendNotification()
+        self.getStudent().setHasRequest(False)
+        self.getStudent().getDraft().clear()
+        Notification(self.getStudent(), "Your request has been approved.").sendNotification()
 
     def rejectRequest(self):
         print("Request rejected.")
 
-        self.__student.setHasRequest(False)
-        self.__student.getDraft().clear()
+        self.getStudent().setHasRequest(False)
+        self.getStudent().getDraft().clear()
 
-        Notification(self.__student, "Your request has been rejected.").sendNotification()
+        Notification(self.getStudent(), "Your request has been rejected.").sendNotification()
 
     def addRequest(self, advisor):
-        advisor.requests.append(self)
-        self.__student.setHasRequest(True)
+        advisor.getRequestList().append(self)
+        self.getStudent().setHasRequest(True)
         print("Request sent to advisor.")
 
     def getStudent(self):
