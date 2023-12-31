@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class IDisplayMenu(ABC):
     """
     This interface is used to display menus.

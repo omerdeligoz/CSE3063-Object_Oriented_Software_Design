@@ -16,7 +16,6 @@ class Department:
         self.advisorIDAdvisorMap = {}
         self.__maxCourseNumber = 10
 
-
     def getDepartmentName(self):
         return self.departmentName
 

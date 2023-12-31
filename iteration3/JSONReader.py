@@ -12,6 +12,7 @@ from Lecturer import Lecturer
 from Registration import Registration
 from Student import Student
 from Transcript import Transcript
+import CourseRegistrationSystem
 
 
 class JSONReader:
@@ -24,7 +25,6 @@ class JSONReader:
         self.__studentIDAdvisorIDMap = {}
         self.__studentRegistrationMap = {}
         self.__sectionCodeSectionMap = {}
-        self.__jsonNode = None
         self.__university = None
         self.__department = None
 
@@ -34,9 +34,9 @@ class JSONReader:
 
         self.__university = university
         # Parse the JSON file into a Python object.
-        self.__jsonNode = json.loads(data)
+        data = json.loads(data)
 
-        for department in self.__jsonNode:
+        for department in data:
             departmentName = department.get("departmentName")
 
             # Create a new department object with the retrieved details.
@@ -80,7 +80,7 @@ class JSONReader:
                                    semester, capacity, hour, day)
 
                 logging.info(f"Course {courseCode} created.")
-                self.__department.courses.append(newCourse)
+                self.__department.getCourses().append(newCourse)
                 self.__department.courseCodeCourseMap.update({courseCode: newCourse})
 
                 # Get the array of prerequisite course codes from the course.
@@ -98,9 +98,9 @@ class JSONReader:
             with open("jsons/assistants.json", 'r', encoding='utf-8') as f:
                 data = f.read()
 
-            self.__jsonNode = json.loads(data)
+            assistantsArray = json.loads(data)
 
-            for lecturer in self.__jsonNode:
+            for lecturer in assistantsArray:
                 id = lecturer.get("assistantID")
                 name = lecturer.get("name")
                 surname = lecturer.get("surname")
@@ -111,7 +111,7 @@ class JSONReader:
 
                 self.__department.assistants.append(newAssistant)
                 self.__assistantIDAssistantMap[id] = newAssistant
-                newAssistant.__department = self.__department
+                newAssistant.setDepartment(self.__department)
         except Exception:
             print("There is a problem with the assistants.json file.")
             logging.error("There is a problem with the assistants.json file.")
@@ -137,7 +137,7 @@ class JSONReader:
 
                 logging.info(f"Lab section created with code: {labSectionCode}")
 
-                newLabSection.assistant = self.__assistantIDAssistantMap.get(assistantID)
+                newLabSection.setAssistant(self.__assistantIDAssistantMap.get(assistantID))
                 self.__sectionCodeSectionMap[labSectionCode] = newLabSection
 
                 self.__department.laboratorySections.append(newLabSection)
@@ -163,7 +163,7 @@ class JSONReader:
                 logging.info(f"Lecturer created with ID: {id}")
 
                 self.__department.lecturers.append(newLecturer)
-                newLecturer.__department = self.__department
+                newLecturer.setDepartment(self.__department)
 
                 # Get the array of lessons taught from the lecturer.
                 lessonsTaughtArray = lecturer.get("lessonsTaught")
@@ -191,14 +191,14 @@ class JSONReader:
 
                 newStudent = Student(id, name, surname, userName, password, semester)
                 logging.info(f"Student created with ID: {id}")
-                newStudent.__department = self.__department
+                newStudent.setDepartment(self.__department)
 
                 labSectionsArray = student.get("labSections")
                 for labSectionCode in labSectionsArray:
-                    newStudent.labSections.append(self.__sectionCodeSectionMap.get(labSectionCode))
+                    newStudent.getLabSections().append(self.__sectionCodeSectionMap.get(labSectionCode))
 
                 self.__department.students.append(newStudent)
-                self.__university.userNamePersonMap[userName] = newStudent
+                self.__university.getUserNamePersonMap()[userName] = newStudent
                 self.__department.studentIDStudentMap[id] = newStudent
 
                 advisorID = student.get("advisorID")
@@ -213,13 +213,13 @@ class JSONReader:
 
     def readTranscript(self, student):
         try:
-            with open(f"jsons/Transcripts/{student.__ID}.json", 'r', encoding='utf-8') as f:
+            with open(f"jsons/Transcripts/{student.getID()}.json", 'r', encoding='utf-8') as f:
                 transcript = json.load(f)
 
             courseGradeMap = {}
             studentCourses = []
             courses = transcript.get("courses")
-
+            system = CourseRegistrationSystem.CourseRegistrationSystem()
             for course in courses:
                 letterGrade = course.get("letterGrade")
                 courseCode = course.get("courseCode")
@@ -230,8 +230,8 @@ class JSONReader:
                     grades = []
 
                     if letterGrade == "null":
-                        self.system.addToSchedule(course1, student)
-                        course1.numberOfStudents += 1
+                        system.addToSchedule(course1, student)
+                        course1.setNumberOfStudents(course1.getNumberOfStudents() + 1)
                         grades.append(None)
                         courseGradeMap[course1] = grades
                     else:
@@ -239,25 +239,25 @@ class JSONReader:
                         courseGradeMap[course1] = grades
                 else:
                     if letterGrade == "null":
-                        self.system.addToSchedule(course1, student)
-                        course1.numberOfStudents += 1
+                        system.addToSchedule(course1, student)
+                        course1.setNumberOfStudents(course1.getNumberOfStudents() + 1)
                         courseGradeMap[course1].append(None)
                     else:
                         courseGradeMap[course1].append(Grade(letterGrade))
 
             newTranscript = Transcript(student)
             self.__department.transcripts.append(newTranscript)
-            newTranscript.studentCourses = studentCourses
+            newTranscript.setStudentCourses(studentCourses)
 
-            student.transcript = newTranscript
-            student.transcript.courseGradeMap = courseGradeMap
+            student.setTranscript(newTranscript)
+            student.getTranscript().setCourseGradeMap(courseGradeMap)
             newTranscript.calculateValues()
 
-            logging.info(f"Transcript created for student with ID: {student.__ID}")
+            logging.info(f"Transcript created for student with ID: {student.getID()}")
 
         except Exception as e:
-            print(f"There is a problem with the {student.__ID}.json file.")
-            logging.error(f"There is a problem with the {student.__ID}.json file.")
+            print(f"There is a problem with the {student.getID()}.json file.")
+            logging.error(f"There is a problem with the {student.getID()}.json file.")
             exit(0)
 
     def readRequests(self):
@@ -275,8 +275,8 @@ class JSONReader:
                     draftCourses.append(course1)
 
                 student = self.__department.studentIDStudentMap.get(studentID)
-                student.draft = draftCourses
-                student.hasRequest = True
+                student.setDraft(draftCourses)
+                student.setHasRequest(True)
                 self.__studentRegistrationMap[student] = Registration(student, draftCourses)
 
         except Exception as e:
@@ -303,7 +303,7 @@ class JSONReader:
                 newAdvisor.setDepartment(self.__department)
 
                 self.__department.advisorIDAdvisorMap[id] = newAdvisor
-                self.__university.userNamePersonMap[userName] = newAdvisor
+                self.__university.getUserNamePersonMap()[userName] = newAdvisor
 
                 lessonsTaughtArray = advisor.get("lessonsTaught")
                 lessonsTaught = [lesson for lesson in lessonsTaughtArray]
@@ -318,32 +318,32 @@ class JSONReader:
     def syncObjects(self):
         # Sync for courses
         # For each course in the department, add its prerequisite courses and course sections
-        for course in self.__department.courses:
+        for course in self.__department.getCourses():
             for courseCode in self.__coursePrerequisiteCourseCodesMap[course]:
-                course.preRequisiteCourses.append(self.__department.courseCodeCourseMap[courseCode])
+                course.getPreRequisiteCourses().append(self.__department.courseCodeCourseMap[courseCode])
 
         # Sync for lab sections
         for labSection in self.__department.laboratorySections:
             course = self.__department.labSectionCourseMap[labSection]
-            course.laboratorySections.append(labSection)
+            course.getLaboratorySections().append(labSection)
 
         # Sync for lecturers
         # For each lecturer in the department, add the courses they teach and set them as the lecturer for each course
         for lecturer in self.__department.lecturers:
-            for courseCode in self.__lecturerIDCoursesMap[lecturer.__ID]:
-                lecturer.lessonsTaught.append(self.__department.courseCodeCourseMap[courseCode])
-            for course in lecturer.lessonsTaught:
-                course.lecturer = lecturer
+            for courseCode in self.__lecturerIDCoursesMap[lecturer.getID()]:
+                lecturer.getLessonsTaught().append(self.__department.courseCodeCourseMap[courseCode])
+            for course in lecturer.getLessonsTaught():
+                course.setLecturer(lecturer)
 
         # Sync for advisors
         # For each student in the department, add them to their advisor's list of advised students and add their registration to the advisor's request list
         # For each advisor in the department, add the courses they teach
         for student in self.__department.students:
-            advisor = self.__department.advisorIDAdvisorMap[self.__studentIDAdvisorIDMap[student.__ID]]
-            student.advisor = advisor
-            advisor.__studentsAdvised.append(student)
+            advisor = self.__department.advisorIDAdvisorMap[self.__studentIDAdvisorIDMap[student.getID()]]
+            student.setAdvisor(advisor)
+            advisor.getStudentsAdvised().append(student)
             if student in self.__studentRegistrationMap and self.__studentRegistrationMap[student] is not None:
-                advisor.__requestList.append(self.__studentRegistrationMap[student])
+                advisor.getRequestList().append(self.__studentRegistrationMap[student])
         for advisor in self.__department.advisors:
-            for courseCode in self.__advisorIDCoursesMap[advisor.__ID]:
-                advisor.lessonsTaught.append(self.__department.courseCodeCourseMap[courseCode])
+            for courseCode in self.__advisorIDCoursesMap[advisor.getID()]:
+                advisor.getLessonsTaught().append(self.__department.courseCodeCourseMap[courseCode])

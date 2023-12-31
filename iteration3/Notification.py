@@ -1,6 +1,7 @@
 import logging
 
 from Advisor import Advisor
+from Student import Student
 
 
 class Notification:

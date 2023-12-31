@@ -1,62 +1,62 @@
 import CourseRegistrationSystem
-import Notification
+from Notification import Notification
 
 
 class Registration:
 
     def __init__(self, student, courses):
-        self.student = student
-        self.courses = courses
+        self.__student = student
+        self.__courses = courses
 
     def approveRequest(self):
         print("Request approved.")
-
-        for course in self.courses:
-            if course not in self.student.transcript.studentCourses:
-                CourseRegistrationSystem.addToSchedule(course, self.student)
-                self.student.transcript.courseGradeMap[course] = [None]
-                self.student.transcript.studentCourses.append(course)
-                course.numberOfStudents += 1
+        system = CourseRegistrationSystem.CourseRegistrationSystem()
+        for course in self.__courses:
+            if course not in self.__student.getTranscript().getStudentCourses():
+                system.addToSchedule(course, self.__student)
+                self.__student.getTranscript().getCourseGradeMap()[course] = [None]
+                self.__student.getTranscript().getStudentCourses().append(course)
+                course.setNumberOfStudents(course.getNumberOfStudents() + 1)
             else:
-                tempList = self.student.transcript.courseGradeMap[course]
+                tempList = self.__student.getTranscript().getCourseGradeMap()[course]
 
                 if len(tempList) == 1 and tempList[0] is None:
-                    system.removeFromSchedule(course, self.student)
-                    self.student.transcript.courseGradeMap.pop(course, None)
-                    self.student.transcript.studentCourses.remove(course)
-                    course.numberOfStudents -= 1
+                    system.removeFromSchedule(course, self.__student)
+                    self.__student.getTranscript().getCourseGradeMap().pop(course, None)
+                    self.__student.getTranscript().getStudentCourses().remove(course)
+                    course.setNumberOfStudents(course.getNumberOfStudents() - 1)
                 elif len(tempList) == 1 and tempList[0] is not None:
-                    system.addToSchedule(course, self.student)
+                    system.addToSchedule(course, self.__student)
                     tempList.append(None)
-                    course.numberOfStudents += 1
+                    course.setNumberOfStudents(course.getNumberOfStudents() + 1)
                 elif len(tempList) > 1 and tempList[-1] is None:
-                    system.removeFromSchedule(course, self.student)
+                    system.removeFromSchedule(course, self.__student)
                     tempList.remove(tempList[-1])
-                    course.numberOfStudents -= 1
+                    course.setNumberOfStudents(course.getNumberOfStudents() - 1)
                 elif tempList and tempList[-1] is not None:
-                    system.addToSchedule(course, self.student)
+                    system.addToSchedule(course, self.__student)
                     tempList.append(None)
-                    course.numberOfStudents += 1
+                    course.setNumberOfStudents(course.getNumberOfStudents() + 1)
 
-        self.student.hasRequest = False
-        self.student.draft.clear()
-        Notification(self.student, "Your request has been approved.").sendNotification()
+        self.__student.setHasRequest(False)
+        self.__student.getDraft().clear()
+        Notification(self.__student, "Your request has been approved.").sendNotification()
 
     def rejectRequest(self):
         print("Request rejected.")
 
-        self.student.hasRequest = False
-        self.student.draft.clear()
+        self.__student.setHasRequest(False)
+        self.__student.getDraft().clear()
 
-        Notification(self.student, "Your request has been rejected.").sendNotification()
+        Notification(self.__student, "Your request has been rejected.").sendNotification()
 
     def addRequest(self, advisor):
         advisor.requests.append(self)
-        self.student.hasRequest = True
+        self.__student.setHasRequest(True)
         print("Request sent to advisor.")
 
     def getStudent(self):
-        return self.student
+        return self.__student
 
     def getCourses(self):
-        return self.courses
+        return self.__courses

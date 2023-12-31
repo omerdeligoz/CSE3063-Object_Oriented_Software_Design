@@ -7,4 +7,3 @@ class Assistant(Person):
 
     def login(self, userName, password):
         return False
-

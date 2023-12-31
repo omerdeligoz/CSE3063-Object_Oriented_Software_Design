@@ -13,38 +13,41 @@ class Course:
         self.__numberOfStudents = 0
         self.__lecturer = None
 
-        def getCourseName(self):
-            return self.__courseName
+    def getCourseName(self):
+        return self.__courseName
 
-        def getpreRequisiteCourses(self):
-            return self.__preRequisiteCourses
+    def getPreRequisiteCourses(self):
+        return self.__preRequisiteCourses
 
-        def getCourseCode(self):
-            return self.__courseCode
+    def getCourseCode(self):
+        return self.__courseCode
 
-        def getCourseType(self):
-            return self.__courseType
+    def getCourseType(self):
+        return self.__courseType
 
-        def getCourseCredit(self):
-            return self.__courseCredit
+    def getCourseCredit(self):
+        return self.__courseCredit
 
-        def getHour(self):
-            return self.__hour
+    def getHour(self):
+        return self.__hour
 
-        def getDay(self):
-            return self.__day
+    def getDay(self):
+        return self.__day
 
-        def getLaboratorySections(self):
-            return self.__laboratorySections
+    def getLaboratorySections(self):
+        return self.__laboratorySections
 
-        def getNumberOfStudents(self):
-            return self.__numberOfStudents
+    def getNumberOfStudents(self):
+        return self.__numberOfStudents
 
-        def setNumberOfStudents(self, numberOfStudents):
-            self.__numberOfStudents = numberOfStudents
+    def setNumberOfStudents(self, numberOfStudents):
+        self.__numberOfStudents = numberOfStudents
 
-        def setLecturer(self, lecturer):
-            self.__lecturer = lecturer
+    def setLecturer(self, lecturer):
+        self.__lecturer = lecturer
 
-        def hasCapacity(self):
-            return self.__numberOfStudents < self.__capacity
+    def hasCapacity(self):
+        return self.__numberOfStudents < self.__capacity
+
+    def getSemester(self):
+        return self.__semester

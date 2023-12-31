@@ -19,7 +19,7 @@ class CourseRegistrationSystem(IDisplayMenu):
     def start(self):
         jsonReader = JSONReader()
         jsonReader.readDepartments(self.__university)
-        for department in self.__university.departments:
+        for department in self.__university.getDepartments():
             jsonReader.start(department)
         self.mainMenu()
 
@@ -67,10 +67,10 @@ class CourseRegistrationSystem(IDisplayMenu):
         print("Enter your password: ")
         password = input()
 
-        person = self.__university.userNamePersonMap.get(userName)
+        person = self.__university.getUserNamePersonMap().get(userName)
         if person is not None:  # Check if there is such user
             if person.login(userName, password):
-                logging.info(f"{person.__ID} {person.__name} {person.__surname} logged in.")
+                logging.info(f"{person.getID()} {person.getName()} {person.getSurname()} logged in.")
                 if isinstance(person, Student):
                     self.studentMenu(person)
                 elif isinstance(person, Advisor):
@@ -91,15 +91,15 @@ class CourseRegistrationSystem(IDisplayMenu):
         self.__choice = self.getInput()
 
         if self.__choice == 0:
-            logging.info(f"Student {student.__name} {student.__surname} exited the system.")
+            logging.info(f"Student {student.getName()} {student.getSurname()} exited the system.")
             self.exitProgram()
             return
         elif self.__choice == 1:
             self.courseRegistrationMenu(student)
         elif self.__choice == 2:
-            student.transcript.showTranscript()
+            student.getTranscript().showTranscript()
         elif self.__choice == 3:
-            logging.info(f"Student {student.__name} {student.__surname} logged out.")
+            logging.info(f"Student {student.getName()} {student.getSurname()} logged out.")
             self.loginMenu()
             return
         elif self.__choice == -1:
@@ -117,7 +117,7 @@ class CourseRegistrationSystem(IDisplayMenu):
             case 0:
                 return
             case 1:
-                student.transcript.courseStatusCheck()
+                student.getTranscript().courseStatusCheck()
             case 2:
                 student.addCourseToDraft()
             case 3:
@@ -127,7 +127,7 @@ class CourseRegistrationSystem(IDisplayMenu):
             case 5:
                 student.sendRequest()
             case 6:
-                logging.info(f"Student {student.__name} {student.__surname} logged out.")
+                logging.info(f"Student {student.getName()} {student.getSurname()} logged out.")
                 self.loginMenu()
                 return
             case -1:
@@ -143,13 +143,13 @@ class CourseRegistrationSystem(IDisplayMenu):
 
         match self.__choice:
             case 0:
-                logging.info(f"Advisor {advisor.__name} {advisor.__surname} exited the system.")
+                logging.info(f"Advisor {advisor.getName()} {advisor.getSurname()} exited the system.")
                 self.exitProgram()
                 return
             case 1:
                 advisor.printRequests()
             case 2:
-                logging.info(f"Advisor {advisor.__name} {advisor.__surname} logged out.")
+                logging.info(f"Advisor {advisor.getName()} {advisor.getSurname()} logged out.")
                 self.loginMenu()
                 return
             case -1:
@@ -204,17 +204,17 @@ class CourseRegistrationSystem(IDisplayMenu):
         day_to_index = {"Monday": 0, "Tuesday": 1, "Wednesday": 2, "Thursday": 3, "Friday": 4}
         hour_to_index = {8: 0, 9: 1, 10: 2, 11: 3, 13: 4, 14: 5, 15: 6, 16: 7}
 
-        i = day_to_index.get(course.day)
-        j = hour_to_index.get(course.hour)
+        i = day_to_index.get(course.getDay())
+        j = hour_to_index.get(int(course.getHour()))
 
-        student.schedule[i][j] = course
+        student.getSchedule()[i][j] = course
 
     def removeFromSchedule(self, course, student):
         i, j = 0, 0
         day_to_index = {"Monday": 0, "Tuesday": 1, "Wednesday": 2, "Thursday": 3, "Friday": 4}
         hour_to_index = {8: 0, 9: 1, 10: 2, 11: 3, 13: 4, 14: 5, 15: 6, 16: 7}
 
-        i = day_to_index.get(course.day)
-        j = hour_to_index.get(course.hour)
+        i = day_to_index.get(course.getDay())
+        j = hour_to_index.get(int(course.getHour()))
 
-        student.schedule[i][j] = None
+        student.getSchedule()[i][j] = None

@@ -7,7 +7,7 @@ class JSONWriter:
         self.__department = None
 
     def start(self, university):
-        for department in university.departments:
+        for department in university.getDepartments():
             self.__department = department
             self.writeJson()
 
@@ -20,41 +20,41 @@ class JSONWriter:
 
     def writeTranscripts(self):
         for student in self.__department.students:
-            filepath = f"jsons/Transcripts/{student.__ID}.json"
+            filepath = f"jsons/Transcripts/{student.getID()}.json"
             try:
                 with open(filepath, 'r+', encoding='utf-8') as f:
                     data = json.load(f)
-                    data['takenCredits'] = student.transcript.takenCredits
-                    data['completedCredits'] = student.transcript.completedCredits
-                    data['cgpa'] = round(student.transcript.cgpa, 2)
+                    data['takenCredits'] = student.getTranscript().getTakenCredits()
+                    data['completedCredits'] = student.getTranscript().getCompletedCredits()
+                    data['cgpa'] = round(student.getTranscript().getCgpa(), 2)
                     data['courses'] = [
                         {
-                            "courseCode": course.courseCode,
-                            "letterGrade": grade.__letterGrade if grade else None
+                            "courseCode": course.getCourseCode(),
+                            "letterGrade": grade.getLetterGrade() if grade else None
                         }
-                        for course, grades in student.transcript.courseGradeMap.items()
+                        for course, grades in student.getTranscript().getCourseGradeMap().items()
                         for grade in grades
                     ]
 
-                with open(filepath, "w") as f:
+                with open(filepath, "w", encoding='utf-8') as f:
                     json.dump(data, f, indent=4)
             except Exception as e:
-                print(f"There is a problem with the {student.__ID}.json file")
-                logging.error(f"There is a problem with the {student.__ID}.json file")
+                print(f"There is a problem with the {student.getID()}.json file")
+                logging.error(f"There is a problem with the {student.getID()}.json file")
                 exit(0)
 
     def writeRequests(self):
         try:
             requests_data = []
             for student in self.__department.students:
-                if student.hasRequest:
+                if student.isHasRequest():
                     request = {
-                        "studentID": student.__ID,
-                        "courses": [course.courseCode for course in student.draft]
+                        "studentID": student.getID(),
+                        "courses": [course.getCourseCode() for course in student.getDraft()]
                     }
                     requests_data.append(request)
 
-            with open("jsons/requests.json", "w") as f:
+            with open("jsons/requests.json", "w", encoding='utf-8') as f:
                 json.dump(requests_data, f, indent=4)
         except Exception as e:
             print("There is a problem with the requests.json file")
@@ -71,11 +71,11 @@ class JSONWriter:
             for data in existingData:
                 student = self.__department.studentIDStudentMap.get(data["studentID"])
                 if student:
-                    data["hasRequest"] = student.hasRequest
-                    data["labSections"] = [labSection.laboratorySectionCode for labSection in student.labSections]
+                    data["hasRequest"] = student.isHasRequest()
+                    data["labSections"] = [labSection.getLaboratorySectionCode() for labSection in student.getLabSections()]
 
             # write back updated data
-            with open(filepath, "w") as f:
+            with open(filepath, "w", encoding='utf-8') as f:
                 json.dump(existingData, f, indent=4, ensure_ascii=False)
         except Exception as e:
             print("There is a problem with the students.json file")

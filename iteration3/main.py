@@ -2,8 +2,7 @@ import logging
 import os
 from datetime import datetime
 
-from CourseRegistrationSystem import CourseRegistrationSystem
-
+import CourseRegistrationSystem
 
 # Define the format
 log_format = '%(asctime)s - %(levelname)s - %(name)s.%(funcName)s - %(message)s'
@@ -19,5 +18,5 @@ if not os.path.exists('logs'):
 logging.basicConfig(filename=os.path.join('logs', filename), filemode='w', format=log_format, level=logging.INFO)
 
 os.environ["LOG_CFG"] = "log4j2.xml"  # to set the log4j2 configuration file
-courseRegistrationSystem = CourseRegistrationSystem()
+courseRegistrationSystem = CourseRegistrationSystem.CourseRegistrationSystem()
 courseRegistrationSystem.start()
