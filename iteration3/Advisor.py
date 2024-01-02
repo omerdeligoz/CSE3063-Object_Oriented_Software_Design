@@ -1,21 +1,21 @@
 import logging
 
-import CourseRegistrationSystem
-from IDisplayMenu import IDisplayMenu
-from Lecturer import Lecturer
+from iteration3.IDisplayMenu import IDisplayMenu
+from iteration3.Lecturer import Lecturer
 
 
 class Advisor(Lecturer, IDisplayMenu):
 
     def __init__(self, ID, name, surname, userName, password):
         super().__init__(ID, name, surname, userName, password)
+        from iteration3.CourseRegistrationSystem import CourseRegistrationSystem
+        self.__system = CourseRegistrationSystem()
         self.__studentsAdvised = []
         self.__requestList = []
         self.__requestNumber = None
         self.__notification = None
 
     def printRequests(self):
-        controller = CourseRegistrationSystem.CourseRegistrationSystem()
         print("Request Approval Menu:")
         print("\nBack -> 0\n")
         if len(self.__requestList) != 0:
@@ -24,7 +24,7 @@ class Advisor(Lecturer, IDisplayMenu):
                 print(
                     f"{i + 1}. {self.__requestList[i].getStudent().getName()} {self.__requestList[i].getStudent().getSurname()}")
                 print("``````````````````````````````````````````````")
-            requestNumber = controller.getInput()
+            requestNumber = self.__system.getInput()
             if 1 <= requestNumber <= len(self.__requestList):
                 self.__requestNumber = requestNumber
                 request = self.__requestList[requestNumber - 1]
@@ -49,13 +49,12 @@ class Advisor(Lecturer, IDisplayMenu):
             print("You are redirecting to the Advisor Main Menu...")
 
     def replyRequests(self):
-        controller = CourseRegistrationSystem.CourseRegistrationSystem()
         print("               Back -> 0")
         print("    Approve Request -> 1")
         print("     Reject Request -> 2")
         print("Please select an option:")
 
-        choice = controller.getInput()
+        choice = self.__system.getInput()
         if choice == 1:
             self.__requestList[self.__requestNumber - 1].approveRequest()
             logging.info(

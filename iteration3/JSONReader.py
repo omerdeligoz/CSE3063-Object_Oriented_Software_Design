@@ -2,22 +2,23 @@ import json
 import logging
 import sys
 
-from Advisor import Advisor
-from Assistant import Assistant
-from Course import Course
-from Department import Department
-from Grade import Grade
-from LaboratorySection import LaboratorySection
-from Lecturer import Lecturer
-from Registration import Registration
-from Student import Student
-from Transcript import Transcript
-import CourseRegistrationSystem
+from iteration3.Advisor import Advisor
+from iteration3.Assistant import Assistant
+from iteration3.Course import Course
+from iteration3.Department import Department
+from iteration3.Grade import Grade
+from iteration3.LaboratorySection import LaboratorySection
+from iteration3.Lecturer import Lecturer
+from iteration3.Registration import Registration
+from iteration3.Student import Student
+from iteration3.Transcript import Transcript
 
 
 class JSONReader:
 
     def __init__(self):
+        from iteration3.CourseRegistrationSystem import CourseRegistrationSystem
+        self.__system = CourseRegistrationSystem()
         self.__coursePrerequisiteCourseCodesMap = {}
         self.__lecturerIDCoursesMap = {}
         self.__assistantIDAssistantMap = {}
@@ -219,7 +220,6 @@ class JSONReader:
             courseGradeMap = {}
             studentCourses = []
             courses = transcript.get("courses")
-            system = CourseRegistrationSystem.CourseRegistrationSystem()
             for course in courses:
                 letterGrade = course.get("letterGrade")
                 courseCode = course.get("courseCode")
@@ -230,7 +230,7 @@ class JSONReader:
                     grades = []
 
                     if letterGrade == "null":
-                        system.addToSchedule(course1, student)
+                        self.__system.addToSchedule(course1, student)
                         course1.setNumberOfStudents(course1.getNumberOfStudents() + 1)
                         grades.append(None)
                         courseGradeMap[course1] = grades
@@ -239,7 +239,7 @@ class JSONReader:
                         courseGradeMap[course1] = grades
                 else:
                     if letterGrade == "null":
-                        system.addToSchedule(course1, student)
+                        self.__system.addToSchedule(course1, student)
                         course1.setNumberOfStudents(course1.getNumberOfStudents() + 1)
                         courseGradeMap[course1].append(None)
                     else:

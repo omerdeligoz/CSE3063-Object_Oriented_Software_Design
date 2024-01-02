@@ -1,16 +1,15 @@
 import logging
-
-import CourseRegistrationSystem
-import Registration
-from ConsoleColours import ConsoleColours
-from Course import Course
-from IDisplayMenu import IDisplayMenu
-from Person import Person
+from iteration3.ConsoleColours import ConsoleColours
+from iteration3.Course import Course
+from iteration3.IDisplayMenu import IDisplayMenu
+from iteration3.Person import Person
 
 
 class Student(Person, IDisplayMenu):
     def __init__(self, studentID, name, surname, userName, password, semester):
         super().__init__(studentID, name, surname, userName, password)
+        from iteration3.CourseRegistrationSystem import CourseRegistrationSystem
+        self.__system = CourseRegistrationSystem()
         self.__draft = []
         self.__availableCoursesToAdd = []
         self.__availableCoursesToDrop = []
@@ -23,6 +22,17 @@ class Student(Person, IDisplayMenu):
         self.__schedule = [[None for _ in range(8)] for _ in range(5)]
 
     def sendRequest(self):
+        """
+        Sends a request for approval to the assigned advisor.
+
+        If the student already has a request waiting for approval, it prints a warning message and does nothing.
+        If the student's draft is empty, it prints a message and does nothing.
+        Otherwise, it creates a new Registration object with the student and draft as parameters, adds the advisor to the request,
+        and logs the event.
+
+        Returns:
+            None
+        """
         ConsoleColours.paintRedMenu()
         if self.__hasRequest:
             print("You already have a request waiting for approval.")
@@ -33,11 +43,21 @@ class Student(Person, IDisplayMenu):
             print("Your draft is empty!")
             ConsoleColours.resetColour()
         else:
-            registration = Registration.Registration(self, self.__draft)
+            from Registration import Registration
+            registration = Registration(self, self.__draft)
             registration.addRequest(self.__advisor)
             logging.info(f"Student {self.getID()} sent a request to advisor {self.__advisor.getID()}.")
 
     def printMenu(self, menuType):
+        """
+        Prints out the menu based on the given menuType.
+
+        Parameters:
+            menuType (str): The type of menu to be printed.
+
+        Returns:
+            None
+        """
         match menuType:
             case "studentMenu":
                 ConsoleColours.paintBlueMenu()
@@ -123,8 +143,7 @@ class Student(Person, IDisplayMenu):
                 return
             ConsoleColours.paintBlueMenu()
             self.printMenu("courseSelectionMenu")
-            system = CourseRegistrationSystem.CourseRegistrationSystem()
-            choice = system.getInput()
+            choice = self.__system.getInput()
             match choice:
                 case 0:
                     return
@@ -150,7 +169,6 @@ class Student(Person, IDisplayMenu):
             print("Something went wrong. Please try again..")
             self.addCourseToDraft()
 
-
     def addMandatoryCourse(self):
         if self.maxCoursesReached():
             return
@@ -168,7 +186,7 @@ class Student(Person, IDisplayMenu):
 
             ConsoleColours.paintGreenMenu()
             print(f"Choose number between 1 to {len(self.__availableCoursesToAdd)} to add course: \n")
-            userNumberInput1 = CourseRegistrationSystem.CourseRegistrationSystem().getInput()
+            userNumberInput1 = self.__system.getInput()
 
             if 1 <= userNumberInput1 <= len(self.__availableCoursesToAdd):
                 self.chooseLabSection(self.__availableCoursesToAdd[userNumberInput1 - 1])
@@ -206,7 +224,7 @@ class Student(Person, IDisplayMenu):
             print("´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´")
 
         print(f"Choose number between 1 to {len(availableLabSections)} to add laboratory section: \n")
-        userNumberInput = CourseRegistrationSystem.CourseRegistrationSystem().getInput()
+        userNumberInput = self.__system.getInput()
 
         if 1 <= userNumberInput <= len(availableLabSections):
             self.__labSections.append(availableLabSections[userNumberInput - 1])
@@ -237,7 +255,7 @@ class Student(Person, IDisplayMenu):
 
             ConsoleColours.paintGreenMenu()
             print(f"Choose number between 1 to {len(self.__availableCoursesToAdd)} to add course: \n")
-            userNumberInput1 = CourseRegistrationSystem.CourseRegistrationSystem().getInput()
+            userNumberInput1 = self.__system.getInput()
 
             if 1 <= userNumberInput1 <= len(self.__availableCoursesToAdd):
                 self.__draft.append(self.__availableCoursesToAdd[userNumberInput1 - 1])
@@ -300,7 +318,7 @@ class Student(Person, IDisplayMenu):
 
             ConsoleColours.paintGreenMenu()
             print(f"Choose number between 1 to {len(self.__availableCoursesToAdd)} to add course: \n")
-            userNumberInput1 = CourseRegistrationSystem.CourseRegistrationSystem().getInput()
+            userNumberInput1 = self.__system.getInput()
 
             if 1 <= userNumberInput1 <= len(self.__availableCoursesToAdd):
                 self.__draft.append(self.__availableCoursesToAdd[userNumberInput1 - 1])
@@ -333,7 +351,7 @@ class Student(Person, IDisplayMenu):
 
             ConsoleColours.paintGreenMenu()
             print(f"Choose number between 1 to {len(self.__availableCoursesToAdd)} to add course: \n")
-            userNumberInput1 = CourseRegistrationSystem.CourseRegistrationSystem().getInput()
+            userNumberInput1 = self.__system.getInput()
 
             if 1 <= userNumberInput1 <= len(self.__availableCoursesToAdd):
                 self.__draft.append(self.__availableCoursesToAdd[userNumberInput1 - 1])
@@ -417,7 +435,7 @@ class Student(Person, IDisplayMenu):
 
             ConsoleColours.paintGreenMenu()
             print(f"Choose number between 1 to {len(self.__availableCoursesToDrop)} to add course: \n")
-            userNumberInput = CourseRegistrationSystem.CourseRegistrationSystem().getInput()
+            userNumberInput = self.__system.getInput()
 
             if 1 <= userNumberInput <= len(self.__availableCoursesToDrop):
                 self.__draft.append(self.__availableCoursesToDrop[userNumberInput - 1])
@@ -551,7 +569,7 @@ class Student(Person, IDisplayMenu):
                     f"´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´")
             ConsoleColours.paintGreenMenu()
             print(f"Choose number between 1 to {len(self.__draft)} to remove course: \n")
-            userNumberInput = CourseRegistrationSystem.CourseRegistrationSystem().getInput()
+            userNumberInput = self.__system.getInput()
             if 1 <= userNumberInput <= len(self.__draft):
                 for labSection in self.__draft[userNumberInput - 1].getLaboratorySections():
                     if labSection in self.__labSections:

@@ -1,4 +1,4 @@
-from Person import Person
+from iteration3.Person import Person
 
 
 class Lecturer(Person):

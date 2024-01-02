@@ -1,7 +1,7 @@
 import logging
 
-from Advisor import Advisor
-from Student import Student
+from iteration3.Advisor import Advisor
+from iteration3.Student import Student
 
 
 class Notification:

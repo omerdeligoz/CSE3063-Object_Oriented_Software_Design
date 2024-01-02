@@ -1,12 +1,12 @@
 import logging
 import sys
 
-from Advisor import Advisor
-from IDisplayMenu import IDisplayMenu
-from JSONReader import JSONReader
-from JSONWriter import JSONWriter
-from Student import Student
-from University import University
+from iteration3.Advisor import Advisor
+from iteration3.IDisplayMenu import IDisplayMenu
+from iteration3.JSONReader import JSONReader
+from iteration3.JSONWriter import JSONWriter
+from iteration3.Student import Student
+from iteration3.University import University
 
 
 class CourseRegistrationSystem(IDisplayMenu):
