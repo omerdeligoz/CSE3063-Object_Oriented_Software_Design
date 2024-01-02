@@ -114,36 +114,42 @@ class Student(Person, IDisplayMenu):
                 ConsoleColours.paintPurpleMenu()
 
     def addCourseToDraft(self):
-        if self.__hasRequest:
-            ConsoleColours.paintRedMenu()
-            print("You can not add lecture because you have a request waiting for approval.")
-            logging.warning(
-                f"Student {self.getID()} can not add lecture because he/she has a request waiting for {self.__advisor.getID()}'s approval.")
-            return
-        ConsoleColours.paintBlueMenu()
-        self.printMenu("courseSelectionMenu")
-        system = CourseRegistrationSystem.CourseRegistrationSystem()
-        choice = system.getInput()
-        match choice:
-            case 0:
+        try:
+            if self.__hasRequest:
+                ConsoleColours.paintRedMenu()
+                print("You can not add lecture because you have a request waiting for approval.")
+                logging.warning(
+                    f"Student {self.getID()} can not add lecture because he/she has a request waiting for {self.__advisor.getID()}'s approval.")
                 return
-            case 1:
-                self.addMandatoryCourse()
-            case 2:
-                self.addTechnicalElective()
-            case 3:
-                self.addNonTechnicalElective()
-            case 4:
-                self.addFacultyTechnicalElective()
-            case 5:
-                self.addCourseToDrop()
-            case -1:
-                ConsoleColours.paintRedMenu()
-                print("Please enter valid number!")
-            case _:
-                ConsoleColours.paintRedMenu()
-                print("Invalid input, please enter a valid number!")
-        self.addCourseToDraft()
+            ConsoleColours.paintBlueMenu()
+            self.printMenu("courseSelectionMenu")
+            system = CourseRegistrationSystem.CourseRegistrationSystem()
+            choice = system.getInput()
+            match choice:
+                case 0:
+                    return
+                case 1:
+                    self.addMandatoryCourse()
+                case 2:
+                    self.addTechnicalElective()
+                case 3:
+                    self.addNonTechnicalElective()
+                case 4:
+                    self.addFacultyTechnicalElective()
+                case 5:
+                    self.addCourseToDrop()
+                case -1:
+                    ConsoleColours.paintRedMenu()
+                    print("Please enter valid number!")
+                case _:
+                    ConsoleColours.paintRedMenu()
+                    print("Invalid input, please enter a valid number!")
+            self.addCourseToDraft()
+        except Exception as e:
+            logging.error(f"An error occurred while adding course to draft: {e}")
+            print("Something went wrong. Please try again..")
+            self.addCourseToDraft()
+
 
     def addMandatoryCourse(self):
         if self.maxCoursesReached():
