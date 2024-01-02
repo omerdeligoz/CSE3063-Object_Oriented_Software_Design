@@ -32,13 +32,13 @@ class Advisor(Lecturer, IDisplayMenu):
                     f"{request.getStudent().getName()} {request.getStudent().getSurname()} wants to take these courses:")
                 for course in request.getCourses():
                     if not (request.getStudent().getTranscript().getCourseGradeMap().get(course) is not None
-                            and request.getStudent().getTranscript().getCourseGradeMap().get(course).last is None):
+                            and request.getStudent().getTranscript().getCourseGradeMap().get(course)[-1] is None):
                         print(f"{course.getCourseCode()} {course.getCourseName()}")
                 print(
                     f"{request.getStudent().getName()} {request.getStudent().getSurname()} wants to drop these courses:")
                 for course in request.getCourses():
                     if request.getStudent().getTranscript().getCourseGradeMap().get(course) is not None \
-                            and request.getStudent().getTranscript().getCourseGradeMap().get(course).last is None:
+                            and request.getStudent().getTranscript().getCourseGradeMap().get(course)[-1] is None:
                         print(f"{course.getCourseCode()} {course.getCourseName()}")
                 self.replyRequests()
             elif requestNumber > len(self.__requestList) or requestNumber < 0:
