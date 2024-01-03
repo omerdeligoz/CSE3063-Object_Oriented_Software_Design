@@ -220,7 +220,8 @@ class Student(Person, IDisplayMenu):
                 availableLabSections.append(labSection)
 
         for i, labSection in enumerate(availableLabSections):
-            print(f"{i + 1}. {labSection.getLaboratorySectionCode()}")
+            print(
+                f"{i + 1}. {labSection.getLaboratorySectionCode()} - {course.getCourseName()} (Lab) - {labSection.getDay()} - {labSection.getHour()}.00")
             print("´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´")
 
         print(f"Choose number between 1 to {len(availableLabSections)} to add laboratory section: \n")

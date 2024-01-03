@@ -33,7 +33,7 @@ class Advisor(Lecturer, IDisplayMenu):
                 for course in request.getCourses():
                     if not (request.getStudent().getTranscript().getCourseGradeMap().get(course) is not None
                             and request.getStudent().getTranscript().getCourseGradeMap().get(course)[-1] is None):
-                        print(f"{course.getCourseCode()} {course.getCourseName()}")
+                        print(f"{course.getCourseCode()} {course.getCourseName()} - {course.getDay()} - {course.getHour()}.00")
                 print(
                     f"{request.getStudent().getName()} {request.getStudent().getSurname()} wants to drop these courses:")
                 for course in request.getCourses():
