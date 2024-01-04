@@ -285,6 +285,7 @@ class Student(Person, IDisplayMenu):
                     if (course.getSemester() > 6
                             or course.getCourseType() == "NTE"
                             or lastGrade is None
+                            or lastGrade.getLetterGrade() is None
                             or lastGrade.getLetterGrade() > "DD"):
                         continue
                     sum += course.getCourseCredit()
@@ -394,6 +395,7 @@ class Student(Person, IDisplayMenu):
                             (course.getCourseType() in ["NTE", "TE", "FTE"])
                             or studentCourse.getCourseCode() in ["ISG121", "ISG122"]
                             or self.__transcript.getCourseGradeMap()[studentCourse][-1] is None
+                            or self.__transcript.getCourseGradeMap()[studentCourse][-1].getLetterGrade() is None
                             or self.__transcript.getCourseGradeMap()[studentCourse][-1].getLetterGrade() > "DD"):
                         continue
                     sum += course.getCourseCredit()
@@ -452,21 +454,19 @@ class Student(Person, IDisplayMenu):
 
     def checkThePrerequisiteAndCourseThatWasTaken(self, course):
         mapGrade = self.__transcript.getCourseGradeMap()
-
         if course not in mapGrade:
-            status = True
             for prerequisite in course.getPreRequisiteCourses():
                 if (prerequisite not in self.__transcript.getStudentCourses()
                         or mapGrade[prerequisite][-1] is None
                         or mapGrade[prerequisite][-1].getLetterGrade() in ["FF", "FD"]):
                     return False
+        elif mapGrade[course][-1].getLetterGrade() is None:
+            return False
         elif not (mapGrade[course][-1] is not None and mapGrade[course][-1].getLetterGrade() > "CC"):
             return False
-
         return True
 
     def hasCourseOverlap(self, courseToAdd, isLab):
-        i, j = 0, 0
         day_to_index = {"Monday": 0, "Tuesday": 1, "Wednesday": 2, "Thursday": 3, "Friday": 4}
         hour_to_index = {8: 0, 9: 1, 10: 2, 11: 3, 13: 4, 14: 5, 15: 6, 16: 7}
 
