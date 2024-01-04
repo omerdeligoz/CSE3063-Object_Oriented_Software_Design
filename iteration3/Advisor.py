@@ -45,6 +45,7 @@ class Advisor(Lecturer, IDisplayMenu):
                         print()
                 lanet = []
                 for i in range(len(nested_list) - 1):
+                    conflict = 0
                     if i in lanet:
                         continue
                     controlInput = 0
@@ -64,6 +65,7 @@ class Advisor(Lecturer, IDisplayMenu):
                             print(
                                 f"{first_list[0]} - {first_list[1]} / {second_list[0]} - {second_list[1]} /", end='')
                             controlInput = 1
+                            conflict = 1
                             lanet.append(j)
                             continue
                         if (es_Day == g_day) and (
@@ -72,8 +74,10 @@ class Advisor(Lecturer, IDisplayMenu):
                                 f"{second_list[0]} - {second_list[1]} /",
                                 end='')
                             lanet.append(j)
-                    print(
-                        f"------->{nested_list[i][2]} - {nested_list[i][3]}.00 -----> CLASS OVERLAP!!!")
+                            conflict = 1
+                    if conflict == 1:
+                        print(
+                            f"------->{nested_list[i][2]} - {nested_list[i][3]}.00 -----> CLASS OVERLAP!!!")
                 print()
                 print(
                     f"{request.getStudent().getName()} {request.getStudent().getSurname()} wants to drop these courses:")
