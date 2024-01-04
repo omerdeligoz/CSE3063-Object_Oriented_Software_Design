@@ -43,7 +43,7 @@ class Student(Person, IDisplayMenu):
             print("Your draft is empty!")
             ConsoleColours.resetColour()
         else:
-            from Registration import Registration
+            from iteration3.Registration import Registration
             registration = Registration(self, self.__draft)
             registration.addRequest(self.__advisor)
             logging.info(f"Student {self.getID()} sent a request to advisor {self.__advisor.getID()}.")

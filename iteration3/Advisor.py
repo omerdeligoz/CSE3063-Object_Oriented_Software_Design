@@ -2,10 +2,10 @@ import logging
 
 from iteration3.IDisplayMenu import IDisplayMenu
 from iteration3.Lecturer import Lecturer
-from ConsoleColours import ConsoleColours
+from iteration3.ConsoleColours import ConsoleColours
+
 
 class Advisor(Lecturer, IDisplayMenu):
-
 
     def __init__(self, ID, name, surname, userName, password):
         super().__init__(ID, name, surname, userName, password)
@@ -42,7 +42,8 @@ class Advisor(Lecturer, IDisplayMenu):
                     sorted_courses = []
                     if not (request.getStudent().getTranscript().getCourseGradeMap().get(course) is not None
                             and request.getStudent().getTranscript().getCourseGradeMap().get(course)[-1] is None):
-                        print(f"{course.getCourseCode()} {course.getCourseName()} - {course.getDay()} - {course.getHour()}.00")
+                        print(
+                            f"{course.getCourseCode()} {course.getCourseName()} - {course.getDay()} - {course.getHour()}.00")
                         print()
                 lanet = []
                 for i in range(len(nested_list) - 1):
@@ -63,7 +64,6 @@ class Advisor(Lecturer, IDisplayMenu):
                         g_Hour = second_list[-1]
                         ConsoleColours.paintRedMenu()
                         if (es_Day == g_day) and (es_Hour == g_Hour) and controlInput == 0:
-                            #ConsoleColours.paintRedMenu()
                             print(
                                 f"{first_list[0]} - {first_list[1]} / {second_list[0]} - {second_list[1]} /", end='')
                             controlInput = 1
@@ -72,15 +72,12 @@ class Advisor(Lecturer, IDisplayMenu):
                             continue
                         if (es_Day == g_day) and (
                                 es_Hour == g_Hour) and controlInput == 1:
-                            #ConsoleColours.paintRedMenu()
                             print(
                                 f"{second_list[0]} - {second_list[1]} /",
                                 end='')
                             lanet.append(j)
                             conflict = 1
                     if conflict == 1:
-
-                        #ConsoleColours.paintRedMenu()
                         print(
                             f"------->{nested_list[i][2]} - {nested_list[i][3]}.00 -----> CLASS OVERLAP!!!")
                 ConsoleColours.paintBlueMenu()
