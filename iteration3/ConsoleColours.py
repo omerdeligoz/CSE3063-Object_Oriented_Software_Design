@@ -35,4 +35,4 @@ class ConsoleColours:
 
     @staticmethod
     def paintWhiteMenu():
-        print(ConsoleColours.ANSI_BLACK + ConsoleColours.ANSIWHITE_BRIGHT_BACKGROUND, end="")
+        print(ConsoleColours.ANSI_BLACK + ConsoleColours.ANSI_WHITE_BRIGHT_BACKGROUND, end="")
