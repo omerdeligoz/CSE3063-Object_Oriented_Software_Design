@@ -19,7 +19,7 @@ class JSONWriter:
         logging.info("JSON data for the department has been written")
 
     def writeTranscripts(self):
-        for student in self.__department.students:
+        for student in self.__department.getStudents():
             filepath = f"jsons/Transcripts/{student.getID()}.json"
             try:
                 with open(filepath, 'r+', encoding='utf-8') as f:
@@ -45,7 +45,7 @@ class JSONWriter:
     def writeRequests(self):
         try:
             requests_data = []
-            for student in self.__department.students:
+            for student in self.__department.getStudents():
                 if student.isHasRequest():
                     request = {
                         "studentID": student.getID(),
@@ -68,7 +68,7 @@ class JSONWriter:
                 existingData = json.load(f)
 
             for data in existingData:
-                student = self.__department.studentIDStudentMap.get(data["studentID"])
+                student = self.__department.getStudentIDStudentMap().get(data["studentID"])
                 if student:
                     data["hasRequest"] = student.isHasRequest()
                     data["labSections"] = [labSection.getLaboratorySectionCode() for labSection in
