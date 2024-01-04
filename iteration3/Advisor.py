@@ -30,10 +30,51 @@ class Advisor(Lecturer, IDisplayMenu):
                 request = self.__requestList[requestNumber - 1]
                 print(
                     f"{request.getStudent().getName()} {request.getStudent().getSurname()} wants to take these courses:")
+                sorted_courses = []
+                nested_list = []
                 for course in request.getCourses():
+                    sorted_courses.append(course.getCourseCode())
+                    sorted_courses.append(course.getCourseName())
+                    sorted_courses.append(course.getDay())
+                    sorted_courses.append(course.getHour())
+                    nested_list.append(sorted_courses)
+                    sorted_courses = []
                     if not (request.getStudent().getTranscript().getCourseGradeMap().get(course) is not None
                             and request.getStudent().getTranscript().getCourseGradeMap().get(course)[-1] is None):
                         print(f"{course.getCourseCode()} {course.getCourseName()} - {course.getDay()} - {course.getHour()}.00")
+                        print()
+                lanet = []
+                for i in range(len(nested_list) - 1):
+                    if i in lanet:
+                        continue
+                    controlInput = 0
+                    for j in range(i + 1, len(nested_list)):
+                        if j in lanet:
+                            continue
+                        first_list = nested_list[i]
+                        second_list = nested_list[j]
+
+                        es_Day = first_list[2]
+                        es_Hour = first_list[3]
+
+                        g_day = second_list[2]
+                        g_Hour = second_list[-1]
+
+                        if (es_Day == g_day) and (es_Hour == g_Hour) and controlInput == 0:
+                            print(
+                                f"{first_list[0]} - {first_list[1]} / {second_list[0]} - {second_list[1]} /", end='')
+                            controlInput = 1
+                            lanet.append(j)
+                            continue
+                        if (es_Day == g_day) and (
+                                es_Hour == g_Hour) and controlInput == 1:
+                            print(
+                                f"{second_list[0]} - {second_list[1]} /",
+                                end='')
+                            lanet.append(j)
+                    print(
+                        f"------->{nested_list[i][2]} - {nested_list[i][3]}.00 -----> CLASS OVERLAP!!!")
+                print()
                 print(
                     f"{request.getStudent().getName()} {request.getStudent().getSurname()} wants to drop these courses:")
                 for course in request.getCourses():

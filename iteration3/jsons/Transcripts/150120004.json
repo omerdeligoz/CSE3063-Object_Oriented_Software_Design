@@ -2,9 +2,9 @@
   "studentID": 150120004,
   "name": "Melda",
   "surname": "Yanar",
-  "cgpa": 4.0,
-  "takenCredits": 111,
-  "completedCredits": 111,
+  "cgpa": 3.33,
+  "takenCredits": 152,
+  "completedCredits": 152,
   "semester": 5,
   "courses": [
     {
@@ -106,6 +106,38 @@
     {
       "courseCode": "PHYS1104",
       "letterGrade": "AA"
+    },
+    {
+      "courseCode": "CSE3055",
+      "letterGrade": "DC"
+    },
+    {
+      "courseCode": "CSE3033",
+      "letterGrade": "DC"
+    },
+    {
+      "courseCode": "CSE3063",
+      "letterGrade": "DC"
+    },
+    {
+      "courseCode": "CSE3215",
+      "letterGrade": "DC"
+    },
+    {
+      "courseCode": "IE3081",
+      "letterGrade": "DC"
+    },
+    {
+      "courseCode": "CSE4074",
+      "letterGrade": "DC"
+    },
+    {
+      "courseCode": "CSE4288",
+      "letterGrade": "DC"
+    },
+    {
+      "courseCode": "ISG121",
+      "letterGrade": "DC"
     }
   ]
 }

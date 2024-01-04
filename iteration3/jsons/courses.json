@@ -362,7 +362,7 @@
     "courseCode": "CSE3033",
     "courseCredit": 7,
     "capacity": 120,
-    "day": "Wednesday",
+    "day": "Tuesday",
     "hour": "15",
     "preRequisiteCourseCodes": [
       "CSE2225"
@@ -376,7 +376,7 @@
     "courseCode": "CSE3063",
     "courseCredit": 5,
     "capacity": 120,
-    "day": "Thursday",
+    "day": "Tuesday",
     "hour": "15",
     "preRequisiteCourseCodes": [
       "CSE1242"
@@ -403,8 +403,8 @@
     "courseCode": "IE3081",
     "courseCredit": 4,
     "capacity": 120,
-    "day": "Monday",
-    "hour": "16",
+    "day": "Friday",
+    "hour": "15",
     "preRequisiteCourseCodes": [
       "STAT2253"
     ]
@@ -526,7 +526,7 @@
     "courseCode": "CSE4288",
     "courseCredit": 5,
     "capacity": 120,
-    "day": "Friday",
+    "day": "Wednesday",
     "hour": "8",
     "preRequisiteCourseCodes": [
       "STAT2253",
@@ -541,8 +541,8 @@
     "courseCode": "ISG121",
     "courseCredit": 2,
     "capacity": 100,
-    "day": "Monday",
-    "hour": "10",
+    "day": "Wednesday",
+    "hour": "8",
     "preRequisiteCourseCodes": []
   },
   {
