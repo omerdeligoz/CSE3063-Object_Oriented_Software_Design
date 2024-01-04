@@ -17,20 +17,31 @@ class Advisor(Lecturer, IDisplayMenu):
         self.__notification = None
 
     def printRequests(self):
+        ConsoleColours.paintBlueMenu()
         print("Request Approval Menu:")
+        print("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨\n")
         print("\nBack -> 0\n")
+        print("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨")
         if len(self.__requestList) != 0:
             print("Request(s) Listed Below:")
+            print("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨")
+            ConsoleColours.paintPurpleMenu()
             for i in range(len(self.__requestList)):
                 print(
                     f"{i + 1}. {self.__requestList[i].getStudent().getName()} {self.__requestList[i].getStudent().getSurname()}")
                 print("``````````````````````````````````````````````")
+
+                ConsoleColours.paintGreenMenu()
+                print("Enter the request number you want to evaluate: ")
+
             requestNumber = self.__system.getInput()
+            ConsoleColours.paintGreenMenu()
             if 1 <= requestNumber <= len(self.__requestList):
                 self.__requestNumber = requestNumber
                 request = self.__requestList[requestNumber - 1]
                 print(
                     f"{request.getStudent().getName()} {request.getStudent().getSurname()} wants to take these courses:")
+                ConsoleColours.paintPurpleMenu()
                 sorted_courses = []
                 nested_list = []
                 for course in request.getCourses():
@@ -82,24 +93,35 @@ class Advisor(Lecturer, IDisplayMenu):
                             f"------->{nested_list[i][2]} - {nested_list[i][3]}.00 -----> CLASS OVERLAP!!!")
                 ConsoleColours.paintBlueMenu()
                 print()
+                ConsoleColours.paintRedMenu()
                 print(
                     f"{request.getStudent().getName()} {request.getStudent().getSurname()} wants to drop these courses:")
+                ConsoleColours.paintPurpleMenu()
                 for course in request.getCourses():
                     if request.getStudent().getTranscript().getCourseGradeMap().get(course) is not None \
                             and request.getStudent().getTranscript().getCourseGradeMap().get(course)[-1] is None:
                         print(f"{course.getCourseCode()} {course.getCourseName()}")
                 self.replyRequests()
             elif requestNumber > len(self.__requestList) or requestNumber < 0:
+                ConsoleColours.paintRedMenu()
+                logging.warning("Advisor " + self.getID() + " entered invalid input.")
                 print("Invalid choice! Please select again.")
                 self.printRequests()
         else:
+            ConsoleColours.paintYellowMenu()
             print("There is not a waiting request!")
             print("You are redirecting to the Advisor Main Menu...")
+            ConsoleColours.resetColour()
+            print()
 
     def replyRequests(self):
+        ConsoleColours.paintBlueMenu()
+        print("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨")
         print("               Back -> 0")
         print("    Approve Request -> 1")
         print("     Reject Request -> 2")
+        print("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨")
+        ConsoleColours.paintGreenMenu()
         print("Please select an option:")
 
         choice = self.__system.getInput()
@@ -118,17 +140,21 @@ class Advisor(Lecturer, IDisplayMenu):
         elif choice == 0:
             self.printRequests()
         else:
+            ConsoleColours.paintRedMenu()
             logging.warning(f"Advisor {self.getID()} entered invalid input.")
             print("Invalid choice. Please select again!")
             self.replyRequests()
 
     def printMenu(self, menuType):
+        ConsoleColours.paintBlueMenu()
         print(f"Welcome {self.getName()} {self.getSurname()}!")
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
+        ConsoleColours.paintYellowMenu()
         message = f"You have {len(self.__requestList)} request(s)."
         print(message)
         print()
+        ConsoleColours.paintBlueMenu()
 
         print("Please select from the following options:")
         print("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨")
@@ -136,7 +162,7 @@ class Advisor(Lecturer, IDisplayMenu):
         print("                       List requests -> 1")
         print("                             Log out -> 2")
         print("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨")
-
+        ConsoleColours.paintGreenMenu()
         print("Enter your choice: ")
 
     def login(self, userName, password):

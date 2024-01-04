@@ -65,7 +65,7 @@ class Student(Person, IDisplayMenu):
                 print(f"Welcome {self.getName()} {self.getSurname()}!")
                 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 
-                if self.__notification != None:
+                if self.__notification is not None:
                     ConsoleColours.paintYellowMenu()
                     print(self.__notification.message)
                     self.__notification = None
@@ -223,7 +223,7 @@ class Student(Person, IDisplayMenu):
             print(
                 f"{i + 1}. {labSection.getLaboratorySectionCode()} - {course.getCourseName()} (Lab) - {labSection.getDay()} - {labSection.getHour()}.00")
             print("´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´")
-
+        ConsoleColours.paintGreenMenu()
         print(f"Choose number between 1 to {len(availableLabSections)} to add laboratory section: \n")
         userNumberInput = self.__system.getInput()
 
@@ -489,6 +489,8 @@ class Student(Person, IDisplayMenu):
                     continue
                 if course.getDay() == courseToAdd.getDay() and course.getHour() == courseToAdd.getHour():
                     if grades and grades[-1].getLetterGrade() == "DZ":
+                        return True
+                    if not grades:
                         return True
             for labSection in self.__labSections:
                 if labSection.getDay() == courseToAdd.getDay() and labSection.getHour() == courseToAdd.getHour():

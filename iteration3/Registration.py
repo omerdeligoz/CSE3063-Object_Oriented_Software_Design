@@ -1,3 +1,4 @@
+from iteration3.ConsoleColours import ConsoleColours
 from iteration3.Notification import Notification
 
 
@@ -10,7 +11,9 @@ class Registration:
         self.__courses = courses
 
     def approveRequest(self):
+        ConsoleColours.paintYellowMenu()
         print("Request approved.")
+        ConsoleColours.resetColour()
         for course in self.__courses:
             if course not in self.getStudent().getTranscript().getStudentCourses():
                 self.__system.addToSchedule(course, self.getStudent())
@@ -43,8 +46,9 @@ class Registration:
         Notification(self.getStudent(), "Your request has been approved.").sendNotification()
 
     def rejectRequest(self):
+        ConsoleColours.paintYellowMenu()
         print("Request rejected.")
-
+        ConsoleColours.resetColour()
         self.getStudent().setHasRequest(False)
         self.getStudent().getDraft().clear()
 
@@ -53,8 +57,9 @@ class Registration:
     def addRequest(self, advisor):
         advisor.getRequestList().append(self)
         self.getStudent().setHasRequest(True)
+        ConsoleColours.paintYellowMenu()
         print("Request sent to advisor.")
-
+        ConsoleColours.resetColour()
     def getStudent(self):
         return self.__student
 

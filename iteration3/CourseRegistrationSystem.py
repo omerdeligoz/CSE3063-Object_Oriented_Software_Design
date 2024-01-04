@@ -7,6 +7,7 @@ from iteration3.JSONReader import JSONReader
 from iteration3.JSONWriter import JSONWriter
 from iteration3.Student import Student
 from iteration3.University import University
+from iteration3.ConsoleColours import ConsoleColours
 
 
 class CourseRegistrationSystem(IDisplayMenu):
@@ -43,19 +44,23 @@ class CourseRegistrationSystem(IDisplayMenu):
                 self.loginMenu()
             case -1:
                 # If the user enters string or -1 give error.
+                ConsoleColours.paintRedMenu()
                 print("Please enter valid number!")
             case _:
                 # If the user's choice is not recognized, print a message and display the main menu again.
+                ConsoleColours.paintRedMenu()
                 print("Invalid choice! Please select again!")
 
         self.mainMenu()
 
     def loginMenu(self):
+        ConsoleColours.paintBlueMenu()
         print("Login Page")
         print("¨¨¨¨¨¨¨¨¨¨\n")
         print(" Back -> 0")
         print("¨¨¨¨¨¨¨¨¨¨")
 
+        ConsoleColours.paintGreenMenu()
         print("Please enter your username: ")
         userName = input()
 
@@ -66,6 +71,7 @@ class CourseRegistrationSystem(IDisplayMenu):
 
         print("Enter your password: ")
         password = input()
+        ConsoleColours.paintBlueMenu()
 
         person = self.__university.getUserNamePersonMap().get(userName)
         if person is not None:  # Check if there is such user
@@ -76,11 +82,13 @@ class CourseRegistrationSystem(IDisplayMenu):
                 elif isinstance(person, Advisor):
                     self.advisorMenu(person)
             else:
+                ConsoleColours.paintRedMenu()
                 logging.warning(
                     f"User entered an invalid username or password. -> Username: {userName} Password: {password}")
                 print("Username or password is incorrect. Please try again!")
                 self.loginMenu()
         else:
+            ConsoleColours.paintRedMenu()
             logging.warning(
                 f"User entered an invalid username or password. -> Username: {userName} Password: {password}")
             print("Username or password is incorrect. Please try again!")
@@ -103,8 +111,10 @@ class CourseRegistrationSystem(IDisplayMenu):
             self.loginMenu()
             return
         elif self.__choice == -1:
+            ConsoleColours.paintRedMenu()
             print("Please enter valid number!")
         else:
+            ConsoleColours.paintRedMenu()
             print("Invalid choice! Please select again!")
 
         self.studentMenu(student)
@@ -131,8 +141,10 @@ class CourseRegistrationSystem(IDisplayMenu):
                 self.loginMenu()
                 return
             case -1:
+                ConsoleColours.paintRedMenu()
                 print("Please enter valid number!")
             case _:
+                ConsoleColours.paintRedMenu()
                 print("Invalid choice! Please select again!")
 
         self.courseRegistrationMenu(student)
@@ -153,8 +165,10 @@ class CourseRegistrationSystem(IDisplayMenu):
                 self.loginMenu()
                 return
             case -1:
+                ConsoleColours.paintRedMenu()
                 print("Please enter valid number!")
             case _:
+                ConsoleColours.paintRedMenu()
                 print("Invalid choice!")
 
         self.advisorMenu(advisor)
@@ -167,12 +181,14 @@ class CourseRegistrationSystem(IDisplayMenu):
             if user_input != str(self.__choice):
                 raise ValueError
         except Exception as e:
+            ConsoleColours.paintRedMenu()
             print("Invalid input, please do not enter a nonnumeric input!")
             logging.error(f"User entered an invalid input. -> Input: {user_input}")
             return -1
         return self.__choice
 
     def exitProgram(self):
+        ConsoleColours.paintYellowMenu()
         print("Exiting from system...")
 
         # Create a new instance.
@@ -189,6 +205,7 @@ class CourseRegistrationSystem(IDisplayMenu):
         sys.exit(0)
 
     def printMenu(self, menuType):
+        ConsoleColours.paintBlueMenu()
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
         print("  Marmara University Course Registration System  ")
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
@@ -197,6 +214,7 @@ class CourseRegistrationSystem(IDisplayMenu):
         print("                                Exit -> 0")
         print("                          Login Page -> 1")
         print("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨")
+        ConsoleColours.paintGreenMenu()
         print("Enter your choice: ")
 
     def addToSchedule(self, course, student):

@@ -1,3 +1,6 @@
+from iteration3.ConsoleColours import ConsoleColours
+
+
 class Transcript:
     def __init__(self, student):
         self.__studentCourses = []
@@ -48,7 +51,10 @@ class Transcript:
         return self.__completedCredits
 
     def showTranscript(self):
+        ConsoleColours.paintBlueMenu()
         print(f'Transcript for {self.__student.getName()} {self.__student.getSurname()}:')
+        ConsoleColours.paintWhiteMenu()
+        print("¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨")
         print(f'Student ID       : {self.__student.getID()}')
         print(f'CGPA             : {self.__cgpa:.2f}')
         print(f'Completed Credits: {self.calculateCompletedCredits()}')
@@ -56,14 +62,21 @@ class Transcript:
         print(f'Semester         : {self.__semester}')
         print(f'Department       : {self.__student.getDepartment().getDepartmentName()}')
 
+        ConsoleColours.paintPurpleMenu()
+        print("%-15s%-38s%-20s%-15s\n", "Course Code", "Course Name", "Course Credit", "Grade")
+        print("-------------------------------------------------------------------------------")
+
         for course in self.__studentCourses:
             for grade in self.__courseGradeMap.get(course, []):
                 if grade is None:
                     print(
-                        "%-15s%-45s%-15s%-15s" % (course.getCourseCode(), course.getCourseName(), course.getCourseCredit(), "--"))
+                        "%-15s%-45s%-15s%-15s" % (
+                            course.getCourseCode(), course.getCourseName(), course.getCourseCredit(), "--"))
                 else:
                     print("%-15s%-45s%-15s%-15s" % (
-                        course.getCourseCode(), course.getCourseName(), course.getCourseCredit(), grade.getLetterGrade()))
+                        course.getCourseCode(), course.getCourseName(), course.getCourseCredit(),
+                        grade.getLetterGrade()))
+        ConsoleColours.resetColour()
         print()
 
     def courseStatusCheck(self):
@@ -80,20 +93,24 @@ class Transcript:
                     failedCourses.append(course)
                 else:
                     successfulCourses.append(course)
-
+        ConsoleColours.paintGreenMenu()
         print("Successful Courses:\n")
         for course in successfulCourses:
             print(course.getCourseCode() + " " + course.getCourseName())
         print()
 
+        ConsoleColours.paintRedMenu()
         print("Failed Courses:\n")
         for course in failedCourses:
             print(course.getCourseCode() + " " + course.getCourseName())
         print()
 
+        ConsoleColours.paintYellowMenu()
         print("Ongoing Courses:\n")
         for course in ongoingCourses:
             print(course.getCourseCode() + " " + course.getCourseName())
+
+        ConsoleColours.resetColour()
         print()
 
     def getStudentCourses(self):
