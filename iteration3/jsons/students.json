@@ -308,7 +308,7 @@
     "semester": 5,
     "departmentName": "CSE",
     "advisorID": 130110005,
-    "hasRequest": true,
+    "hasRequest": false,
     "labSections": []
   },
   {

@@ -44,7 +44,7 @@ public class RegistrationTest {
         assertFalse(student.isHasRequest());
         assertEquals(0, student.getDraft().size());
     }
-
+    
     @Test
     void addRequestTest() {
         Advisor advisor = new Advisor(1234567,"name" ,"surname","username","password");

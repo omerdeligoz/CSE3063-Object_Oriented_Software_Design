@@ -1,0 +1,13 @@
+<mxfile host="app.diagrams.net" modified="2024-01-04T13:31:02.356Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="0OQ3FnRJit4W9h87RoxN" version="22.1.16" type="device">
+  <diagram id="j3ZhM5BMVq8c1ECWxK8d" name="Sayfa -1">
+    <mxGraphModel dx="521" dy="1051" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="node0" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Department&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; __laboratorySections: List&lt;br&gt; __sectionCodeCourseMap: Map&lt;br&gt; __studentIDStudentMap: Map&lt;br&gt; __lecturers: List&lt;br&gt; __courseCodeCourseMap:&amp;nbsp; Map&lt;br&gt; __assistants: List&lt;br&gt; __labSectionCourseMap: Map&lt;br&gt; __students: List&lt;br&gt; __advisors: List&lt;br&gt; __courses: List&lt;br&gt; __advisorIDAdvisorMap: Map&lt;br&gt; __departmentName: String&lt;br&gt; __transcripts: List&lt;br&gt; __maxCourseNumber: Integer&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; __init__(self, departmentName: str): &lt;br&gt; getDepartmentName(self): &lt;br&gt; getAdvisors(self): &lt;br&gt; getTranscripts(self): &lt;br&gt; getCourses(self): &lt;br&gt; getStudents(self): &lt;br&gt; getLaboratorySections(self): &lt;br&gt; getLecturers(self): &lt;br&gt; getAssistants(self): &lt;br&gt; getCourseCodeCourseMap(self): &lt;br&gt; getSectionCodeCourseMap(self): &lt;br&gt; getLabSectionCourseMap(self): &lt;br&gt; getStudentIDStudentMap(self): &lt;br&gt; getAdvisorIDAdvisorMap(self): &lt;br&gt; getMaxCourseNumber(self): &lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="130" y="-296" width="302" height="736" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

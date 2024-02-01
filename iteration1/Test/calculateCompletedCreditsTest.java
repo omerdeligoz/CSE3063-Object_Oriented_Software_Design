@@ -9,7 +9,7 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class calculateCompletedCreditsTest {
+class CalculateCompletedCreditsTest {
 
     private Transcript transcript;
     private Course course1, course2, course3, course4;
@@ -49,8 +49,7 @@ class calculateCompletedCreditsTest {
         transcript.setCourseGradeMap(courseGradeMap);
 
     }
-
-
+    
     @Test
     void calculateCompletedCredits() {
         assertEquals(12, transcript.calculateCompletedCredits());

@@ -151,7 +151,6 @@
     "day": "Tuesday",
     "hour": "11",
     "preRequisiteCourseCodes": [
-      "EE2031"
     ]
   },
   {
@@ -178,8 +177,6 @@
     "day": "Thursday",
     "hour": "11",
     "preRequisiteCourseCodes": [
-      "IE3235",
-      "CSE4288"
     ]
   },
   {
@@ -234,7 +231,6 @@
     "day": "Wednesday",
     "hour": "13",
     "preRequisiteCourseCodes": [
-      "CSE3264"
     ]
   },
   {
@@ -274,7 +270,7 @@
     "day": "Monday",
     "hour": "14",
     "preRequisiteCourseCodes": [
-      "CSE3048"
+
     ]
   },
   {
@@ -580,7 +576,7 @@
     "lecturerID": 130114009,
     "courseName": "Advanced Unix Programming",
     "courseType": "TE",
-    "semester": 8,
+    "semester": 7,
     "courseCode": "CSE4034",
     "courseCredit": 5,
     "capacity": 80,
@@ -594,7 +590,7 @@
     "lecturerID": 130106001,
     "courseName": "Compiler Design",
     "courseType": "TE",
-    "semester": 8,
+    "semester": 7,
     "courseCode": "CSE4061",
     "courseCredit": 5,
     "capacity": 80,
@@ -608,7 +604,7 @@
     "lecturerID": 130108003,
     "courseName": "Microprocessors",
     "courseType": "TE",
-    "semester": 8,
+    "semester": 7,
     "courseCode": "CSE4217",
     "courseCredit": 5,
     "capacity": 80,
@@ -622,7 +618,7 @@
     "lecturerID": 130109007,
     "courseName": "Software Project Management",
     "courseType": "TE",
-    "semester": 8,
+    "semester": 7,
     "courseCode": "CSE4044",
     "courseCredit": 5,
     "capacity": 80,
